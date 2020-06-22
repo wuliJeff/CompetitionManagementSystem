@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE configuration PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-config.dtd">
+<configuration>
+    <properties resource="dbconfig.properties"/>
+    <settings>
+        <!-- 使用jdbc的getGeneratedKeys获取数据库自增主键值 -->
+        <!--  
+        <setting name="useGeneratedKeys" value="true" />
+ 		-->
+        <!-- 使用列别名替换列名 -->
+        <setting name="useColumnLabel" value="true"/>
+
+        <!-- 开启驼峰命名转换(userId === user_id) -->
+        <setting name="mapUnderscoreToCamelCase" value="true"/>
+    </settings>
+    <environments default="dev_mysql">
+        <environment id="dev_mysql">
+            <transactionManager type="JDBC"/>
+            <dataSource type="POOLED">
+                <property name="driver" value="${jdbc.driver}"/>
+                <property name="url" value="${jdbc.url}"/>
+                <property name="username" value="${jdbc.username}"/>
+                <property name="password" value="${jdbc.password}"/>
+            </dataSource>
+        </environment>
+    </environments>
+
+    <mappers>
+        <mapper resource="com/cms/mapper/UserDaoMapper.xml"/>
+    </mappers>
+
+</configuration>

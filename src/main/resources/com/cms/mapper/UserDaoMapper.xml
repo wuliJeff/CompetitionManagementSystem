@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.cms.dao.IUserDao">
+
+    <!-- 查询用户 -->
+    <select id="isExistAccount" resultType="String">
+        select account from userInfo where account=#{account};
+    </select>
+
+    <!-- 查询检查密码是否正确 -->
+    <select id="checkPwd" resultType="com.cms.entity.UserInfo">
+        select * from userInfo where account=#{account} and password=#{password};
+    </select>
+
+    <!-- 插入（注册）用户，默认为普通用户 -->
+    <insert id="register" parameterType="com.cms.entity.UserInfo">
+        insert into userInfo values (#{account}, #{password}, #{tel}, 1);
+        <selectKey keyProperty="account" keyColumn="account" resultType="int" order="AFTER">
+            select @@IDENTITY ;
+        </selectKey>
+    </insert>
+
+    <!-- 查询电话是否正确 -->
+    <select id="checkTel" resultType="String">
+        select account from userInfo where account=#{account} and tel=#{tel};
+    </select>
+
+    <!-- 重设密码 -->
+    <update id="resetPwd" parameterType="com.cms.entity.UserInfo">
+        update userInfo set password=#{password} where account=#{account};
+        <selectKey keyProperty="account" keyColumn="account" resultType="int" order="AFTER">
+            select @@IDENTITY ;
+        </selectKey>
+    </update>
+
+</mapper>

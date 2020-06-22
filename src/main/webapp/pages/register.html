@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <title>注册</title>
+    <link rel="shortcut icon" type="image/x-icon" href="../resources/assets/images/icon-cat.png"/>
+    <link rel="stylesheet" href="../resources/assets/css/login.css">
+</head>
+<script type="text/javascript">
+    function validate() {
+        var account = document.getElementById("account").value;
+        var pwd = document.getElementById("password").value;
+        var rePwd = document.getElementById("rePwd").value;
+        var tel = document.getElementById("tel").value;
+        var registerInfo = document.getElementById("registerInfo");
+        if (account == "") {
+            window.alert("请输入用户名！");
+            account.focus();
+            return false;
+        } else if (tel == "") {
+            window.alert("请输入联系方式，便于找回密码！");
+            tel.focus();
+            return false;
+        } else if (pwd == "") {
+            window.alert("密码不能为空！");
+            pwd.focus();
+            return false;
+        } else if (pwd != rePwd) {
+            window.alert("两次输入的密码不一致！");
+            rePwd.focus();
+            return false;
+        }
+        registerInfo.submit();
+        return true;
+    }
+</script>
+<body>
+<section class="signin popup-in">
+    <div class="container">
+        <div class="sign-content popup-in-content">
+            <div class="popup-in-txt">
+                <h2>新用户注册</h2>
+                <div class="row">
+                    <div class="col-sm-12">
+                        <div class="signin-form">
+                            <form id="registerInfo" action="../register.do" method="post">
+                                <div class="form-group">
+                                    <input type="text" class="form-control" id="account" name="account"
+                                           placeholder="账号(必填)">
+                                </div>
+                                <div class="form-group">
+                                    <br>
+                                    <input type="password" class="form-control" id="password" name="password"
+                                           placeholder="密码(必填)">
+                                </div>
+                                <div class="form-group">
+                                    <br>
+                                    <input type="password" class="form-control" id="rePwd" name="rePwd"
+                                           placeholder="确认密码(必填)">
+                                </div>
+                                <div class="form-group">
+                                    <br>
+                                    <input type="text" class="form-control" id="tel" name="tel" placeholder="联系方式(必填)">
+                                </div>
+                                <input type="button" class="btn signin_btn signin_btn_two"
+                                       value="确认注册" onclick="validate()">
+                                <input type="button" class="btn signin_btn" value="返回主页"
+                                       onclick="window.location.href='../index.jsp'">
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+</body>
+</html>

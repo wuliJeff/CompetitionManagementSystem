@@ -1,0 +1,158 @@
+html, body {
+    height: 100%;
+    position: relative;
+    z-index: 2;
+}
+
+body {
+    font-family: "΢���ź�";
+    font-size: 16px;
+    color: #c0c0c0;
+    background: #fff;
+    max-width: 1920px;
+    margin: 0 auto;
+    overflow-x: hidden;
+}
+
+h1, h2, h3, h4, h5, h6 {
+    margin: 0;
+    color: #464d5f;
+    font-family: 'Poppins', sans-serif;
+    font-weight: 400;
+}
+
+img {
+    border: none;
+    max-width: 100%;
+    height: auto;
+}
+
+select, input, textarea, button, .form-control {
+    box-shadow: none;
+    outline: 0;
+}
+
+a {
+    text-decoration: none;
+}
+
+[placeholder]:focus::-webkit-input-placeholder {
+    -webkit-transition: opacity 0.3s 0.3s ease;
+    -moz-transition: opacity 0.3s 0.3s ease;
+    -ms-transition: opacity 0.3s 0.3s ease;
+    -o-transition: opacity 0.3s 0.3s ease;
+    transition: opacity 0.3s 0.3s ease;
+    opacity: 0;
+}
+
+.signin {
+    background: #f4f6fa;
+    padding: 250px 0;
+}
+
+.sign-content {
+    max-width: 620px;
+    margin: 0 auto;
+}
+
+.sign-content h2 {
+    color: #464d5f;
+    font-size: 30px;
+    text-align: center;
+    margin-bottom: 54px;
+}
+
+.signin-form .form-control {
+    background: transparent;
+    border: transparent;
+    border-bottom: 1px solid #bcbfc9;
+    border-radius: 0;
+    outline: 0;
+    box-shadow: none;
+    padding: 0px 0;
+    height: 46px;
+    -webkit-transition: linear .5s;
+    -moz-transition: linear .5s;
+    -ms-transition: linear .5s;
+    -o-transition: linear .5s;
+    transition: linear .5s;
+}
+
+.signin-form .form-control:hover, .signin-form .form-control:focus {
+    border-bottom: 1px solid #474d5b;
+    color: #474d5b;
+}
+
+.signin-form label {
+    position: relative;
+    top: 5px;
+    color: #474d5b;
+    font-size: 22px;
+    font-weight: 500;
+    text-transform: capitalize;
+    margin-bottom: 0px;
+}
+
+.signin-form input[type="text"], .signin-form input[type="email"],
+.signin-form input[type="password"] {
+    color: #474d5b;
+    font-size: 16px;
+    font-weight: 400;
+    width: 100%;
+}
+
+.btn.signin_btn, .btn.signin_btn:focus {
+    width: 620px;
+    padding: 0;
+    height: 60px;
+    background: #26d9b3;
+    color: #fff;
+    font-size: 16px;
+    text-transform: uppercase;
+    border-radius: 3px;
+    box-shadow: 0 5px 30px rgba(60, 191, 163, .3);
+    margin-top: 23px;
+}
+
+.btn.signin_btn.signin_btn_two, .btn.signin_btn.signin_btn_two:focus {
+    background: #5a84fd;
+    box-shadow: 0 5px 30px rgba(0, 66, 255, .3);
+}
+
+.signin.popup-in {
+    padding: 120px 0 170px 0;
+}
+
+.signin.popup-in, .signin.signup.popup-up {
+    position: relative;
+    background: url(../images/popupsignin.png) no-repeat;
+    background-size: cover;
+    background-position: center;
+    z-index: 1;
+}
+
+.signin.popup-in:before, .signin.signup.popup-up:before {
+    position: absolute;
+    content: " ";
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, .7);
+    z-index: -1;
+}
+
+.sign-content.popup-in-content {
+    background: #fff;
+    border-radius: 5px;
+    padding: 60px 0 100px;
+}
+
+.popup-in-txt {
+    max-width: 500px;
+    margin: 0 auto;
+}
+
+.sign-content.popup-in-content .btn.signin_btn, .sign-content.popup-in-content .btn.signin_btn:focus {
+    width: 500px;
+}

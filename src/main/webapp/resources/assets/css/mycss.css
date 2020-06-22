@@ -1,0 +1,59 @@
+.itema {
+    font-family: ΢���ź�;
+    font-style: normal;
+    color: #000;
+    font-size: 14px;
+}
+
+.itemdiv {
+    width: 33%;
+    height: 400px;
+    float: left;
+}
+
+.itemimg {
+    width: 90%;
+    height: 65%;
+}
+
+.modifyinput {
+    width: 60%;
+    height: 40px;
+    border: none;
+    font-family: ΢���ź�;
+    font-size: 16px;
+}
+
+.modifysubmit {
+    width: 30%;
+    height: 40px;
+    border-radius: 5px;
+    background: #5a84fd;
+    font-family: ΢���ź�;
+    font-size: 16px;
+    color: #fff;
+}
+
+.selectbutton {
+    width: 85px;
+    height: 30px;
+    border-radius: 5px;
+    font-family: ΢���ź�;
+    font-size: 18px;
+    font-style: normal;
+    font-weight: 400px;
+    color: #fff;
+    background: #5a84fd;
+}
+
+.orderbutton {
+    width: 85px;
+    height: 30px;
+    border-radius: 5px;
+    font-family: ΢���ź�;
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 400px;
+    color: #fff;
+    background: #5a84fd;
+}
