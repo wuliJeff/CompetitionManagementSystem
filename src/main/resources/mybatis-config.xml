@@ -1,8 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE configuration PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+<!DOCTYPE configuration
+        PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-config.dtd">
 <configuration>
     <properties resource="dbconfig.properties"/>
+
     <settings>
         <!-- 使用jdbc的getGeneratedKeys获取数据库自增主键值 -->
         <!--  
@@ -14,6 +16,7 @@
         <!-- 开启驼峰命名转换(userId === user_id) -->
         <setting name="mapUnderscoreToCamelCase" value="true"/>
     </settings>
+
     <environments default="dev_mysql">
         <environment id="dev_mysql">
             <transactionManager type="JDBC"/>
@@ -28,6 +31,7 @@
 
     <mappers>
         <mapper resource="com/cms/mapper/UserDaoMapper.xml"/>
+        <mapper resource="com/cms/mapper/CompetitionDaoMapper.xml"/>
     </mappers>
 
 </configuration>

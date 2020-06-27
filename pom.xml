@@ -22,6 +22,19 @@
     <dependencies>
         <!-- ********************** Java Servlet API 4.0.0-b01 ********************** -->
         <dependency>
+            <groupId>junit</groupId>
+            <artifactId>junit</artifactId>
+            <version>4.11</version>
+             <scope>test</scope>
+        </dependency>
+
+        <dependency>
+            <groupId>com.github.pagehelper</groupId>
+            <artifactId>pagehelper</artifactId>
+            <version>5.1.10</version>
+        </dependency>
+
+        <dependency>
             <groupId>javax.servlet</groupId>
             <artifactId>javax.servlet-api</artifactId>
             <version>4.0.0-b01</version>
@@ -63,9 +76,11 @@
             <artifactId>mybatis</artifactId>
             <version>3.4.5</version>
         </dependency>
+
     </dependencies>
 
     <build>
+
         <finalName>CompetitionManagementSystem</finalName>
         <pluginManagement><!-- lock down plugins versions to avoid using Maven defaults (may be moved to parent pom) -->
             <plugins>
@@ -100,5 +115,6 @@
                 </plugin>
             </plugins>
         </pluginManagement>
+
     </build>
 </project>

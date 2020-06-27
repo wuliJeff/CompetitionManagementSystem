@@ -5,6 +5,7 @@ import com.cms.entity.UserInfo;
 import com.cms.service.UserService;
 import com.cms.util.MapperConfig;
 import org.apache.ibatis.session.SqlSession;
+import org.junit.Test;
 
 public class UserServiceImpl implements UserService {
 
@@ -63,5 +64,10 @@ public class UserServiceImpl implements UserService {
         int resetPwdOK = session.getMapper(IUserDao.class).resetPwd(account, password);
         session.commit();
         return resetPwdOK;
+    }
+
+    @Test
+    public void test1(){
+        System.out.println(isExistAccount("10000"));
     }
 }
