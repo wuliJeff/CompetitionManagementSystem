@@ -3,7 +3,7 @@ package com.cms.entity;
 public class Competition {
     private int cid;  //赛事id
     private String cname;  //赛事名称
-    private String host;  //发起人
+    private String hostName;  //发起人
     private String school;  //学校
     private String type;  //赛事类型
     private int cnum;  //赛事人数
@@ -16,10 +16,10 @@ public class Competition {
     public Competition() {
     }
 
-    public Competition(int cid, String cname, String host, String school, String type, int cnum, int gunm, String startCompetition, String endCompetition, String enrollStartTime, String enrollEndTime) {
+    public Competition(int cid, String cname, String hostName, String school, String type, int cnum, int gunm, String startCompetition, String endCompetition, String enrollStartTime, String enrollEndTime) {
         this.cid = cid;
         this.cname = cname;
-        this.host = host;
+        this.hostName = hostName;
         this.school = school;
         this.type = type;
         this.cnum = cnum;
@@ -47,11 +47,11 @@ public class Competition {
     }
 
     public String getHost() {
-        return host;
+        return hostName;
     }
 
     public void setHost(String host) {
-        this.host = host;
+        this.hostName = host;
     }
 
     public String getSchool() {
@@ -123,7 +123,7 @@ public class Competition {
         return "Competition{" +
                 "cid=" + cid +
                 ", cname='" + cname + '\'' +
-                ", host='" + host + '\'' +
+                ", host='" + hostName + '\'' +
                 ", school='" + school + '\'' +
                 ", type='" + type + '\'' +
                 ", cnum=" + cnum +
