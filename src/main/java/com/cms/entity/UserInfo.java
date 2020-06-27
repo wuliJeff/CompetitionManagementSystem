@@ -6,10 +6,20 @@ public class UserInfo {
      * 用于接收用户登录信息
      */
 
-    private String account;
-    private String password;
-    private String tel;
-    private int role;
+    private String account;  //账号
+    private String password;  //密码
+    private String tel;  //电话
+    private int role;  //角色
+
+    public UserInfo() {
+    }
+
+    public UserInfo(String account, String password, String tel, int role) {
+        this.account = account;
+        this.password = password;
+        this.tel = tel;
+        this.role = role;
+    }
 
     public String getAccount() {
         return account;
