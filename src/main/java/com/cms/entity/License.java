@@ -1,6 +1,6 @@
 package com.cms.entity;
 
-public class Licence {
+public class License {
     private int id;  //id
     private String userId;  //参赛者id
     private String name;  //姓名
@@ -9,10 +9,10 @@ public class Licence {
     private int cid;  //赛事id
     private String cname;  //赛事名称
 
-    public Licence() {
+    public License() {
     }
 
-    public Licence(int id, String userId, String name, String groupName, String school, int cid, String cname) {
+    public License(int id, String userId, String name, String groupName, String school, int cid, String cname) {
         this.id = id;
         this.userId = userId;
         this.name = name;
