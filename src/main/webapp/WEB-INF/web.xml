@@ -34,4 +34,13 @@
         <servlet-name>forgetPwdServlet</servlet-name>
         <url-pattern>/forgetPwd.do</url-pattern>
     </servlet-mapping>
+    <!-- 注销 -->
+    <servlet>
+        <servlet-name>logoutServlet</servlet-name>
+        <servlet-class>com.cms.servlet.logout.LogoutServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>logoutServlet</servlet-name>
+        <url-pattern>/logout.do</url-pattern>
+    </servlet-mapping>
 </web-app>

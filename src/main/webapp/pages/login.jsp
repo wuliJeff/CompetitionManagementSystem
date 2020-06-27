@@ -3,46 +3,71 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>登录</title>
-    <link rel="shortcut icon" type="image/x-icon" href="../resources/assets/images/icon-cat.png"/>
-    <link rel="stylesheet" href="../resources/assets/css/login.css">
+
+    <link href="../assets/css/bootstrap.min.css" rel="stylesheet">
+    <link href="../assets/css/datepicker3.css" rel="stylesheet">
+    <link href="../assets/css/styles.css" rel="stylesheet">
+
 </head>
+
 <body>
-<section class="signin popup-in">
-    <div class="container">
-        <div class="sign-content popup-in-content">
-            <div class="popup-in-txt">
-                <h2>登录</h2>
-                <div class="row">
-                    <div class="col-sm-12">
-                        <div class="signin-form">
-                            <form action="../login.do" method="post">
-                                <div class="form-group">
-                                    <input type="text" class="form-control" id="account" name="account"
-                                           placeholder="账户">
-                                </div>
-                                <div class="form-group">
-                                    <br>
-                                    <input type="password" class="form-control" id="password" name="password"
-                                           placeholder="密码">
-                                </div>
-                                <input type="submit" class="btn signin_btn signin_btn_two"
-                                       value="登录">
-                                <input type="button" class="btn signin_btn" value="注册新用户"
-                                       onclick="window.location.href='register.html'">
-                            </form>
-                            <br>
-                            <div>
-                                <a href="../index.jsp" style="float: left;">返回主页>></a>
-                                <a href="forgetPassword.html" style="float: right;">找回密码</a>
-                            </div>
+
+<div class="row">
+    <div class="col-xs-10 col-xs-offset-1 col-sm-8 col-sm-offset-2 col-md-4 col-md-offset-4">
+        <div class="login-panel panel panel-default">
+            <div class="panel-heading"><b>登录</b></div>
+            <div class="panel-body">
+                <form role="form" action="../login.do" method="post">
+                    <fieldset>
+                        <div class="form-group">
+                            <input class="form-control" placeholder="账号" name="account" type="Account" autofocus="">
                         </div>
-                    </div>
-                </div>
+                        <div class="form-group">
+                            <input class="form-control" placeholder="密码" name="password" type="password" value="">
+                        </div>
+                        <div style="float: left;">
+                            <a href="forgetPassword.jsp">忘记密码</a>
+                        </div>
+                        <div style="float: right;">
+                            <a href="register.jsp">注册</a>
+                        </div>
+                        <div style="clear: both;">
+                            <br/>
+                            <input type="submit" class="btn btn-primary" style="width: 100%;" value="登录">
+                        </div>
+                    </fieldset>
+                </form>
             </div>
         </div>
-    </div>
-</section>
+    </div><!-- /.col-->
+</div><!-- /.row -->
+
+
+<script src="../assets/js/jquery-1.11.1.min.js"></script>
+<script src="../assets/js/bootstrap.min.js"></script>
+<script src="../assets/js/chart.min.js"></script>
+<script src="../assets/js/chart-data.js"></script>
+<script src="../assets/js/easypiechart.js"></script>
+<script src="../assets/js/easypiechart-data.js"></script>
+<script src="../assets/js/bootstrap-datepicker.js"></script>
+<script>
+    !function ($) {
+        $(document).on("click", "ul.nav li.parent > a > span.icon", function () {
+            $(this).find('em:first').toggleClass("glyphicon-minus");
+        });
+        $(".sidebar span.icon").find('em:first').addClass("glyphicon-plus");
+    }(window.jQuery);
+
+    $(window).on('resize', function () {
+        if ($(window).width() > 768) $('#sidebar-collapse').collapse('show')
+    })
+    $(window).on('resize', function () {
+        if ($(window).width() <= 767) $('#sidebar-collapse').collapse('hide')
+    })
+</script>
 </body>
+
 </html>
