@@ -24,6 +24,16 @@ public class Competitor {
         this.cid = cid;
     }
 
+    public Competitor(String account, String password, String name, String groupName, String tel, String school, int cid) {
+        this.account = account;
+        this.password = password;
+        this.name = name;
+        this.groupName = groupName;
+        this.tel = tel;
+        this.school = school;
+        this.cid = cid;
+    }
+
     public int getId() {
         return id;
     }

@@ -6,7 +6,7 @@
     <!-- 添加竞赛 -->
     <insert id="addCompetition">
         insert into
-        competition(cid,cname,host,school,type,cnum,gunm,startCompetition,endCompetition,enrollStartTime,enrollEndTime,)
+        competition(cid,cname,host,school,type,cnum,gunm,startCompetition,endCompetition,enrollStartTime,enrollEndTime)
         values (#{cid},#{cname},#{host},#{school},#{type},#{cnum},#{gunm},#{startCompetition},#{endCompetition},#{enrollStartTime},#{enrollEndTime})
     </insert>
 

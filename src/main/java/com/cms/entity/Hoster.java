@@ -20,6 +20,13 @@ public class Hoster {
         this.school = school;
     }
 
+    public Hoster(String password, String name, String tel, String school) {
+        this.password = password;
+        this.name = name;
+        this.tel = tel;
+        this.school = school;
+    }
+
     public int getId() {
         return id;
     }

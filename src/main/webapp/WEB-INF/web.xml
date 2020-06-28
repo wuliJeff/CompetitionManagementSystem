@@ -43,4 +43,14 @@
         <servlet-name>logoutServlet</servlet-name>
         <url-pattern>/logout.do</url-pattern>
     </servlet-mapping>
+
+    <!-- 添加竞赛 -->
+    <servlet>
+        <servlet-name>AddCompetitionServlet</servlet-name>
+        <servlet-class>com.cms.servlet.CompetitionServlet.AddCompetitionServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>AddCompetitionServlet</servlet-name>
+        <url-pattern>/AddCompetition.do</url-pattern>
+    </servlet-mapping>
 </web-app>

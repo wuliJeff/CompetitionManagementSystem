@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.cms.dao.IHoster">
+
+    <!-- 添加赛事主办方 -->
+    <insert id="addHoster">
+        insert into
+        hoster(account,password,name,tel,school)
+        values ( #{account},#{password},#{name},#{tel},#{school});
+    </insert>
+
+    <!-- 修改当前主办方信息 -->
+    <update id="updateHoster">
+    </update>
+
+    <!-- 查询当前主办方 -->
+    <select id="getHosterByName" resultType="com.cms.entity.Hoster"  useCache="false" flushCache="true">
+        select * from Hoster where name=#{name};
+    </select>
+
+    <!-- 查询当前主办方 -->
+    <select id="getHoster" resultType="com.cms.entity.Hoster"  useCache="false" flushCache="true">
+        select * from hoster where account=#{account};
+    </select>
+
+    <!-- 查询所有主办方 -->
+    <select id="getAllHoster" resultType="com.cms.entity.Hoster"  useCache="false" flushCache="true">
+        select * from Hoster;
+    </select>
+
+
+</mapper>

@@ -30,6 +30,19 @@ public class Competition {
         this.enrollEndTime = enrollEndTime;
     }
 
+    public Competition(String cname, String hostName, String school, String type, int cnum, int gunm, String startCompetition, String endCompetition, String enrollStartTime, String enrollEndTime) {
+        this.cname = cname;
+        this.hostName = hostName;
+        this.school = school;
+        this.type = type;
+        this.cnum = cnum;
+        this.gunm = gunm;
+        this.startCompetition = startCompetition;
+        this.endCompetition = endCompetition;
+        this.enrollStartTime = enrollStartTime;
+        this.enrollEndTime = enrollEndTime;
+    }
+
     public int getCid() {
         return cid;
     }
