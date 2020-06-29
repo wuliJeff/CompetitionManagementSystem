@@ -24,7 +24,7 @@ public interface ICompetitionDao
      * @param competition
      * @return 添加成功则返回true，失败则返回false
      */
-    public boolean addCompetition(@Param("competition") Competition competition);
+    public boolean addCompetition( Competition competition);
 
     /**
      * 获取所有竞赛信息
@@ -38,5 +38,5 @@ public interface ICompetitionDao
      * @param competition
      * @return 修改成功则返回true，失败则返回false
      */
-    public boolean updateCompetition(@Param("competition")Competition competition);
+    public boolean updateCompetition(Competition competition);
 }
