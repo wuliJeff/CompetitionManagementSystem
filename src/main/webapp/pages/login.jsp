@@ -20,13 +20,13 @@
         <div class="login-panel panel panel-default">
             <div class="panel-heading"><b>登录</b></div>
             <div class="panel-body">
-                <form role="form" action="../login.do" method="post">
+                <form role="form" <%--action="../login.do"--%> method="post">
                     <fieldset>
                         <div class="form-group">
-                            <input class="form-control" placeholder="账号" name="account" type="Account" autofocus="">
+                            <input class="form-control" placeholder="账号" id="account" name="account" type="Account" autofocus="">
                         </div>
                         <div class="form-group">
-                            <input class="form-control" placeholder="密码" name="password" type="password" value="">
+                            <input class="form-control" placeholder="密码" id="password" name="password" type="password" value="">
                         </div>
                         <div style="float: left;">
                             <a href="forgetPassword.jsp">忘记密码</a>
@@ -36,7 +36,7 @@
                         </div>
                         <div style="clear: both;">
                             <br/>
-                            <input type="submit" class="btn btn-primary" style="width: 100%;" value="登录">
+                            <input type="submit" id="submit" class="btn btn-primary" style="width: 100%;" value="登录">
                         </div>
                     </fieldset>
                 </form>
@@ -53,7 +53,34 @@
 <script src="../assets/js/easypiechart.js"></script>
 <script src="../assets/js/easypiechart-data.js"></script>
 <script src="../assets/js/bootstrap-datepicker.js"></script>
+<script src="../assets/js/jquery.cookie.js"></script>
 <script>
+    $("#submit").click(function () {
+        $.ajax({
+            url:"http://120.25.255.183:8080/Curriculum/User/checkUser/"+$("#account").val(),
+            type:"GET",
+            data:{
+                password:$("#password").val()
+            },
+           /* headers:{
+                "TOKEN":$.cookie("TOKEN")
+            },*/
+            dataType:"json",
+            success:function (result) {
+                if(result.code==200){
+                    alert(6666)
+                    $.cookie("username",result.username);
+                    $.cookie("type",result.type);
+                    $.cookie("TOKEN",result.TOKEN);
+
+                }else if(result.code==404){
+                    alert("用户名或密码不正确")
+                }
+
+            }
+        })
+        return false;
+    })
     !function ($) {
         $(document).on("click", "ul.nav li.parent > a > span.icon", function () {
             $(this).find('em:first').toggleClass("glyphicon-minus");

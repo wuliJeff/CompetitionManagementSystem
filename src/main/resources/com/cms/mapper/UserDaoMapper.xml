@@ -15,7 +15,8 @@
     </select>
 
     <!-- 插入（注册）用户，默认为普通用户 -->
-    <insert id="register" parameterType="com.cms.entity.UserInfo">
+    <insert id="register" parameterType="com.cms.entity.Use
+    \rInfo">
         insert into userInfo values (#{account}, #{password}, #{tel}, 1);
         <selectKey keyProperty="account" keyColumn="account" resultType="int" order="AFTER">
             select @@IDENTITY ;

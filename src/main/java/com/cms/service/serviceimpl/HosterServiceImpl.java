@@ -61,8 +61,8 @@ public class HosterServiceImpl implements HosterService {
 
         // System.out.println(getCompetition(1));
        Hoster hoster =new Hoster("123456789","陈磊","18507769802","广西民族大学");
-      //  System.out.println(addHoster(hoster));
-       System.out.println(getHoster("202006293489907"));
-        System.out.println(getAllHoster());
+        System.out.println(addHoster(hoster));
+        // System.out.println(getHoster("202006293489907"));
+        //  System.out.println(getAllHoster());
     }
 }
