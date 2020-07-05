@@ -40,6 +40,6 @@ public class ScheduleServiceImpl implements ScheduleService {
     }
     @Test
     public void test1(){
-        System.out.println(selectGradeB());
+        System.out.println(selectGradeD());
     }
 }

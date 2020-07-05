@@ -7,8 +7,8 @@ public class License {
     private String school;  //学校
     private int cid;  //赛事id
     private String cname;  //赛事名称
-    private int pid;
-    private int oid;
+    private int pid; //赛场id
+    private int oid; //赛场秩序册id
 
     public int getCompetitorId() {
         return competitorId;
