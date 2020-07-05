@@ -30,6 +30,7 @@
     </environments>
 
     <mappers>
+        <mapper resource="com/cms/mapper/ScheduleDaoMapper.xml" />
     </mappers>
 
 </configuration>
