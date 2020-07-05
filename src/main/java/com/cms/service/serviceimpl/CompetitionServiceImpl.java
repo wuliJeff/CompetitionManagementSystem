@@ -38,12 +38,9 @@ public class CompetitionServiceImpl implements CompetitionService {
 
     @Override
     public boolean addCompetition(Competition competition) {
-        //判断账户
-//        if (hs.getHosterByName(competition.getHost()){
-//
-//        }
 
-        return false;
+        boolean flag = session.getMapper(ICompetitionDao.class).addCompetition(competition);
+        return flag;
     }
 
     @Override
@@ -54,8 +51,10 @@ public class CompetitionServiceImpl implements CompetitionService {
 
     @Test
     public void test1() {
-
+      Competition competition=new Competition("英语四级","陈磊","广西民族大学","团体赛",500,5,"2020年6月30日","2020年6月31日","2020年6月30日","2020年6月31日");
        // System.out.println(getCompetition(1));
+
+        System.out.println( addCompetition(competition));
         System.out.println(getAllCompetition());
     }
 }

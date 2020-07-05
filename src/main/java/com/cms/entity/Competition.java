@@ -7,7 +7,7 @@ public class Competition {
     private String school;  //学校
     private String type;  //赛事类型
     private int cnum;  //赛事人数
-    private int gunm;  //小组人数
+    private int gnum;  //小组人数
     private String startCompetition;  //比赛开始时间
     private String endCompetition;  //比赛结束时间
     private String enrollStartTime;  //比赛报名开始时间
@@ -16,27 +16,39 @@ public class Competition {
     public Competition() {
     }
 
-    public Competition(int cid, String cname, String hostName, String school, String type, int cnum, int gunm, String startCompetition, String endCompetition, String enrollStartTime, String enrollEndTime) {
+    public Competition(int cid, String cname, String hostName, String school, String type, int cnum, int gnum, String startCompetition, String endCompetition, String enrollStartTime, String enrollEndTime) {
         this.cid = cid;
         this.cname = cname;
         this.hostName = hostName;
         this.school = school;
         this.type = type;
         this.cnum = cnum;
-        this.gunm = gunm;
+        this.gnum = gnum;
         this.startCompetition = startCompetition;
         this.endCompetition = endCompetition;
         this.enrollStartTime = enrollStartTime;
         this.enrollEndTime = enrollEndTime;
     }
 
-    public Competition(String cname, String hostName, String school, String type, int cnum, int gunm, String startCompetition, String endCompetition, String enrollStartTime, String enrollEndTime) {
+    public Competition(String cname, String hostName, String school, String type, int cnum, String startCompetition, String endCompetition, String enrollStartTime, String enrollEndTime) {
         this.cname = cname;
         this.hostName = hostName;
         this.school = school;
         this.type = type;
         this.cnum = cnum;
-        this.gunm = gunm;
+        this.startCompetition = startCompetition;
+        this.endCompetition = endCompetition;
+        this.enrollStartTime = enrollStartTime;
+        this.enrollEndTime = enrollEndTime;
+    }
+
+    public Competition(String cname, String hostName, String school, String type, int cnum, int gnum, String startCompetition, String endCompetition, String enrollStartTime, String enrollEndTime) {
+        this.cname = cname;
+        this.hostName = hostName;
+        this.school = school;
+        this.type = type;
+        this.cnum = cnum;
+        this.gnum = gnum;
         this.startCompetition = startCompetition;
         this.endCompetition = endCompetition;
         this.enrollStartTime = enrollStartTime;
@@ -91,13 +103,7 @@ public class Competition {
         this.cnum = cnum;
     }
 
-    public int getGunm() {
-        return gunm;
-    }
 
-    public void setGunm(int gunm) {
-        this.gunm = gunm;
-    }
 
     public String getStartCompetition() {
         return startCompetition;
@@ -131,16 +137,32 @@ public class Competition {
         this.enrollEndTime = enrollEndTime;
     }
 
+    public String getHostName() {
+        return hostName;
+    }
+
+    public void setHostName(String hostName) {
+        this.hostName = hostName;
+    }
+
+    public int getGnum() {
+        return gnum;
+    }
+
+    public void setGnum(int gnum) {
+        this.gnum = gnum;
+    }
+
     @Override
     public String toString() {
         return "Competition{" +
                 "cid=" + cid +
                 ", cname='" + cname + '\'' +
-                ", host='" + hostName + '\'' +
+                ", hostName='" + hostName + '\'' +
                 ", school='" + school + '\'' +
                 ", type='" + type + '\'' +
                 ", cnum=" + cnum +
-                ", gunm=" + gunm +
+                ", gnum=" + gnum +
                 ", startCompetition='" + startCompetition + '\'' +
                 ", endCompetition='" + endCompetition + '\'' +
                 ", enrollStartTime='" + enrollStartTime + '\'' +

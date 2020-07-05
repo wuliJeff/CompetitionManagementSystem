@@ -6,13 +6,13 @@
     <!-- 添加竞赛 -->
     <insert id="addCompetition">
         insert into
-        competition(cid,cname,host,school,type,cnum,gunm,startCompetition,endCompetition,enrollStartTime,enrollEndTime)
-        values (#{cid},#{cname},#{host},#{school},#{type},#{cnum},#{gunm},#{startCompetition},#{endCompetition},#{enrollStartTime},#{enrollEndTime})
+        competition(cid,cname,hostName,school,type,cnum,gnum,startCompetition,endCompetition,enrollStartTime,enrollEndTime)
+        values (#{cid},#{cname},#{hostName},#{school},#{type},#{cnum},#{gnum},#{startCompetition},#{endCompetition},#{enrollStartTime},#{enrollEndTime})
     </insert>
 
     <!-- 修改竞赛信息 -->
     <update id="updateCompetition">
-update Competition set cname=#{cname},host=#{host},school=#{school},type=#{type},cnum=#{cnum},gunm=#{gunm},startCompetition=#{startCompetition},endCompetition=#{endCompetition},enrollStartTime=#{enrollStartTime},enrollEndTime=#{enrollEndTime}
+update Competition set cname=#{cname},hostName=#{hostName},school=#{school},type=#{type},cnum=#{cnum},gnum=#{gnum},startCompetition=#{startCompetition},endCompetition=#{endCompetition},enrollStartTime=#{enrollStartTime},enrollEndTime=#{enrollEndTime}
 		where cid=#{cid}
     </update>
 

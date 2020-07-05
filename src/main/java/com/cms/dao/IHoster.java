@@ -30,7 +30,7 @@ public interface IHoster {
      * @param hoster
      * @return 添加成功则返回true，失败则返回false
      */
-    public boolean addHoster(@Param("hoster") Hoster hoster);
+    public boolean addHoster( Hoster hoster);
 
     /**
      * 获取所有赛事主办方
@@ -44,7 +44,5 @@ public interface IHoster {
      * @param hoster
      * @return 修改成功则返回true，失败则返回false
      */
-    public boolean updateHoster(@Param("hoster")Hoster hoster);
-
-    public boolean test();
+    public boolean updateHoster(Hoster hoster);
 }
