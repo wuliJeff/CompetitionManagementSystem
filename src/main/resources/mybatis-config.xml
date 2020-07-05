@@ -30,9 +30,6 @@
     </environments>
 
     <mappers>
-        <mapper resource="com/cms/mapper/UserDaoMapper.xml"/>
-        <mapper resource="com/cms/mapper/CompetitionDaoMapper.xml"/>
-        <mapper resource="com/cms/mapper/HosterDaoMapper.xml"/>
     </mappers>
 
 </configuration>

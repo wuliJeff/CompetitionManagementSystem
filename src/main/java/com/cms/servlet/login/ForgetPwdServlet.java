@@ -1,7 +1,5 @@
 package com.cms.servlet.login;
 
-import com.cms.service.serviceimpl.UserServiceImpl;
-
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;

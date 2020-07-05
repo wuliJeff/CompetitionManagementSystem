@@ -1,19 +1,18 @@
 package com.cms.entity;
 
 public class Schedule {
+    private int cid;
     private int competitorId;  //参赛者id
     private int pid;  //赛场id
     private String seat;  //座位号
     private float grade;  //成绩
 
-    public Schedule() {
+    public int getCid() {
+        return cid;
     }
 
-    public Schedule(int competitorId, int pid, String seat, float grade) {
-        this.competitorId = competitorId;
-        this.pid = pid;
-        this.seat = seat;
-        this.grade = grade;
+    public void setCid(int cid) {
+        this.cid = cid;
     }
 
     public int getCompetitorId() {
@@ -51,9 +50,10 @@ public class Schedule {
     @Override
     public String toString() {
         return "Schedule{" +
-                "competitorId=" + competitorId +
+                "cid=" + cid +
+                ", competitorId=" + competitorId +
                 ", pid=" + pid +
-                ", seat='" + seat + '\'' +
+                ", seat=" + seat +
                 ", grade=" + grade +
                 '}';
     }

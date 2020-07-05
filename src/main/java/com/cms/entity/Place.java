@@ -7,18 +7,7 @@ public class Place {
     private String pnum;  //教室编号
     private int cid;  //赛事id
     private int csize;  //教室容量
-
-    public Place() {
-    }
-
-    public Place(int pid, String school, String pname, String pnum, int cid, int csize) {
-        this.pid = pid;
-        this.school = school;
-        this.pname = pname;
-        this.pnum = pnum;
-        this.cid = cid;
-        this.csize = csize;
-    }
+    private String manager;
 
     public int getPid() {
         return pid;
@@ -68,6 +57,14 @@ public class Place {
         this.csize = csize;
     }
 
+    public String getManager() {
+        return manager;
+    }
+
+    public void setManager(String manager) {
+        this.manager = manager;
+    }
+
     @Override
     public String toString() {
         return "Place{" +
@@ -77,6 +74,7 @@ public class Place {
                 ", pnum='" + pnum + '\'' +
                 ", cid=" + cid +
                 ", csize=" + csize +
+                ", manager='" + manager + '\'' +
                 '}';
     }
 }

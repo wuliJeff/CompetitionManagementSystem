@@ -1,41 +1,21 @@
 package com.cms.entity;
 
 public class License {
-    private int id;  //id
-    private String userId;  //参赛者id
+    private int competitorId;  //参赛者id
     private String name;  //姓名
-    private String groupName;  //团队名
+    private String teamName;  //团队名
     private String school;  //学校
     private int cid;  //赛事id
     private String cname;  //赛事名称
+    private int pid;
+    private int oid;
 
-    public License() {
+    public int getCompetitorId() {
+        return competitorId;
     }
 
-    public License(int id, String userId, String name, String groupName, String school, int cid, String cname) {
-        this.id = id;
-        this.userId = userId;
-        this.name = name;
-        this.groupName = groupName;
-        this.school = school;
-        this.cid = cid;
-        this.cname = cname;
-    }
-
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
-    }
-
-    public String getUserId() {
-        return userId;
-    }
-
-    public void setUserId(String userId) {
-        this.userId = userId;
+    public void setCompetitorId(int competitorId) {
+        this.competitorId = competitorId;
     }
 
     public String getName() {
@@ -46,12 +26,12 @@ public class License {
         this.name = name;
     }
 
-    public String getGroupName() {
-        return groupName;
+    public String getTeamName() {
+        return teamName;
     }
 
-    public void setGroupName(String groupName) {
-        this.groupName = groupName;
+    public void setTeamName(String teamName) {
+        this.teamName = teamName;
     }
 
     public String getSchool() {
@@ -78,16 +58,33 @@ public class License {
         this.cname = cname;
     }
 
+    public int getPid() {
+        return pid;
+    }
+
+    public void setPid(int pid) {
+        this.pid = pid;
+    }
+
+    public int getOid() {
+        return oid;
+    }
+
+    public void setOid(int oid) {
+        this.oid = oid;
+    }
+
     @Override
     public String toString() {
-        return "Licence{" +
-                "id=" + id +
-                ", userId='" + userId + '\'' +
+        return "License{" +
+                "competitorId=" + competitorId +
                 ", name='" + name + '\'' +
-                ", groupName='" + groupName + '\'' +
+                ", teamName='" + teamName + '\'' +
                 ", school='" + school + '\'' +
                 ", cid=" + cid +
                 ", cname='" + cname + '\'' +
+                ", pid=" + pid +
+                ", oid=" + oid +
                 '}';
     }
 }
