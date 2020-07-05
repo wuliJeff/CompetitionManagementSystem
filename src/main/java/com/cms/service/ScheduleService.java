@@ -1,6 +1,26 @@
 package com.cms.service;
 
+import com.cms.entity.Schedule;
+import org.apache.ibatis.annotations.Param;
+
+import java.util.List;
+
 public interface ScheduleService {
+
+    /**
+     * 根据参赛者ID查询成绩
+     * @param competitorId:参赛者成绩
+     * @return List<Schedule>当前查询的用户的所有竞赛成绩
+     */
+    public List<Schedule> selectGradeByCompetitorId(int competitorId);
+
+    /**
+     * 根据竞赛ID查询成绩
+     * @param cid: 某次竞赛所有成绩
+     * @return List<Schedule>当前查询的竞赛所有参赛者成绩
+     */
+    public List<Schedule> selectGradeByCid(int cid);
+
     /**
      * 获取一等奖人数
      * @return 人数

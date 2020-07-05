@@ -3,6 +3,17 @@
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.cms.dao.IScheduleDao">
+
+    <!-- 根据参赛者id查询所有成绩 -->
+    <select id="selectGradeByCompetitorId" parameterType="int" resultType="com.cms.entity.Schedule">
+        select * from Schedule where competitorId=#{competitorId};
+    </select>
+
+    <!-- 根据赛事id查询所有成绩 -->
+    <select id="selectGradeByCid" parameterType="int" resultType="com.cms.entity.Schedule">
+        select * from Schedule where cid=#{cid};
+    </select>
+    
     <!-- 获取一等奖人数 -->
     <select id="selectGradeA" resultType="int">
         select count(*) from Schedule where grade>=90;

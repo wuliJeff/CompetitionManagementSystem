@@ -1,10 +1,14 @@
 package com.cms.service.serviceImpl;
 
 import com.cms.dao.IScheduleDao;
+import com.cms.entity.Schedule;
 import com.cms.service.ScheduleService;
 import com.cms.util.MapperConfig;
 import org.apache.ibatis.session.SqlSession;
 import org.junit.Test;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class ScheduleServiceImpl implements ScheduleService {
 
@@ -12,6 +16,20 @@ public class ScheduleServiceImpl implements ScheduleService {
 
     public ScheduleServiceImpl() {
         session = MapperConfig.getSession();
+    }
+
+    @Override
+    public List<Schedule> selectGradeByCompetitorId(int competitorId) {
+        List<Schedule> schedules = new ArrayList<Schedule>();
+        schedules = session.getMapper(IScheduleDao.class).selectGradeByCompetitorId(competitorId);
+        return schedules;
+    }
+
+    @Override
+    public List<Schedule> selectGradeByCid(int cid) {
+        List<Schedule> schedules = new ArrayList<Schedule>();
+        schedules = session.getMapper(IScheduleDao.class).selectGradeByCid(cid);
+        return schedules;
     }
 
     @Override
@@ -39,7 +57,25 @@ public class ScheduleServiceImpl implements ScheduleService {
         return sum;
     }
     @Test
-    public void test1(){
-        System.out.println(selectGradeD());
+    public void testSelectGradeByCompetitorId(){
+        List<Schedule> schedules = selectGradeByCompetitorId(1);
+        if (schedules != null) {
+            for(Schedule schedule : schedules){
+                System.out.println(schedule.toString());
+            }
+        }else{
+            System.out.println("null");
+        }
+    }
+    @Test
+    public void testSelectGradeByCid(){
+        List<Schedule> schedules = selectGradeByCid(1);
+        if (schedules != null) {
+            for(Schedule schedule : schedules){
+                System.out.println(schedule.toString());
+            }
+        }else{
+            System.out.println("null");
+        }
     }
 }
