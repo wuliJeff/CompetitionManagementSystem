@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.cms.dao.ICompetitionOrderDao">
+    <!-- 添加赛场秩序册 -->
+    <insert id="insertNewOrder" parameterType="com.cms.entity.CompetitionOrder">
+        insert into CompetitionOrder values (null, #{newOrder.cid}, #{newOrder.title}, #{newOrder.detail});
+        <selectKey keyColumn="1" resultType="int" keyProperty="oid" order="AFTER">
+            select last_insert_id()
+        </selectKey>
+    </insert>
+    <!-- 查询赛场秩序册 -->
+    <select id="getOrderByid" parameterType="int" resultType="com.cms.entity.CompetitionOrder">
+        select * from CompetitionOrder where oid=#{oid}
+    </select>
+</mapper>

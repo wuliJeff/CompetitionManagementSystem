@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.cms.dao.ILicenseDao">
+
+    <!-- 添加参赛证 -->
+    <insert id="insertLicense" parameterType="com.cms.entity.License">
+        insert into License values (#{license.competitorId}, #{license.name}, #{license.teamName}, #{license.school},
+                                    #{license.cid}, #{license.cname}, #{license.pid}, #{license.oid});
+        <selectKey keyColumn="1" resultType="int" keyProperty="competitorId" order="AFTER">
+            select last_insert_id()
+        </selectKey>
+    </insert>
+    <!-- 获取参赛证 -->
+    <select id="getLicenseById" parameterType="int" resultType="com.cms.entity.License">
+        select * from License where competitorId = #{competitorId};
+    </select>
+</mapper>
