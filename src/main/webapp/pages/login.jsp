@@ -56,23 +56,25 @@
 <script src="../assets/js/jquery.cookie.js"></script>
 <script>
     $("#submit").click(function () {
+
         $.ajax({
             url:"http://120.25.255.183:8080/Curriculum/User/checkUser/"+$("#account").val(),
             type:"GET",
             data:{
                 password:$("#password").val()
             },
-           /* headers:{
+            headers:{
                 "TOKEN":$.cookie("TOKEN")
-            },*/
+            },
             dataType:"json",
             success:function (result) {
                 if(result.code==200){
-                    alert(6666)
-                    $.cookie("username",result.username);
-                    $.cookie("type",result.type);
-                    $.cookie("TOKEN",result.TOKEN);
-
+                    document.cookie="yww=123"
+                    sessionStorage.setItem('userid', result.userid);
+                    sessionStorage.setItem('type', result.type);
+                    sessionStorage.setItem('TOKEN', result.data);
+                    alert("登陆成功");
+                    window.location.href="../index.jsp";
                 }else if(result.code==404){
                     alert("用户名或密码不正确")
                 }

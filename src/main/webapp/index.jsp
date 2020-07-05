@@ -1,4 +1,4 @@
-<%@ page language="java" import="java.util.*, com.cms.entity.*, com.cms.service.*, javax.servlet.http.*"
+<%@ page language="java" import="java.util.*, com.cms.entity.*,  javax.servlet.http.*"
          contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <!DOCTYPE html>
 <html>
@@ -18,7 +18,7 @@
 
 </head>
 
-<body>
+<body >
 <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
     <div class="container-fluid">
         <div class="navbar-header">
@@ -174,7 +174,34 @@
 <script src="assets/js/easypiechart.js"></script>
 <script src="assets/js/easypiechart-data.js"></script>
 <script src="assets/js/bootstrap-datepicker.js"></script>
+<script src="assets/js/jquery.cookie.js"></script>
 <script>
+   function loan(){
+       console.log(sessionStorage.getItem('key'))
+       $.ajax({
+           url: "http://120.25.255.183:8080/Curriculum/User/getUser/" +sessionStorage.getItem('userid'),
+           type: "GET",
+           headers: {
+               "TOKEN":sessionStorage.getItem("TOKEN")
+           },
+           dataType: "json",
+           success: function (result) {
+               if (result.code == 200) {
+                   $.cookie("type", result.type);
+                   $.cookie("user", result.data);
+                   alert(11);
+                   console.log($.cookie("data"));
+                   console.log($.cookie("TOKEN"));
+               } else if (result.code == 404) {
+                   alert("未登录")
+               }
+           }
+       });
+
+   }
+
+    window.onload=loan;
+
     $('#calendar').datepicker({});
 
     !function ($) {
