@@ -6,12 +6,12 @@
 
     <!-- 根据参赛者id查询所有成绩 -->
     <select id="selectGradeByCompetitorId" parameterType="int" resultType="com.cms.entity.Schedule">
-        select * from Schedule where competitorId=#{competitorId};
+        select * from Schedule where competitorId=#{competitorId} order by grade DESC;
     </select>
 
     <!-- 根据赛事id查询所有成绩 -->
     <select id="selectGradeByCid" parameterType="int" resultType="com.cms.entity.Schedule">
-        select * from Schedule where cid=#{cid};
+        select * from Schedule where cid=#{cid} order by grade DESC;
     </select>
     
     <!-- 获取一等奖人数 -->

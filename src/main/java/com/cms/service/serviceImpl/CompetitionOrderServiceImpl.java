@@ -8,6 +8,7 @@ import org.apache.ibatis.session.SqlSession;
 import org.junit.Test;
 
 public class CompetitionOrderServiceImpl implements CompetitorOrderService {
+
     private SqlSession session;
 
     public CompetitionOrderServiceImpl() {

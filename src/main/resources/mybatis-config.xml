@@ -33,6 +33,7 @@
         <mapper resource="com/cms/mapper/ScheduleDaoMapper.xml" />
         <mapper resource="com/cms/mapper/CompetitionOrderDaoMapper.xml" />
         <mapper resource="com/cms/mapper/LicenseDaoMapper.xml" />
+        <mapper resource="com/cms/mapper/PlaceDaoMapper.xml" />
     </mappers>
 
 </configuration>

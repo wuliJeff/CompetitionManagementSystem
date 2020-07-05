@@ -1,7 +1,6 @@
 package com.cms.dao;
 
 import com.cms.entity.CompetitionOrder;
-import com.cms.entity.License;
 import org.apache.ibatis.annotations.Param;
 
 public interface ICompetitionOrderDao {
