@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.cms.dao.IScheduleDao">
+    <!-- 获取一等奖人数 -->
+    <select id="selectGradeA" resultType="int">
+        select count(*) from Schedule where grade>=90;
+    </select>
+
+    <!-- 获取二等奖人数 -->
+    <select id="selectGradeB" resultType="int">
+        select count(*) from Schedule where grade &lt; 90 and grade>=75;
+    </select>
+
+    <!-- 获取三等奖人数 -->
+    <select id="selectGradeC" resultType="int">
+        select count(*) from Schedule where grade &lt; 75 and grade>=60;
+    </select>
+
+    <!-- 获取未获奖人数 -->
+    <select id="selectGradeD" resultType="int">
+        select count(*) from Schedule where grade &lt; 60;
+    </select>
+</mapper>
