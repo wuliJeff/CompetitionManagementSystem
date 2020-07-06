@@ -156,45 +156,51 @@
                 <div class="col-lg-12" style="margin-top: 2%;">
                     <form id="searchInfo" action="" method="post">
                         <div class="input-group">
-                            <input type="text" name="userId" class="form-control input-group-sm" style="width: auto;" placeholder="参赛者id"/>
+                            <input type="text" name="userId" class="form-control input-group-sm" style="width: auto;"
+                                   placeholder="参赛者id"/>
                             <button type="submit" name="search" class="btn btn-primary btn-outline-primary">
                                 <span class="glyphicon glyphicon-search"></span> 查询
                             </button>
                         </div>
                     </form>
-                    <form id="gradeInfo">
-                        <table class="table" style="margin-top: 2%; width: 80%; font-size: 16px; text-align: center;">
-                            <tr style="font-size: 18px; font-family: 'Microsoft YaHei UI';">
-                                <td><b>赛事名称</b></td>
-                                <td><b>赛场号</b></td>
-                                <td><b>参赛证号</b></td>
-                                <td><b>座位号</b></td>
-                                <td><b>成绩</b></td>
-                                <td><b>排名</b></td>
-                            </tr>
-                            <tr>
-                                <td>广西民族大学程序设计竞赛</td>
-                                <td>1</td>
-                                <td>117583010144</td>
-                                <td>1</td>
-                                <td>80</td>
-                                <td>3</td>
-                            </tr>
-                            <tr>
-                                <td colspan="6">
-                                    <div style="float: right; font-size: 14px;">
-                                        <button name="last" class="btn btn-primary btn-outline-primary">
-                                            <span class="glyphicon glyphicon-chevron-left"></span>上一页
-                                        </button>
-                                        <input type="text" style="width: 40px;" readonly="readonly" value="1">
-                                        <button name="next" class="btn btn-primary btn-outline-primary">
-                                            下一页<span class="glyphicon glyphicon-chevron-right"></span>
-                                        </button>
-                                    </div>
-                                </td>
-                            </tr>
-                        </table>
-                    </form>
+
+                    <table class="table" id="myTable"
+                           style="margin-top: 2%; margin-bottom: 0; width: 80%; font-size: 16px; text-align: center;">
+                        <tr style="font-size: 18px; font-family: 'Microsoft YaHei UI';">
+                            <td><b>赛事名称</b></td>
+                            <td><b>赛场号</b></td>
+                            <td><b>参赛证号</b></td>
+                            <td><b>座位号</b></td>
+                            <td><b>成绩</b></td>
+                            <td><b>排名</b></td>
+                        </tr>
+<%--                        <tr>--%>
+<%--                            <td>广西民族大学程序设计竞赛</td>--%>
+<%--                            <td>1</td>--%>
+<%--                            <td>117583010144</td>--%>
+<%--                            <td>1</td>--%>
+<%--                            <td>80</td>--%>
+<%--                            <td>3</td>--%>
+<%--                        </tr>--%>
+                    </table>
+                    <table class="table" id="page"
+                           style="margin-top: 0; width: 80%; font-size: 16px; text-align: center;">
+
+                        <tr>
+                            <td>
+                                <div style="float: right; font-size: 14px;">
+                                    <button name="last" class="btn btn-primary btn-outline-primary">
+                                        <span class="glyphicon glyphicon-chevron-left"></span>上一页
+                                    </button>
+                                    <input type="text" style="width: 40px;" readonly="readonly" value="1">
+                                    <button name="next" class="btn btn-primary btn-outline-primary">
+                                        下一页<span class="glyphicon glyphicon-chevron-right"></span>
+                                    </button>
+                                </div>
+                            </td>
+                        </tr>
+                    </table>
+
                 </div>
             </div><!--/.row-->
 
@@ -244,28 +250,39 @@
             $(".login").show()
             $("#logout").hide()
         }
-    $(".logout").click(function () {
-        sessionStorage.clear();
-        $.cookie().clear();
-        window.location.href="../../index.jsp";
-    })
+        $(".logout").click(function () {
+            sessionStorage.clear();
+            $.cookie().clear();
+            window.location.href = "../../index.jsp";
+        })
 
-    $.ajax({
-            url:"http://120.25.255.183:8088/Curriculum/Competition/UserCompetition/"+sessionStorage.getItem("userid"),
-        type:"GET",
+        $.ajax({
+            url: "http://120.25.255.183:8088/Curriculum/Competition/UserCompetition/" + sessionStorage.getItem("userid"),
+            type: "GET",
             data: {
                 page: 1,
                 pagesize: 10
             },
             headers: {
-            "TOKEN": $.cookie("TOKEN")
-        },
-        dataType: "json",
-            success:function (result) {
-                if(result.code==0){
-                    $.cookie("eventList",result.data)
+                "TOKEN": $.cookie("TOKEN")
+            },
+            dataType: "json",
+            success: function (result) {
+                if (result.code == 0) {
+                    $.cookie("eventList", result.data)
                     console.log(result.data)
-                }else if(result.code==404){
+                    for (var i = 0; i < result.data.length; i++)
+                    {
+                        $("#myTable").append("<tr> " +
+                            "<td>"+ result.data[i].competitionId+"</td>" +
+                            "<td>"+  result.data[i].competitionName+"</td>" +
+                            "<td>"+ result.data[i].duration +"</td>" +
+                            "<td>"+  result.data[i].enrollStartTime+"</td>" +
+                            "<td>"+ result.data[i].enrollEndTime +"</td>" +
+                            "<td>"+ result.data[i].endCompetition +"</td></tr>"
+                    )
+                    }
+                } else if (result.code == 404) {
                 }
 
             }
@@ -289,6 +306,7 @@
         // }
         return false;
     }
+
     window.onload = loan;
 
     $('#calendar').datepicker({});
