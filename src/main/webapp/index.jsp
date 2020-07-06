@@ -67,7 +67,7 @@
             dataType: "json",
             success: function (result) {
                 if (result.code == 200) {
-                    $.cookie("Userid", result.userid)
+                    $.cookie("TOKEN", result.data)
                     sessionStorage.setItem("username", $("#account").val())
                     sessionStorage.setItem('userid', result.userid);
                     sessionStorage.setItem('type', result.type);

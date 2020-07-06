@@ -20,7 +20,7 @@
         <div class="login-panel panel panel-default">
             <div class="panel-heading"><b>忘记密码</b></div>
             <div class="panel-body">
-                <form id="resetInfo" action="../forgetPwd.do" method="post">
+               <form id="resetInfo" <%-- action="../forgetPwd.do" --%>method="post">
                     <fieldset>
                         <div class="form-group">
                             <input type="text" class="form-control" id="account" name="account" placeholder="账号">
@@ -31,8 +31,7 @@
                         <div class="form-group">
                             <input type="password" class="form-control" id="password" name="password" placeholder="新密码">
                         </div>
-                        <input id="submit" type="button" class="btn btn-primary" value="确认" style="width: 100%;"
-                               onclick="validate()">
+                        <input id="submit" type="button" class="btn btn-primary" value="确认" style="width: 100%;">
                         <br/><br/>
                         <input type="button" class="btn btn-primary" value="取消" style="width: 100%;"
                                onclick="window.location.href='../index.jsp'">
@@ -55,70 +54,51 @@
 <script>
     $("#submit").click(function () {
         $.ajax({
-            url:"http://120.25.255.183:8088/Curriculum/User/modifyUserPwd/"+$("#account").val(),
+            url:"http://120.25.255.183:8088/Curriculum/User/findUserPwd/"+$("#account").val(),
             type:"GET",
             data:{
-                password:$("#password").val()
-            },
-            headers:{
-                "TOKEN":$.cookie("TOKEN")
+                password:$("#password").val(),
+                email:$("#email").val()
             },
             dataType:"json",
             success:function (result) {
-                if(result.code==200){
-                    $.cookie("Userid",result.userid)
-                    sessionStorage.setItem("username",$("#account").val())
-                    sessionStorage.setItem('userid', result.userid);
-                    sessionStorage.setItem('type', result.type);
-                    sessionStorage.setItem('TOKEN', result.data);
-                    alert("登陆成功");
-                    window.location.href="pages/default.jsp";
+                if(result.code==0){
+                    alert("修改成功,请登录");
+                    window.location.href="../index.jsp";
                 }else if(result.code==404){
-                    alert("用户名或密码不正确")
+                    alert("用户名或邮箱不正确")
                 }
 
             }
         })
         return false;
     })
-    !function ($) {
-        $(document).on("click", "ul.nav li.parent > a > span.icon", function () {
-            $(this).find('em:first').toggleClass("glyphicon-minus");
-        });
-        $(".sidebar span.icon").find('em:first').addClass("glyphicon-plus");
-    }(window.jQuery);
 
-    $(window).on('resize', function () {
-        if ($(window).width() > 768) $('#sidebar-collapse').collapse('show')
-    })
-    $(window).on('resize', function () {
-        if ($(window).width() <= 767) $('#sidebar-collapse').collapse('hide')
-    })
 </script>
 
-<script type="text/javascript">
-    function validate() {
-        var account = document.getElementById("account").value;
-        var pwd = document.getElementById("password").value;
-        var tel = document.getElementById("tel").value;
-        var resetInfo = document.getElementById("resetInfo");
-        if (account == "") {
-            window.alert("请输入用户名！");
-            account.focus();
-            return false;
-        } else if (pwd == "") {
-            window.alert("密码不能为空！");
-            pwd.focus();
-            return false;
-        } else if (tel == "") {
-            window.alert("请输入联系方式！");
-            tel.focus();
-            return false;
-        }
-        resetInfo.submit();
-        return true;
-    }
-</script>
+<%--<script type="text/javascript">--%>
+<%--    function validate() {--%>
+<%--        var account = document.getElementById("account").value;--%>
+<%--        var pwd = document.getElementById("password").value;--%>
+<%--        var tel = document.getElementById("email").value;--%>
+<%--        var resetInfo = document.getElementById("resetInfo");--%>
+<%--        if (account == "") {--%>
+<%--            window.alert("请输入用户名！");--%>
+<%--            account.focus();--%>
+<%--            return false;--%>
+<%--        } else if (pwd == "") {--%>
+<%--            window.alert("密码不能为空！");--%>
+<%--            pwd.focus();--%>
+<%--            return false;--%>
+<%--        } else if (email == "") {--%>
+<%--            window.alert("请输入邮箱！");--%>
+<%--            tel.focus();--%>
+<%--            return false;--%>
+<%--        }--%>
+<%--        resetInfo.submit();--%>
+<%--        return true;--%>
+<%--    }--%>
+<%--</script>--%>
 </body>
 
 </html>
