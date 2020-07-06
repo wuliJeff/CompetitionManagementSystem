@@ -23,20 +23,19 @@
                 <form role="form" <%--action="../login.do"--%> method="post">
                     <fieldset>
                         <div class="form-group">
-                            <input class="form-control" placeholder="账号" id="account" name="account" type="Account" autofocus="">
+                            <input class="form-control" placeholder="账号" id="account" name="account" type="Account"
+                                   autofocus="">
                         </div>
                         <div class="form-group">
-                            <input class="form-control" placeholder="密码" id="password" name="password" type="password" value="">
+                            <input class="form-control" placeholder="密码" id="password" name="password" type="password"
+                                   value="">
                         </div>
                         <div style="float: left;">
                             <a href="pages/forgetPassword.jsp">忘记密码</a>
                         </div>
-                        <div style="float: right;">
-                            <a href="register.jsp">注册</a>
-                        </div>
                         <div style="clear: both;">
                             <br/>
-                            <input type="button" id="submit" class="btn btn-primary" style="width: 100%;" value="登录">
+                            <input type="submit" id="submit" class="btn btn-primary" style="width: 100%;" value="登录">
                         </div>
                     </fieldset>
                 </form>
@@ -56,27 +55,26 @@
 <script src="assets/js/jquery.cookie.js"></script>
 <script>
     $("#submit").click(function () {
-
         $.ajax({
-            url:"http://120.25.255.183:8080/Curriculum/User/checkUser/"+$("#account").val(),
-            type:"GET",
-            data:{
-                password:$("#password").val()
+            url: "http://120.25.255.183:8088/Curriculum/User/checkUser/" + $("#account").val(),
+            type: "GET",
+            data: {
+                password: $("#password").val()
             },
-            headers:{
-                "TOKEN":$.cookie("TOKEN")
+            headers: {
+                "TOKEN": $.cookie("TOKEN")
             },
-            dataType:"json",
-            success:function (result) {
-                if(result.code==200){
-                    $.cookie("Userid",result.userid)
-                    sessionStorage.setItem("username",$("#account").val())
+            dataType: "json",
+            success: function (result) {
+                if (result.code == 200) {
+                    $.cookie("Userid", result.userid)
+                    sessionStorage.setItem("username", $("#account").val())
                     sessionStorage.setItem('userid', result.userid);
                     sessionStorage.setItem('type', result.type);
                     sessionStorage.setItem('TOKEN', result.data);
                     alert("登陆成功");
-                    window.location.href="pages/default.jsp";
-                }else if(result.code==404){
+                    window.location.href = "pages/default.jsp";
+                } else if (result.code == 404) {
                     alert("用户名或密码不正确")
                 }
 

@@ -26,16 +26,16 @@
                             <input type="text" class="form-control" id="account" name="account" placeholder="账号">
                         </div>
                         <div class="form-group">
-                            <input type="password" class="form-control" id="password" name="password" placeholder="新密码">
+                            <input type="text" class="form-control" id="email" name="email" placeholder="邮箱">
                         </div>
                         <div class="form-group">
-                            <input type="text" class="form-control" id="tel" name="tel" placeholder="联系方式">
+                            <input type="password" class="form-control" id="password" name="password" placeholder="新密码">
                         </div>
-                        <input type="button" class="btn btn-primary" value="确认" style="width: 100%;"
+                        <input id="submit" type="button" class="btn btn-primary" value="确认" style="width: 100%;"
                                onclick="validate()">
                         <br/><br/>
                         <input type="button" class="btn btn-primary" value="取消" style="width: 100%;"
-                               onclick="window.location.href='login.html'">
+                               onclick="window.location.href='../index.jsp'">
                     </fieldset>
                 </form>
             </div>
@@ -51,7 +51,36 @@
 <script src="../assets/js/easypiechart.js"></script>
 <script src="../assets/js/easypiechart-data.js"></script>
 <script src="../assets/js/bootstrap-datepicker.js"></script>
+<script src="../assets/js/jquery.cookie.js"></script>
 <script>
+    $("#submit").click(function () {
+        $.ajax({
+            url:"http://120.25.255.183:8088/Curriculum/User/modifyUserPwd/"+$("#account").val(),
+            type:"GET",
+            data:{
+                password:$("#password").val()
+            },
+            headers:{
+                "TOKEN":$.cookie("TOKEN")
+            },
+            dataType:"json",
+            success:function (result) {
+                if(result.code==200){
+                    $.cookie("Userid",result.userid)
+                    sessionStorage.setItem("username",$("#account").val())
+                    sessionStorage.setItem('userid', result.userid);
+                    sessionStorage.setItem('type', result.type);
+                    sessionStorage.setItem('TOKEN', result.data);
+                    alert("登陆成功");
+                    window.location.href="pages/default.jsp";
+                }else if(result.code==404){
+                    alert("用户名或密码不正确")
+                }
+
+            }
+        })
+        return false;
+    })
     !function ($) {
         $(document).on("click", "ul.nav li.parent > a > span.icon", function () {
             $(this).find('em:first').toggleClass("glyphicon-minus");

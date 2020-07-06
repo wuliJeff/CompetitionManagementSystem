@@ -180,7 +180,7 @@
 <script>
     function loan() {
         $.ajax({
-            url: "http://120.25.255.183:8080/Curriculum/User/getUser/" + sessionStorage.getItem('userid'),
+            url: "http://120.25.255.183:8088/Curriculum/User/getUser/" + sessionStorage.getItem('userid'),
             type: "GET",
             headers: {
                 "TOKEN": sessionStorage.getItem("TOKEN")
