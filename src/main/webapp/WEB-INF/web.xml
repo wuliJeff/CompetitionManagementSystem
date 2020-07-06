@@ -6,9 +6,7 @@
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd"
          version="3.1">
-<welcome-file-list>
-    <welcome-file>../pages/login.jsp</welcome-file>
-</welcome-file-list>
+
     <!-- 登录用servlet -->
     <servlet>
         <servlet-name>loginServlet</servlet-name>

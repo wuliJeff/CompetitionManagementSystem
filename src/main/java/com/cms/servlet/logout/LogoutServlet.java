@@ -13,7 +13,7 @@ public class LogoutServlet extends HttpServlet {
         response.setContentType("text/html; charset=UTF-8");
         request.setCharacterEncoding("UTF-8");;
         request.getSession().invalidate();
-        response.sendRedirect("index.jsp");
+        response.sendRedirect("default.jsp");
     }
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
