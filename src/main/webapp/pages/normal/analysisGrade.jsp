@@ -5,7 +5,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>主页</title>
+    <title>赛绩分析</title>
 
     <link href="../../assets/css/bootstrap.min.css" rel="stylesheet">
     <link href="../../assets/css/datepicker3.css" rel="stylesheet">
@@ -44,11 +44,11 @@
                     </li>
                 </ul>
             </div>
-            <div id="noLogin"><a href="../index.jsp">
+            <div id="noLogin"><a href="../../index.jsp">
                 <ul class="user-menu">
                     <li class="dropdown pull-right">
 
-                        <a href="../index.jsp">
+                        <a href="../../index.jsp">
                             <span class="glyphicon glyphicon-user"></span> 登录
                         </a>
                     </li>
@@ -61,111 +61,39 @@
 </nav>
 
 <div id="sidebar-collapse" class="col-sm-3 col-lg-2 sidebar">
-    <form role="search">
-        <div class="form-group">
-            <input type="text" class="form-control" placeholder="Search">
-        </div>
-    </form>
     <ul class="nav menu">
-        <li class="active"><a href="default.jsp"><span class="glyphicon glyphicon-dashboard"></span> 主页 </a></li>
-        <li class="parent ">
-            <a href="#">
-                <span class="glyphicon glyphicon-list"></span> 赛程管理
-                <span data-toggle="collapse" href="#sub-item-1" class="icon pull-right">
-                    <em class="glyphicon  glyphicon-chevron-down glyphicon-chevron-up"></em>
-                </span>
-            </a>
-            <ul class="children collapse" id="sub-item-1">
-                <li>
-                    <a class="" href="#">
-                        <span class="glyphicon glyphicon-paperclip"></span> 发布赛事
-                    </a>
-                </li>
-                <li>
-                    <a class="" href="#">
-                        <span class="glyphicon glyphicon-paperclip"></span> 查询赛场
-                    </a>
-                </li>
-                <li>
-                    <a class="" href="#">
-                        <span class="glyphicon glyphicon-paperclip"></span> 安排赛场
-                    </a>
-                </li>
-                <li>
-                    <a class="" href="#">
-                        <span class="glyphicon glyphicon-paperclip"></span> 上传赛场秩序册
-                    </a>
-                </li>
-            </ul>
-        </li>
-
-        <li class="parent ">
-            <a href="#">
-                <span class="glyphicon glyphicon-list"></span> 成绩管理
-                <span data-toggle="collapse" href="#sub-item-2" class="icon pull-right">
-                    <em class="glyphicon glyphicon-chevron-down glyphicon-chevron-up"></em>
-                </span>
-            </a>
-            <ul class="children collapse" id="sub-item-2">
-                <li>
-                    <a class="" href="#">
-                        <span class="glyphicon glyphicon-paperclip"></span> 发布成绩
-                    </a>
-                </li>
-                <li>
-                    <a class="" href="#">
-                        <span class="glyphicon glyphicon-paperclip"></span> 成绩查询
-                    </a>
-                </li>
-                <li>
-                    <a class="" href="#">
-                        <span class="glyphicon glyphicon-paperclip"></span> 赛绩分析
-                    </a>
-                </li>
-            </ul>
-        </li>
+        <li><a href="default.jsp"><span class="glyphicon glyphicon-chevron-left"></span> 返回我的赛事 </a></li>
+        <li><a href="detail.jsp"><span class="glyphicon glyphicon-leaf"></span> 赛事详情 </a></li>
+        <li class="active"><a href="#"><span class="glyphicon glyphicon-stats"></span> 赛绩分析 </a></li>
+        <li><a href="myLicense.jsp"><span class="glyphicon glyphicon-file"></span> 我的参赛证 </a></li>
         <li role="presentation" class="divider"></li>
-        <div class="logout">
-            <li><a href="#"><span class="glyphicon glyphicon-log-out"></span> 注销</a></li>
-        </div>
-        <div id="login">
-            <li><a href="pages/login.jsp"><span class="glyphicon glyphicon-log-in"></span> 登录</a></li>
-        </div>
     </ul>
-    <div class="attribution">write by Jeff</div>
+    <div class="logout">
+        <ul class="nav menu">
+            <li><a href="#"><span class="glyphicon glyphicon-log-out"></span> 注销</a></li>
+        </ul>
+    </div>
+    <div id="login">
+        <ul class="nav menu">
+            <li><a href="../../index.jsp"><span class="glyphicon glyphicon-log-in"></span> 登录</a></li>
+        </ul>
+    </div>
+    <div class="attribution">Copyright &copy; 2020 陈欢成小组 </div>
 </div><!--/.sidebar-->
 
 <div class="col-sm-9 col-sm-offset-3 col-lg-10 col-lg-offset-2 main">
     <div class="row">
         <ol class="breadcrumb">
-            <li><a href="#"><span class="glyphicon glyphicon-home"></span></a></li>
-            <li class="active">主页</li>
+            <li><a href="default.jsp"><span class="glyphicon glyphicon-home"></span></a></li>
+            <li class="active"><a href="#"><span class="glyphicon glyphicon-stats"></span> 赛绩分析 </a></li>
         </ol>
     </div><!--/.row-->
 
     <div class="row">
         <div class="col-lg-12">
-            guangximinzudaxue
+            <div id="competitionName" style="text-align: center; margin-top: 2%; margin-bottom: 0;"><h3><b>某某竞赛成绩分布情况</b></h3></div>
+            <div id="ringGraphic" style="width: 100%; height: 600px; margin: 0;"></div>
         </div>
-    </div><!--/.row-->
-
-    <div class="copyrights">write by ...小组</div>
-
-    <div class="row">
-
-        <div id="container" style="width: 100%; height: 600px; margin: 0;"></div>
-    </div><!--/.row-->
-
-    <div class="row">
-
-    </div><!--/.row-->
-
-    <div class="row">
-
-    </div><!--/.row-->
-
-    <div class="row">
-
     </div><!--/.row-->
 </div><!--/.main-->
 
@@ -178,10 +106,10 @@
 <script src="../../assets/js/bootstrap-datepicker.js"></script>
 <script src="../../assets/js/jquery.cookie.js"></script>
 
-<!-- 饼图 -->
+<!-- 环形图 -->
 <script type="text/javascript" src="http://echarts.baidu.com/gallery/vendors/echarts/echarts.min.js"></script>
 <script type="text/javascript">
-    var dom = document.getElementById("container");
+    var dom = document.getElementById("ringGraphic");
     var myChart = echarts.init(dom);
     var app = {};
 

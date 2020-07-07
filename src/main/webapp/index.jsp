@@ -72,8 +72,8 @@
                     sessionStorage.setItem('userid', result.userid);
                     sessionStorage.setItem('type', result.type);
                     sessionStorage.setItem('TOKEN', result.data);
-                    alert("登陆成功");
-                    window.location.href = "pages/default.jsp";
+                    alert("登录成功");
+                    window.location.href = "pages/admin/default.jsp";
                 } else if (result.code == 404) {
                     alert("用户名或密码不正确")
                 }
