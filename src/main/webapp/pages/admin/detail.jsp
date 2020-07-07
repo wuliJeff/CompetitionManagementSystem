@@ -85,7 +85,7 @@
             <li><a href="../../index.jsp"><span class="glyphicon glyphicon-log-in"></span> 登录</a></li>
         </ul>
     </div>
-    <div class="attribution">Copyright &copy; 2020 陈欢成小组 </div>
+    <div class="attribution">Copyright &copy; 2020 陈欢成小组</div>
 </div><!--/.sidebar-->
 
 <div class="col-sm-9 col-sm-offset-3 col-lg-10 col-lg-offset-2 main">
@@ -112,7 +112,7 @@
 
                     <table class="table" id="myTable"
                            style="margin-top: 2%; margin-bottom: 0; width: 90%; font-size: 16px; text-align: center;">
-                        <tr style="font-size: 18px; font-family: 'Microsoft YaHei UI';">
+                        <tr id="trOne" style="font-size: 18px; font-family: 'Microsoft YaHei UI';">
                             <td><b>赛事名称</b></td>
                             <td><b>赛场号</b></td>
                             <td><b>参赛证号</b></td>
@@ -120,13 +120,13 @@
                             <td><b>成绩</b></td>
                             <td><b>排名</b></td>
                         </tr>
-                        <tr>
-                            <td><b>gxcpc</b></td>
-                            <td><b>1</b></td>
-                            <td><b>123456</b></td>
-                            <td><b>李波波</b></td>
-                            <td><b>90</b></td>
-                            <td><b>3</b></td>
+                        <tr id="trTow" style="font-size: 18px; font-family: 'Microsoft YaHei UI';">
+                            <td><b>赛事名称</b></td>
+                            <td><b>赛场号</b></td>
+                            <td><b>参赛证号</b></td>
+                            <td><b>团队名</b></td>
+                            <td><b>成绩</b></td>
+                            <td><b>排名</b></td>
                         </tr>
                     </table>
                     <table class="table" id="page"
@@ -161,9 +161,19 @@
 <script src="../../assets/js/jquery.cookie.js"></script>
 <script>
     function loan() {
-
+        var eventType=$.cookie("eventType");
+        var eventId = $.cookie("eventId");
+        var event = $.cookie("event");
+        console.log(event[0].type)
+        if (eventType=="1"){
+           $("#trOne").hide();
+            $("#trTow").show();
+        }else{
+            $("#trTow").hide();
+            $("#trOne").show();
+        }
         $.ajax({
-            url: "http://120.25.255.183:8088/Curriculum/User/getUser/" + sessionStorage.getItem('userid'),
+            url: 'http://120.25.255.183:8088/Curriculum/Enlist/getCidEnlist/' + eventId,
             type: "GET",
             headers: {
                 "TOKEN": sessionStorage.getItem("TOKEN")
@@ -171,9 +181,30 @@
             dataType: "json",
             success: function (result) {
                 if (result.code == 0) {
-                    sessionStorage.setItem("user", result.data);
-                } else if (result.code == 404) {
+                    for (var i = 0; i < result.data.length; i++)
+                    {
+                        var id=result.data[i].competitionId;
+                        if(result.data[i].type=="1"){
+                            var eventType="团队赛";
+                        }else{
+                            var eventType="个人赛";
+                        }
 
+                        $("#myTable").append("<tr> " +
+                            "<td>"+ result.data[i].cid+"</td>" +
+                            "<td>"+ result.data[i].enlistid +"</td>" +
+                            "<td>"+ result.data[i].teamuser +"</td>" +
+                            "<td>"+  result.data[i].teamname +"</td>" +
+                            "<td>"+ result.data[i].teamusers +"</td>" +
+                            "<td>"+ result.data[i].userid +"</td>" +
+                            "<td>"+ '<input type="text" name="competitionId" style="display: none" value="'+id+'">' +
+                           // '<input type="text" name="competitionName" style="display: none" value="'+ result.data[i].competitionName+'">' +
+                            '<input type="button" name="seachButton" value="查看详情" class="btn-primary">'+ "</td>" +
+
+                            "</tr>"
+                        )
+                    }
+                } else if (result.code == 404) {
                 }
             }
         });
@@ -192,12 +223,33 @@
         }
 
     }
+
     window.onload = loan;
+
+    // 清除所有的cookie
+    function deleteCookie() {
+        var cookies = document.cookie.split(";");
+        for (var i = 0; i < cookies.length; i++) {
+            var cookie = cookies[i];
+            var eqPos = cookie.indexOf("=");
+            var name = eqPos > -1 ? cookie.substr(0, eqPos) : cookie;
+            document.cookie = name + "=;expires=Thu, 01 Jan 1970 00:00:00 GMT; path=/";
+        }
+        if (cookies.length > 0) {
+            for (var i = 0; i < cookies.length; i++) {
+                var cookie = cookies[i];
+                var eqPos = cookie.indexOf("=");
+                var name = eqPos > -1 ? cookie.substr(0, eqPos) : cookie;
+                var domain = location.host.substr(location.host.indexOf('.'));
+                document.cookie = name + "=;expires=Thu, 01 Jan 1970 00:00:00 GMT; path=/; domain=" + domain;
+            }
+        }
+    }
 
     $(".logout").click(function () {
         sessionStorage.clear();
-        $.cookie().clear();
-        window.location.href="../../index.jsp";
+        deleteCookie();
+        window.location.href = "../../index.jsp";
     })
 </script>
 

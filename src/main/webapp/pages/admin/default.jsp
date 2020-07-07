@@ -166,7 +166,7 @@
         }
         $(".logout").click(function () {
             sessionStorage.clear();
-            $.cookie().clear();
+            deleteCookie();
             window.location.href = "../../index.jsp";
         })
 
@@ -216,6 +216,27 @@
 
         return false;
     }
+    // 清除所有的cookie
+    function deleteCookie() {
+        var cookies = document.cookie.split(";");
+        for (var i = 0; i < cookies.length; i++) {
+            var cookie = cookies[i];
+            var eqPos = cookie.indexOf("=");
+            var name = eqPos > -1 ? cookie.substr(0, eqPos) : cookie;
+            document.cookie = name + "=;expires=Thu, 01 Jan 1970 00:00:00 GMT; path=/";
+        }
+        if(cookies.length > 0)
+        {
+            for (var i = 0; i < cookies.length; i++) {
+                var cookie = cookies[i];
+                var eqPos = cookie.indexOf("=");
+                var name = eqPos > -1 ? cookie.substr(0, eqPos) : cookie;
+                var domain = location.host.substr(location.host.indexOf('.'));
+                document.cookie = name + "=;expires=Thu, 01 Jan 1970 00:00:00 GMT; path=/; domain=" + domain;
+            }
+        }
+    }
+
     //模糊查询
     $("#search").click(function () {
         $("#myTable tr:gt(0)").empty();
@@ -272,7 +293,7 @@ console.log($("#competitionNameSearch").val())
     $("#myTable").on("click", "input[name='seachButton']", function() {
         var name=$(this).parent().parent().find("input[name='competitionName']").val();
         var id=$(this).parent().parent().find("input[name='competitionId']").val();
-        alert(id+name);
+
         $.ajax({
             url: 'http://120.25.255.183:8088/Curriculum/Competition/findCompetition/'+id,
             type: "get",
@@ -282,7 +303,11 @@ console.log($("#competitionNameSearch").val())
             dataType: "json",
             success: function (result) {
                 if (result.code == 1001) {
-                    console.log(result.data)
+                    $.cookie("eventType",result.data[0].type)
+                    $.cookie("eventId",result.data[0].competitionId)
+                    $.cookie("event",result.data[0])
+                    alert(id+name);
+                    window.location.href="detail.jsp";
                 }
             },
             error: function () {
