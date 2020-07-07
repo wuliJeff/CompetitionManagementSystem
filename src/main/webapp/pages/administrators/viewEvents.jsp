@@ -168,20 +168,13 @@
                            style="margin-top: 2%; margin-bottom: 0; width: 80%; font-size: 16px; text-align: center;">
                         <tr style="font-size: 18px; font-family: 'Microsoft YaHei UI';">
                             <td><b>赛事名称</b></td>
-                            <td><b>赛场号</b></td>
-                            <td><b>参赛证号</b></td>
-                            <td><b>座位号</b></td>
-                            <td><b>成绩</b></td>
-                            <td><b>排名</b></td>
+                            <td><b>赛事类型</b></td>
+                            <td><b>参赛人数</b></td>
+                            <td><b>参赛时长</b></td>
+                            <td><b>比赛开始时间</b></td>
+                            <td><b>比赛结束时间</b></td>
+                            <td><b>  &nbsp; &nbsp; &nbsp; &nbsp;  操作  &nbsp; &nbsp; &nbsp;    </b></td>
                         </tr>
-<%--                        <tr>--%>
-<%--                            <td>广西民族大学程序设计竞赛</td>--%>
-<%--                            <td>1</td>--%>
-<%--                            <td>117583010144</td>--%>
-<%--                            <td>1</td>--%>
-<%--                            <td>80</td>--%>
-<%--                            <td>3</td>--%>
-<%--                        </tr>--%>
                     </table>
                     <table class="table" id="page"
                            style="margin-top: 0; width: 80%; font-size: 16px; text-align: center;">
@@ -271,15 +264,29 @@
                 if (result.code == 0) {
                     $.cookie("eventList", result.data)
                     console.log(result.data)
+
                     for (var i = 0; i < result.data.length; i++)
                     {
+                        var id=result.data[i].competitionId;
+                        if(result.data[i].type=="1"){
+                            var eventType="团队赛";
+                        }else{
+                            var eventType="个人赛";
+                        }
+
+
                         $("#myTable").append("<tr> " +
-                            "<td>"+ result.data[i].competitionId+"</td>" +
-                            "<td>"+  result.data[i].competitionName+"</td>" +
-                            "<td>"+ result.data[i].duration +"</td>" +
-                            "<td>"+  result.data[i].enrollStartTime+"</td>" +
-                            "<td>"+ result.data[i].enrollEndTime +"</td>" +
-                            "<td>"+ result.data[i].endCompetition +"</td></tr>"
+                            "<td>"+ result.data[i].competitionName+"</td>" +
+                            "<td>"+ eventType +"</td>" +
+                            "<td>"+ result.data[i].num +"</td>" +
+                            "<td>"+  result.data[i].duration +"</td>" +
+                            "<td>"+ result.data[i].startCompetition +"</td>" +
+                            "<td>"+ result.data[i].endCompetition +"</td>" +
+                            "<td>"+ '<input type="text" name="competitionId" style="display: none" value="'+id+'">' +
+                            '<input type="text" name="competitionName" style="display: none" value="'+ result.data[i].competitionName+'">' +
+                            '<input type="button" name="seachButton" value="查看详情" class="btn-primary">'+ "</td>" +
+
+                            "</tr>"
                     )
                     }
                 } else if (result.code == 404) {
@@ -287,25 +294,33 @@
 
             }
         });
-        // var json=eval($.cookie("eventList"));
-        // $.each(json, function (index, item) {
-        //     //循环获取数据
-        //     var competitionId =item.competitionId;
-        //     var competitionName =item.competitionName;
-        //     var duration =item.duration;
-        //     var endCompetition =item.endCompetition;
-        //     var enrollEndTime =item.enrollEndTime;
-        //     var enrollStartTime =item.enrollStartTime;
-        //     var isEnrolled =item.isEnrolled;
-        //     var num =item.num;
-        //     var startCompetition =item.startCompetition;
-        //     var teamNum =item.teamNum;
-        //     var type =item.type;
-        //     var userid =item.userid;
-        //
-        // }
+
         return false;
     }
+
+    //查看单个竞赛
+    $("#myTable").on("click", "input[name='seachButton']", function() {
+        var name=$(this).parent().parent().find("input[name='competitionName']").val();
+        var id=$(this).parent().parent().find("input[name='competitionId']").val();
+        alert(id+name);
+        $.ajax({
+            url: 'http://120.25.255.183:8088/Curriculum/Competition/findCompetition/'+id,
+            type: "get",
+            headers: {
+                "TOKEN": $.cookie("TOKEN")
+            },
+            dataType: "json",
+            success: function (result) {
+                if (result.code == 1001) {
+                    console.log(result.data)
+                }
+            },
+            error: function () {
+                alert("查询失败");
+            }
+        });
+        return;
+    });
 
     window.onload = loan;
 
