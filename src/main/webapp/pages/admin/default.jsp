@@ -12,7 +12,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>主页</title>
+    <title>我的赛事</title>
 
     <link href="../../assets/css/bootstrap.min.css" rel="stylesheet">
     <link href="../../assets/css/datepicker3.css" rel="stylesheet">
@@ -68,85 +68,27 @@
 </nav>
 
 <div id="sidebar-collapse" class="col-sm-3 col-lg-2 sidebar">
-    <form role="search">
-        <div class="form-group">
-            <input type="text" class="form-control" placeholder="Search">
-        </div>
-    </form>
     <ul class="nav menu">
-        <li class="active"><a href="default.jsp"><span class="glyphicon glyphicon-dashboard"></span> 主页 </a></li>
-        <li class="parent ">
-            <a href="#">
-                <span class="glyphicon glyphicon-list"></span> 赛程管理
-                <span data-toggle="collapse" href="#sub-item-1" class="icon pull-right">
-                    <em class="glyphicon  glyphicon-chevron-down glyphicon-chevron-up"></em>
-                </span>
-            </a>
-            <ul class="children collapse" id="sub-item-1">
-                <li>
-                    <a class="" href="viewEvents.jsp">
-                        <span class="glyphicon glyphicon-paperclip"></span> 查看赛事
-                    </a>
-                </li>
-                <li>
-                    <a class="" href="#">
-                        <span class="glyphicon glyphicon-paperclip"></span> 查询赛场
-                    </a>
-                </li>
-                <li>
-                    <a class="" href="#">
-                        <span class="glyphicon glyphicon-paperclip"></span> 安排赛场
-                    </a>
-                </li>
-                <li>
-                    <a class="" href="#">
-                        <span class="glyphicon glyphicon-paperclip"></span> 上传赛场秩序册
-                    </a>
-                </li>
-            </ul>
-        </li>
-
-        <li class="parent ">
-            <a href="#">
-                <span class="glyphicon glyphicon-list"></span> 成绩管理
-                <span data-toggle="collapse" href="#sub-item-2" class="icon pull-right">
-                    <em class="glyphicon glyphicon-chevron-down glyphicon-chevron-up"></em>
-                </span>
-            </a>
-            <ul class="children collapse" id="sub-item-2">
-                <li>
-                    <a class="" href="#">
-                        <span class="glyphicon glyphicon-paperclip"></span> 发布成绩
-                    </a>
-                </li>
-                <li>
-                    <a class="" href="#">
-                        <span class="glyphicon glyphicon-paperclip"></span> 成绩查询
-                    </a>
-                </li>
-                <li>
-                    <a class="" href="#">
-                        <span class="glyphicon glyphicon-paperclip"></span> 赛绩分析
-                    </a>
-                </li>
-            </ul>
-        </li>
+        <li class="active"><a href="#"><span class="glyphicon glyphicon-home"></span> 主页 </a></li>
         <li role="presentation" class="divider"></li>
-        <div class="logout">
-            <li><a href="#"><span class="glyphicon glyphicon-log-out"></span> 注销</a></li>
-        </div>
-        <div id="login">
-            <li><a href="pages/login.jsp"><span class="glyphicon glyphicon-log-in"></span> 登录</a></li>
-        </div>
     </ul>
-    <div class="attribution">write by Jeff</div>
+    <div class="logout">
+        <ul class="nav menu">
+            <li><a href="#"><span class="glyphicon glyphicon-log-out"></span> 注销</a></li>
+        </ul>
+    </div>
+    <div id="login">
+        <ul class="nav menu">
+            <li><a href="../../index.jsp"><span class="glyphicon glyphicon-log-in"></span> 登录</a></li>
+        </ul>
+    </div>
+    <div class="attribution">Copyright &copy; 2020 陈欢成小组 </div>
 </div><!--/.sidebar-->
 
 <div class="col-sm-9 col-sm-offset-3 col-lg-10 col-lg-offset-2 main">
     <div class="row">
         <ol class="breadcrumb">
-            <li><a href="#"><span class="glyphicon glyphicon-home"></span></a></li>
-            <li class="active">主页</li>
+            <li class="active"><a href="#"><span class="glyphicon glyphicon-home"></span>我的赛事</a></li>
         </ol>
     </div><!--/.row-->
 
@@ -165,7 +107,7 @@
 
 
                     <table class="table" id="myTable"
-                           style="margin-top: 2%; margin-bottom: 0; width: 80%; font-size: 16px; text-align: center;">
+                           style="margin-top: 2%; margin-bottom: 0; width: 90%; font-size: 16px; text-align: center;">
                         <tr style="font-size: 18px; font-family: 'Microsoft YaHei UI';">
                             <td><b>赛事名称</b></td>
                             <td><b>赛事类型</b></td>
@@ -173,12 +115,11 @@
                             <td><b>参赛时长</b></td>
                             <td><b>比赛开始时间</b></td>
                             <td><b>比赛结束时间</b></td>
-                            <td><b>  &nbsp; &nbsp; &nbsp; &nbsp;  操作  &nbsp; &nbsp; &nbsp;    </b></td>
+                            <td><b>操作</b></td>
                         </tr>
                     </table>
                     <table class="table" id="page"
-                           style="margin-top: 0; width: 80%; font-size: 16px; text-align: center;">
-
+                           style="margin-top: 0; width: 90%; font-size: 16px; text-align: center;">
                         <tr>
                             <td>
                                 <div style="float: right; font-size: 14px;">
@@ -193,29 +134,9 @@
                             </td>
                         </tr>
                     </table>
-
                 </div>
             </div><!--/.row-->
-
         </div>
-    </div><!--/.row-->
-
-    <div class="copyrights">write by ...小组</div>
-
-    <div class="row">
-
-    </div><!--/.row-->
-
-    <div class="row">
-
-    </div><!--/.row-->
-
-    <div class="row">
-
-    </div><!--/.row-->
-
-    <div class="row">
-
     </div><!--/.row-->
 </div><!--/.main-->
 
