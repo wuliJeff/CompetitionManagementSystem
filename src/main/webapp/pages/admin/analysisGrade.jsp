@@ -182,22 +182,6 @@
 
 <script>
     function loan() {
-        $.ajax({
-            url: "http://120.25.255.183:8088/Curriculum/User/getUser/" + sessionStorage.getItem('userid'),
-            type: "GET",
-            headers: {
-                "TOKEN": sessionStorage.getItem("TOKEN")
-            },
-            dataType: "json",
-            success: function (result) {
-                if (result.code == 0) {
-                    sessionStorage.setItem("type", result.type);
-                    sessionStorage.setItem("user", result.data);
-                } else if (result.code == 404) {
-                    alert("未登录")
-                }
-            }
-        });
 
         if (sessionStorage.getItem("username") != null) {
             $("#loginSuccess").show()
@@ -219,8 +203,6 @@
         sessionStorage.clear();
         window.location.href="../index.jsp";
     })
-
-
 
     $('#calendar').datepicker({});
     !function ($) {

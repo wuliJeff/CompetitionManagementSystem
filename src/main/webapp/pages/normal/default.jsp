@@ -88,15 +88,15 @@
         <div class="col-lg-12">
             <div class="row">
                 <div class="col-lg-12" style="margin-top: 2%;">
-                    <form id="searchInfo" action="" method="post">
+
                         <div class="input-group">
-                            <input type="text" name="userId" class="form-control input-group-sm" style="width: auto;"
+                            <input type="text" class="form-control input-group-sm" name="competitionNameSearch" id="competitionNameSearch"  style="width: auto;"
                                    placeholder="赛事id/赛事名称"/>
-                            <button type="submit" name="search" class="btn btn-primary btn-outline-primary">
+                            <button type="submit" id="search" name="search" class="btn btn-primary btn-outline-primary">
                                 <span class="glyphicon glyphicon-search"></span> 查询
                             </button>
                         </div>
-                    </form>
+
 
                     <table class="table" id="myTable"
                            style="margin-top: 2%; margin-bottom: 0; width: 90%; font-size: 16px; text-align: center;">
@@ -144,15 +144,42 @@
     function loan() {
 
         $.ajax({
-            url: "http://120.25.255.183:8088/Curriculum/User/getUser/" + sessionStorage.getItem('userid'),
+            url: "http://120.25.255.183:8088/Curriculum/Competition/EnrollCompetition/" + sessionStorage.getItem('userid'),
             type: "GET",
+            data: {
+                page: 1,
+                pagesize: 10
+            },
             headers: {
                 "TOKEN": sessionStorage.getItem("TOKEN")
             },
             dataType: "json",
             success: function (result) {
                 if (result.code == 0) {
-                    sessionStorage.setItem("user", result.data);
+                   $.cookie("eventList",result.data)
+
+                    for (var i = 0; i < result.data.length; i++)
+                    {
+                        var id=result.data[i].competitionId;
+                        if(result.data[i].type=="1"){
+                            var eventType="团队赛";
+                        }else{
+                            var eventType="个人赛";
+                        }
+                        $("#myTable").append("<tr> " +
+                            "<td>"+ result.data[i].competitionName+"</td>" +
+                            "<td>"+ eventType +"</td>" +
+                            "<td>"+ result.data[i].num +"</td>" +
+                            "<td>"+  result.data[i].duration +"</td>" +
+                            "<td>"+ result.data[i].startCompetition +"</td>" +
+                            "<td>"+ result.data[i].endCompetition +"</td>" +
+                            "<td>"+ '<input type="text" name="competitionId" style="display: none" value="'+id+'">' +
+                            '<input type="text" name="competitionName" style="display: none" value="'+ result.data[i].competitionName+'">' +
+                            '<input type="button" name="seachButton" value="查看详情" class="btn-primary">'+ "</td>" +
+
+                            "</tr>"
+                        )
+                    }
                 } else if (result.code == 404) {
 
                 }
@@ -201,6 +228,91 @@
             }
         }
     }
+    //
+    // //模糊查询
+    // $("#search").click(function () {
+    //     alert(111)
+    //     $("#myTable tr:gt(0)").empty();
+    //     $("#myTable tr").not(':eq(0)').empty();
+    //     alert($("#competitionNameSearch").val())
+    //     $.ajax({
+    //         url: "http://120.25.255.183:8088/Curriculum/Competition/" + "allCompetition",
+    //         type: "GET",
+    //         data: {
+    //             competitionName: $("#competitionNameSearch").val(),
+    //             page: 1,
+    //             pagesize: 10
+    //         },
+    //         headers: {
+    //             "TOKEN": $.cookie("TOKEN")
+    //         },
+    //         dataType: "json",
+    //         success: function (result) {
+    //             if (result.code == 0) {
+    //                 $.cookie("eventList", result.data)
+    //                 console.log(result.data)
+    //                 for (var i = 0; i < result.data.length; i++)
+    //                 {
+    //                     var id=result.data[i].competitionId;
+    //                     if(result.data[i].type=="1"){
+    //                         var eventType="团队赛";
+    //                     }else{
+    //                         var eventType="个人赛";
+    //                     }
+    //
+    //                     $("#myTable").append("<tr> " +
+    //                         "<td>"+ result.data[i].competitionName+"</td>" +
+    //                         "<td>"+ eventType +"</td>" +
+    //                         "<td>"+ result.data[i].num +"</td>" +
+    //                         "<td>"+  result.data[i].duration +"</td>" +
+    //                         "<td>"+ result.data[i].startCompetition +"</td>" +
+    //                         "<td>"+ result.data[i].endCompetition +"</td>" +
+    //                         "<td>"+ '<input type="text" name="competitionId" style="display: none" value="'+id+'">' +
+    //                         '<input type="text" name="competitionName" style="display: none" value="'+ result.data[i].competitionName+'">' +
+    //                         '<input type="button" name="seachButton" value="查看详情" class="btn-primary">'+ "</td>" +
+    //
+    //                         "</tr>"
+    //                     )
+    //                 }
+    //             } else if (result.code == 404) {
+    //             }
+    //             console.log($("#competitionNameSearch").val())
+    //         }
+    //     })
+    // });
+
+
+    //查看单个竞赛
+    $("#myTable").on("click", "input[name='seachButton']", function() {
+        var name=$(this).parent().parent().find("input[name='competitionName']").val();
+        var id=$(this).parent().parent().find("input[name='competitionId']").val();
+
+        $.ajax({
+            url: 'http://120.25.255.183:8088/Curriculum/Competition/findCompetition/'+id,
+            type: "get",
+            headers: {
+                "TOKEN": $.cookie("TOKEN")
+            },
+            dataType: "json",
+            success: function (result) {
+                if (result.code == 1001) {
+                    $.cookie("eventType",result.data[0].type)
+                    $.cookie("eventId",result.data[0].competitionId)
+                    $.cookie("eventName",result.data[0].competitionName)
+                    $.cookie("event",result.data[0])
+                    console.log(result.data[0])
+                    sessionStorage.setItem("event",result.data[0])
+                    alert(id+name);
+                    window.location.href="detail.jsp";
+                }
+            },
+            error: function () {
+                alert("查询失败");
+            }
+        });
+        return;
+    });
+
 </script>
 </body>
 

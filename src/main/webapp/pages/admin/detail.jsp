@@ -163,8 +163,9 @@
     function loan() {
         var eventType=$.cookie("eventType");
         var eventId = $.cookie("eventId");
-        var event = $.cookie("event");
-        console.log(event[0].type)
+        var eventName = $.cookie("eventName");
+
+
         if (eventType=="1"){
            $("#trOne").hide();
             $("#trTow").show();
@@ -172,6 +173,7 @@
             $("#trTow").hide();
             $("#trOne").show();
         }
+
         $.ajax({
             url: 'http://120.25.255.183:8088/Curriculum/Enlist/getCidEnlist/' + eventId,
             type: "GET",
@@ -184,25 +186,37 @@
                     for (var i = 0; i < result.data.length; i++)
                     {
                         var id=result.data[i].competitionId;
-                        if(result.data[i].type=="1"){
-                            var eventType="团队赛";
-                        }else{
-                            var eventType="个人赛";
+                        if(eventType == "1"){
+                            var eventtype="团队赛";
+                            $("#myTable").append("<tr> " +
+                                "<td>"+ eventName +"</td>" +
+                                "<td>"+  "无"+"</td>" +
+                                "<td>"+ "无" +"</td>" +
+                                "<td>"+  result.data[i].teamname +"</td>" +
+                                "<td>"+ "无" +"</td>" +
+                                "<td>"+ "无" +"</td>" +
+                                "<td>"+ '<input type="text" name="competitionId" style="display: none" value="'+id+'">' +
+                                // '<input type="text" name="competitionName" style="display: none" value="'+ result.data[i].competitionName+'">' +
+                                '<input type="button" name="seachButton" value="查看详情" class="btn-primary">'+ "</td>" +
+
+                                "</tr>"
+                            )
+                        }else if (eventType == "0"){
+                            var eventtype="个人赛";
+                            $("#myTable").append("<tr> " +
+                                "<td>"+ eventName +"</td>" +
+                                "<td>"+  "无"+"</td>" +
+                                "<td>"+ "无" +"</td>" +
+                                "<td>"+  result.data[i].userid +"</td>" +
+                                "<td>"+ "无" +"</td>" +
+                                "<td>"+ "无" +"</td>" +
+                                "<td>"+ '<input type="text" name="competitionId" style="display: none" value="'+id+'">' +
+                                // '<input type="text" name="competitionName" style="display: none" value="'+ result.data[i].competitionName+'">' +
+                                '<input type="button" name="seachButton" value="查看详情" class="btn-primary">'+ "</td>" +
+
+                                "</tr>"
+                            )
                         }
-
-                        $("#myTable").append("<tr> " +
-                            "<td>"+ result.data[i].cid+"</td>" +
-                            "<td>"+ result.data[i].enlistid +"</td>" +
-                            "<td>"+ result.data[i].teamuser +"</td>" +
-                            "<td>"+  result.data[i].teamname +"</td>" +
-                            "<td>"+ result.data[i].teamusers +"</td>" +
-                            "<td>"+ result.data[i].userid +"</td>" +
-                            "<td>"+ '<input type="text" name="competitionId" style="display: none" value="'+id+'">' +
-                           // '<input type="text" name="competitionName" style="display: none" value="'+ result.data[i].competitionName+'">' +
-                            '<input type="button" name="seachButton" value="查看详情" class="btn-primary">'+ "</td>" +
-
-                            "</tr>"
-                        )
                     }
                 } else if (result.code == 404) {
                 }
