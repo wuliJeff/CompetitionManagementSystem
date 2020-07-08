@@ -83,7 +83,7 @@
             <li><a href="../../index.jsp"><span class="glyphicon glyphicon-log-in"></span> 登录</a></li>
         </ul>
     </div>
-    <div class="attribution">Copyright &copy; 2020 陈欢成小组 </div>
+    <div class="attribution">Copyright &copy; 2020 陈欢成小组</div>
 </div><!--/.sidebar-->
 
 <div class="col-sm-9 col-sm-offset-3 col-lg-10 col-lg-offset-2 main">
@@ -96,22 +96,73 @@
 
     <div class="row">
         <div class="col-lg-12">
-            <div id="myLicense" class="row" style="margin-top: 2%;width: 90%; ">
+            <div id="myLicense" class="row" style="margin-top: 2%;width: 90%; margin-left: 2%; background-color: #ffffff;">
                 <table class="table" id="myTable"
-                       style=" margin-bottom: 0; width: 100%; font-size: 16px; text-align: center;">
-                    <tr style="font-size: 18px; font-family: 'Microsoft YaHei UI';">
-                        <td><b>赛事名称</b></td>
-                        <td><b>赛事类型</b></td>
-                        <td><b>参赛人数</b></td>
-                        <td><b>参赛时长</b></td>
-                        <td><b>比赛开始时间</b></td>
-                        <td><b>比赛结束时间</b></td>
-                        <td><b>操作</b></td>
+                       style=" margin-bottom: 0; width: 100%; font-size: 16px;">
+                    <tr>
+                        <td colspan="3"><b>赛事编号：202006180303</b></td>
+                    </tr>
+                    <tr style="font-size: 18px; font-family: 'Microsoft YaHei UI'; text-align: center;">
+                        <td colspan="3"><h2><b>广西大学生程序设计竞赛(GXCPC)<br/>参赛证</b></h2></td>
+                    </tr>
+                    <tr>
+                        <td style="width: 33%;">
+                            <b style="margin-left: 50px;">
+                                参赛者编号：117583010102
+                            </b>
+                        </td>
+                        <td style="width: 33%;">
+                            <b style="margin-left: 50px;">姓名：陈欢成</b>
+                        </td>
+                        <td style="width: 33%;"></td>
+                    </tr>
+                    <tr>
+                        <td style="width: 33%;">
+                            <b style="margin-left: 50px;">
+                                赛事地点：广西民族大学
+                            </b>
+                        </td>
+                        <td style="width: 33%;">
+                            <b style="margin-left: 50px;">赛场：1</b>
+                        </td>
+                        <td style="width: 33%;">
+                            <b style="margin-left: 50px;">座位号：1</b>
+                        </td>
+                    </tr>
+                    <tr style="text-align: center;">
+                        <td colspan="3">
+                            <b>赛场秩序册</b>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td colspan="3">
+                            竞赛细则<br/>
+                            1、选手在参赛时携带个人证件。<br/>
+                            2、竞赛以上机为比赛方式。<br/>
+                            3、竞赛中至少命题6题，至多命题9题，上机比赛时间为4个小时，中间不休息。<br/>
+                            4、参赛选手可以携带诸如书籍、字典、手册、程序清单等文字性参考资料。<br/>
+                            5、参赛选手不能携带任何可用计算机处理的软件或数据(不允许任何私人携带的磁盘或计算器)。<br/>
+                            6、参赛选手不能携带任何类型的通讯工具，包括无线电接收器、移动电话等。<br/>
+                            7、选手未解决全部题目不得提前离场<br/>
+                            8、竞赛的预定时间为4小时，但当竞赛进行一定时间后，竞赛裁判可以因为出现不可预见的事件而调整比赛时间长度，一旦比赛时间长度发生改变，将会以及时并且统一的方式通告所有参赛选手。<br/>
+                            9、当参赛选手出现妨碍比赛正常进行的行为时，诸如擅自移动赛场中的设备，未经授权修改比赛软硬件，干扰他人比赛等，都将会被竞赛裁判剥夺参赛资格。<br/>
+                            <br/>
+                            竞赛评分<br/>
+                            1、正确解答中等数量以上试题的队伍会根据解题数目进行排名，解题数在中等数量以下的队伍只发布解题数量，不进行排名。<br/>
+                            2、在进行排名时，如果多人解题数量相同，则根据总用时加上惩罚时间进行排名。<br/>
+                            总用时和惩罚时间由每道解答正确的试题的用时之和加上惩罚时间之和而成。每道试题用时将从竞赛开始到试题解答被判定为正确为止，期间每一次错误的运行将被加罚20分钟时间。未正确解答的试题不记时，对应的错误运行也不计入惩罚时间。<br/>
+                            3、选手在比赛期间能看到排名表和他人的成绩、解决的问题。<br/>
+                            4、比赛中每一道题目对应一种颜色的气球(颜色的对应在试题中注明)。在选手正确解答出某道题目后，工作人员将会把对应颜色的气球插到此同学的位置旁。<br/>
+                            5、比赛结束前一个小时内，将不再为正确的解答摆放气球。<br/>
+                            6、请注意竞赛裁判决定解答提交是否正确需要一定的时间。<br/>
+                        </td>
                     </tr>
                 </table>
             </div><!--/.row-->
-            <br />
-            <button id="printLicense" class="btn btn-default active"><span class="glyphicon glyphicon-print"></span> 点击打印 </button>
+            <br/>
+            <button id="printLicense" class="btn btn-default active" style="margin-left: 2%;"><span
+                    class="glyphicon glyphicon-print"></span> 点击打印
+            </button>
         </div>
     </div><!--/.row-->
 </div><!--/.main-->
@@ -124,13 +175,12 @@
 <script src="../../assets/js/easypiechart-data.js"></script>
 <script src="../../assets/js/bootstrap-datepicker.js"></script>
 <script src="../../assets/js/jquery.cookie.js"></script>
-
-<!-- 打印 -->
-<script src="https://cdn.bootcdn.net/ajax/libs/html2canvas/0.5.0-beta4/html2canvas.js"></script>
-<script src="https://cdn.bootcdn.net/ajax/libs/jspdf/1.5.3/jspdf.debug.js"></script>
+<script src="../../assets/js/html2canvas-0.4.1.js"></script>
+<script src="../../assets/js/canvg2.js"></script>
+<script src="../../assets/js/html2canvas-0.4.1.js"></script>
+<script src="../../assets/js/jspdf.min.js"></script>
 <script>
     function loan() {
-
         $.ajax({
             url: "http://120.25.255.183:8088/Curriculum/User/getUser/" + sessionStorage.getItem('userid'),
             type: "GET",
@@ -161,29 +211,66 @@
         }
 
     }
+
     window.onload = loan;
     // 注销
     $(".logout").click(function () {
         sessionStorage.clear();
         $.cookie().clear();
-        window.location.href="../../index.jsp";
+        window.location.href = "../../index.jsp";
     })
-    // 打印参赛证
-    $("#printLicense").click(function () {
-        html2canvas(document.getElementById("myLicense"), {
-            onrendered: function (canvas) {
-                //返回图片URL，参数：图片格式和清晰度(0-1)
-                var pageData = canvas.toDataURL('image/jpeg', 1.0);
-                //方向默认竖直，尺寸ponits，格式a4【595.28,841.89]
-                var pdf = new jsPDF('', 'pt', 'a4');
-                //需要dataUrl格式;arg3-->距离左边距;arg4-->距离上边距;arg5-->宽度;arg6-->高度
-                pdf.addImage(pageData, 'JPEG', 20, 100, 550, 592.28 / canvas.width * canvas.height);
-                pdf.save('参赛证.pdf');
-            }
-        })
-    })
-</script>
 
+    $(function () {
+        $("#printLicense").click(function () {
+            var targetDom = $("#myLicense");
+            //把需要导出的pdf内容clone一份，这样对它进行转换、微调等操作时才不会影响原来界面
+            var copyDom = targetDom.clone();
+            //新的div宽高跟原来一样，高度设置成自适应，这样才能完整显示节点中的所有内容（比如说表格滚动条中的内容）
+            copyDom.width(targetDom.width() + "px");
+            copyDom.height(targetDom.height() + "px");
+
+            $('#myLicense').append(copyDom);//ps:这里一定要先把copyDom append到body下，然后再进行后续的glyphicons2canvas处理，不然会导致图标为空
+
+            svg2canvas(copyDom);
+            html2canvas(copyDom, {
+                onrendered: function (canvas) {
+                    var imgData = canvas.toDataURL('image/jpeg', 1.0);
+                    var img = new Image();
+                    img.src = imgData;
+                    //根据图片的尺寸设置pdf的规格，要在图片加载成功时执行，之所以要*0.225是因为比例问题
+                    img.onload = function () {
+                        //方向默认竖直，尺寸ponits，格式a4[595.28,841.89]
+                        var doc = new jsPDF('', 'pt', 'a4');
+                        //addImage后两个参数控制添加图片的尺寸，此处将页面高度按照a4纸宽高比列进行压缩
+                        doc.addImage(imgData, 'JPEG', 20, 70, 555.28, 592.28/canvas.width * canvas.height );
+                        //根据下载保存成不同的文件名
+                        doc.save('参赛证.pdf');
+                    };
+                    //删除复制出来的div
+                    copyDom.remove();
+                },
+                background: "#ffffff",
+                //这里给生成的图片默认背景，不然的话，如果你的html根节点没设置背景的话，会用黑色填充。
+                allowTaint: true //避免一些不识别的图片干扰，默认为false，遇到不识别的图片干扰则会停止处理html2canvas
+            });
+        });
+    });
+
+    function svg2canvas(targetElem) {
+        var svgElem = targetElem.find('svg');
+        svgElem.each(function (index, node) {
+            var parentNode = node.parentNode;
+            //由于现在的IE不支持直接对svg标签node取内容，所以需要在当前标签外面套一层div，通过外层div的innerHTML属性来获取
+            var tempNode = document.createElement('div');
+            tempNode.appendChild(node);
+            var svg = tempNode.innerHTML;
+            var canvas = document.createElement('canvas');
+            //转换
+            canvg(canvas, svg);
+            parentNode.appendChild(canvas);
+        });
+    }
+</script>
 </body>
 
 </html>
