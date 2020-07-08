@@ -160,12 +160,12 @@
 <script src="../../assets/js/jquery.cookie.js"></script>
 <script>
         function loan() {
-            var eventType=$.cookie("eventType");
-            var eventId = $.cookie("eventId");
-            var eventName = $.cookie("eventName");
+            var event  = $.cookie("event");
+            event = JSON.parse(event)
+            console.log(event)
 
 
-            if (eventType=="1"){
+            if (event.type=="1"){
                 $("#trOne").hide();
                 $("#trTow").show();
             }else{
@@ -174,7 +174,7 @@
             }
 
             $.ajax({
-                url: 'http://120.25.255.183:8088/Curriculum/Enlist/getCidEnlist/' + eventId,
+                url: 'http://120.25.255.183:8088/Curriculum/Enlist/getCidEnlist/' + event.competitionId,
                 type: "GET",
                 headers: {
                     "TOKEN": sessionStorage.getItem("TOKEN")
@@ -185,10 +185,10 @@
                         for (var i = 0; i < result.data.length; i++)
                         {
                             var id=result.data[i].competitionId;
-                            if(eventType == "1"){
+                            if(event.type == "1"){
                                 var eventtype="团队赛";
                                 $("#myTable").append("<tr> " +
-                                    "<td>"+ eventName +"</td>" +
+                                    "<td>"+ event.competitionName +"</td>" +
                                     "<td>"+  "无"+"</td>" +
                                     "<td>"+ "无" +"</td>" +
                                     "<td>"+  result.data[i].teamname +"</td>" +
@@ -200,10 +200,10 @@
 
                                     "</tr>"
                                 )
-                            }else if (eventType == "0"){
+                            }else if (event.type == "0"){
                                 var eventtype="个人赛";
                                 $("#myTable").append("<tr> " +
-                                    "<td>"+ eventName +"</td>" +
+                                    "<td>"+ event.competitionName +"</td>" +
                                     "<td>"+  "无"+"</td>" +
                                     "<td>"+ "无" +"</td>" +
                                     "<td>"+  result.data[i].userid +"</td>" +

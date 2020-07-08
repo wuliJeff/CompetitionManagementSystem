@@ -303,13 +303,7 @@ console.log($("#competitionNameSearch").val())
             dataType: "json",
             success: function (result) {
                 if (result.code == 1001) {
-                    $.cookie("eventType",result.data[0].type)
-                    $.cookie("eventId",result.data[0].competitionId)
-                    $.cookie("eventName",result.data[0].competitionName)
-                    $.cookie("event",result.data[0])
-                    console.log(result.data[0])
-                    sessionStorage.setItem("event",result.data[0])
-                    alert(id+name);
+                    $.cookie("event", JSON.stringify(result.data[0]))
                     window.location.href="detail.jsp";
                 }
             },
