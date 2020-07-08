@@ -96,9 +96,22 @@
 
     <div class="row">
         <div class="col-lg-12">
-            <div id="myLicense" class="row">
-                <p>参赛证信息位置</p>
+            <div id="myLicense" class="row" style="margin-top: 2%;width: 90%; ">
+                <table class="table" id="myTable"
+                       style=" margin-bottom: 0; width: 100%; font-size: 16px; text-align: center;">
+                    <tr style="font-size: 18px; font-family: 'Microsoft YaHei UI';">
+                        <td><b>赛事名称</b></td>
+                        <td><b>赛事类型</b></td>
+                        <td><b>参赛人数</b></td>
+                        <td><b>参赛时长</b></td>
+                        <td><b>比赛开始时间</b></td>
+                        <td><b>比赛结束时间</b></td>
+                        <td><b>操作</b></td>
+                    </tr>
+                </table>
             </div><!--/.row-->
+            <br />
+            <button id="printLicense" class="btn btn-default active"><span class="glyphicon glyphicon-print"></span> 点击打印 </button>
         </div>
     </div><!--/.row-->
 </div><!--/.main-->
@@ -111,6 +124,10 @@
 <script src="../../assets/js/easypiechart-data.js"></script>
 <script src="../../assets/js/bootstrap-datepicker.js"></script>
 <script src="../../assets/js/jquery.cookie.js"></script>
+
+<!-- 打印 -->
+<script src="https://cdn.bootcdn.net/ajax/libs/html2canvas/0.5.0-beta4/html2canvas.js"></script>
+<script src="https://cdn.bootcdn.net/ajax/libs/jspdf/1.5.3/jspdf.debug.js"></script>
 <script>
     function loan() {
 
@@ -145,11 +162,25 @@
 
     }
     window.onload = loan;
-
+    // 注销
     $(".logout").click(function () {
         sessionStorage.clear();
         $.cookie().clear();
         window.location.href="../../index.jsp";
+    })
+    // 打印参赛证
+    $("#printLicense").click(function () {
+        html2canvas(document.getElementById("myLicense"), {
+            onrendered: function (canvas) {
+                //返回图片URL，参数：图片格式和清晰度(0-1)
+                var pageData = canvas.toDataURL('image/jpeg', 1.0);
+                //方向默认竖直，尺寸ponits，格式a4【595.28,841.89]
+                var pdf = new jsPDF('', 'pt', 'a4');
+                //需要dataUrl格式;arg3-->距离左边距;arg4-->距离上边距;arg5-->宽度;arg6-->高度
+                pdf.addImage(pageData, 'JPEG', 20, 100, 550, 592.28 / canvas.width * canvas.height);
+                pdf.save('参赛证.pdf');
+            }
+        })
     })
 </script>
 
