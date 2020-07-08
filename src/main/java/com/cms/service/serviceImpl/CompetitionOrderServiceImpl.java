@@ -26,16 +26,16 @@ public class CompetitionOrderServiceImpl implements CompetitorOrderService {
     }
 
     @Override
-    public CompetitionOrder getOrderByid(int oid) {
-        CompetitionOrder order = session.getMapper(ICompetitionOrderDao.class).getOrderByid(oid);
+    public CompetitionOrder getOrderById(String oid) {
+        CompetitionOrder order = session.getMapper(ICompetitionOrderDao.class).getOrderById(oid);
         return order;
     }
 
     @Test
     public void testInsertOrder() {
         CompetitionOrder order = new CompetitionOrder();
-        order.setOid(1);
-        order.setCid(1);
+        order.setOid("1");
+        order.setCid("1");
         order.setTitle("第十二届蓝桥杯大赛");
         order.setDetail("软件与信息安全学院");
         boolean isInsertOK = insertNewOrder(order);
@@ -43,7 +43,7 @@ public class CompetitionOrderServiceImpl implements CompetitorOrderService {
     }
     @Test
     public void testGetOrderByid() {
-        CompetitionOrder order = getOrderByid(1);
+        CompetitionOrder order = getOrderById("1");
         System.out.println(order.toString());
     }
 }

@@ -12,14 +12,14 @@ public interface IPlaceDao {
      * @param pid
      * @return
      */
-    public List<Place> getPlaceByPid(@Param("pid") int pid);
+    public List<Place> getPlaceByPid(@Param("pid") String pid);
 
     /**
      * 根据赛事id查询所有赛场
      * @param cid
      * @return
      */
-    public List<Place> getPlaceByCid(@Param("cid") int cid);
+    public List<Place> getPlaceByCid(@Param("cid") String cid);
 
     /**
      * 添加赛场安排

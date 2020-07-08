@@ -1,20 +1,20 @@
 package com.cms.entity;
 
 public class License {
-    private int competitorId;  //参赛者id
+    private String competitorId;  //参赛者id
     private String name;  //姓名
     private String teamName;  //团队名
     private String school;  //学校
-    private int cid;  //赛事id
+    private String cid;  //赛事id
     private String cname;  //赛事名称
-    private int pid; //赛场id
-    private int oid; //赛场秩序册id
+    private String pid; //赛场id
+    private String oid; //赛场秩序册id
 
-    public int getCompetitorId() {
+    public String getCompetitorId() {
         return competitorId;
     }
 
-    public void setCompetitorId(int competitorId) {
+    public void setCompetitorId(String competitorId) {
         this.competitorId = competitorId;
     }
 
@@ -42,11 +42,11 @@ public class License {
         this.school = school;
     }
 
-    public int getCid() {
+    public String getCid() {
         return cid;
     }
 
-    public void setCid(int cid) {
+    public void setCid(String cid) {
         this.cid = cid;
     }
 
@@ -58,33 +58,33 @@ public class License {
         this.cname = cname;
     }
 
-    public int getPid() {
+    public String getPid() {
         return pid;
     }
 
-    public void setPid(int pid) {
+    public void setPid(String pid) {
         this.pid = pid;
     }
 
-    public int getOid() {
+    public String getOid() {
         return oid;
     }
 
-    public void setOid(int oid) {
+    public void setOid(String oid) {
         this.oid = oid;
     }
 
     @Override
     public String toString() {
         return "License{" +
-                "competitorId=" + competitorId +
+                "competitorId='" + competitorId + '\'' +
                 ", name='" + name + '\'' +
                 ", teamName='" + teamName + '\'' +
                 ", school='" + school + '\'' +
-                ", cid=" + cid +
+                ", cid='" + cid + '\'' +
                 ", cname='" + cname + '\'' +
-                ", pid=" + pid +
-                ", oid=" + oid +
+                ", pid='" + pid + '\'' +
+                ", oid='" + oid + '\'' +
                 '}';
     }
 }

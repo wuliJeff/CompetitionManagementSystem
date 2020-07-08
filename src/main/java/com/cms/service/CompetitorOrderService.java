@@ -1,7 +1,6 @@
 package com.cms.service;
 
 import com.cms.entity.CompetitionOrder;
-import org.apache.ibatis.annotations.Param;
 
 public interface CompetitorOrderService {
     /**
@@ -11,5 +10,5 @@ public interface CompetitorOrderService {
      */
     public boolean insertNewOrder(CompetitionOrder newOrder);
 
-    public CompetitionOrder getOrderByid(int oid);
+    public CompetitionOrder getOrderById(String oid);
 }

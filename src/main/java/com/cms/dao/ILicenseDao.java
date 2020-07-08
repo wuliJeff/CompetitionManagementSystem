@@ -14,5 +14,5 @@ public interface ILicenseDao {
      * 获取参赛证
      * @return License对象
      */
-    public License getLicenseById(@Param("competitorId") int competitorId);
+    public License getLicenseById(@Param("competitorId") String competitorId);
 }

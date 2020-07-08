@@ -1,19 +1,19 @@
 package com.cms.entity;
 
 public class Place {
-    private int pid;  //赛场id
+    private String pid;  //赛场id
     private String school;  //学校
     private String pname;  //教学楼
     private String pnum;  //教室编号
-    private int cid;  //赛事id
-    private int csize;  //教室容量
+    private String cid;  //赛事id
+    private String csize;  //教室容量
     private String manager;
 
-    public int getPid() {
+    public String getPid() {
         return pid;
     }
 
-    public void setPid(int pid) {
+    public void setPid(String pid) {
         this.pid = pid;
     }
 
@@ -41,19 +41,19 @@ public class Place {
         this.pnum = pnum;
     }
 
-    public int getCid() {
+    public String getCid() {
         return cid;
     }
 
-    public void setCid(int cid) {
+    public void setCid(String cid) {
         this.cid = cid;
     }
 
-    public int getCsize() {
+    public String getCsize() {
         return csize;
     }
 
-    public void setCsize(int csize) {
+    public void setCsize(String csize) {
         this.csize = csize;
     }
 
@@ -68,12 +68,12 @@ public class Place {
     @Override
     public String toString() {
         return "Place{" +
-                "pid=" + pid +
+                "pid='" + pid + '\'' +
                 ", school='" + school + '\'' +
                 ", pname='" + pname + '\'' +
                 ", pnum='" + pnum + '\'' +
-                ", cid=" + cid +
-                ", csize=" + csize +
+                ", cid='" + cid + '\'' +
+                ", csize='" + csize + '\'' +
                 ", manager='" + manager + '\'' +
                 '}';
     }

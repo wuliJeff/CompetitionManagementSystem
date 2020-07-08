@@ -19,14 +19,14 @@ public class ScheduleServiceImpl implements ScheduleService {
     }
 
     @Override
-    public List<Schedule> selectGradeByCompetitorId(int competitorId) {
+    public List<Schedule> selectGradeByCompetitorId(String competitorId) {
         List<Schedule> schedules = new ArrayList<Schedule>();
         schedules = session.getMapper(IScheduleDao.class).selectGradeByCompetitorId(competitorId);
         return schedules;
     }
 
     @Override
-    public List<Schedule> selectGradeByCid(int cid) {
+    public List<Schedule> selectGradeByCid(String cid) {
         List<Schedule> schedules = new ArrayList<Schedule>();
         schedules = session.getMapper(IScheduleDao.class).selectGradeByCid(cid);
         return schedules;
@@ -58,7 +58,7 @@ public class ScheduleServiceImpl implements ScheduleService {
     }
     @Test
     public void testSelectGradeByCompetitorId(){
-        List<Schedule> schedules = selectGradeByCompetitorId(1);
+        List<Schedule> schedules = selectGradeByCompetitorId("1");
         if (schedules != null) {
             for(Schedule schedule : schedules){
                 System.out.println(schedule.toString());
@@ -69,7 +69,7 @@ public class ScheduleServiceImpl implements ScheduleService {
     }
     @Test
     public void testSelectGradeByCid(){
-        List<Schedule> schedules = selectGradeByCid(1);
+        List<Schedule> schedules = selectGradeByCid("1");
         if (schedules != null) {
             for(Schedule schedule : schedules){
                 System.out.println(schedule.toString());

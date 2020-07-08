@@ -12,14 +12,14 @@ public interface PlaceService {
      * @param pid
      * @return
      */
-    public List<Place> getPlaceByPid(int pid);
+    public List<Place> getPlaceByPid(String pid);
 
     /**
      * 根据赛事id查询所有赛场
      * @param cid
      * @return
      */
-    public List<Place> getPlaceByCid(int cid);
+    public List<Place> getPlaceByCid(String cid);
 
     /**
      * 添加赛场安排

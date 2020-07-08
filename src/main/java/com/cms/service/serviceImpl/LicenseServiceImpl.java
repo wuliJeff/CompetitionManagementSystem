@@ -26,7 +26,7 @@ public class LicenseServiceImpl implements LicenseService {
     }
 
     @Override
-    public License getLicenseById(int competitorId) {
+    public License getLicenseById(String competitorId) {
         License license = session.getMapper(ILicenseDao.class).getLicenseById(competitorId);
         return license;
     }
@@ -34,21 +34,21 @@ public class LicenseServiceImpl implements LicenseService {
     @Test
     public void testInsertLicense(){
         License license = new License();
-        license.setCompetitorId(1);
+        license.setCompetitorId("1");
         license.setName("Jeff");
         license.setTeamName("AKM");
         license.setSchool("广西民族大学");
-        license.setCid(1);
+        license.setCid("1");
         license.setCname("程序设计竞赛");
-        license.setPid(1);
-        license.setOid(1);
+        license.setPid("1");
+        license.setOid("1");
         boolean isInsertOK = insertLicense(license);
         System.out.println(isInsertOK);
     }
 
     @Test
     public void testGetLicenseById(){
-        License license = getLicenseById(1);
+        License license = getLicenseById("1");
         if (license!=null){
             System.out.println(license.toString());
         }else{

@@ -16,5 +16,5 @@ public interface ICompetitionOrderDao {
      * @param oid，赛场秩序册id
      * @return CompetitionOrder对象
      */
-    public CompetitionOrder getOrderByid(@Param("oid")int oid);
+    public CompetitionOrder getOrderById(@Param("oid")String oid);
 }

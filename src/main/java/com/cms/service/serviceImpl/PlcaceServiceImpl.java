@@ -18,13 +18,13 @@ public class PlcaceServiceImpl implements PlaceService {
         session = MapperConfig.getSession();
     }
     @Override
-    public List<Place> getPlaceByPid(int pid) {
+    public List<Place> getPlaceByPid(String pid) {
         List<Place> places = session.getMapper(IPlaceDao.class).getPlaceByPid(pid);
         return places;
     }
 
     @Override
-    public List<Place> getPlaceByCid(int cid) {
+    public List<Place> getPlaceByCid(String cid) {
         List<Place> places = session.getMapper(IPlaceDao.class).getPlaceByCid(cid);
         return places;
     }
@@ -42,7 +42,7 @@ public class PlcaceServiceImpl implements PlaceService {
     @Test
     public void testGetPalce() {
         List<Place> places = new ArrayList<Place>();
-        places = getPlaceByPid(1);
+        places = getPlaceByPid("1");
         if (places != null) {
             for (Place place : places){
                 System.out.println(place.toString());
@@ -55,7 +55,7 @@ public class PlcaceServiceImpl implements PlaceService {
     @Test
     public void testInsertPlace(){
         Place place = new Place();
-        place.setPid(1);
+        place.setPid("1");
         boolean isInsertOK = insertPlace(place);
         System.out.println(isInsertOK);
     }

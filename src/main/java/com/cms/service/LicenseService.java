@@ -13,5 +13,5 @@ public interface LicenseService {
      * 获取参赛证
      * @return License对象
      */
-    public License getLicenseById(int competitorId);
+    public License getLicenseById(String competitorId);
 }

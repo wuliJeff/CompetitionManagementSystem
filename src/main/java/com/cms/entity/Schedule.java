@@ -1,33 +1,33 @@
 package com.cms.entity;
 
 public class Schedule {
-    private int cid;
-    private int competitorId;  //参赛者id
-    private int pid;  //赛场id
+    private String cid;
+    private String competitorId;  //参赛者id
+    private String pid;  //赛场id
     private String seat;  //座位号
     private float grade;  //成绩
 
-    public int getCid() {
+    public String getCid() {
         return cid;
     }
 
-    public void setCid(int cid) {
+    public void setCid(String cid) {
         this.cid = cid;
     }
 
-    public int getCompetitorId() {
+    public String getCompetitorId() {
         return competitorId;
     }
 
-    public void setCompetitorId(int competitorId) {
+    public void setCompetitorId(String competitorId) {
         this.competitorId = competitorId;
     }
 
-    public int getPid() {
+    public String getPid() {
         return pid;
     }
 
-    public void setPid(int pid) {
+    public void setPid(String pid) {
         this.pid = pid;
     }
 
@@ -50,10 +50,10 @@ public class Schedule {
     @Override
     public String toString() {
         return "Schedule{" +
-                "cid=" + cid +
-                ", competitorId=" + competitorId +
-                ", pid=" + pid +
-                ", seat=" + seat +
+                "cid='" + cid + '\'' +
+                ", competitorId='" + competitorId + '\'' +
+                ", pid='" + pid + '\'' +
+                ", seat='" + seat + '\'' +
                 ", grade=" + grade +
                 '}';
     }

@@ -1,24 +1,24 @@
 package com.cms.entity;
 
 public class CompetitionOrder {
-    private int oid;  //赛场秩序册oid
-    private int cid;  //赛事id
+    private String oid;  //赛场秩序册oid
+    private String cid;  //赛事id
     private String title;  //标题
     private String detail;  //详情
 
-    public int getOid() {
+    public String getOid() {
         return oid;
     }
 
-    public void setOid(int oid) {
+    public void setOid(String oid) {
         this.oid = oid;
     }
 
-    public int getCid() {
+    public String getCid() {
         return cid;
     }
 
-    public void setCid(int cid) {
+    public void setCid(String cid) {
         this.cid = cid;
     }
 
@@ -41,8 +41,8 @@ public class CompetitionOrder {
     @Override
     public String toString() {
         return "CompetitionOrder{" +
-                "oid=" + oid +
-                ", cid=" + cid +
+                "oid='" + oid + '\'' +
+                ", cid='" + cid + '\'' +
                 ", title='" + title + '\'' +
                 ", detail='" + detail + '\'' +
                 '}';

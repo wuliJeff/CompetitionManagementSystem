@@ -5,18 +5,18 @@
 <mapper namespace="com.cms.dao.IPlaceDao">
 
     <!-- 根据赛场id查询所有赛事的赛场安排 -->
-    <select id="getPlaceByPid" parameterType="int" resultType="com.cms.entity.Place">
+    <select id="getPlaceByPid" parameterType="String" resultType="com.cms.entity.Place">
         select * from Place where pid=#{pid}
     </select>
 
     <!-- 根据赛事id查询所有赛场 -->
-    <select id="getPlaceByCid" parameterType="int" resultType="com.cms.entity.Place">
+    <select id="getPlaceByCid" parameterType="String" resultType="com.cms.entity.Place">
         select * from Place where cid=#{cid}
     </select>
 
     <insert id="insertPlace" parameterType="com.cms.entity.Place">
         insert into Place values (#{place.pid}, #{place.school}, #{place.pname}, #{place.pnum}, #{place.cid}, #{place.csize}, #{place.manager})
-        <selectKey keyColumn="1" resultType="int" keyProperty="pid" order="AFTER">
+        <selectKey keyColumn="1" resultType="String" keyProperty="pid" order="AFTER">
             select last_insert_id()
         </selectKey>
     </insert>
