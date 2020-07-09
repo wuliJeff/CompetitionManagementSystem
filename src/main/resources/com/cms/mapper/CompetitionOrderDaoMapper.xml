@@ -5,13 +5,13 @@
 <mapper namespace="com.cms.dao.ICompetitionOrderDao">
     <!-- 添加赛场秩序册 -->
     <insert id="insertNewOrder" parameterType="com.cms.entity.CompetitionOrder">
-        insert into CompetitionOrder values (null, #{newOrder.cid}, #{newOrder.title}, #{newOrder.detail});
+        insert into CompetitionOrder values (#{newOrder.oid}, #{newOrder.cid}, #{newOrder.title}, #{newOrder.detail});
         <selectKey keyColumn="1" resultType="int" keyProperty="oid" order="AFTER">
             select last_insert_id()
         </selectKey>
     </insert>
     <!-- 查询赛场秩序册 -->
-    <select id="getOrderByid" parameterType="int" resultType="com.cms.entity.CompetitionOrder">
+    <select id="getOrderById" parameterType="String" resultType="com.cms.entity.CompetitionOrder">
         select * from CompetitionOrder where oid=#{oid}
     </select>
 </mapper>

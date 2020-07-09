@@ -38,44 +38,57 @@ public class ScheduleServiceImpl implements ScheduleService {
         sum = session.getMapper(IScheduleDao.class).selectGradeA();
         return sum;
     }
+
     @Override
     public int selectGradeB() {
         int sum = 0;
         sum = session.getMapper(IScheduleDao.class).selectGradeB();
         return sum;
     }
+
     @Override
     public int selectGradeC() {
         int sum = 0;
         sum = session.getMapper(IScheduleDao.class).selectGradeC();
         return sum;
     }
+
     @Override
     public int selectGradeD() {
         int sum = 0;
         sum = session.getMapper(IScheduleDao.class).selectGradeD();
         return sum;
     }
+
     @Test
-    public void testSelectGradeByCompetitorId(){
+    public void testSelectGradeByCompetitorId() {
         List<Schedule> schedules = selectGradeByCompetitorId("1");
         if (schedules != null) {
-            for(Schedule schedule : schedules){
+            for (Schedule schedule : schedules) {
                 System.out.println(schedule.toString());
             }
-        }else{
+        } else {
             System.out.println("null");
         }
     }
+
     @Test
-    public void testSelectGradeByCid(){
+    public void testSelectGradeByCid() {
         List<Schedule> schedules = selectGradeByCid("1");
         if (schedules != null) {
-            for(Schedule schedule : schedules){
+            for (Schedule schedule : schedules) {
                 System.out.println(schedule.toString());
             }
-        }else{
+        } else {
             System.out.println("null");
         }
+    }
+
+    @Test
+    public void testGetGradeForAllLevel() {
+        System.out.println(session.getMapper(IScheduleDao.class).selectGradeA());
+        System.out.println(session.getMapper(IScheduleDao.class).selectGradeB());
+        System.out.println(session.getMapper(IScheduleDao.class).selectGradeC());
+        System.out.println(session.getMapper(IScheduleDao.class).selectGradeD());
     }
 }

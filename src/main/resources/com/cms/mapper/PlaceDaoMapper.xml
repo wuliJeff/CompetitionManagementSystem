@@ -13,12 +13,16 @@
     <select id="getPlaceByCid" parameterType="String" resultType="com.cms.entity.Place">
         select * from Place where cid=#{cid}
     </select>
-
+    
+    <!-- 插入赛场 -->
     <insert id="insertPlace" parameterType="com.cms.entity.Place">
         insert into Place values (#{place.pid}, #{place.school}, #{place.pname}, #{place.pnum}, #{place.cid}, #{place.csize}, #{place.manager})
-        <selectKey keyColumn="1" resultType="String" keyProperty="pid" order="AFTER">
+        <selectKey keyColumn="1" resultType="int" keyProperty="pid" order="AFTER">
             select last_insert_id()
         </selectKey>
     </insert>
-
+    <!-- 判断赛场是否被使用 -->
+    <select id="isUsedPlace" parameterType="String" resultType="com.cms.entity.Place">
+        select * from Place where pid=#{pid} and cid=#{cid};
+    </select>
 </mapper>

@@ -17,10 +17,25 @@ public class CompetitionOrderServiceImpl implements CompetitorOrderService {
 
     @Override
     public boolean insertNewOrder(CompetitionOrder newOrder) {
-        int oid = session.getMapper(ICompetitionOrderDao.class).insertNewOrder(newOrder);
-        if (oid>=0){
+        if (isExistOrder(newOrder.getOid())) {
+            return false;
+        } else {
+            int oid = session.getMapper(ICompetitionOrderDao.class).insertNewOrder(newOrder);
+            System.out.println(oid);
+            if (oid >= 0) {
+                return true;
+            } else {
+                return false;
+            }
+        }
+    }
+
+    @Override
+    public boolean isExistOrder(String oid) {
+        CompetitionOrder order = session.getMapper(ICompetitionOrderDao.class).getOrderById(oid);
+        if (order != null) {
             return true;
-        }else {
+        } else {
             return false;
         }
     }
@@ -34,13 +49,14 @@ public class CompetitionOrderServiceImpl implements CompetitorOrderService {
     @Test
     public void testInsertOrder() {
         CompetitionOrder order = new CompetitionOrder();
-        order.setOid("1");
+        order.setOid("10");
         order.setCid("1");
         order.setTitle("第十二届蓝桥杯大赛");
         order.setDetail("软件与信息安全学院");
         boolean isInsertOK = insertNewOrder(order);
         System.out.println(isInsertOK);
     }
+
     @Test
     public void testGetOrderByid() {
         CompetitionOrder order = getOrderById("1");

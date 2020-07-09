@@ -17,12 +17,28 @@ public class LicenseServiceImpl implements LicenseService {
 
     @Override
     public boolean insertLicense(License license) {
-        int competitorId = session.getMapper(ILicenseDao.class).insertLicense(license);
-        if (competitorId>=0){
-            return true;
-        }else {
+        /**
+         * 存在参赛证则不重复插入
+         */
+        if (isExistLicense(license)) {
             return false;
+        } else {
+            int competitorId = session.getMapper(ILicenseDao.class).insertLicense(license);
+            if (competitorId >= 0) {
+                return true;
+            } else {
+                return false;
+            }
         }
+    }
+
+    @Override
+    public boolean isExistLicense(License license) {
+        License license1 = session.getMapper(ILicenseDao.class).isExistLicense(license);
+        if (license1 != null) {
+            return true;
+        }
+        return false;
     }
 
     @Override
@@ -32,11 +48,11 @@ public class LicenseServiceImpl implements LicenseService {
     }
 
     @Test
-    public void testInsertLicense(){
+    public void testInsertLicense() {
         License license = new License();
-        license.setCompetitorId("1");
-        license.setName("Jeff");
-        license.setTeamName("AKM");
+        license.setCompetitorId("7");
+        license.setName("lulu");
+        license.setTeamName("null");
         license.setSchool("广西民族大学");
         license.setCid("1");
         license.setCname("程序设计竞赛");
@@ -47,11 +63,11 @@ public class LicenseServiceImpl implements LicenseService {
     }
 
     @Test
-    public void testGetLicenseById(){
+    public void testGetLicenseById() {
         License license = getLicenseById("1");
-        if (license!=null){
+        if (license != null) {
             System.out.println(license.toString());
-        }else{
+        } else {
             System.out.println("null");
         }
     }
