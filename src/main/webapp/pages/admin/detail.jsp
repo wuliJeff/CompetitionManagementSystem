@@ -135,11 +135,11 @@
                             <td>
                                 <div style="float: right; font-size: 14px;">
                                     <button name="last" class="btn btn-primary btn-outline-primary">
-                                        <span class="glyphicon glyphicon-chevron-left"></span>上一页
+                                        &lt;上一页
                                     </button>
                                     <input type="text" style="width: 40px;" readonly="readonly" value="1">
                                     <button name="next" class="btn btn-primary btn-outline-primary">
-                                        下一页<span class="glyphicon glyphicon-chevron-right"></span>
+                                        下一页&gt;</span>
                                     </button>
                                 </div>
                             </td>
@@ -210,7 +210,7 @@
                                 "<td>"+ "无" +"</td>" +
                                 "<td>"+ '<input type="text" name="competitionId" style="display: none" value="'+id+'">' +
                                 // '<input type="text" name="competitionName" style="display: none" value="'+ result.data[i].competitionName+'">' +
-                                '<input type="button" name="seachButton" value="查看详情" class="btn-primary">'+ "</td>" +
+                                '<input type="button" name="seachButton" value="详情" class="btn btn-primary">'+ "</td>" +
 
                                 "</tr>"
                             )
