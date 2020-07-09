@@ -3,12 +3,15 @@ package com.cms.service.serviceImpl;
 import com.cms.dao.ICompetitionOrderDao;
 import com.cms.entity.CompetitionOrder;
 import com.cms.service.CompetitorOrderService;
+import com.cms.util.JsonUtil;
 import com.cms.util.MapperConfig;
+import net.sf.json.JSONArray;
 import org.apache.ibatis.session.SqlSession;
 import org.junit.Test;
 
 public class CompetitionOrderServiceImpl implements CompetitorOrderService {
-
+    private String msg = null;
+    private boolean flag = false;
     private SqlSession session;
 
     public CompetitionOrderServiceImpl() {
@@ -16,16 +19,22 @@ public class CompetitionOrderServiceImpl implements CompetitorOrderService {
     }
 
     @Override
-    public boolean insertNewOrder(CompetitionOrder newOrder) {
+    public JSONArray insertNewOrder(CompetitionOrder newOrder) {
+        Boolean flag = false;
         if (isExistOrder(newOrder.getOid())) {
-            return false;
+            msg="该竞赛已存在";
+            return JsonUtil.returnStatus(flag, msg);
         } else {
             int oid = session.getMapper(ICompetitionOrderDao.class).insertNewOrder(newOrder);
             System.out.println(oid);
             if (oid >= 0) {
-                return true;
+                flag=true;
+                msg="添加竞赛成功";
+                return JsonUtil.returnStatus(flag, msg);
             } else {
-                return false;
+                flag=false;
+                msg="添加竞赛失败";
+                return JsonUtil.returnStatus(flag, msg);
             }
         }
     }
@@ -41,9 +50,9 @@ public class CompetitionOrderServiceImpl implements CompetitorOrderService {
     }
 
     @Override
-    public CompetitionOrder getOrderById(String oid) {
+    public JSONArray getOrderById(String oid) {
         CompetitionOrder order = session.getMapper(ICompetitionOrderDao.class).getOrderById(oid);
-        return order;
+        return JSONArray.fromObject(order);
     }
 
     @Test
@@ -53,13 +62,13 @@ public class CompetitionOrderServiceImpl implements CompetitorOrderService {
         order.setCid("1");
         order.setTitle("第十二届蓝桥杯大赛");
         order.setDetail("软件与信息安全学院");
-        boolean isInsertOK = insertNewOrder(order);
-        System.out.println(isInsertOK);
+        System.out.println(insertNewOrder(order));
+
     }
 
     @Test
     public void testGetOrderByid() {
-        CompetitionOrder order = getOrderById("1");
-        System.out.println(order.toString());
+
+        System.out.println( getOrderById("1"));
     }
 }
