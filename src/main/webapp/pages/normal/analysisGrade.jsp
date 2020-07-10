@@ -180,6 +180,9 @@
 
 <script>
     function loan() {
+        var event = $.cookie("event");
+        event = JSON.parse(event)
+        $("#competitionName").html(event.competitionName);
         $.ajax({
             url: "http://120.25.255.183:8088/Curriculum/User/getUser/" + sessionStorage.getItem('userid'),
             type: "GET",

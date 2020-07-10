@@ -184,9 +184,8 @@
             dataType: "json",
             success: function (result) {
                 if (result.code == 0) {
-                    $.cookie("eventList", result.data)
+                    $.cookie("eventList", JSON.stringify(result.data))
                     console.log(result.data)
-
                     for (var i = 0; i < result.data.length; i++) {
                         var id = result.data[i].competitionId;
                         if (result.data[i].type == "1") {

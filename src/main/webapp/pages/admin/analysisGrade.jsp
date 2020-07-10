@@ -93,8 +93,8 @@
 
     <div class="row">
         <div class="col-lg-12">
-            <div id="competitionName" style="text-align: center; margin-top: 2%; margin-bottom: 0;"><h3>
-                <b>某某竞赛成绩分布情况</b></h3></div>
+            <div id="d" style="text-align: center; margin-top: 2%; margin-bottom: 0;"><h3>
+                <b><span id="competitionName"></span></b></h3></div></h3></div>
             <div id="ringGraphic" style="width: 100%; height: 600px; margin: 0;"></div>
         </div>
     </div><!--/.row-->
@@ -182,6 +182,9 @@
 
 <script>
     function loan() {
+        var event = $.cookie("event");
+        event = JSON.parse(event)
+        $("#competitionName").html(event.competitionName);
         if (sessionStorage.getItem("username") != null) {
             $("#loginSuccess").show()
             $("#noLogin").hide()
