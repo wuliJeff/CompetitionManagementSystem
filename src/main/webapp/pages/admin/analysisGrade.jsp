@@ -112,75 +112,77 @@
 <!-- 环形图 -->
 <script type="text/javascript" src="../../assets/js/echarts.min.js"></script>
 <script type="text/javascript">
+    function createGraphic(A, B, C, D) {
 
-    var dom = document.getElementById("ringGraphic");
-    var myChart = echarts.init(dom);
-    var app = {};
+        var dom = document.getElementById("ringGraphic");
+        var myChart = echarts.init(dom);
+        var app = {};
 
-    app.title = '环形图';
+        app.title = '环形图';
 
-    var option = {
-        tooltip: {
-            trigger: 'item',
-            formatter: "{a} <br/>{b}: {c} ({d}%)"
-        },
-        color: ['#93D8A9', '#FFB99D', '#AF7DCC', '#FFD83D'],
-        legend: {
-            orient: 'vertical',
-            x: '1000px',
-            y: '200px',
-            data: ['一等奖', '二等奖', '三等奖', '未获奖']
-        },
-        series: [{
-            name: '访问来源',
-            type: 'pie',
-            radius: ['30%', '70%'],
-            avoidLabelOverlap: false,
-            label: {
-                normal: {
-                    show: false,
-                    position: 'center'
-                },
-                emphasis: {
-                    show: true,
-                    textStyle: {
-                        fontSize: '30',
-                        fontWeight: 'bold'
+        var option = {
+            tooltip: {
+                trigger: 'item',
+                formatter: "{a} <br/>{b}: {c} ({d}%)"
+            },
+            color: ['#93D8A9', '#FFB99D', '#AF7DCC', '#FFD83D'],
+            legend: {
+                orient: 'vertical',
+                x: '1000px',
+                y: '200px',
+                data: ['一等奖', '二等奖', '三等奖', '未获奖']
+            },
+            series: [{
+                name: '数据来源：赛程管理系统',
+                type: 'pie',
+                radius: ['30%', '70%'],
+                avoidLabelOverlap: false,
+                label: {
+                    normal: {
+                        show: false,
+                        position: 'center'
+                    },
+                    emphasis: {
+                        show: true,
+                        textStyle: {
+                            fontSize: '30',
+                            fontWeight: 'bold'
+                        }
                     }
-                }
-            },
-            labelLine: {
-                normal: {
-                    show: false
-                }
-            },
-            data: [{
-                value: 10,
-                name: '一等奖'
-            },
-                {
-                    value: 20,
-                    name: '二等奖'
                 },
-                {
-                    value: 30,
-                    name: '三等奖'
+                labelLine: {
+                    normal: {
+                        show: false
+                    }
                 },
-                {
-                    value: 40,
-                    name: '未获奖'
-                }
-            ]
-        }]
-    };
-    if (option && typeof option === "object") {
-        myChart.setOption(option, true);
+                data: [{
+                    value: A,
+                    name: '一等奖'
+                },
+                    {
+                        value: B,
+                        name: '二等奖'
+                    },
+                    {
+                        value: C,
+                        name: '三等奖'
+                    },
+                    {
+                        value: D,
+                        name: '未获奖'
+                    }
+                ]
+            }]
+        };
+        if (option && typeof option === "object") {
+            myChart.setOption(option, true);
+        }
     }
 </script>
 
 <script>
     function loan() {
-
+        createGraphic(2, 3, 4, 5)
         if (sessionStorage.getItem("username") != null) {
             $("#loginSuccess").show()
             $("#noLogin").hide()
@@ -222,21 +224,6 @@
         sessionStorage.clear();
         deleteCookie();
         window.location.href = "../../index.jsp";
-    })
-
-    $('#calendar').datepicker({});
-    !function ($) {
-        $(document).on("click", "ul.nav li.parent > a > span.icon", function () {
-            $(this).find('em:first').toggleClass("glyphicon-chevron-down");
-        });
-        $(".sidebar span.icon").find('em:first').addClass("glyphicon-chevron-up");
-    }(window.jQuery);
-
-    $(window).on('resize', function () {
-        if ($(window).width() > 768) $('#sidebar-collapse').collapse('show')
-    })
-    $(window).on('resize', function () {
-        if ($(window).width() <= 767) $('#sidebar-collapse').collapse('hide')
     })
 </script>
 </body>
