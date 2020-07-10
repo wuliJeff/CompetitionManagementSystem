@@ -182,7 +182,6 @@
 
 <script>
     function loan() {
-        createGraphic(2, 3, 4, 5)
         if (sessionStorage.getItem("username") != null) {
             $("#loginSuccess").show()
             $("#noLogin").hide()
@@ -195,7 +194,21 @@
             $(".login").show()
             $("#logout").hide()
         }
-
+        $.ajax({
+            url: "http://localhost:8080/CompetitionManagementSystem/Schedule/getAllLevelCount",
+            type: "GET",
+            headers: {
+                "TOKEN": sessionStorage.getItem("TOKEN")
+            },
+            dataType: "json",
+            success: function (result) {
+                var A = result.data[0].A;
+                var B = result.data[0].B;
+                var C = result.data[0].C;
+                var D = result.data[0].D;
+                createGraphic(A, B, C, D)
+            }
+        });
     }
 
     window.onload = loan;
