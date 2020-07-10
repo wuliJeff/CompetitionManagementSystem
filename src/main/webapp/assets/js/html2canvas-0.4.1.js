@@ -5,7 +5,7 @@
  Released under MIT License
  */
 
-(function(window, document, undefined){
+(function (window, document, undefined) {
 
     "use strict";
 
@@ -16,23 +16,23 @@
 
     _html2canvas.Util = {};
 
-    _html2canvas.Util.log = function(a) {
+    _html2canvas.Util.log = function (a) {
         if (_html2canvas.logging && window.console && window.console.log) {
             window.console.log(a);
         }
     };
 
-    _html2canvas.Util.trimText = (function(isNative){
-        return function(input) {
-            return isNative ? isNative.apply(input) : ((input || '') + '').replace( /^\s+|\s+$/g , '' );
+    _html2canvas.Util.trimText = (function (isNative) {
+        return function (input) {
+            return isNative ? isNative.apply(input) : ((input || '') + '').replace(/^\s+|\s+$/g, '');
         };
     })(String.prototype.trim);
 
-    _html2canvas.Util.asFloat = function(v) {
+    _html2canvas.Util.asFloat = function (v) {
         return parseFloat(v);
     };
 
-    (function() {
+    (function () {
         // TODO: support all possible length values
         var TEXT_SHADOW_PROPERTY = /((rgba|rgb)\([^\)]+\)(\s-?\d+px){0,})/g;
         var TEXT_SHADOW_VALUES = /(-?\d+px)|(#.+)|(rgb\(.+\))|(rgba\(.+\))/g;
@@ -63,18 +63,18 @@
             method, definition, prefix, prefix_i, block, results = [],
             c, mode = 0, numParen = 0, quote, args;
 
-        var appendResult = function(){
-            if(method) {
-                if(definition.substr( 0, 1 ) === '"') {
-                    definition = definition.substr( 1, definition.length - 2 );
+        var appendResult = function () {
+            if (method) {
+                if (definition.substr(0, 1) === '"') {
+                    definition = definition.substr(1, definition.length - 2);
                 }
-                if(definition) {
+                if (definition) {
                     args.push(definition);
                 }
-                if(method.substr( 0, 1 ) === '-' &&
-                    (prefix_i = method.indexOf( '-', 1 ) + 1) > 0) {
-                    prefix = method.substr( 0, prefix_i);
-                    method = method.substr( prefix_i );
+                if (method.substr(0, 1) === '-' &&
+                    (prefix_i = method.indexOf('-', 1) + 1) > 0) {
+                    prefix = method.substr(0, prefix_i);
+                    method = method.substr(prefix_i);
                 }
                 results.push({
                     prefix: prefix,
@@ -91,24 +91,24 @@
         };
 
         appendResult();
-        for(var i = 0, ii = value.length; i<ii; i++) {
+        for (var i = 0, ii = value.length; i < ii; i++) {
             c = value[i];
-            if(mode === 0 && whitespace.indexOf( c ) > -1){
+            if (mode === 0 && whitespace.indexOf(c) > -1) {
                 continue;
             }
-            switch(c) {
+            switch (c) {
                 case '"':
-                    if(!quote) {
+                    if (!quote) {
                         quote = c;
-                    }
-                    else if(quote === c) {
+                    } else if (quote === c) {
                         quote = null;
                     }
                     break;
 
                 case '(':
-                    if(quote) { break; }
-                    else if(mode === 0) {
+                    if (quote) {
+                        break;
+                    } else if (mode === 0) {
                         mode = 1;
                         block += c;
                         continue;
@@ -118,9 +118,10 @@
                     break;
 
                 case ')':
-                    if(quote) { break; }
-                    else if(mode === 1) {
-                        if(numParen === 0) {
+                    if (quote) {
+                        break;
+                    } else if (mode === 1) {
+                        if (numParen === 0) {
                             mode = 0;
                             block += c;
                             appendResult();
@@ -132,13 +133,13 @@
                     break;
 
                 case ',':
-                    if(quote) { break; }
-                    else if(mode === 0) {
+                    if (quote) {
+                        break;
+                    } else if (mode === 0) {
                         appendResult();
                         continue;
-                    }
-                    else if (mode === 1) {
-                        if(numParen === 0 && !method.match(/^url$/i)) {
+                    } else if (mode === 1) {
+                        if (numParen === 0 && !method.match(/^url$/i)) {
                             args.push(definition);
                             definition = '';
                             block += c;
@@ -149,8 +150,11 @@
             }
 
             block += c;
-            if(mode === 0) { method += c; }
-            else { definition += c; }
+            if (mode === 0) {
+                method += c;
+            } else {
+                definition += c;
+            }
         }
         appendResult();
 
@@ -160,7 +164,7 @@
     _html2canvas.Util.Bounds = function (element) {
         var clientRect, bounds = {};
 
-        if (element.getBoundingClientRect){
+        if (element.getBoundingClientRect) {
             clientRect = element.getBoundingClientRect();
 
             // TODO add scroll position to bounds, so no scrolling of window necessary
@@ -189,7 +193,7 @@
         };
     };
 
-    function toPX(element, attribute, value ) {
+    function toPX(element, attribute, value) {
         var rsLeft = element.runtimeStyle && element.runtimeStyle[attribute],
             left,
             style = element.style;
@@ -202,7 +206,7 @@
         // If we're not dealing with a regular pixel number
         // but a number that has a weird ending, we need to convert it to pixels
 
-        if ( !/^-?[0-9]+\.?[0-9]*(?:px)?$/i.test( value ) && /^-?\d/.test(value) ) {
+        if (!/^-?[0-9]+\.?[0-9]*(?:px)?$/i.test(value) && /^-?\d/.test(value)) {
             // Remember the original values
             left = style.left;
 
@@ -236,12 +240,12 @@
         value = value[index || 0] || value[0] || 'auto';
         value = _html2canvas.Util.trimText(value).split(' ');
 
-        if(attribute === 'backgroundSize' && (!value[0] || value[0].match(/cover|contain|auto/))) {
+        if (attribute === 'backgroundSize' && (!value[0] || value[0].match(/cover|contain|auto/))) {
             //these values will be handled in the parent function
         } else {
-            value[0] = (value[0].indexOf( "%" ) === -1) ? toPX(element, attribute + "X", value[0]) : value[0];
-            if(value[1] === undefined) {
-                if(attribute === 'backgroundSize') {
+            value[0] = (value[0].indexOf("%") === -1) ? toPX(element, attribute + "X", value[0]) : value[0];
+            if (value[1] === undefined) {
+                if (attribute === 'backgroundSize') {
                     value[1] = 'auto';
                     return value;
                 } else {
@@ -274,15 +278,15 @@
         return value;
     };
 
-    _html2canvas.Util.resizeBounds = function( current_width, current_height, target_width, target_height, stretch_mode ){
+    _html2canvas.Util.resizeBounds = function (current_width, current_height, target_width, target_height, stretch_mode) {
         var target_ratio = target_width / target_height,
             current_ratio = current_width / current_height,
             output_width, output_height;
 
-        if(!stretch_mode || stretch_mode === 'auto') {
+        if (!stretch_mode || stretch_mode === 'auto') {
             output_width = target_width;
             output_height = target_height;
-        } else if(target_ratio < current_ratio ^ stretch_mode === 'contain') {
+        } else if (target_ratio < current_ratio ^ stretch_mode === 'contain') {
             output_height = target_height;
             output_width = target_height * current_ratio;
         } else {
@@ -296,14 +300,14 @@
         };
     };
 
-    function backgroundBoundsFactory( prop, el, bounds, image, imageIndex, backgroundSize ) {
-        var bgposition =  _html2canvas.Util.getCSS( el, prop, imageIndex ) ,
+    function backgroundBoundsFactory(prop, el, bounds, image, imageIndex, backgroundSize) {
+        var bgposition = _html2canvas.Util.getCSS(el, prop, imageIndex),
             topPos,
             left,
             percentage,
             val;
 
-        if (bgposition.length === 1){
+        if (bgposition.length === 1) {
             val = bgposition[0];
 
             bgposition = [];
@@ -312,15 +316,15 @@
             bgposition[1] = val;
         }
 
-        if (bgposition[0].toString().indexOf("%") !== -1){
-            percentage = (parseFloat(bgposition[0])/100);
+        if (bgposition[0].toString().indexOf("%") !== -1) {
+            percentage = (parseFloat(bgposition[0]) / 100);
             left = bounds.width * percentage;
-            if(prop !== 'backgroundSize') {
-                left -= (backgroundSize || image).width*percentage;
+            if (prop !== 'backgroundSize') {
+                left -= (backgroundSize || image).width * percentage;
             }
         } else {
-            if(prop === 'backgroundSize') {
-                if(bgposition[0] === 'auto') {
+            if (prop === 'backgroundSize') {
+                if (bgposition[0] === 'auto') {
                     left = image.width;
                 } else {
                     if (/contain|cover/.test(bgposition[0])) {
@@ -332,35 +336,35 @@
                     }
                 }
             } else {
-                left = parseInt( bgposition[0], 10);
+                left = parseInt(bgposition[0], 10);
             }
         }
 
 
-        if(bgposition[1] === 'auto') {
+        if (bgposition[1] === 'auto') {
             topPos = left / image.width * image.height;
-        } else if (bgposition[1].toString().indexOf("%") !== -1){
-            percentage = (parseFloat(bgposition[1])/100);
-            topPos =  bounds.height * percentage;
-            if(prop !== 'backgroundSize') {
+        } else if (bgposition[1].toString().indexOf("%") !== -1) {
+            percentage = (parseFloat(bgposition[1]) / 100);
+            topPos = bounds.height * percentage;
+            if (prop !== 'backgroundSize') {
                 topPos -= (backgroundSize || image).height * percentage;
             }
 
         } else {
-            topPos = parseInt(bgposition[1],10);
+            topPos = parseInt(bgposition[1], 10);
         }
 
         return [left, topPos];
     }
 
-    _html2canvas.Util.BackgroundPosition = function( el, bounds, image, imageIndex, backgroundSize ) {
-        var result = backgroundBoundsFactory( 'backgroundPosition', el, bounds, image, imageIndex, backgroundSize );
-        return { left: result[0], top: result[1] };
+    _html2canvas.Util.BackgroundPosition = function (el, bounds, image, imageIndex, backgroundSize) {
+        var result = backgroundBoundsFactory('backgroundPosition', el, bounds, image, imageIndex, backgroundSize);
+        return {left: result[0], top: result[1]};
     };
 
-    _html2canvas.Util.BackgroundSize = function( el, bounds, image, imageIndex ) {
-        var result = backgroundBoundsFactory( 'backgroundSize', el, bounds, image, imageIndex );
-        return { width: result[0], height: result[1] };
+    _html2canvas.Util.BackgroundSize = function (el, bounds, image, imageIndex) {
+        var result = backgroundBoundsFactory('backgroundSize', el, bounds, image, imageIndex);
+        return {width: result[0], height: result[1]};
     };
 
     _html2canvas.Util.Extend = function (options, defaults) {
@@ -379,13 +383,13 @@
      * Dual licensed under the MIT or GPL Version 2 licenses.
      * http://jquery.org/license
      */
-    _html2canvas.Util.Children = function( elem ) {
+    _html2canvas.Util.Children = function (elem) {
         var children;
         try {
-            children = (elem.nodeName && elem.nodeName.toUpperCase() === "IFRAME") ? elem.contentDocument || elem.contentWindow.document : (function(array) {
+            children = (elem.nodeName && elem.nodeName.toUpperCase() === "IFRAME") ? elem.contentDocument || elem.contentWindow.document : (function (array) {
                 var ret = [];
                 if (array !== null) {
-                    (function(first, second ) {
+                    (function (first, second) {
                         var i = first.length,
                             j = 0;
 
@@ -414,14 +418,14 @@
         return children;
     };
 
-    _html2canvas.Util.isTransparent = function(backgroundColor) {
+    _html2canvas.Util.isTransparent = function (backgroundColor) {
         return (backgroundColor === "transparent" || backgroundColor === "rgba(0, 0, 0, 0)");
     };
     _html2canvas.Util.Font = (function () {
 
         var fontData = {};
 
-        return function(font, fontSize, doc) {
+        return function (font, fontSize, doc) {
             if (fontData[font + "-" + fontSize] !== undefined) {
                 return fontData[font + "-" + fontSize];
             }
@@ -467,7 +471,7 @@
             container.style.lineHeight = "normal";
             img.style.verticalAlign = "super";
 
-            middle = (img.offsetTop-container.offsetTop) + 1;
+            middle = (img.offsetTop - container.offsetTop) + 1;
             metricsObj = {
                 baseline: baseline,
                 lineWidth: 1,
@@ -482,7 +486,7 @@
         };
     })();
 
-    (function(){
+    (function () {
         var Util = _html2canvas.Util,
             Generate = {};
 
@@ -504,18 +508,18 @@
          * TODO: Add old Webkit -webkit-gradient(radial, ...) support
          * TODO: Maybe some RegExp optimizations are possible ;o)
          */
-        Generate.parseGradient = function(css, bounds) {
-            var gradient, i, len = reGradients.length, m1, stop, m2, m2Len, step, m3, tl,tr,br,bl;
+        Generate.parseGradient = function (css, bounds) {
+            var gradient, i, len = reGradients.length, m1, stop, m2, m2Len, step, m3, tl, tr, br, bl;
 
-            for(i = 0; i < len; i+=1){
+            for (i = 0; i < len; i += 1) {
                 m1 = css.match(reGradients[i]);
-                if(m1) {
+                if (m1) {
                     break;
                 }
             }
 
-            if(m1) {
-                switch(m1[1]) {
+            if (m1) {
+                switch (m1[1]) {
                     case '-webkit-linear-gradient':
                     case '-o-linear-gradient':
 
@@ -530,10 +534,10 @@
 
                         // get coordinates
                         m2 = m1[2].match(/\w+/g);
-                        if(m2){
+                        if (m2) {
                             m2Len = m2.length;
-                            for(i = 0; i < m2Len; i+=1){
-                                switch(m2[i]) {
+                            for (i = 0; i < m2Len; i += 1) {
+                                switch (m2[i]) {
                                     case 'top':
                                         gradient.y0 = 0;
                                         gradient.y1 = bounds.height;
@@ -556,23 +560,23 @@
                                 }
                             }
                         }
-                        if(gradient.x0 === null && gradient.x1 === null){ // center
+                        if (gradient.x0 === null && gradient.x1 === null) { // center
                             gradient.x0 = gradient.x1 = bounds.width / 2;
                         }
-                        if(gradient.y0 === null && gradient.y1 === null){ // center
+                        if (gradient.y0 === null && gradient.y1 === null) { // center
                             gradient.y0 = gradient.y1 = bounds.height / 2;
                         }
 
                         // get colors and stops
                         m2 = m1[3].match(/((?:rgb|rgba)\(\d{1,3},\s\d{1,3},\s\d{1,3}(?:,\s[0-9\.]+)?\)(?:\s\d{1,3}(?:%|px))?)+/g);
-                        if(m2){
+                        if (m2) {
                             m2Len = m2.length;
                             step = 1 / Math.max(m2Len - 1, 1);
-                            for(i = 0; i < m2Len; i+=1){
+                            for (i = 0; i < m2Len; i += 1) {
                                 m3 = m2[i].match(/((?:rgb|rgba)\(\d{1,3},\s\d{1,3},\s\d{1,3}(?:,\s[0-9\.]+)?\))\s*(\d{1,3})?(%|px)?/);
-                                if(m3[2]){
+                                if (m3[2]) {
                                     stop = parseFloat(m3[2]);
-                                    if(m3[3] === '%'){
+                                    if (m3[3] === '%') {
                                         stop /= 100;
                                     } else { // px - stupid opera
                                         stop /= bounds.width;
@@ -601,7 +605,7 @@
 
                         // get coordinates
                         m2 = m1[3].match(/(\d{1,3})%?\s(\d{1,3})%?,\s(\d{1,3})%?\s(\d{1,3})%?/);
-                        if(m2){
+                        if (m2) {
                             gradient.x0 = (m2[1] * bounds.width) / 100;
                             gradient.y0 = (m2[2] * bounds.height) / 100;
                             gradient.x1 = (m2[3] * bounds.width) / 100;
@@ -610,15 +614,15 @@
 
                         // get colors and stops
                         m2 = m1[4].match(/((?:from|to|color-stop)\((?:[0-9\.]+,\s)?(?:rgb|rgba)\(\d{1,3},\s\d{1,3},\s\d{1,3}(?:,\s[0-9\.]+)?\)\))+/g);
-                        if(m2){
+                        if (m2) {
                             m2Len = m2.length;
-                            for(i = 0; i < m2Len; i+=1){
+                            for (i = 0; i < m2Len; i += 1) {
                                 m3 = m2[i].match(/(from|to|color-stop)\(([0-9\.]+)?(?:,\s)?((?:rgb|rgba)\(\d{1,3},\s\d{1,3},\s\d{1,3}(?:,\s[0-9\.]+)?\))\)/);
                                 stop = parseFloat(m3[2]);
-                                if(m3[1] === 'from') {
+                                if (m3[1] === 'from') {
                                     stop = 0.0;
                                 }
-                                if(m3[1] === 'to') {
+                                if (m3[1] === 'to') {
                                     stop = 1.0;
                                 }
                                 gradient.colorStops.push({
@@ -651,7 +655,7 @@
                         // m2[2] == 50%  -> center
                         // m2[2] == 100% -> bottom
 
-                        if(m2){
+                        if (m2) {
                             gradient.x0 = (m2[1] * bounds.width) / 100;
                             gradient.y0 = (m2[2] * bounds.height) / 100;
                             gradient.x1 = bounds.width - gradient.x0;
@@ -660,14 +664,14 @@
 
                         // get colors and stops
                         m2 = m1[3].match(/((?:rgb|rgba)\(\d{1,3},\s\d{1,3},\s\d{1,3}(?:,\s[0-9\.]+)?\)(?:\s\d{1,3}%)?)+/g);
-                        if(m2){
+                        if (m2) {
                             m2Len = m2.length;
                             step = 1 / Math.max(m2Len - 1, 1);
-                            for(i = 0; i < m2Len; i+=1){
+                            for (i = 0; i < m2Len; i += 1) {
                                 m3 = m2[i].match(/((?:rgb|rgba)\(\d{1,3},\s\d{1,3},\s\d{1,3}(?:,\s[0-9\.]+)?\))\s*(\d{1,3})?(%)?/);
-                                if(m3[2]){
+                                if (m3[2]) {
                                     stop = parseFloat(m3[2]);
-                                    if(m3[3]){ // percentage
+                                    if (m3[3]) { // percentage
                                         stop /= 100;
                                     }
                                 } else {
@@ -700,7 +704,7 @@
 
                         // center
                         m2 = m1[2].match(/(\d{1,3})%?\s(\d{1,3})%?/);
-                        if(m2){
+                        if (m2) {
                             gradient.cx = (m2[1] * bounds.width) / 100;
                             gradient.cy = (m2[2] * bounds.height) / 100;
                         }
@@ -708,8 +712,8 @@
                         // size
                         m2 = m1[3].match(/\w+/);
                         m3 = m1[4].match(/[a-z\-]*/);
-                        if(m2 && m3){
-                            switch(m3[0]){
+                        if (m2 && m3) {
+                            switch (m3[0]) {
                                 case 'farthest-corner':
                                 case 'cover': // is equivalent to farthest-corner
                                 case '': // mozilla removes "cover" from definition :(
@@ -727,7 +731,7 @@
                                     gradient.rx = gradient.ry = Math.min(tl, tr, br, bl);
                                     break;
                                 case 'farthest-side':
-                                    if(m2[0] === 'circle'){
+                                    if (m2[0] === 'circle') {
                                         gradient.rx = gradient.ry = Math.max(
                                             gradient.cx,
                                             gradient.cy,
@@ -750,7 +754,7 @@
                                     break;
                                 case 'closest-side':
                                 case 'contain': // is equivalent to closest-side
-                                    if(m2[0] === 'circle'){
+                                    if (m2[0] === 'circle') {
                                         gradient.rx = gradient.ry = Math.min(
                                             gradient.cx,
                                             gradient.cy,
@@ -778,14 +782,14 @@
 
                         // color stops
                         m2 = m1[5].match(/((?:rgb|rgba)\(\d{1,3},\s\d{1,3},\s\d{1,3}(?:,\s[0-9\.]+)?\)(?:\s\d{1,3}(?:%|px))?)+/g);
-                        if(m2){
+                        if (m2) {
                             m2Len = m2.length;
                             step = 1 / Math.max(m2Len - 1, 1);
-                            for(i = 0; i < m2Len; i+=1){
+                            for (i = 0; i < m2Len; i += 1) {
                                 m3 = m2[i].match(/((?:rgb|rgba)\(\d{1,3},\s\d{1,3},\s\d{1,3}(?:,\s[0-9\.]+)?\))\s*(\d{1,3})?(%|px)?/);
-                                if(m3[2]){
+                                if (m3[2]) {
                                     stop = parseFloat(m3[2]);
-                                    if(m3[3] === '%'){
+                                    if (m3[3] === '%') {
                                         stop /= 100;
                                     } else { // px - stupid opera
                                         stop /= bounds.width;
@@ -807,18 +811,17 @@
         };
 
         function addScrollStops(grad) {
-            return function(colorStop) {
+            return function (colorStop) {
                 try {
                     grad.addColorStop(colorStop.stop, colorStop.color);
-                }
-                catch(e) {
+                } catch (e) {
                     Util.log(['failed to add color stop: ', e, '; tried to add: ', colorStop]);
                 }
             };
         }
 
-        Generate.Gradient = function(src, bounds) {
-            if(bounds.width === 0 || bounds.height === 0) {
+        Generate.Gradient = function (src, bounds) {
+            if (bounds.width === 0 || bounds.height === 0) {
                 return;
             }
 
@@ -832,8 +835,8 @@
             // TODO: add support for multi defined background gradients
             gradient = _html2canvas.Generate.parseGradient(src, bounds);
 
-            if(gradient) {
-                switch(gradient.type) {
+            if (gradient) {
+                switch (gradient.type) {
                     case 'linear':
                         grad = ctx.createLinearGradient(gradient.x0, gradient.y0, gradient.x1, gradient.y1);
                         gradient.colorStops.forEach(addScrollStops(grad));
@@ -872,7 +875,7 @@
             return canvas;
         };
 
-        Generate.ListAlpha = function(number) {
+        Generate.ListAlpha = function (number) {
             var tmp = "",
                 modulus;
 
@@ -880,12 +883,12 @@
                 modulus = number % 26;
                 tmp = String.fromCharCode((modulus) + 64) + tmp;
                 number = number / 26;
-            }while((number*26) > 26);
+            } while ((number * 26) > 26);
 
             return tmp;
         };
 
-        Generate.ListRoman = function(number) {
+        Generate.ListRoman = function (number) {
             var romanArray = ["M", "CM", "D", "CD", "C", "XC", "L", "XL", "X", "IX", "V", "IV", "I"],
                 decimal = [1000, 900, 500, 400, 100, 90, 50, 40, 10, 9, 5, 4, 1],
                 roman = "",
@@ -896,7 +899,7 @@
                 return number;
             }
 
-            for (v=0; v < len; v+=1) {
+            for (v = 0; v < len; v += 1) {
                 while (number >= decimal[v]) {
                     number -= decimal[v];
                     roman += romanArray[v];
@@ -906,41 +909,42 @@
             return roman;
         };
     })();
+
     function h2cRenderContext(width, height) {
         var storage = [];
         return {
             storage: storage,
             width: width,
             height: height,
-            clip: function() {
+            clip: function () {
                 storage.push({
                     type: "function",
                     name: "clip",
                     'arguments': arguments
                 });
             },
-            translate: function() {
+            translate: function () {
                 storage.push({
                     type: "function",
                     name: "translate",
                     'arguments': arguments
                 });
             },
-            fill: function() {
+            fill: function () {
                 storage.push({
                     type: "function",
                     name: "fill",
                     'arguments': arguments
                 });
             },
-            save: function() {
+            save: function () {
                 storage.push({
                     type: "function",
                     name: "save",
                     'arguments': arguments
                 });
             },
-            restore: function() {
+            restore: function () {
                 storage.push({
                     type: "function",
                     name: "restore",
@@ -954,14 +958,14 @@
                     'arguments': arguments
                 });
             },
-            createPattern: function() {
+            createPattern: function () {
                 storage.push({
                     type: "function",
                     name: "createPattern",
                     'arguments': arguments
                 });
             },
-            drawShape: function() {
+            drawShape: function () {
 
                 var shape = [];
 
@@ -972,31 +976,31 @@
                 });
 
                 return {
-                    moveTo: function() {
+                    moveTo: function () {
                         shape.push({
                             name: "moveTo",
                             'arguments': arguments
                         });
                     },
-                    lineTo: function() {
+                    lineTo: function () {
                         shape.push({
                             name: "lineTo",
                             'arguments': arguments
                         });
                     },
-                    arcTo: function() {
+                    arcTo: function () {
                         shape.push({
                             name: "arcTo",
                             'arguments': arguments
                         });
                     },
-                    bezierCurveTo: function() {
+                    bezierCurveTo: function () {
                         shape.push({
                             name: "bezierCurveTo",
                             'arguments': arguments
                         });
                     },
-                    quadraticCurveTo: function() {
+                    quadraticCurveTo: function () {
                         shape.push({
                             name: "quadraticCurveTo",
                             'arguments': arguments
@@ -1029,10 +1033,11 @@
             }
         };
     }
-    _html2canvas.Parse = function (images, options) {
-        window.scroll(0,0);
 
-        var element = (( options.elements === undefined ) ? document.body : options.elements[0]), // select body by default
+    _html2canvas.Parse = function (images, options) {
+        window.scroll(0, 0);
+
+        var element = ((options.elements === undefined) ? document.body : options.elements[0]), // select body by default
             numDraws = 0,
             doc = element.ownerDocument,
             Util = _html2canvas.Util,
@@ -1050,7 +1055,7 @@
 
         images = images || {};
 
-        function documentWidth () {
+        function documentWidth() {
             return Math.max(
                 Math.max(doc.body.scrollWidth, doc.documentElement.scrollWidth),
                 Math.max(doc.body.offsetWidth, doc.documentElement.offsetWidth),
@@ -1058,7 +1063,7 @@
             );
         }
 
-        function documentHeight () {
+        function documentHeight() {
             return Math.max(
                 Math.max(doc.body.scrollHeight, doc.documentElement.scrollHeight),
                 Math.max(doc.body.offsetHeight, doc.documentElement.offsetHeight),
@@ -1071,11 +1076,11 @@
             return (isNaN(val)) ? 0 : val; // borders in old IE are throwing 'medium' for demo.html
         }
 
-        function renderRect (ctx, x, y, w, h, bgcolor) {
-            if (bgcolor !== "transparent"){
+        function renderRect(ctx, x, y, w, h, bgcolor) {
+            if (bgcolor !== "transparent") {
                 ctx.setVariable("fillStyle", bgcolor);
                 ctx.fillRect(x, y, w, h);
-                numDraws+=1;
+                numDraws += 1;
             }
         }
 
@@ -1085,12 +1090,12 @@
             }
         }
 
-        function textTransform (text, transform) {
-            switch(transform){
+        function textTransform(text, transform) {
+            switch (transform) {
                 case "lowercase":
                     return text.toLowerCase();
                 case "capitalize":
-                    return text.replace( /(^|\s|:|-|\(|\))([a-z])/g, capitalize);
+                    return text.replace(/(^|\s|:|-|\(|\))([a-z])/g, capitalize);
                 case "uppercase":
                     return text.toUpperCase();
                 default:
@@ -1102,10 +1107,10 @@
             return (/^(normal|none|0px)$/.test(letter_spacing));
         }
 
-        function drawText(currentText, x, y, ctx){
+        function drawText(currentText, x, y, ctx) {
             if (currentText !== null && Util.trimText(currentText).length > 0) {
                 ctx.fillText(currentText, x, y);
-                numDraws+=1;
+                numDraws += 1;
             }
         }
 
@@ -1116,7 +1121,7 @@
                 size = getCSS(el, "fontSize"),
                 shadows = Util.parseTextShadows(getCSS(el, "textShadow"));
 
-            switch(parseInt(bold, 10)){
+            switch (parseInt(bold, 10)) {
                 case 401:
                     bold = "bold";
                     break;
@@ -1138,13 +1143,13 @@
                 ctx.setVariable("shadowBlur", shadows[0].blur);
             }
 
-            if (text_decoration !== "none"){
+            if (text_decoration !== "none") {
                 return Util.Font(family, size, doc);
             }
         }
 
         function renderTextDecoration(ctx, text_decoration, bounds, metrics, color) {
-            switch(text_decoration) {
+            switch (text_decoration) {
                 case "underline":
                     // Draws a line at the baseline of the font
                     // TODO As some browsers display the line as more than 1px if the font-size is big, need to take that into account both in position and size
@@ -1167,7 +1172,7 @@
                     bounds = textRangeBounds(text, state.node, state.textOffset);
                 }
                 state.textOffset += text.length;
-            } else if (state.node && typeof state.node.nodeValue === "string" ){
+            } else if (state.node && typeof state.node.nodeValue === "string") {
                 var newTextNode = (isLast) ? state.node.splitText(text.length) : null;
                 bounds = textWrapperBounds(state.node, transform);
                 state.node = newTextNode;
@@ -1209,7 +1214,7 @@
 
             if (Util.trimText(textNode.nodeValue).length > 0) {
                 textNode.nodeValue = textTransform(textNode.nodeValue, getCSS(el, "textTransform"));
-                textAlign = textAlign.replace(["-webkit-auto"],["auto"]);
+                textAlign = textAlign.replace(["-webkit-auto"], ["auto"]);
 
                 textList = (!options.letterRendering && /^(left|right|justify|auto)$/.test(textAlign) && noLetterSpacing(getCSS(el, "letterSpacing"))) ?
                     textNode.nodeValue.split(/(\b| )/)
@@ -1218,7 +1223,7 @@
                 metrics = setTextVariables(ctx, el, textDecoration, color);
 
                 if (options.chinese) {
-                    textList.forEach(function(word, index) {
+                    textList.forEach(function (word, index) {
                         if (/.*[\u4E00-\u9FA5].*$/.test(word)) {
                             word = word.split("");
                             word.unshift(index, 1);
@@ -1227,7 +1232,7 @@
                     });
                 }
 
-                textList.forEach(function(text, index) {
+                textList.forEach(function (text, index) {
                     var bounds = getTextBounds(state, text, textDecoration, (index < textList.length - 1), stack.transform.matrix);
                     if (bounds) {
                         drawText(text, bounds.left, bounds.bottom, ctx);
@@ -1237,8 +1242,8 @@
             }
         }
 
-        function listPosition (element, val) {
-            var boundElement = doc.createElement( "boundelement" ),
+        function listPosition(element, val) {
+            var boundElement = doc.createElement("boundelement"),
                 originalType,
                 bounds;
 
@@ -1263,7 +1268,7 @@
                 childs = el.parentNode.childNodes;
 
             if (el.parentNode) {
-                while(childs[++i] !== el) {
+                while (childs[++i] !== el) {
                     if (childs[i].nodeType === 1) {
                         count++;
                     }
@@ -1276,7 +1281,7 @@
 
         function listItemText(element, type) {
             var currentIndex = elementIndex(element), text;
-            switch(type){
+            switch (type) {
                 case "decimal":
                     text = currentIndex;
                     break;
@@ -1284,16 +1289,16 @@
                     text = (currentIndex.toString().length === 1) ? currentIndex = "0" + currentIndex.toString() : currentIndex.toString();
                     break;
                 case "upper-roman":
-                    text = _html2canvas.Generate.ListRoman( currentIndex );
+                    text = _html2canvas.Generate.ListRoman(currentIndex);
                     break;
                 case "lower-roman":
-                    text = _html2canvas.Generate.ListRoman( currentIndex ).toLowerCase();
+                    text = _html2canvas.Generate.ListRoman(currentIndex).toLowerCase();
                     break;
                 case "lower-alpha":
-                    text = _html2canvas.Generate.ListAlpha( currentIndex ).toLowerCase();
+                    text = _html2canvas.Generate.ListAlpha(currentIndex).toLowerCase();
                     break;
                 case "upper-alpha":
-                    text = _html2canvas.Generate.ListAlpha( currentIndex );
+                    text = _html2canvas.Generate.ListAlpha(currentIndex);
                     break;
             }
 
@@ -1323,26 +1328,26 @@
             }
         }
 
-        function loadImage (src){
+        function loadImage(src) {
             var img = images[src];
             return (img && img.succeeded === true) ? img.img : false;
         }
 
-        function clipBounds(src, dst){
+        function clipBounds(src, dst) {
             var x = Math.max(src.left, dst.left),
                 y = Math.max(src.top, dst.top),
                 x2 = Math.min((src.left + src.width), (dst.left + dst.width)),
                 y2 = Math.min((src.top + src.height), (dst.top + dst.height));
 
             return {
-                left:x,
-                top:y,
-                width:x2-x,
-                height:y2-y
+                left: x,
+                top: y,
+                width: x2 - x,
+                height: y2 - y
             };
         }
 
-        function setZ(element, stack, parentStack){
+        function setZ(element, stack, parentStack) {
             var newContext,
                 isPositioned = stack.cssPosition !== 'static',
                 zIndex = isPositioned ? getCSS(element, 'zIndex') : 'auto',
@@ -1389,7 +1394,7 @@
         }
 
         function getBorderData(element) {
-            return ["Top", "Right", "Bottom", "Left"].map(function(side) {
+            return ["Top", "Right", "Bottom", "Left"].map(function (side) {
                 return {
                     width: getCSSInt(element, 'border' + side + 'Width'),
                     color: getCSS(element, 'border' + side + 'Color')
@@ -1398,70 +1403,70 @@
         }
 
         function getBorderRadiusData(element) {
-            return ["TopLeft", "TopRight", "BottomRight", "BottomLeft"].map(function(side) {
+            return ["TopLeft", "TopRight", "BottomRight", "BottomLeft"].map(function (side) {
                 return getCSS(element, 'border' + side + 'Radius');
             });
         }
 
-        var getCurvePoints = (function(kappa) {
+        var getCurvePoints = (function (kappa) {
 
-            return function(x, y, r1, r2) {
+            return function (x, y, r1, r2) {
                 var ox = (r1) * kappa, // control point offset horizontal
                     oy = (r2) * kappa, // control point offset vertical
                     xm = x + r1, // x-middle
                     ym = y + r2; // y-middle
                 return {
                     topLeft: bezierCurve({
-                        x:x,
-                        y:ym
+                        x: x,
+                        y: ym
                     }, {
-                        x:x,
-                        y:ym - oy
+                        x: x,
+                        y: ym - oy
                     }, {
-                        x:xm - ox,
-                        y:y
+                        x: xm - ox,
+                        y: y
                     }, {
-                        x:xm,
-                        y:y
+                        x: xm,
+                        y: y
                     }),
                     topRight: bezierCurve({
-                        x:x,
-                        y:y
+                        x: x,
+                        y: y
                     }, {
-                        x:x + ox,
-                        y:y
+                        x: x + ox,
+                        y: y
                     }, {
-                        x:xm,
-                        y:ym - oy
+                        x: xm,
+                        y: ym - oy
                     }, {
-                        x:xm,
-                        y:ym
+                        x: xm,
+                        y: ym
                     }),
                     bottomRight: bezierCurve({
-                        x:xm,
-                        y:y
+                        x: xm,
+                        y: y
                     }, {
-                        x:xm,
-                        y:y + oy
+                        x: xm,
+                        y: y + oy
                     }, {
-                        x:x + ox,
-                        y:ym
+                        x: x + ox,
+                        y: ym
                     }, {
-                        x:x,
-                        y:ym
+                        x: x,
+                        y: ym
                     }),
                     bottomLeft: bezierCurve({
-                        x:xm,
-                        y:ym
+                        x: xm,
+                        y: ym
                     }, {
-                        x:xm - ox,
-                        y:ym
+                        x: xm - ox,
+                        y: ym
                     }, {
-                        x:x,
-                        y:y + oy
+                        x: x,
+                        y: y + oy
                     }, {
-                        x:x,
-                        y:y
+                        x: x,
+                        y: y
                     })
                 };
             };
@@ -1471,8 +1476,8 @@
 
             var lerp = function (a, b, t) {
                 return {
-                    x:a.x + (b.x - a.x) * t,
-                    y:a.y + (b.y - a.y) * t
+                    x: a.x + (b.x - a.x) * t,
+                    y: a.y + (b.y - a.y) * t
                 };
             };
 
@@ -1481,7 +1486,7 @@
                 startControl: startControl,
                 endControl: endControl,
                 end: end,
-                subdivide: function(t) {
+                subdivide: function (t) {
                     var ab = lerp(start, startControl, t),
                         bc = lerp(startControl, endControl, t),
                         cd = lerp(endControl, end, t),
@@ -1490,10 +1495,10 @@
                         dest = lerp(abbc, bccd, t);
                     return [bezierCurve(start, ab, abbc, dest), bezierCurve(dest, bccd, cd, end)];
                 },
-                curveTo: function(borderArgs) {
+                curveTo: function (borderArgs) {
                     borderArgs.push(["bezierCurve", startControl.x, startControl.y, endControl.x, endControl.y, end.x, end.y]);
                 },
-                curveToReversed: function(borderArgs) {
+                curveToReversed: function (borderArgs) {
                     borderArgs.push(["bezierCurve", endControl.x, endControl.y, startControl.x, startControl.y, start.x, start.y]);
                 }
             };
@@ -1520,7 +1525,7 @@
                 borderArgs.push(["line", outer1[1].start.x, outer1[1].start.y]);
                 outer1[1].curveTo(borderArgs);
             } else {
-                borderArgs.push([ "line", borderData.c1[0], borderData.c1[1]]);
+                borderArgs.push(["line", borderData.c1[0], borderData.c1[1]]);
             }
 
             if (radius2[0] > 0 || radius2[1] > 0) {
@@ -1529,15 +1534,15 @@
                 borderArgs.push(["line", inner2[0].end.x, inner2[0].end.y]);
                 inner2[0].curveToReversed(borderArgs);
             } else {
-                borderArgs.push([ "line", borderData.c2[0], borderData.c2[1]]);
-                borderArgs.push([ "line", borderData.c3[0], borderData.c3[1]]);
+                borderArgs.push(["line", borderData.c2[0], borderData.c2[1]]);
+                borderArgs.push(["line", borderData.c3[0], borderData.c3[1]]);
             }
 
             if (radius1[0] > 0 || radius1[1] > 0) {
                 borderArgs.push(["line", inner1[1].end.x, inner1[1].end.y]);
                 inner1[1].curveToReversed(borderArgs);
             } else {
-                borderArgs.push([ "line", borderData.c4[0], borderData.c4[1]]);
+                borderArgs.push(["line", borderData.c4[0], borderData.c4[1]]);
             }
 
             return borderArgs;
@@ -1589,7 +1594,7 @@
                 topRightInner: getCurvePoints(
                     x + Math.min(topWidth, width + borders[3].width),
                     y + borders[0].width,
-                    (topWidth > width + borders[3].width) ? 0 :trh - borders[3].width,
+                    (topWidth > width + borders[3].width) ? 0 : trh - borders[3].width,
                     trv - borders[0].width
                 ).topRight.subdivide(0.5),
 
@@ -1627,7 +1632,7 @@
             var backgroundClip = getCSS(element, 'backgroundClip'),
                 borderArgs = [];
 
-            switch(backgroundClip) {
+            switch (backgroundClip) {
                 case "content-box":
                 case "padding-box":
                     parseCorner(borderArgs, radius[0], radius[1], borderPoints.topLeftInner, borderPoints.topRightInner, bounds.left + borders[3].width, bounds.top + borders[0].width);
@@ -1647,7 +1652,7 @@
             return borderArgs;
         }
 
-        function parseBorders(element, bounds, borders){
+        function parseBorders(element, bounds, borders) {
             var x = bounds.left,
                 y = bounds.top,
                 width = bounds.width,
@@ -1658,7 +1663,7 @@
                 bw,
                 bh,
                 borderArgs,
-            // http://www.w3.org/TR/css3-background/#the-border-radius
+                // http://www.w3.org/TR/css3-background/#the-border-radius
                 borderRadius = getBorderRadiusData(element),
                 borderPoints = calculateCurvePoints(bounds, borderRadius, borders),
                 borderData = {
@@ -1674,7 +1679,7 @@
                     bw = width;
                     bh = height - (borders[2].width);
 
-                    switch(borderSide) {
+                    switch (borderSide) {
                         case 0:
                             // top border
                             bh = borders[0].width;
@@ -1740,32 +1745,32 @@
 
         function createShape(ctx, args) {
             var shape = ctx.drawShape();
-            args.forEach(function(border, index) {
-                shape[(index === 0) ? "moveTo" : border[0] + "To" ].apply(null, border.slice(1));
+            args.forEach(function (border, index) {
+                shape[(index === 0) ? "moveTo" : border[0] + "To"].apply(null, border.slice(1));
             });
             return shape;
         }
 
         function renderBorders(ctx, borderArgs, color) {
             if (color !== "transparent") {
-                ctx.setVariable( "fillStyle", color);
+                ctx.setVariable("fillStyle", color);
                 createShape(ctx, borderArgs);
                 ctx.fill();
-                numDraws+=1;
+                numDraws += 1;
             }
         }
 
-        function renderFormValue (el, bounds, stack){
+        function renderFormValue(el, bounds, stack) {
 
             var valueWrap = doc.createElement('valuewrap'),
-                cssPropertyArray = ['lineHeight','textAlign','fontFamily','color','fontSize','paddingLeft','paddingTop','width','height','border','borderLeftWidth','borderTopWidth'],
+                cssPropertyArray = ['lineHeight', 'textAlign', 'fontFamily', 'color', 'fontSize', 'paddingLeft', 'paddingTop', 'width', 'height', 'border', 'borderLeftWidth', 'borderTopWidth'],
                 textValue,
                 textNode;
 
-            cssPropertyArray.forEach(function(property) {
+            cssPropertyArray.forEach(function (property) {
                 try {
                     valueWrap.style[property] = getCSS(el, property);
-                } catch(e) {
+                } catch (e) {
                     // Older IE has issues with "border"
                     Util.log("html2canvas: Parse: Exception caught in renderFormValue: " + e.message);
                 }
@@ -1776,7 +1781,7 @@
             valueWrap.style.display = "block";
             valueWrap.style.position = "absolute";
 
-            if (/^(submit|reset|button|text|password)$/.test(el.type) || el.nodeName === "SELECT"){
+            if (/^(submit|reset|button|text|password)$/.test(el.type) || el.nodeName === "SELECT") {
                 valueWrap.style.lineHeight = getCSS(el, "height");
             }
 
@@ -1784,7 +1789,7 @@
             valueWrap.style.left = bounds.left + "px";
 
             textValue = (el.nodeName === "SELECT") ? (el.options[el.selectedIndex] || 0).text : el.value;
-            if(!textValue) {
+            if (!textValue) {
                 textValue = el.placeholder;
             }
 
@@ -1797,29 +1802,29 @@
             body.removeChild(valueWrap);
         }
 
-        function drawImage (ctx) {
+        function drawImage(ctx) {
             ctx.drawImage.apply(ctx, Array.prototype.slice.call(arguments, 1));
-            numDraws+=1;
+            numDraws += 1;
         }
 
         function getPseudoElement(el, which) {
             var elStyle = window.getComputedStyle(el, which);
-            if(!elStyle || !elStyle.content || elStyle.content === "none" || elStyle.content === "-moz-alt-content" || elStyle.display === "none") {
+            if (!elStyle || !elStyle.content || elStyle.content === "none" || elStyle.content === "-moz-alt-content" || elStyle.display === "none") {
                 return;
             }
             var content = elStyle.content + '',
-                first = content.substr( 0, 1 );
+                first = content.substr(0, 1);
             //strips quotes
-            if(first === content.substr( content.length - 1 ) && first.match(/'|"/)) {
-                content = content.substr( 1, content.length - 2 );
+            if (first === content.substr(content.length - 1) && first.match(/'|"/)) {
+                content = content.substr(1, content.length - 2);
             }
 
-            var isImage = content.substr( 0, 3 ) === 'url',
-                elps = document.createElement( isImage ? 'img' : 'span' );
+            var isImage = content.substr(0, 3) === 'url',
+                elps = document.createElement(isImage ? 'img' : 'span');
 
             elps.className = pseudoHide + "-before " + pseudoHide + "-after";
 
-            Object.keys(elStyle).filter(indexedProperty).forEach(function(prop) {
+            Object.keys(elStyle).filter(indexedProperty).forEach(function (prop) {
                 // Prevent assigning of read only CSS Rules, ex. length, parentRule
                 try {
                     elps.style[prop] = elStyle[prop];
@@ -1828,7 +1833,7 @@
                 }
             });
 
-            if(isImage) {
+            if (isImage) {
                 elps.src = Util.parseBackgroundImage(content)[0].args[0];
             } else {
                 elps.innerHTML = content;
@@ -1843,11 +1848,11 @@
         function injectPseudoElements(el, stack) {
             var before = getPseudoElement(el, ':before'),
                 after = getPseudoElement(el, ':after');
-            if(!before && !after) {
+            if (!before && !after) {
                 return;
             }
 
-            if(before) {
+            if (before) {
                 el.className += " " + pseudoHide + "-before";
                 el.parentNode.insertBefore(before, el);
                 parseElement(before, stack, true);
@@ -1941,7 +1946,7 @@
                 image,
                 imageIndex = backgroundImages.length;
 
-            while(imageIndex--) {
+            while (imageIndex--) {
                 backgroundImage = backgroundImages[imageIndex];
 
                 if (!backgroundImage.args || backgroundImage.args.length === 0) {
@@ -1964,7 +1969,7 @@
         }
 
         function resizeImage(image, bounds) {
-            if(image.width === bounds.width && image.height === bounds.height) {
+            if (image.width === bounds.width && image.height === bounds.height) {
                 return image;
             }
 
@@ -1972,7 +1977,7 @@
             canvas.width = bounds.width;
             canvas.height = bounds.height;
             ctx = canvas.getContext("2d");
-            drawImage(ctx, image, 0, 0, image.width, image.height, 0, 0, bounds.width, bounds.height );
+            drawImage(ctx, image, 0, 0, image.width, image.height, 0, 0, bounds.width, bounds.height);
             return canvas;
         }
 
@@ -1996,7 +2001,7 @@
             if (transform && transform !== "none") {
                 var match = transform.match(transformRegExp);
                 if (match) {
-                    switch(match[1]) {
+                    switch (match[1]) {
                         case "matrix":
                             matrix = match[2].split(",").map(Util.trimText).map(Util.asFloat);
                             break;
@@ -2011,20 +2016,20 @@
         }
 
         function createStack(element, parentStack, bounds, transform) {
-            var ctx = h2cRenderContext((!parentStack) ? documentWidth() : bounds.width , (!parentStack) ? documentHeight() : bounds.height),
+            var ctx = h2cRenderContext((!parentStack) ? documentWidth() : bounds.width, (!parentStack) ? documentHeight() : bounds.height),
                 stack = {
                     ctx: ctx,
                     opacity: setOpacity(ctx, element, parentStack),
                     cssPosition: getCSS(element, "position"),
                     borders: getBorderData(element),
                     transform: transform,
-                    clip: (parentStack && parentStack.clip) ? Util.Extend( {}, parentStack.clip ) : null
+                    clip: (parentStack && parentStack.clip) ? Util.Extend({}, parentStack.clip) : null
                 };
 
             setZ(element, stack, parentStack);
 
             // TODO correct overflow for absolute content residing under a static position
-            if (options.useOverflow === true && /(hidden|scroll|auto)/.test(getCSS(element, "overflow")) === true && /(BODY)/i.test(element.nodeName) === false){
+            if (options.useOverflow === true && /(hidden|scroll|auto)/.test(getCSS(element, "overflow")) === true && /(BODY)/i.test(element.nodeName) === false) {
                 stack.clip = (stack.clip) ? clipBounds(stack.clip, bounds) : bounds;
             }
 
@@ -2074,12 +2079,12 @@
                 renderBackgroundColor(ctx, bounds, backgroundColor);
                 renderBackgroundImage(element, backgroundBounds, ctx);
             } else if (ignoreBackground) {
-                stack.backgroundColor =  backgroundColor;
+                stack.backgroundColor = backgroundColor;
             }
 
             ctx.restore();
 
-            borderData.borders.forEach(function(border) {
+            borderData.borders.forEach(function (border) {
                 renderBorders(ctx, border.args, border.color);
             });
 
@@ -2087,7 +2092,7 @@
                 injectPseudoElements(element, stack);
             }
 
-            switch(element.nodeName){
+            switch (element.nodeName) {
                 case "IMG":
                     if ((image = loadImage(element.getAttribute('src')))) {
                         renderImage(ctx, element, image, bounds, borders);
@@ -2098,17 +2103,17 @@
                 case "INPUT":
                     // TODO add all relevant type's, i.e. HTML5 new stuff
                     // todo add support for placeholder attribute for browsers which support it
-                    if (/^(text|url|email|submit|button|reset)$/.test(element.type) && (element.value || element.placeholder || "").length > 0){
+                    if (/^(text|url|email|submit|button|reset)$/.test(element.type) && (element.value || element.placeholder || "").length > 0) {
                         renderFormValue(element, bounds, stack);
                     }
                     break;
                 case "TEXTAREA":
-                    if ((element.value || element.placeholder || "").length > 0){
+                    if ((element.value || element.placeholder || "").length > 0) {
                         renderFormValue(element, bounds, stack);
                     }
                     break;
                 case "SELECT":
-                    if ((element.options||element.placeholder || "").length > 0){
+                    if ((element.options || element.placeholder || "").length > 0) {
                         renderFormValue(element, bounds, stack);
                     }
                     break;
@@ -2127,7 +2132,7 @@
             return (getCSS(element, 'display') !== "none" && getCSS(element, 'visibility') !== "hidden" && !element.hasAttribute("data-html2canvas-ignore"));
         }
 
-        function parseElement (element, stack, pseudoElement) {
+        function parseElement(element, stack, pseudoElement) {
             if (isElementVisible(element)) {
                 stack = renderElement(element, stack, pseudoElement, false) || stack;
                 if (!ignoreElementsRegExp.test(element.nodeName)) {
@@ -2137,7 +2142,7 @@
         }
 
         function parseChildren(element, stack, pseudoElement) {
-            Util.Children(element).forEach(function(node) {
+            Util.Children(element).forEach(function (node) {
                 if (node.nodeType === node.ELEMENT_NODE) {
                     parseElement(node, stack, pseudoElement);
                 } else if (node.nodeType === node.TEXT_NODE) {
@@ -2173,7 +2178,7 @@
         };
     }
 
-    _html2canvas.Preload = function( options ) {
+    _html2canvas.Preload = function (options) {
 
         var images = {
                 numLoaded: 0,   // also failed are counted here
@@ -2191,27 +2196,27 @@
             domImages = element.getElementsByTagName('img'), // Fetch images of the present element only
             imgLen = domImages.length,
             link = doc.createElement("a"),
-            supportCORS = (function( img ){
+            supportCORS = (function (img) {
                 return (img.crossOrigin !== undefined);
             })(new Image()),
             timeoutTimer;
 
         link.href = window.location.href;
-        pageOrigin  = link.protocol + link.host;
+        pageOrigin = link.protocol + link.host;
 
-        function isSameOrigin(url){
+        function isSameOrigin(url) {
             link.href = url;
             link.href = link.href; // YES, BELIEVE IT OR NOT, that is required for IE9 - http://jsfiddle.net/niklasvh/2e48b/
             var origin = link.protocol + link.host;
             return (origin === pageOrigin);
         }
 
-        function start(){
+        function start() {
             Util.log("html2canvas: start: images: " + images.numLoaded + " / " + images.numTotal + " (failed: " + images.numFailed + ")");
-            if (!images.firstRun && images.numLoaded >= images.numTotal){
+            if (!images.firstRun && images.numLoaded >= images.numTotal) {
                 Util.log("Finished loading images: # " + images.numTotal + " (failed: " + images.numFailed + ")");
 
-                if (typeof options.complete === "function"){
+                if (typeof options.complete === "function") {
                     options.complete(images);
                 }
 
@@ -2219,7 +2224,7 @@
         }
 
         // TODO modify proxy to serve images with CORS enabled, where available
-        function proxyGetImage(url, img, imageObj){
+        function proxyGetImage(url, img, imageObj) {
             var callback_name,
                 scriptUrl = options.proxy,
                 script;
@@ -2238,8 +2243,8 @@
             scriptUrl += 'url=' + encodeURIComponent(url) + '&callback=' + callback_name;
             script = doc.createElement("script");
 
-            window[callback_name] = function(a){
-                if (a.substring(0,6) === "error:"){
+            window[callback_name] = function (a) {
+                if (a.substring(0, 6) === "error:") {
                     imageObj.succeeded = false;
                     images.numLoaded++;
                     images.numFailed++;
@@ -2251,7 +2256,8 @@
                 window[callback_name] = undefined; // to work with IE<9  // NOTE: that the undefined callback property-name still exists on the window object (for IE<9)
                 try {
                     delete window[callback_name];  // for all browser that support this
-                } catch(ex) {}
+                } catch (ex) {
+                }
                 script.parentNode.removeChild(script);
                 script = null;
                 delete imageObj.script;
@@ -2282,7 +2288,7 @@
         function loadGradientImage(backgroundImage, bounds) {
             var img = _html2canvas.Generate.Gradient(backgroundImage, bounds);
 
-            if (img !== undefined){
+            if (img !== undefined) {
                 images[backgroundImage] = {
                     img: img,
                     succeeded: true
@@ -2294,17 +2300,17 @@
         }
 
         function invalidBackgrounds(background_image) {
-            return (background_image && background_image.method && background_image.args && background_image.args.length > 0 );
+            return (background_image && background_image.method && background_image.args && background_image.args.length > 0);
         }
 
         function loadBackgroundImages(background_image, el) {
             var bounds;
 
-            _html2canvas.Util.parseBackgroundImage(background_image).filter(invalidBackgrounds).forEach(function(background_image) {
+            _html2canvas.Util.parseBackgroundImage(background_image).filter(invalidBackgrounds).forEach(function (background_image) {
                 if (background_image.method === 'url') {
                     methods.loadImage(background_image.args[0]);
-                } else if(background_image.method.match(/\-?gradient$/)) {
-                    if(bounds === undefined) {
+                } else if (background_image.method.match(/\-?gradient$/)) {
+                    if (bounds === undefined) {
                         bounds = _html2canvas.Util.Bounds(el);
                     }
                     loadGradientImage(background_image.value, bounds);
@@ -2312,14 +2318,14 @@
             });
         }
 
-        function getImages (el) {
+        function getImages(el) {
             var elNodeType = false;
 
             // Firefox fails with permission denied on pages with iframes
             try {
                 Util.Children(el).forEach(getImages);
+            } catch (e) {
             }
-            catch( e ) {}
 
             try {
                 elNodeType = el.nodeType;
@@ -2332,7 +2338,7 @@
                 loadPseudoElementImages(el);
                 try {
                     loadBackgroundImages(Util.getCSS(el, 'backgroundImage'), el);
-                } catch(e) {
+                } catch (e) {
                     Util.log("html2canvas: failed to get background-image - Exception: " + e.message);
                 }
                 loadBackgroundImages(el);
@@ -2340,10 +2346,10 @@
         }
 
         function setImageLoadHandlers(img, imageObj) {
-            img.onload = function() {
-                if ( imageObj.timer !== undefined ) {
+            img.onload = function () {
+                if (imageObj.timer !== undefined) {
                     // CORS succeeded
-                    window.clearTimeout( imageObj.timer );
+                    window.clearTimeout(imageObj.timer);
                 }
 
                 images.numLoaded++;
@@ -2351,19 +2357,19 @@
                 img.onerror = img.onload = null;
                 start();
             };
-            img.onerror = function() {
+            img.onerror = function () {
                 if (img.crossOrigin === "anonymous") {
                     // CORS failed
-                    window.clearTimeout( imageObj.timer );
+                    window.clearTimeout(imageObj.timer);
 
                     // let's try with proxy instead
-                    if ( options.proxy ) {
+                    if (options.proxy) {
                         var src = img.src;
                         img = new Image();
                         imageObj.img = img;
                         img.src = src;
 
-                        proxyGetImage( img.src, img, imageObj );
+                        proxyGetImage(img.src, img, imageObj);
                         return;
                     }
                 }
@@ -2377,25 +2383,25 @@
         }
 
         methods = {
-            loadImage: function( src ) {
+            loadImage: function (src) {
                 var img, imageObj;
-                if ( src && images[src] === undefined ) {
+                if (src && images[src] === undefined) {
                     img = new Image();
-                    if ( src.match(/data:image\/.*;base64,/i) ) {
+                    if (src.match(/data:image\/.*;base64,/i)) {
                         img.src = src.replace(/url\(['"]{0,}|['"]{0,}\)$/ig, '');
                         imageObj = images[src] = {
                             img: img
                         };
                         images.numTotal++;
                         setImageLoadHandlers(img, imageObj);
-                    } else if ( isSameOrigin( src ) || options.allowTaint ===  true ) {
+                    } else if (isSameOrigin(src) || options.allowTaint === true) {
                         imageObj = images[src] = {
                             img: img
                         };
                         images.numTotal++;
                         setImageLoadHandlers(img, imageObj);
                         img.src = src;
-                    } else if ( supportCORS && !options.allowTaint && options.useCORS ) {
+                    } else if (supportCORS && !options.allowTaint && options.useCORS) {
                         // attempt to load with CORS
 
                         img.crossOrigin = "anonymous";
@@ -2405,17 +2411,17 @@
                         images.numTotal++;
                         setImageLoadHandlers(img, imageObj);
                         img.src = src;
-                    } else if ( options.proxy ) {
+                    } else if (options.proxy) {
                         imageObj = images[src] = {
                             img: img
                         };
                         images.numTotal++;
-                        proxyGetImage( src, img, imageObj );
+                        proxyGetImage(src, img, imageObj);
                     }
                 }
 
             },
-            cleanupDOM: function(cause) {
+            cleanupDOM: function (cause) {
                 var img, src;
                 if (!images.cleanupDone) {
                     if (cause && typeof cause === "string") {
@@ -2432,7 +2438,8 @@
                                 window[img.callbackname] = undefined; // to work with IE<9  // NOTE: that the undefined callback property-name still exists on the window object (for IE<9)
                                 try {
                                     delete window[img.callbackname];  // for all browser that support this
-                                } catch(ex) {}
+                                } catch (ex) {
+                                }
                                 if (img.script && img.script.parentNode) {
                                     img.script.setAttribute("src", "about:blank");  // try to cancel running request
                                     img.script.parentNode.removeChild(img.script);
@@ -2445,9 +2452,9 @@
                     }
 
                     // cancel any pending requests
-                    if(window.stop !== undefined) {
+                    if (window.stop !== undefined) {
                         window.stop();
-                    } else if(document.execCommand !== undefined) {
+                    } else if (document.execCommand !== undefined) {
                         document.execCommand("Stop", false);
                     }
                     if (document.close !== undefined) {
@@ -2460,7 +2467,7 @@
                 }
             },
 
-            renderingDone: function() {
+            renderingDone: function () {
                 if (timeoutTimer) {
                     window.clearTimeout(timeoutTimer);
                 }
@@ -2478,8 +2485,8 @@
 
         Util.log('html2canvas: Preload: Finding images');
         // load <img> images
-        for (i = 0; i < imgLen; i+=1){
-            methods.loadImage( domImages[i].getAttribute( "src" ) );
+        for (i = 0; i < imgLen; i += 1) {
+            methods.loadImage(domImages[i].getAttribute("src"));
         }
 
         images.firstRun = false;
@@ -2491,7 +2498,7 @@
         return methods;
     };
 
-    _html2canvas.Renderer = function(parseQueue, options){
+    _html2canvas.Renderer = function (parseQueue, options) {
 
         // http://www.w3.org/TR/CSS21/zindex.html
         function createRenderQueue(parseQueue) {
@@ -2500,6 +2507,7 @@
 
             rootContext = (function buildStackingContext(rootNode) {
                 var rootContext = {};
+
                 function insert(context, node, specialParent) {
                     var zi = (node.zIndex.zindex === 'auto') ? 0 : Number(node.zIndex.zindex),
                         contextForChildren = context, // the stacking context for children
@@ -2510,7 +2518,7 @@
 
                     if (node.zIndex.ownStacking) {
                         // '!' comes before numbers in sorted array
-                        contextForChildren = stub.context = { '!': [{node:node, children: []}]};
+                        contextForChildren = stub.context = {'!': [{node: node, children: []}]};
                         childrenDest = undefined;
                     } else if (isPositioned || isFloated) {
                         childrenDest = stub.children = [];
@@ -2519,27 +2527,30 @@
                     if (zi === 0 && specialParent) {
                         specialParent.push(stub);
                     } else {
-                        if (!context[zi]) { context[zi] = []; }
+                        if (!context[zi]) {
+                            context[zi] = [];
+                        }
                         context[zi].push(stub);
                     }
 
-                    node.zIndex.children.forEach(function(childNode) {
+                    node.zIndex.children.forEach(function (childNode) {
                         insert(contextForChildren, childNode, childrenDest);
                     });
                 }
+
                 insert(rootContext, rootNode);
                 return rootContext;
             })(parseQueue);
 
             function sortZ(context) {
-                Object.keys(context).sort().forEach(function(zi) {
+                Object.keys(context).sort().forEach(function (zi) {
                     var nonPositioned = [],
                         floated = [],
                         positioned = [],
                         list = [];
 
                     // positioned after static
-                    context[zi].forEach(function(v) {
+                    context[zi].forEach(function (v) {
                         if (v.node.zIndex.isPositioned || v.node.zIndex.opacity < 1) {
                             // http://www.w3.org/TR/css3-color/#transparency
                             // non-positioned element with opactiy < 1 should be stacked as if it were a positioned element with ��z-index: 0�� and ��opacity: 1��.
@@ -2552,13 +2563,15 @@
                     });
 
                     (function walk(arr) {
-                        arr.forEach(function(v) {
+                        arr.forEach(function (v) {
                             list.push(v);
-                            if (v.children) { walk(v.children); }
+                            if (v.children) {
+                                walk(v.children);
+                            }
                         });
                     })(nonPositioned.concat(floated, positioned));
 
-                    list.forEach(function(v) {
+                    list.forEach(function (v) {
                         if (v.context) {
                             sortZ(v.context);
                         } else {
@@ -2584,7 +2597,7 @@
                 throw new Error("Unknown renderer");
             }
 
-            if ( typeof renderer !== "function" ) {
+            if (typeof renderer !== "function") {
                 throw new Error("Invalid renderer defined");
             }
             return renderer;
@@ -2616,7 +2629,7 @@
             try {
                 ctx.drawImage(img, 0, 0);
                 canvas.toDataURL();
-            } catch(e) {
+            } catch (e) {
                 return false;
             }
             _html2canvas.Util.log('html2canvas: Parse: SVG powered rendering available');
@@ -2656,7 +2669,7 @@
             svgRendering: options.svgRendering && supportSVGRendering()
         };
     };
-    window.html2canvas = function(elements, opts) {
+    window.html2canvas = function (elements, opts) {
         elements = (elements.length) ? elements : [elements];
         var queue,
             canvas,
@@ -2690,44 +2703,44 @@
         options = _html2canvas.Util.Extend(opts, options);
 
         _html2canvas.logging = options.logging;
-        options.complete = function( images ) {
+        options.complete = function (images) {
 
             if (typeof options.onpreloaded === "function") {
-                if ( options.onpreloaded( images ) === false ) {
+                if (options.onpreloaded(images) === false) {
                     return;
                 }
             }
-            queue = _html2canvas.Parse( images, options );
+            queue = _html2canvas.Parse(images, options);
 
             if (typeof options.onparsed === "function") {
-                if ( options.onparsed( queue ) === false ) {
+                if (options.onparsed(queue) === false) {
                     return;
                 }
             }
 
-            canvas = _html2canvas.Renderer( queue, options );
+            canvas = _html2canvas.Renderer(queue, options);
 
             if (typeof options.onrendered === "function") {
-                options.onrendered( canvas );
+                options.onrendered(canvas);
             }
 
 
         };
 
         // for pages without images, we still want this to be async, i.e. return methods before executing
-        window.setTimeout( function(){
-            _html2canvas.Preload( options );
-        }, 0 );
+        window.setTimeout(function () {
+            _html2canvas.Preload(options);
+        }, 0);
 
         return {
-            render: function( queue, opts ) {
-                return _html2canvas.Renderer( queue, _html2canvas.Util.Extend(opts, options) );
+            render: function (queue, opts) {
+                return _html2canvas.Renderer(queue, _html2canvas.Util.Extend(opts, options));
             },
-            parse: function( images, opts ) {
-                return _html2canvas.Parse( images, _html2canvas.Util.Extend(opts, options) );
+            parse: function (images, opts) {
+                return _html2canvas.Parse(images, _html2canvas.Util.Extend(opts, options));
             },
-            preload: function( opts ) {
-                return _html2canvas.Preload( _html2canvas.Util.Extend(opts, options) );
+            preload: function (opts) {
+                return _html2canvas.Preload(_html2canvas.Util.Extend(opts, options));
             },
             log: _html2canvas.Util.log
         };
@@ -2737,7 +2750,7 @@
     window.html2canvas.Renderer = {
         Canvas: undefined // We are assuming this will be used
     };
-    _html2canvas.Renderer.Canvas = function(options) {
+    _html2canvas.Renderer.Canvas = function (options) {
         options = options || {};
 
         var doc = document,
@@ -2749,18 +2762,18 @@
 
         function createShape(ctx, args) {
             ctx.beginPath();
-            args.forEach(function(arg) {
+            args.forEach(function (arg) {
                 ctx[arg.name].apply(ctx, arg['arguments']);
             });
             ctx.closePath();
         }
 
         function safeImage(item) {
-            if (safeImages.indexOf(item['arguments'][0].src ) === -1) {
+            if (safeImages.indexOf(item['arguments'][0].src) === -1) {
                 testctx.drawImage(item['arguments'][0], 0, 0);
                 try {
                     testctx.getImageData(0, 0, 1, 1);
-                } catch(e) {
+                } catch (e) {
                     testCanvas = doc.createElement("canvas");
                     testctx = testCanvas.getContext("2d");
                     return false;
@@ -2771,18 +2784,17 @@
         }
 
         function renderItem(ctx, item) {
-            switch(item.type){
+            switch (item.type) {
                 case "variable":
                     ctx[item.name] = item['arguments'];
                     break;
                 case "function":
-                    switch(item.name) {
+                    switch (item.name) {
                         case "createPattern":
                             if (item['arguments'][0].width > 0 && item['arguments'][0].height > 0) {
                                 try {
                                     ctx.fillStyle = ctx.createPattern(item['arguments'][0], "repeat");
-                                }
-                                catch(e) {
+                                } catch (e) {
                                     Util.log("html2canvas: Renderer: Error creating pattern", e.message);
                                 }
                             }
@@ -2793,7 +2805,7 @@
                         case "drawImage":
                             if (item['arguments'][8] > 0 && item['arguments'][7] > 0) {
                                 if (!options.taintTest || (options.taintTest && safeImage(item))) {
-                                    ctx.drawImage.apply( ctx, item['arguments'] );
+                                    ctx.drawImage.apply(ctx, item['arguments']);
                                 }
                             }
                             break;
@@ -2804,14 +2816,14 @@
             }
         }
 
-        return function(parsedData, options, document, queue, _html2canvas) {
+        return function (parsedData, options, document, queue, _html2canvas) {
             var ctx = canvas.getContext("2d"),
                 newCanvas,
                 bounds,
                 fstyle,
                 zStack = parsedData.stack;
 
-            canvas.width = canvas.style.width =  options.width || zStack.ctx.width;
+            canvas.width = canvas.style.width = options.width || zStack.ctx.width;
             canvas.height = canvas.style.height = options.height || zStack.ctx.height;
 
             fstyle = ctx.fillStyle;
@@ -2819,7 +2831,7 @@
             ctx.fillRect(0, 0, canvas.width, canvas.height);
             ctx.fillStyle = fstyle;
 
-            queue.forEach(function(storageContext) {
+            queue.forEach(function (storageContext) {
                 // set common settings for canvas
                 ctx.textBaseline = "bottom";
                 ctx.save();
@@ -2830,14 +2842,14 @@
                     ctx.translate(-storageContext.transform.origin[0], -storageContext.transform.origin[1]);
                 }
 
-                if (storageContext.clip){
+                if (storageContext.clip) {
                     ctx.beginPath();
                     ctx.rect(storageContext.clip.left, storageContext.clip.top, storageContext.clip.width, storageContext.clip.height);
                     ctx.clip();
                 }
 
                 if (storageContext.ctx.storage) {
-                    storageContext.ctx.storage.forEach(function(item) {
+                    storageContext.ctx.storage.forEach(function (item) {
                         renderItem(ctx, item);
                     });
                 }
@@ -2865,4 +2877,4 @@
             return canvas;
         };
     };
-})(window,document);
+})(window, document);

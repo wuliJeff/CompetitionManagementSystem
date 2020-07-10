@@ -83,7 +83,7 @@
             <li><a href="../../index.jsp"><span class="glyphicon glyphicon-log-in"></span> 登录</a></li>
         </ul>
     </div>
-    <div class="attribution">Copyright &copy; 2020 陈欢成小组 </div>
+    <div class="attribution">Copyright &copy; 2020 陈欢成小组</div>
 </div><!--/.sidebar-->
 
 <div class="col-sm-9 col-sm-offset-3 col-lg-10 col-lg-offset-2 main">
@@ -159,110 +159,109 @@
 <script src="../../assets/js/bootstrap-datepicker.js"></script>
 <script src="../../assets/js/jquery.cookie.js"></script>
 <script>
-        function loan() {
-            var event  = $.cookie("event");
-            event = JSON.parse(event)
-            console.log(event)
+    function loan() {
+        var event = $.cookie("event");
+        event = JSON.parse(event)
+        console.log(event)
 
-            if (event.type=="1"){
-                $("#trOne").hide();
-                $("#trTow").show();
-            }else{
-                $("#trTow").hide();
-                $("#trOne").show();
-            }
-
-            $.ajax({
-                url: 'http://120.25.255.183:8088/Curriculum/Enlist/getCidEnlist/' + event.competitionId,
-                type: "GET",
-                headers: {
-                    "TOKEN": sessionStorage.getItem("TOKEN")
-                },
-                dataType: "json",
-                success: function (result) {
-                    if (result.code == 0) {
-                        for (var i = 0; i < result.data.length; i++)
-                        {
-                            var id=result.data[i].competitionId;
-                            if(event.type == "1"){
-                                var eventtype="团队赛";
-                                $("#myTable").append("<tr> " +
-                                    "<td>"+ event.competitionName +"</td>" +
-                                    "<td>"+  "无"+"</td>" +
-                                    "<td>"+ "无" +"</td>" +
-                                    "<td>"+  result.data[i].teamname +"</td>" +
-                                    "<td>"+ "无" +"</td>" +
-                                    "<td>"+ "无" +"</td>" +
-                                    "<td>"+ '<input type="text" name="competitionId" style="display: none" value="'+id+'">' +
-                                    // '<input type="text" name="competitionName" style="display: none" value="'+ result.data[i].competitionName+'">' +
-                                    '<input type="button" name="seachButton" value="详情" class="btn btn-info">'+ "</td>" +
-
-                                    "</tr>"
-                                )
-                            }else if (event.type == "0"){
-                                var eventtype="个人赛";
-                                $("#myTable").append("<tr> " +
-                                    "<td>"+ event.competitionName +"</td>" +
-                                    "<td>"+  "无"+"</td>" +
-                                    "<td>"+ "无" +"</td>" +
-                                    "<td>"+  result.data[i].userid +"</td>" +
-                                    "<td>"+ "无" +"</td>" +
-                                    "<td>"+ "无" +"</td>" +
-                                    "<td>"+ '<input type="text" name="competitionId" style="display: none" value="'+id+'">' +
-                                    // '<input type="text" name="competitionName" style="display: none" value="'+ result.data[i].competitionName+'">' +
-                                    '<input type="button" name="seachButton" value="详情" class="btn btn-info">'+ "</td>" +
-
-                                    "</tr>"
-                                )
-                            }
-                        }
-                    } else if (result.code == 404) {
-                    }
-                }
-            });
-
-            if (sessionStorage.getItem("username") != null) {
-                $("#loginSuccess").show()
-                $("#noLogin").hide()
-                $("#login").hide()
-                $(".logout").show()
-                $("#userName").html(sessionStorage.getItem("username"));
-            } else {
-                $("#loginSuccess").hide()
-                $("#noLogin").show()
-                $(".login").show()
-                $("#logout").hide()
-            }
-
+        if (event.type == "1") {
+            $("#trOne").hide();
+            $("#trTow").show();
+        } else {
+            $("#trTow").hide();
+            $("#trOne").show();
         }
 
-        window.onload = loan;
+        $.ajax({
+            url: 'http://120.25.255.183:8088/Curriculum/Enlist/getCidEnlist/' + event.competitionId,
+            type: "GET",
+            headers: {
+                "TOKEN": sessionStorage.getItem("TOKEN")
+            },
+            dataType: "json",
+            success: function (result) {
+                if (result.code == 0) {
+                    for (var i = 0; i < result.data.length; i++) {
+                        var id = result.data[i].competitionId;
+                        if (event.type == "1") {
+                            var eventtype = "团队赛";
+                            $("#myTable").append("<tr> " +
+                                "<td>" + event.competitionName + "</td>" +
+                                "<td>" + "无" + "</td>" +
+                                "<td>" + "无" + "</td>" +
+                                "<td>" + result.data[i].teamname + "</td>" +
+                                "<td>" + "无" + "</td>" +
+                                "<td>" + "无" + "</td>" +
+                                "<td>" + '<input type="text" name="competitionId" style="display: none" value="' + id + '">' +
+                                // '<input type="text" name="competitionName" style="display: none" value="'+ result.data[i].competitionName+'">' +
+                                '<input type="button" name="seachButton" value="详情" class="btn btn-info">' + "</td>" +
 
-        // 清除所有的cookie
-        function deleteCookie() {
-            var cookies = document.cookie.split(";");
+                                "</tr>"
+                            )
+                        } else if (event.type == "0") {
+                            var eventtype = "个人赛";
+                            $("#myTable").append("<tr> " +
+                                "<td>" + event.competitionName + "</td>" +
+                                "<td>" + "无" + "</td>" +
+                                "<td>" + "无" + "</td>" +
+                                "<td>" + result.data[i].userid + "</td>" +
+                                "<td>" + "无" + "</td>" +
+                                "<td>" + "无" + "</td>" +
+                                "<td>" + '<input type="text" name="competitionId" style="display: none" value="' + id + '">' +
+                                // '<input type="text" name="competitionName" style="display: none" value="'+ result.data[i].competitionName+'">' +
+                                '<input type="button" name="seachButton" value="详情" class="btn btn-info">' + "</td>" +
+
+                                "</tr>"
+                            )
+                        }
+                    }
+                } else if (result.code == 404) {
+                }
+            }
+        });
+
+        if (sessionStorage.getItem("username") != null) {
+            $("#loginSuccess").show()
+            $("#noLogin").hide()
+            $("#login").hide()
+            $(".logout").show()
+            $("#userName").html(sessionStorage.getItem("username"));
+        } else {
+            $("#loginSuccess").hide()
+            $("#noLogin").show()
+            $(".login").show()
+            $("#logout").hide()
+        }
+
+    }
+
+    window.onload = loan;
+
+    // 清除所有的cookie
+    function deleteCookie() {
+        var cookies = document.cookie.split(";");
+        for (var i = 0; i < cookies.length; i++) {
+            var cookie = cookies[i];
+            var eqPos = cookie.indexOf("=");
+            var name = eqPos > -1 ? cookie.substr(0, eqPos) : cookie;
+            document.cookie = name + "=;expires=Thu, 01 Jan 1970 00:00:00 GMT; path=/";
+        }
+        if (cookies.length > 0) {
             for (var i = 0; i < cookies.length; i++) {
                 var cookie = cookies[i];
                 var eqPos = cookie.indexOf("=");
                 var name = eqPos > -1 ? cookie.substr(0, eqPos) : cookie;
-                document.cookie = name + "=;expires=Thu, 01 Jan 1970 00:00:00 GMT; path=/";
-            }
-            if (cookies.length > 0) {
-                for (var i = 0; i < cookies.length; i++) {
-                    var cookie = cookies[i];
-                    var eqPos = cookie.indexOf("=");
-                    var name = eqPos > -1 ? cookie.substr(0, eqPos) : cookie;
-                    var domain = location.host.substr(location.host.indexOf('.'));
-                    document.cookie = name + "=;expires=Thu, 01 Jan 1970 00:00:00 GMT; path=/; domain=" + domain;
-                }
+                var domain = location.host.substr(location.host.indexOf('.'));
+                document.cookie = name + "=;expires=Thu, 01 Jan 1970 00:00:00 GMT; path=/; domain=" + domain;
             }
         }
+    }
 
-        $(".logout").click(function () {
-            sessionStorage.clear();
-            deleteCookie();
-            window.location.href = "../../index.jsp";
-        })
+    $(".logout").click(function () {
+        sessionStorage.clear();
+        deleteCookie();
+        window.location.href = "../../index.jsp";
+    })
 </script>
 
 </body>

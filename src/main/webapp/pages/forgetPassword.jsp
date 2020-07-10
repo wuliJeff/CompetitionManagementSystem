@@ -20,7 +20,7 @@
         <div class="login-panel panel panel-default">
             <div class="panel-heading"><b>忘记密码</b></div>
             <div class="panel-body">
-               <form id="resetInfo" <%-- action="../forgetPwd.do" --%>method="post">
+                <form id="resetInfo" <%-- action="../forgetPwd.do" --%>method="post">
                     <fieldset>
                         <div class="form-group">
                             <input type="text" class="form-control" id="account" name="account" placeholder="账号">
@@ -54,18 +54,18 @@
 <script>
     $("#submit").click(function () {
         $.ajax({
-            url:"http://120.25.255.183:8088/Curriculum/User/findUserPwd/"+$("#account").val(),
-            type:"GET",
-            data:{
-                password:$("#password").val(),
-                email:$("#email").val()
+            url: "http://120.25.255.183:8088/Curriculum/User/findUserPwd/" + $("#account").val(),
+            type: "GET",
+            data: {
+                password: $("#password").val(),
+                email: $("#email").val()
             },
-            dataType:"json",
-            success:function (result) {
-                if(result.code==0){
+            dataType: "json",
+            success: function (result) {
+                if (result.code == 0) {
                     alert("修改成功,请登录");
-                    window.location.href="../index.jsp";
-                }else if(result.code==404){
+                    window.location.href = "../index.jsp";
+                } else if (result.code == 404) {
                     alert("用户名或邮箱不正确")
                 }
 

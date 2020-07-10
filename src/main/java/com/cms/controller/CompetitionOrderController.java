@@ -12,7 +12,8 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
 public class CompetitionOrderController extends HttpServlet {
-    CompetitionOrderServiceImpl competitionOrderService = new CompetitionOrderServiceImpl();
+
+    private CompetitionOrderServiceImpl competitionOrderService = new CompetitionOrderServiceImpl();
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)

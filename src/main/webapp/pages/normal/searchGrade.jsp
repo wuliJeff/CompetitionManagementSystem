@@ -211,6 +211,7 @@
         }
 
     }
+
     window.onload = loan;
 
     // 清除所有的cookie

@@ -13,7 +13,7 @@
     <select id="selectGradeByCid" parameterType="String" resultType="com.cms.entity.Schedule">
         select * from Schedule where cid=#{cid} order by grade DESC;
     </select>
-    
+
     <!-- 获取一等奖人数 -->
     <select id="selectGradeA" resultType="int">
         select count(*) from Schedule where grade>=90;

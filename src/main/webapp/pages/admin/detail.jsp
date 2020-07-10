@@ -161,13 +161,13 @@
 <script src="../../assets/js/jquery.cookie.js"></script>
 <script>
     function loan() {
-        var event  = $.cookie("event");
+        var event = $.cookie("event");
         event = JSON.parse(event)
         console.log(event)
-        if (event.type=="1"){
-           $("#trOne").hide();
+        if (event.type == "1") {
+            $("#trOne").hide();
             $("#trTow").show();
-        }else{
+        } else {
             $("#trTow").hide();
             $("#trOne").show();
         }
@@ -181,36 +181,35 @@
             dataType: "json",
             success: function (result) {
                 if (result.code == 0) {
-                    for (var i = 0; i < result.data.length; i++)
-                    {
-                        var id=result.data[i].competitionId;
-                        if(event.type == "1"){
-                            var eventtype="团队赛";
+                    for (var i = 0; i < result.data.length; i++) {
+                        var id = result.data[i].competitionId;
+                        if (event.type == "1") {
+                            var eventtype = "团队赛";
                             $("#myTable").append("<tr> " +
-                                "<td>"+ event.competitionName +"</td>" +
-                                "<td>"+  "无"+"</td>" +
-                                "<td>"+ "无" +"</td>" +
-                                "<td>"+  result.data[i].teamname +"</td>" +
-                                "<td>"+ "无" +"</td>" +
-                                "<td>"+ "无" +"</td>" +
-                                "<td>"+ '<input type="text" name="competitionId" style="display: none" value="'+id+'">' +
+                                "<td>" + event.competitionName + "</td>" +
+                                "<td>" + "无" + "</td>" +
+                                "<td>" + "无" + "</td>" +
+                                "<td>" + result.data[i].teamname + "</td>" +
+                                "<td>" + "无" + "</td>" +
+                                "<td>" + "无" + "</td>" +
+                                "<td>" + '<input type="text" name="competitionId" style="display: none" value="' + id + '">' +
                                 // '<input type="text" name="competitionName" style="display: none" value="'+ result.data[i].competitionName+'">' +
-                                '<input type="button" name="seachButton" value="查看详情" class="btn-primary">'+ "</td>" +
+                                '<input type="button" name="seachButton" value="查看详情" class="btn-primary">' + "</td>" +
 
                                 "</tr>"
                             )
-                        }else if (event.type == "0"){
-                            var eventtype="个人赛";
+                        } else if (event.type == "0") {
+                            var eventtype = "个人赛";
                             $("#myTable").append("<tr> " +
-                                "<td>"+ event.competitionName +"</td>" +
-                                "<td>"+  "无"+"</td>" +
-                                "<td>"+ "无" +"</td>" +
-                                "<td>"+  result.data[i].userid +"</td>" +
-                                "<td>"+ "无" +"</td>" +
-                                "<td>"+ "无" +"</td>" +
-                                "<td>"+ '<input type="text" name="competitionId" style="display: none" value="'+id+'">' +
+                                "<td>" + event.competitionName + "</td>" +
+                                "<td>" + "无" + "</td>" +
+                                "<td>" + "无" + "</td>" +
+                                "<td>" + result.data[i].userid + "</td>" +
+                                "<td>" + "无" + "</td>" +
+                                "<td>" + "无" + "</td>" +
+                                "<td>" + '<input type="text" name="competitionId" style="display: none" value="' + id + '">' +
                                 // '<input type="text" name="competitionName" style="display: none" value="'+ result.data[i].competitionName+'">' +
-                                '<input type="button" name="seachButton" value="详情" class="btn btn-primary">'+ "</td>" +
+                                '<input type="button" name="seachButton" value="详情" class="btn btn-primary">' + "</td>" +
 
                                 "</tr>"
                             )

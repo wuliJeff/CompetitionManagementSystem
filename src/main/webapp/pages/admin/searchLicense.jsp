@@ -85,7 +85,7 @@
             <li><a href="../../index.jsp"><span class="glyphicon glyphicon-log-in"></span> 登录</a></li>
         </ul>
     </div>
-    <div class="attribution">Copyright &copy; 2020 陈欢成小组 </div>
+    <div class="attribution">Copyright &copy; 2020 陈欢成小组</div>
 </div><!--/.sidebar-->
 
 <div class="col-sm-9 col-sm-offset-3 col-lg-10 col-lg-offset-2 main">
@@ -147,6 +147,7 @@
         }
 
     }
+
     window.onload = loan;
 
     // 清除所有的cookie

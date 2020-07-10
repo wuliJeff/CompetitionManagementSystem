@@ -110,6 +110,7 @@
                     <!--style给定宽度可以影响编辑器的最终宽度-->
                     <script type="text/plain" id="editor" style="width: 100%; height: 400px;">
                         <p>这里我可以写一些输入提示</p>
+
                     </script>
                     <!-- 实例化编辑器 -->
                     <script type="text/javascript">

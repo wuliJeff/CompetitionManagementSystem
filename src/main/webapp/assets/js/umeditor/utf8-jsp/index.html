@@ -11,10 +11,11 @@
     <script type="text/javascript" charset="utf-8" src="umeditor.min.js"></script>
     <script type="text/javascript" src="lang/zh-cn/zh-cn.js"></script>
     <style type="text/css">
-        h1{
+        h1 {
             font-family: "微软雅黑";
             font-weight: normal;
         }
+
         .btn {
             display: inline-block;
             *display: inline;
@@ -116,6 +117,7 @@
 <!--style给定宽度可以影响编辑器的最终宽度-->
 <script type="text/plain" id="myEditor" style="width:1000px;height:240px;">
     <p>这里我可以写一些输入提示</p>
+
 </script>
 
 
@@ -158,8 +160,10 @@
 <table>
     <tr>
         <td>
-            <button class="btn" onclick="createEditor()"/>创建编辑器</button>
-            <button class="btn" onclick="deleteEditor()"/>删除编辑器</button>
+            <button class="btn" onclick="createEditor()"/>
+            创建编辑器</button>
+            <button class="btn" onclick="deleteEditor()"/>
+            删除编辑器</button>
         </td>
     </tr>
 </table>
@@ -170,30 +174,36 @@
 <script type="text/javascript">
     //实例化编辑器
     var um = UM.getEditor('myEditor');
-    um.addListener('blur',function(){
+    um.addListener('blur', function () {
         $('#focush2').html('编辑器失去焦点了')
     });
-    um.addListener('focus',function(){
+    um.addListener('focus', function () {
         $('#focush2').html('')
     });
+
     //按钮的操作
     function insertHtml() {
         var value = prompt('插入html代码', '');
         um.execCommand('insertHtml', value)
     }
-    function isFocus(){
+
+    function isFocus() {
         alert(um.isFocus())
     }
-    function doBlur(){
+
+    function doBlur() {
         um.blur()
     }
+
     function createEditor() {
         enableBtn();
         um = UM.getEditor('myEditor');
     }
+
     function getAllHtml() {
         alert(UM.getEditor('myEditor').getAllHtml())
     }
+
     function getContent() {
         var arr = [];
         arr.push("使用editor.getContent()方法可以获得编辑器的内容");
@@ -201,6 +211,7 @@
         arr.push(UM.getEditor('myEditor').getContent());
         alert(arr.join("\n"));
     }
+
     function getPlainTxt() {
         var arr = [];
         arr.push("使用editor.getPlainTxt()方法可以获得编辑器的带格式的纯文本内容");
@@ -208,12 +219,14 @@
         arr.push(UM.getEditor('myEditor').getPlainTxt());
         alert(arr.join('\n'))
     }
+
     function setContent(isAppendTo) {
         var arr = [];
         arr.push("使用editor.setContent('欢迎使用umeditor')方法可以设置编辑器的内容");
         UM.getEditor('myEditor').setContent('欢迎使用umeditor', isAppendTo);
         alert(arr.join("\n"));
     }
+
     function setDisabled() {
         UM.getEditor('myEditor').setDisabled('fullscreen');
         disableBtn("enable");
@@ -239,6 +252,7 @@
         arr.push(UM.getEditor('myEditor').getContentTxt());
         alert(arr.join("\n"));
     }
+
     function hasContent() {
         var arr = [];
         arr.push("使用editor.hasContents()方法判断编辑器里是否有内容");
@@ -246,13 +260,16 @@
         arr.push(UM.getEditor('myEditor').hasContents());
         alert(arr.join("\n"));
     }
+
     function setFocus() {
         UM.getEditor('myEditor').focus();
     }
+
     function deleteEditor() {
         disableBtn();
         UM.getEditor('myEditor').destroy();
     }
+
     function disableBtn(str) {
         var div = document.getElementById('btns');
         var btns = domUtils.getElementsByTagName(div, "button");
@@ -264,6 +281,7 @@
             }
         }
     }
+
     function enableBtn() {
         var div = document.getElementById('btns');
         var btns = domUtils.getElementsByTagName(div, "button");

@@ -14,7 +14,8 @@
             overflow: hidden;
         }
     </style>
-    <script type="text/javascript" src="http://api.map.baidu.com/api?key=&v=2.0&ak=6b6c1a67eaa7db1ca6d6da28e590e343&services=true"></script>
+    <script type="text/javascript"
+            src="http://api.map.baidu.com/api?key=&v=2.0&ak=6b6c1a67eaa7db1ca6d6da28e590e343&services=true"></script>
 </head>
 
 <body onload="initMap();">
@@ -25,6 +26,7 @@
     function getParam(name) {
         return location.href.match(new RegExp('[?#&]' + name + '=([^?#&]+)', 'i')) ? RegExp.$1 : '';
     }
+
     var map, marker;
     var centerParam = getParam('center');
     var zoomParam = getParam('zoom');
@@ -57,7 +59,7 @@
         marker.enableDragging();
         map.addOverlay(marker); // 将标注添加到地图中
 
-        if(iframe && UM && editor) { //在编辑状态下
+        if (iframe && UM && editor) { //在编辑状态下
             setMapListener();//地图改变修改外层的iframe标签src属性
         } else {
             document.focus();
@@ -105,17 +107,14 @@
                 center = map.getCenter(),
                 marker = window.marker.P;
 
-            iframe.src = iframe.src.
-                replace(new RegExp('([?#&])center=([^?#&]+)', 'i'), '$1center=' + center.lng + ',' + center.lat).
-                replace(new RegExp('([?#&])markers=([^?#&]+)', 'i'), '$1markers=' + marker.lng + ',' + marker.lat).
-                replace(new RegExp('([?#&])zoom=([^?#&]+)', 'i'), '$1zoom=' + zoom);
+            iframe.src = iframe.src.replace(new RegExp('([?#&])center=([^?#&]+)', 'i'), '$1center=' + center.lng + ',' + center.lat).replace(new RegExp('([?#&])markers=([^?#&]+)', 'i'), '$1markers=' + marker.lng + ',' + marker.lat).replace(new RegExp('([?#&])zoom=([^?#&]+)', 'i'), '$1zoom=' + zoom);
             editor.fireEvent('saveScene');
             saveScene(editor);
         }
 
-        function saveScene(){
-            if(!timer) {
-                timer = setTimeout(function(){
+        function saveScene() {
+            if (!timer) {
+                timer = setTimeout(function () {
                     editor.fireEvent('savescene');
                     editor.fireEvent('contentchange');
                     timer = null;
@@ -124,7 +123,7 @@
         }
     }
 
-    function getSelfIframe(){
+    function getSelfIframe() {
         var iframes = parent.document.getElementsByTagName('iframe');
         for (var key in iframes) {
             if (iframes[key].contentWindow == window) {
@@ -134,10 +133,10 @@
         return null;
     }
 
-    function getEditor(){
+    function getEditor() {
         var parentNode = iframe.parentNode;
         while (parentNode && parentNode.tagName && parentNode.tagName.toLowerCase() != 'body') {
-            if (parentNode.className && parentNode.className.indexOf('edui-body-container')!=-1) {
+            if (parentNode.className && parentNode.className.indexOf('edui-body-container') != -1) {
                 return UM.getEditor(parentNode.id);
             }
             parentNode = parentNode.parentNode;

@@ -14,7 +14,7 @@ import java.io.IOException;
 @WebServlet(name = "ScheduleController")
 public class ScheduleController extends HttpServlet {
 
-    ScheduleServiceImpl scheduleService = new ScheduleServiceImpl();
+    private ScheduleServiceImpl scheduleService = new ScheduleServiceImpl();
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String requestURI = request.getRequestURI();

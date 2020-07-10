@@ -78,7 +78,7 @@
             <li><a href="../../index.jsp"><span class="glyphicon glyphicon-log-in"></span> 登录</a></li>
         </ul>
     </div>
-    <div class="attribution">Copyright &copy; 2020 陈欢成小组 </div>
+    <div class="attribution">Copyright &copy; 2020 陈欢成小组</div>
 </div><!--/.sidebar-->
 
 <div class="col-sm-9 col-sm-offset-3 col-lg-10 col-lg-offset-2 main">
@@ -91,7 +91,8 @@
 
     <div class="row">
         <div class="col-lg-12">
-            <div id="competitionName" style="text-align: center; margin-top: 2%; margin-bottom: 0;"><h3><b>某某竞赛成绩分布情况</b></h3></div>
+            <div id="competitionName" style="text-align: center; margin-top: 2%; margin-bottom: 0;"><h3>
+                <b>某某竞赛成绩分布情况</b></h3></div>
             <div id="ringGraphic" style="width: 100%; height: 600px; margin: 0;"></div>
         </div>
     </div><!--/.row-->
@@ -107,7 +108,7 @@
 <script src="../../assets/js/jquery.cookie.js"></script>
 
 <!-- 环形图 -->
-<script type="text/javascript" src="http://echarts.baidu.com/gallery/vendors/echarts/echarts.min.js"></script>
+<script type="text/javascript" src="../../assets/js/echarts.min.js"></script>
 <script type="text/javascript">
     var dom = document.getElementById("ringGraphic");
     var myChart = echarts.init(dom);
@@ -120,7 +121,7 @@
             trigger: 'item',
             formatter: "{a} <br/>{b}: {c} ({d}%)"
         },
-        color:['#93D8A9','#FFB99D','#AF7DCC','#FFD83D','#bbe2e8'],
+        color: ['#93D8A9', '#FFB99D', '#AF7DCC', '#FFD83D', '#bbe2e8'],
         legend: {
             orient: 'vertical',
             x: '1000px',
@@ -173,7 +174,7 @@
             ]
         }]
     };
-    if(option && typeof option === "object") {
+    if (option && typeof option === "object") {
         myChart.setOption(option, true);
     }
 </script>
@@ -211,6 +212,7 @@
         }
 
     }
+
     window.onload = loan;
 
     // 清除所有的cookie
@@ -238,7 +240,6 @@
         deleteCookie();
         window.location.href = "../../index.jsp";
     })
-
 
 
     $('#calendar').datepicker({});

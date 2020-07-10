@@ -72,10 +72,10 @@
                     sessionStorage.setItem('userid', result.userid);
                     sessionStorage.setItem('type', result.type);
                     sessionStorage.setItem('TOKEN', result.data);
-                    if (result.type=="1"){
+                    if (result.type == "1") {
                         alert("登录成功");
                         window.location.href = "pages/admin/default.jsp";
-                    }else{
+                    } else {
                         alert("登录成功");
                         window.location.href = "pages/normal/default.jsp";
                     }

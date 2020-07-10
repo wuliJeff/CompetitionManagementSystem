@@ -15,7 +15,7 @@ import java.io.IOException;
 @WebServlet(name = "PlaceController")
 public class PlaceController extends HttpServlet {
 
-    PlaceServiceImpl placeService = new PlaceServiceImpl();
+    private PlaceServiceImpl placeService = new PlaceServiceImpl();
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String requestURI = request.getRequestURI();

@@ -193,14 +193,14 @@
         }
 
     }
+
     window.onload = loan;
 
     $(".logout").click(function () {
         sessionStorage.clear();
         $.cookie().clear();
-        window.location.href="../index.jsp";
+        window.location.href = "../index.jsp";
     })
-
 
 
     $('#calendar').datepicker({});

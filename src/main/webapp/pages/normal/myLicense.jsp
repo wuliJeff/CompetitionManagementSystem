@@ -96,7 +96,8 @@
 
     <div class="row">
         <div class="col-lg-12">
-            <div id="myLicense" class="row" style="margin-top: 2%;width: 90%; margin-left: 2%; background-color: #ffffff;">
+            <div id="myLicense" class="row"
+                 style="margin-top: 2%;width: 90%; margin-left: 2%; background-color: #ffffff;">
                 <table class="table" id="myTable"
                        style=" margin-bottom: 0; width: 100%; font-size: 16px;">
                     <tr>
@@ -211,7 +212,9 @@
         }
 
     }
+
     window.onload = loan;
+
     // 清除所有的cookie
     function deleteCookie() {
         var cookies = document.cookie.split(";");
@@ -260,7 +263,7 @@
                         //方向默认竖直，尺寸ponits，格式a4[595.28,841.89]
                         var doc = new jsPDF('', 'pt', 'a4');
                         //addImage后两个参数控制添加图片的尺寸，此处将页面高度按照a4纸宽高比列进行压缩
-                        doc.addImage(imgData, 'JPEG', 20, 70, 555.28, 592.28/canvas.width * canvas.height );
+                        doc.addImage(imgData, 'JPEG', 20, 70, 555.28, 592.28 / canvas.width * canvas.height);
                         //根据下载保存成不同的文件名
                         doc.save('参赛证.pdf');
                     };

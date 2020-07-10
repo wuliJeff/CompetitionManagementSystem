@@ -36,7 +36,7 @@
                 formula = me.sourceData.formula,
                 lang = _editor.getLang('formula').static,
                 formulaUrl = UMEDITOR_CONFIG.UMEDITOR_HOME_URL + 'dialogs/formula/',
-                options = $.extend({}, lang, { 'formula_url': formulaUrl }),
+                options = $.extend({}, lang, {'formula_url': formulaUrl}),
                 $root = me.root();
 
             if (me.inited) {
@@ -58,11 +58,13 @@
                 var contentHtml = [];
                 $.each(v, function (i, f) {
                     contentHtml.push('<li class="edui-formula-latex-item" data-latex="' + f + '" style="background-position:-' + (xMax * 30) + 'px -' + (yMax * 30) + 'px"></li>');
-                    if (++xMax >=8) {
-                        ++yMax; xMax = 0;
+                    if (++xMax >= 8) {
+                        ++yMax;
+                        xMax = 0;
                     }
                 });
-                yMax++; xMax = 0;
+                yMax++;
+                xMax = 0;
                 $tabContent.append('<div class="edui-tab-pane"><ul>' + contentHtml.join('') + '</ul>');
                 headHtml.push('<li class="edui-tab-item"><a href="javascript:void(0);" class="edui-tab-text">' + lang['lang_tab_' + k] + '</a></li>');
             });
@@ -99,10 +101,10 @@
                 return false;
             });
         },
-        switchTab:function(index){
+        switchTab: function (index) {
             var me = this,
                 $root = me.root(),
-                index = $.isNumeric(index) ? index:$.inArray(index, $root.find('.edui-tab-nav .edui-tab-item'));
+                index = $.isNumeric(index) ? index : $.inArray(index, $root.find('.edui-tab-nav .edui-tab-item'));
 
             $root.find('.edui-tab-nav .edui-tab-item').removeClass('edui-active').eq(index).addClass('edui-active');
             $root.find('.edui-tab-content .edui-tab-pane').removeClass('edui-active').eq(index).addClass('edui-active');
@@ -114,7 +116,7 @@
             this.$widget.height(this.root() + 2);
         },
         insertLatex: function (latex) {
-            editor.execCommand('formula', latex );
+            editor.execCommand('formula', latex);
         },
         width: 350,
         height: 400

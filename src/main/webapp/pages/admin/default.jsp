@@ -82,7 +82,7 @@
             <li><a href="../../index.jsp"><span class="glyphicon glyphicon-log-in"></span> 登录</a></li>
         </ul>
     </div>
-    <div class="attribution">Copyright &copy; 2020 陈欢成小组 </div>
+    <div class="attribution">Copyright &copy; 2020 陈欢成小组</div>
 </div><!--/.sidebar-->
 
 <div class="col-sm-9 col-sm-offset-3 col-lg-10 col-lg-offset-2 main">
@@ -97,13 +97,14 @@
             <div class="row">
                 <div class="col-lg-12" style="margin-top: 2%;">
 
-                        <div class="input-group">
-                            <input type="text" name="competitionNameSearch" id="competitionNameSearch" class="form-control input-group-sm" style="width: auto;"
-                                   placeholder="参赛者id"/>
-                            <button id="search" type="submit" name="search" class="btn btn-primary btn-outline-primary">
-                                <span class="glyphicon glyphicon-search"></span> 查询
-                            </button>
-                        </div>
+                    <div class="input-group">
+                        <input type="text" name="competitionNameSearch" id="competitionNameSearch"
+                               class="form-control input-group-sm" style="width: auto;"
+                               placeholder="参赛者id"/>
+                        <button id="search" type="submit" name="search" class="btn btn-primary btn-outline-primary">
+                            <span class="glyphicon glyphicon-search"></span> 查询
+                        </button>
+                    </div>
 
 
                     <table class="table" id="myTable"
@@ -186,27 +187,26 @@
                     $.cookie("eventList", result.data)
                     console.log(result.data)
 
-                    for (var i = 0; i < result.data.length; i++)
-                    {
-                        var id=result.data[i].competitionId;
-                        if(result.data[i].type=="1"){
-                            var eventType="团队赛";
-                        }else{
-                            var eventType="个人赛";
+                    for (var i = 0; i < result.data.length; i++) {
+                        var id = result.data[i].competitionId;
+                        if (result.data[i].type == "1") {
+                            var eventType = "团队赛";
+                        } else {
+                            var eventType = "个人赛";
                         }
                         $("#myTable").append("<tr> " +
-                            "<td>"+ result.data[i].competitionName+"</td>" +
-                            "<td>"+ eventType +"</td>" +
-                            "<td>"+ result.data[i].num +"</td>" +
-                            "<td>"+  result.data[i].duration +"</td>" +
-                            "<td>"+ result.data[i].startCompetition +"</td>" +
-                            "<td>"+ result.data[i].endCompetition +"</td>" +
-                            "<td>"+ '<input type="text" name="competitionId" style="display: none" value="'+id+'">' +
-                            '<input type="text" name="competitionName" style="display: none" value="'+ result.data[i].competitionName+'">' +
-                            '<input type="button" name="seachButton" value="详情" class="btn btn-info">'+ "</td>" +
+                            "<td>" + result.data[i].competitionName + "</td>" +
+                            "<td>" + eventType + "</td>" +
+                            "<td>" + result.data[i].num + "</td>" +
+                            "<td>" + result.data[i].duration + "</td>" +
+                            "<td>" + result.data[i].startCompetition + "</td>" +
+                            "<td>" + result.data[i].endCompetition + "</td>" +
+                            "<td>" + '<input type="text" name="competitionId" style="display: none" value="' + id + '">' +
+                            '<input type="text" name="competitionName" style="display: none" value="' + result.data[i].competitionName + '">' +
+                            '<input type="button" name="seachButton" value="详情" class="btn btn-info">' + "</td>" +
 
                             "</tr>"
-                    )
+                        )
                     }
                 } else if (result.code == 404) {
                 }
@@ -216,6 +216,7 @@
 
         return false;
     }
+
     // 清除所有的cookie
     function deleteCookie() {
         var cookies = document.cookie.split(";");
@@ -225,8 +226,7 @@
             var name = eqPos > -1 ? cookie.substr(0, eqPos) : cookie;
             document.cookie = name + "=;expires=Thu, 01 Jan 1970 00:00:00 GMT; path=/";
         }
-        if(cookies.length > 0)
-        {
+        if (cookies.length > 0) {
             for (var i = 0; i < cookies.length; i++) {
                 var cookie = cookies[i];
                 var eqPos = cookie.indexOf("=");
@@ -258,44 +258,43 @@
                 if (result.code == 0) {
                     $.cookie("eventList", result.data)
                     console.log(result.data)
-                    for (var i = 0; i < result.data.length; i++)
-                    {
-                        var id=result.data[i].competitionId;
-                        if(result.data[i].type=="1"){
-                            var eventType="团队赛";
-                        }else{
-                            var eventType="个人赛";
+                    for (var i = 0; i < result.data.length; i++) {
+                        var id = result.data[i].competitionId;
+                        if (result.data[i].type == "1") {
+                            var eventType = "团队赛";
+                        } else {
+                            var eventType = "个人赛";
                         }
 
                         $("#myTable").append("<tr> " +
-                            "<td>"+ result.data[i].competitionName+"</td>" +
-                            "<td>"+ eventType +"</td>" +
-                            "<td>"+ result.data[i].num +"</td>" +
-                            "<td>"+  result.data[i].duration +"</td>" +
-                            "<td>"+ result.data[i].startCompetition +"</td>" +
-                            "<td>"+ result.data[i].endCompetition +"</td>" +
-                            "<td>"+ '<input type="text" name="competitionId" style="display: none" value="'+id+'">' +
-                            '<input type="text" name="competitionName" style="display: none" value="'+ result.data[i].competitionName+'">' +
-                            '<input type="button" name="seachButton" value="查看详情" class="btn-primary">'+ "</td>" +
+                            "<td>" + result.data[i].competitionName + "</td>" +
+                            "<td>" + eventType + "</td>" +
+                            "<td>" + result.data[i].num + "</td>" +
+                            "<td>" + result.data[i].duration + "</td>" +
+                            "<td>" + result.data[i].startCompetition + "</td>" +
+                            "<td>" + result.data[i].endCompetition + "</td>" +
+                            "<td>" + '<input type="text" name="competitionId" style="display: none" value="' + id + '">' +
+                            '<input type="text" name="competitionName" style="display: none" value="' + result.data[i].competitionName + '">' +
+                            '<input type="button" name="seachButton" value="查看详情" class="btn-primary">' + "</td>" +
 
                             "</tr>"
                         )
                     }
                 } else if (result.code == 404) {
                 }
-console.log($("#competitionNameSearch").val())
+                console.log($("#competitionNameSearch").val())
             }
         })
     });
 
 
     //查看单个竞赛
-    $("#myTable").on("click", "input[name='seachButton']", function() {
-        var name=$(this).parent().parent().find("input[name='competitionName']").val();
-        var id=$(this).parent().parent().find("input[name='competitionId']").val();
+    $("#myTable").on("click", "input[name='seachButton']", function () {
+        var name = $(this).parent().parent().find("input[name='competitionName']").val();
+        var id = $(this).parent().parent().find("input[name='competitionId']").val();
 
         $.ajax({
-            url: 'http://120.25.255.183:8088/Curriculum/Competition/findCompetition/'+id,
+            url: 'http://120.25.255.183:8088/Curriculum/Competition/findCompetition/' + id,
             type: "get",
             headers: {
                 "TOKEN": $.cookie("TOKEN")
@@ -304,7 +303,7 @@ console.log($("#competitionNameSearch").val())
             success: function (result) {
                 if (result.code == 1001) {
                     $.cookie("event", JSON.stringify(result.data[0]))
-                    window.location.href="detail.jsp";
+                    window.location.href = "detail.jsp";
                 }
             },
             error: function () {
