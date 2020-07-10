@@ -10,8 +10,8 @@ import org.apache.ibatis.session.SqlSession;
 import org.junit.Test;
 
 public class CompetitionOrderServiceImpl implements CompetitorOrderService {
+
     private String msg = null;
-    private boolean flag = false;
     private SqlSession session;
 
     public CompetitionOrderServiceImpl() {
@@ -20,21 +20,18 @@ public class CompetitionOrderServiceImpl implements CompetitorOrderService {
 
     @Override
     public JSONArray insertNewOrder(CompetitionOrder newOrder) {
-        Boolean flag = false;
         if (isExistOrder(newOrder.getOid())) {
-            msg="该竞赛已存在";
-            return JsonUtil.returnStatus(flag, msg);
+            msg = "赛场秩序册已存在";
+            return JsonUtil.returnStatus(false, msg);
         } else {
             int oid = session.getMapper(ICompetitionOrderDao.class).insertNewOrder(newOrder);
             System.out.println(oid);
             if (oid >= 0) {
-                flag=true;
-                msg="添加竞赛成功";
-                return JsonUtil.returnStatus(flag, msg);
+                msg = "添加赛场秩序册成功";
+                return JsonUtil.returnStatus(true, msg);
             } else {
-                flag=false;
-                msg="添加竞赛失败";
-                return JsonUtil.returnStatus(flag, msg);
+                msg = "添加赛场秩序册失败";
+                return JsonUtil.returnStatus(false, msg);
             }
         }
     }
@@ -63,12 +60,10 @@ public class CompetitionOrderServiceImpl implements CompetitorOrderService {
         order.setTitle("第十二届蓝桥杯大赛");
         order.setDetail("软件与信息安全学院");
         System.out.println(insertNewOrder(order));
-
     }
 
     @Test
     public void testGetOrderByid() {
-
-        System.out.println( getOrderById("1"));
+        System.out.println(getOrderById("1"));
     }
 }

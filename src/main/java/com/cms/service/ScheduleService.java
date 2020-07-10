@@ -1,8 +1,7 @@
 package com.cms.service;
 
-import com.cms.entity.Schedule;
+import net.sf.json.JSONArray;
 
-import java.util.List;
 
 public interface ScheduleService {
 
@@ -10,17 +9,17 @@ public interface ScheduleService {
      * 根据参赛者ID查询成绩
      *
      * @param competitorId:参赛者成绩
-     * @return List<Schedule>当前查询的用户的所有竞赛成绩
+     * @return 当前查询的用户的所有竞赛成绩
      */
-    public List<Schedule> selectGradeByCompetitorId(String competitorId);
+    public JSONArray selectGradeByCompetitorId(String competitorId);
 
     /**
      * 根据竞赛ID查询成绩
      *
      * @param cid: 某次竞赛所有成绩
-     * @return List<Schedule>当前查询的竞赛所有参赛者成绩
+     * @return 当前查询的竞赛所有参赛者成绩
      */
-    public List<Schedule> selectGradeByCid(String cid);
+    public JSONArray selectGradeByCid(String cid);
 
     /**
      * 获取一等奖人数
@@ -49,4 +48,11 @@ public interface ScheduleService {
      * @return 人数
      */
     public int selectGradeD();
+
+    /**
+     * 获取各个等级的人数
+     *
+     * @return
+     */
+    public JSONArray getAllLevelCount();
 }

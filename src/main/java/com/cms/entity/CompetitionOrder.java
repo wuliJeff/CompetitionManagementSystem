@@ -6,14 +6,14 @@ public class CompetitionOrder {
     private String title;  //标题
     private String detail;  //详情
 
+    public CompetitionOrder() {
+    }
+
     public CompetitionOrder(String oid, String cid, String title, String detail) {
         this.oid = oid;
         this.cid = cid;
         this.title = title;
         this.detail = detail;
-    }
-
-    public CompetitionOrder() {
     }
 
     public String getOid() {

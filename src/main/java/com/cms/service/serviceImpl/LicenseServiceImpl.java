@@ -3,12 +3,15 @@ package com.cms.service.serviceImpl;
 import com.cms.dao.ILicenseDao;
 import com.cms.entity.License;
 import com.cms.service.LicenseService;
+import com.cms.util.JsonUtil;
 import com.cms.util.MapperConfig;
+import net.sf.json.JSONArray;
 import org.apache.ibatis.session.SqlSession;
 import org.junit.Test;
 
 public class LicenseServiceImpl implements LicenseService {
 
+    private String msg = null;
     private SqlSession session;
 
     public LicenseServiceImpl() {
@@ -16,18 +19,21 @@ public class LicenseServiceImpl implements LicenseService {
     }
 
     @Override
-    public boolean insertLicense(License license) {
+    public JSONArray insertLicense(License license) {
         /**
          * 存在参赛证则不重复插入
          */
         if (isExistLicense(license)) {
-            return false;
+            msg = "参赛证已存在";
+            return JsonUtil.returnStatus(false, msg);
         } else {
             int competitorId = session.getMapper(ILicenseDao.class).insertLicense(license);
             if (competitorId >= 0) {
-                return true;
+                msg = "参赛证添加成功";
+                return JsonUtil.returnStatus(true, msg);
             } else {
-                return false;
+                msg = "参赛证添加失败";
+                return JsonUtil.returnStatus(false, msg);
             }
         }
     }
@@ -42,9 +48,9 @@ public class LicenseServiceImpl implements LicenseService {
     }
 
     @Override
-    public License getLicenseById(String competitorId) {
+    public JSONArray getLicenseById(String competitorId) {
         License license = session.getMapper(ILicenseDao.class).getLicenseById(competitorId);
-        return license;
+        return JSONArray.fromObject(license);
     }
 
     @Test
@@ -58,17 +64,11 @@ public class LicenseServiceImpl implements LicenseService {
         license.setCname("程序设计竞赛");
         license.setPid("1");
         license.setOid("1");
-        boolean isInsertOK = insertLicense(license);
-        System.out.println(isInsertOK);
+        System.out.println(insertLicense(license));
     }
 
     @Test
     public void testGetLicenseById() {
-        License license = getLicenseById("1");
-        if (license != null) {
-            System.out.println(license.toString());
-        } else {
-            System.out.println("null");
-        }
+        System.out.println(getLicenseById("1"));
     }
 }

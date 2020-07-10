@@ -7,6 +7,17 @@ public class Schedule {
     private String seat;  //座位号
     private float grade;  //成绩
 
+    public Schedule() {
+    }
+
+    public Schedule(String cid, String competitorId, String pid, String seat, float grade) {
+        this.cid = cid;
+        this.competitorId = competitorId;
+        this.pid = pid;
+        this.seat = seat;
+        this.grade = grade;
+    }
+
     public String getCid() {
         return cid;
     }

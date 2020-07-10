@@ -12,13 +12,14 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
 public class CompetitionOrderController extends HttpServlet {
-    CompetitionOrderServiceImpl competitionOrderService=new CompetitionOrderServiceImpl();
+    CompetitionOrderServiceImpl competitionOrderService = new CompetitionOrderServiceImpl();
+
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         String requestURI = request.getRequestURI();
         String data = (String) request.getAttribute("data");
-        JSONObject jsb = JSONObject.fromObject(data);// 鑾峰彇璇锋眰涓殑json鍙傛暟
+        JSONObject jsb = JSONObject.fromObject(data);
         if (requestURI.equals("/CompetitionManagementSystem/CompetitionOrder/getOrderById")) {
             String oid = null;
             String cid = null;
@@ -31,7 +32,7 @@ public class CompetitionOrderController extends HttpServlet {
             String cid = jsb.getString("cid");
             String title = jsb.getString("title");
             String detail = jsb.getString("detail");
-            CompetitionOrder competitionOrder = new CompetitionOrder(oid, cid,title, detail);
+            CompetitionOrder competitionOrder = new CompetitionOrder(oid, cid, title, detail);
             JsonUtil.returnJson(competitionOrderService.insertNewOrder(competitionOrder), request, response);
         }
 

@@ -1,6 +1,7 @@
 package com.cms.service;
 
 import com.cms.entity.License;
+import net.sf.json.JSONArray;
 
 public interface LicenseService {
 
@@ -10,7 +11,7 @@ public interface LicenseService {
      * @param license
      * @return
      */
-    public boolean insertLicense(License license);
+    public JSONArray insertLicense(License license);
 
     /**
      * 查找是否已存在参赛证，避免重复插入
@@ -25,5 +26,5 @@ public interface LicenseService {
      *
      * @return License对象
      */
-    public License getLicenseById(String competitorId);
+    public JSONArray getLicenseById(String competitorId);
 }

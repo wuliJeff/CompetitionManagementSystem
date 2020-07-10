@@ -10,6 +10,20 @@ public class License {
     private String pid; //赛场id
     private String oid; //赛场秩序册id
 
+    public License() {
+    }
+
+    public License(String competitorId, String name, String teamName, String school, String cid, String cname, String pid, String oid) {
+        this.competitorId = competitorId;
+        this.name = name;
+        this.teamName = teamName;
+        this.school = school;
+        this.cid = cid;
+        this.cname = cname;
+        this.pid = pid;
+        this.oid = oid;
+    }
+
     public String getCompetitorId() {
         return competitorId;
     }

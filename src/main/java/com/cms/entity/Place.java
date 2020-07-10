@@ -9,6 +9,19 @@ public class Place {
     private String csize;  //教室容量
     private String manager;
 
+    public Place() {
+    }
+
+    public Place(String pid, String school, String pname, String pnum, String cid, String csize, String manager) {
+        this.pid = pid;
+        this.school = school;
+        this.pname = pname;
+        this.pnum = pnum;
+        this.cid = cid;
+        this.csize = csize;
+        this.manager = manager;
+    }
+
     public String getPid() {
         return pid;
     }

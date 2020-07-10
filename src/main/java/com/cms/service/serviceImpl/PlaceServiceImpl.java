@@ -3,15 +3,17 @@ package com.cms.service.serviceImpl;
 import com.cms.dao.IPlaceDao;
 import com.cms.entity.Place;
 import com.cms.service.PlaceService;
+import com.cms.util.JsonUtil;
 import com.cms.util.MapperConfig;
+import net.sf.json.JSONArray;
 import org.apache.ibatis.session.SqlSession;
 import org.junit.Test;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class PlaceServiceImpl implements PlaceService {
 
+    private String msg = null;
     private SqlSession session;
 
     public PlaceServiceImpl() {
@@ -19,27 +21,30 @@ public class PlaceServiceImpl implements PlaceService {
     }
 
     @Override
-    public List<Place> getPlaceByPid(String pid) {
+    public JSONArray getPlaceByPid(String pid) {
         List<Place> places = session.getMapper(IPlaceDao.class).getPlaceByPid(pid);
-        return places;
+        return JSONArray.fromObject(places);
     }
 
     @Override
-    public List<Place> getPlaceByCid(String cid) {
+    public JSONArray getPlaceByCid(String cid) {
         List<Place> places = session.getMapper(IPlaceDao.class).getPlaceByCid(cid);
-        return places;
+        return JSONArray.fromObject(places);
     }
 
     @Override
-    public boolean insertPlace(Place place) {
+    public JSONArray insertPlace(Place place) {
         if (isUsedPlace(place.getPid(), place.getCid())) {
-            return false;
+            msg = "赛场已被安排";
+            return JsonUtil.returnStatus(false, msg);
         } else {
             int pid = session.getMapper(IPlaceDao.class).insertPlace(place);
             if (pid >= 0) {
-                return true;
+                msg = "赛场安排成功";
+                return JsonUtil.returnStatus(true, msg);
             } else {
-                return false;
+                msg = "赛场安排失败";
+                return JsonUtil.returnStatus(false, msg);
             }
         }
     }
@@ -56,16 +61,8 @@ public class PlaceServiceImpl implements PlaceService {
 
     @Test
     public void testGetPalce() {
-        List<Place> places = new ArrayList<Place>();
-        //places = getPlaceByPid("1");
-        places = getPlaceByCid("1");
-        if (places != null) {
-            for (Place place : places) {
-                System.out.println(place.toString());
-            }
-        } else {
-            System.out.println("null");
-        }
+        System.out.println(getPlaceByPid("1"));
+        System.out.println(getPlaceByCid("1"));
     }
 
     @Test
@@ -73,7 +70,6 @@ public class PlaceServiceImpl implements PlaceService {
         Place place = new Place();
         place.setPid("1");
         place.setCid("2");
-        boolean isInsertOK = insertPlace(place);
-        System.out.println(isInsertOK);
+        System.out.println(insertPlace(place));
     }
 }

@@ -4,11 +4,11 @@ import com.cms.dao.IScheduleDao;
 import com.cms.entity.Schedule;
 import com.cms.service.ScheduleService;
 import com.cms.util.MapperConfig;
+import net.sf.json.JSONArray;
 import org.apache.ibatis.session.SqlSession;
 import org.junit.Test;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
 
 public class ScheduleServiceImpl implements ScheduleService {
 
@@ -19,76 +19,63 @@ public class ScheduleServiceImpl implements ScheduleService {
     }
 
     @Override
-    public List<Schedule> selectGradeByCompetitorId(String competitorId) {
-        List<Schedule> schedules = new ArrayList<Schedule>();
-        schedules = session.getMapper(IScheduleDao.class).selectGradeByCompetitorId(competitorId);
-        return schedules;
+    public JSONArray selectGradeByCompetitorId(String competitorId) {
+        List<Schedule> schedules = session.getMapper(IScheduleDao.class).selectGradeByCompetitorId(competitorId);
+        return JSONArray.fromObject(schedules);
     }
 
     @Override
-    public List<Schedule> selectGradeByCid(String cid) {
-        List<Schedule> schedules = new ArrayList<Schedule>();
-        schedules = session.getMapper(IScheduleDao.class).selectGradeByCid(cid);
-        return schedules;
+    public JSONArray selectGradeByCid(String cid) {
+        List<Schedule> schedules = session.getMapper(IScheduleDao.class).selectGradeByCid(cid);
+        return JSONArray.fromObject(schedules);
     }
 
     @Override
     public int selectGradeA() {
-        int sum = 0;
-        sum = session.getMapper(IScheduleDao.class).selectGradeA();
-        return sum;
+        return session.getMapper(IScheduleDao.class).selectGradeA();
     }
 
     @Override
     public int selectGradeB() {
-        int sum = 0;
-        sum = session.getMapper(IScheduleDao.class).selectGradeB();
-        return sum;
+        return session.getMapper(IScheduleDao.class).selectGradeB();
     }
 
     @Override
     public int selectGradeC() {
-        int sum = 0;
-        sum = session.getMapper(IScheduleDao.class).selectGradeC();
-        return sum;
+        return session.getMapper(IScheduleDao.class).selectGradeC();
     }
 
     @Override
     public int selectGradeD() {
-        int sum = 0;
-        sum = session.getMapper(IScheduleDao.class).selectGradeD();
-        return sum;
+        return session.getMapper(IScheduleDao.class).selectGradeD();
+    }
+
+    @Override
+    public JSONArray getAllLevelCount() {
+        Map<String, Integer> map = new HashMap<>();
+        map.put("A", selectGradeA());
+        map.put("B", selectGradeB());
+        map.put("C", selectGradeC());
+        map.put("D", selectGradeD());
+        return JSONArray.fromObject(map);
     }
 
     @Test
     public void testSelectGradeByCompetitorId() {
-        List<Schedule> schedules = selectGradeByCompetitorId("1");
-        if (schedules != null) {
-            for (Schedule schedule : schedules) {
-                System.out.println(schedule.toString());
-            }
-        } else {
-            System.out.println("null");
-        }
+        System.out.println(selectGradeByCompetitorId("1"));
     }
 
     @Test
     public void testSelectGradeByCid() {
-        List<Schedule> schedules = selectGradeByCid("1");
-        if (schedules != null) {
-            for (Schedule schedule : schedules) {
-                System.out.println(schedule.toString());
-            }
-        } else {
-            System.out.println("null");
-        }
+        System.out.println(selectGradeByCid("1"));
     }
 
     @Test
     public void testGetGradeForAllLevel() {
-        System.out.println(session.getMapper(IScheduleDao.class).selectGradeA());
-        System.out.println(session.getMapper(IScheduleDao.class).selectGradeB());
-        System.out.println(session.getMapper(IScheduleDao.class).selectGradeC());
-        System.out.println(session.getMapper(IScheduleDao.class).selectGradeD());
+        System.out.println(selectGradeA());
+        System.out.println(selectGradeB());
+        System.out.println(selectGradeC());
+        System.out.println(selectGradeD());
+        System.out.println(getAllLevelCount());
     }
 }

@@ -1,7 +1,7 @@
 package com.cms.service;
 
 import com.cms.entity.Place;
-import org.apache.ibatis.annotations.Param;
+import net.sf.json.JSONArray;
 
 import java.util.List;
 
@@ -13,7 +13,7 @@ public interface PlaceService {
      * @param pid
      * @return
      */
-    public List<Place> getPlaceByPid(String pid);
+    public JSONArray getPlaceByPid(String pid);
 
     /**
      * 根据赛事id查询所有赛场
@@ -21,15 +21,15 @@ public interface PlaceService {
      * @param cid
      * @return
      */
-    public List<Place> getPlaceByCid(String cid);
+    public JSONArray getPlaceByCid(String cid);
 
     /**
      * 添加赛场安排
      *
-     * @param place，赛场对象
+     * @param place ，赛场对象
      * @return
      */
-    public boolean insertPlace(Place place);
+    public JSONArray insertPlace(Place place);
 
     /**
      * 判断该赛场是否被安排
