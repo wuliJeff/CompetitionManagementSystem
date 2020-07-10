@@ -117,7 +117,6 @@
             </form>
             <!-- 实例化编辑器 -->
             <script type="text/javascript">
-
                 var um = UM.getEditor('editor');
                 function uploadOrder() {
                     var event = $.cookie("event");

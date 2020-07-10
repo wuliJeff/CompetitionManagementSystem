@@ -90,12 +90,20 @@
         <url-pattern>/Schedule/selectGradeByCid</url-pattern>
     </servlet-mapping>
     <servlet>
-        <servlet-name>getAllLevelCount</servlet-name>
+        <servlet-name>getAllLevelCountByCid</servlet-name>
         <servlet-class>com.cms.controller.ScheduleController</servlet-class>
     </servlet>
     <servlet-mapping>
-        <servlet-name>getAllLevelCount</servlet-name>
-        <url-pattern>/Schedule/getAllLevelCount</url-pattern>
+        <servlet-name>getAllLevelCountByCid</servlet-name>
+        <url-pattern>/Schedule/getAllLevelCountByCid</url-pattern>
+    </servlet-mapping>
+    <servlet>
+        <servlet-name>findSeat</servlet-name>
+        <servlet-class>com.cms.controller.ScheduleController</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>findSeat</servlet-name>
+        <url-pattern>/Schedule/findSeat</url-pattern>
     </servlet-mapping>
     <!-- ScheduleController end -->
 </web-app>

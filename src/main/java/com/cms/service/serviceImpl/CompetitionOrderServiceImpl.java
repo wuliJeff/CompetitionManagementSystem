@@ -65,6 +65,6 @@ public class CompetitionOrderServiceImpl implements CompetitorOrderService {
 
     @Test
     public void testGetOrderByCid() {
-        System.out.println(getOrderByCid("1"));
+        System.out.println(getOrderByCid("202007101135"));
     }
 }

@@ -21,7 +21,8 @@ public class CompetitionOrderController extends HttpServlet {
 
         String requestURI = request.getRequestURI();
         if (requestURI.equals("/CompetitionManagementSystem/CompetitionOrder/getOrderByCid")) {
-            String cid = "1";
+            String cid = request.getParameter("cid");
+            System.out.println(cid);
             JsonUtil.returnJson(competitionOrderService.getOrderByCid(cid), request, response);
         } else if (requestURI.equals("/CompetitionManagementSystem/CompetitionOrder/insertNewOrder")) {
             String cid = request.getParameter("cid");

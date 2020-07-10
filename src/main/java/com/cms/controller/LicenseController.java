@@ -21,11 +21,8 @@ public class LicenseController extends HttpServlet {
         String requestURI = request.getRequestURI();
         if (requestURI.equals("/CompetitionManagementSystem/License/getLicenseById")) {
             String competitorId = request.getParameter("competitorId");
-
-                JsonUtil.returnJson(licenseService.getLicenseById(competitorId), request, response);
-
+            JsonUtil.returnJson(licenseService.getLicenseById(competitorId), request, response);
         } else if (requestURI.equals("/CompetitionManagementSystem/License/insertLicense")) {
-
             String competitorId = request.getParameter("competitorId");
             String name = request.getParameter("competitorId");
             String teamName =request.getParameter("teamName");

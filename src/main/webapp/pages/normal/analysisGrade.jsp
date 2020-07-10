@@ -201,19 +201,23 @@
         });
 
         $.ajax({
-            url: "http://localhost:8080/CompetitionManagementSystem/Schedule/getAllLevelCount",
+            url: "http://localhost:8080/CompetitionManagementSystem/Schedule/getAllLevelCountByCid",
             type: "GET",
             headers: {
                 "TOKEN": sessionStorage.getItem("TOKEN")
             },
+            data: {cid : event.cid},
             dataType: "json",
             success: function (result) {
                 var A = result.data[0].A;
                 var B = result.data[0].B;
                 var C = result.data[0].C;
                 var D = result.data[0].D;
-                alert(aaa)
-                createGraphic(A, B, C, D)
+                if (A === 0 && B === 0 && C === 0 && D===0){
+                    alert("目前竞赛暂未公布成绩")
+                }else{
+                    createGraphic(A, B, C, D)
+                }
             }
         });
 

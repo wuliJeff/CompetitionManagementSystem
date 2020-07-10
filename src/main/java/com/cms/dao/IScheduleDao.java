@@ -50,4 +50,12 @@ public interface IScheduleDao {
      * @return 人数
      */
     public int selectGradeDByCid(@Param("cid") String cid);
+
+    /**
+     * 查询参赛者的座位
+     * @param cid
+     * @param competitorId
+     * @return
+     */
+    public String findSeat(@Param("cid") String cid, @Param("competitorId") String competitorId);
 }

@@ -100,13 +100,11 @@
                     <div class="input-group">
                         <input type="text" name="competitionNameSearch" id="competitionNameSearch"
                                class="form-control input-group-sm" style="width: auto;"
-                               placeholder="参赛者id"/>
+                               placeholder="赛事全称/关键字"/>
                         <button id="search" type="submit" name="search" class="btn btn-primary btn-outline-primary">
                             <span class="glyphicon glyphicon-search"></span> 查询
                         </button>
                     </div>
-
-
                     <table class="table" id="myTable"
                            style="margin-top: 2%; margin-bottom: 0; width: 90%; font-size: 16px; text-align: center;">
                         <tr style="font-size: 18px; font-family: 'Microsoft YaHei UI';">
@@ -202,7 +200,6 @@
                             "<td>" + '<input type="text" name="competitionId" style="display: none" value="' + id + '">' +
                             '<input type="text" name="competitionName" style="display: none" value="' + result.data[i].competitionName + '">' +
                             '<input type="button" name="seachButton" value="详情" class="btn btn-info">' + "</td>" +
-
                             "</tr>"
                         )
                     }
@@ -239,7 +236,6 @@
     $("#search").click(function () {
         $("#myTable tr:gt(0)").empty();
         $("#myTable tr").not(':eq(0)').empty();
-        alert($("#competitionNameSearch").val())
         $.ajax({
             url: "http://120.25.255.183:8088/Curriculum/Competition/" + "allCompetition",
             type: "GET",

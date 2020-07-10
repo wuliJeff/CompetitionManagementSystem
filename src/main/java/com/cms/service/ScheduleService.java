@@ -56,4 +56,12 @@ public interface ScheduleService {
      * @return
      */
     public JSONArray getAllLevelCountByCid(String cid);
+
+    /**
+     * 查询参赛者的座位
+     * @param cid
+     * @param competitorId
+     * @return
+     */
+    public JSONArray findSeat(String cid, String competitorId);
 }

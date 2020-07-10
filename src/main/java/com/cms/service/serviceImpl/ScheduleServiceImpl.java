@@ -60,6 +60,19 @@ public class ScheduleServiceImpl implements ScheduleService {
         return JSONArray.fromObject(map);
     }
 
+    @Override
+    public JSONArray findSeat(String cid, String competitorId) {
+        String seat = session.getMapper(IScheduleDao.class).findSeat(cid, competitorId);
+        Map<String, String> map = new HashMap<>();
+        map.put("seat", seat);
+        return JSONArray.fromObject(map);
+    }
+
+    @Test
+    public void testFindSeat(){
+        System.out.println(findSeat("1","1"));
+    }
+
     @Test
     public void testSelectGradeByCompetitorId() {
         System.out.println(selectGradeByCompetitorId("1"));

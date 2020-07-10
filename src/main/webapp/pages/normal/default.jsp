@@ -227,61 +227,6 @@
             }
         }
     }
-
-    //
-    // //模糊查询
-    // $("#search").click(function () {
-    //     alert(111)
-    //     $("#myTable tr:gt(0)").empty();
-    //     $("#myTable tr").not(':eq(0)').empty();
-    //     alert($("#competitionNameSearch").val())
-    //     $.ajax({
-    //         url: "http://120.25.255.183:8088/Curriculum/Competition/" + "allCompetition",
-    //         type: "GET",
-    //         data: {
-    //             competitionName: $("#competitionNameSearch").val(),
-    //             page: 1,
-    //             pagesize: 10
-    //         },
-    //         headers: {
-    //             "TOKEN": $.cookie("TOKEN")
-    //         },
-    //         dataType: "json",
-    //         success: function (result) {
-    //             if (result.code == 0) {
-    //                 $.cookie("eventList", result.data)
-    //                 console.log(result.data)
-    //                 for (var i = 0; i < result.data.length; i++)
-    //                 {
-    //                     var id=result.data[i].competitionId;
-    //                     if(result.data[i].type=="1"){
-    //                         var eventType="团队赛";
-    //                     }else{
-    //                         var eventType="个人赛";
-    //                     }
-    //
-    //                     $("#myTable").append("<tr> " +
-    //                         "<td>"+ result.data[i].competitionName+"</td>" +
-    //                         "<td>"+ eventType +"</td>" +
-    //                         "<td>"+ result.data[i].num +"</td>" +
-    //                         "<td>"+  result.data[i].duration +"</td>" +
-    //                         "<td>"+ result.data[i].startCompetition +"</td>" +
-    //                         "<td>"+ result.data[i].endCompetition +"</td>" +
-    //                         "<td>"+ '<input type="text" name="competitionId" style="display: none" value="'+id+'">' +
-    //                         '<input type="text" name="competitionName" style="display: none" value="'+ result.data[i].competitionName+'">' +
-    //                         '<input type="button" name="seachButton" value="查看详情" class="btn-primary">'+ "</td>" +
-    //
-    //                         "</tr>"
-    //                     )
-    //                 }
-    //             } else if (result.code == 404) {
-    //             }
-    //             console.log($("#competitionNameSearch").val())
-    //         }
-    //     })
-    // });
-
-
     //查看单个竞赛
     $("#myTable").on("click", "input[name='seachButton']", function () {
         var name = $(this).parent().parent().find("input[name='competitionName']").val();

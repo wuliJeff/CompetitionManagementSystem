@@ -9,28 +9,33 @@
         select * from Schedule where competitorId=#{competitorId} order by grade DESC;
     </select>
 
+    <!-- 根据赛事id和参赛者id查询座位安排 -->
+    <select id="findSeat" parameterType="String" resultType="String">
+        select seat from Schedule where cid=#{cid} and competitorId=#{competitorId}
+    </select>
+
     <!-- 根据赛事id查询所有成绩 -->
     <select id="selectGradeByCid" parameterType="String" resultType="com.cms.entity.Schedule">
         select * from Schedule where cid=#{cid} order by grade DESC;
     </select>
 
     <!-- 获取一等奖人数 -->
-    <select id="selectGradeAByCid" resultType="int">
-        select count(*) from Schedule where grade>=90;
+    <select id="selectGradeAByCid" parameterType="String" resultType="int">
+        select count(*) from Schedule where cid=#{cid} and grade>=90;
     </select>
 
     <!-- 获取二等奖人数 -->
-    <select id="selectGradeBByCid" resultType="int">
-        select count(*) from Schedule where grade &lt; 90 and grade>=75;
+    <select id="selectGradeBByCid" parameterType="String" resultType="int">
+        select count(*) from Schedule where cid=#{cid} and (grade &lt; 90 and grade>=75);
     </select>
 
     <!-- 获取三等奖人数 -->
-    <select id="selectGradeCByCid" resultType="int">
-        select count(*) from Schedule where grade &lt; 75 and grade>=60;
+    <select id="selectGradeCByCid" parameterType="String" resultType="int">
+        select count(*) from Schedule where cid=#{cid} and (grade &lt; 75 and grade>=60);
     </select>
 
     <!-- 获取未获奖人数 -->
-    <select id="selectGradeDByCid" resultType="int">
-        select count(*) from Schedule where grade &lt; 60;
+    <select id="selectGradeDByCid" parameterType="String" resultType="int">
+        select count(*) from Schedule where cid=#{cid} and grade &lt; 60;
     </select>
 </mapper>

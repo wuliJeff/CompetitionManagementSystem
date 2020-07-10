@@ -188,6 +188,7 @@
     function loan() {
         var event = $.cookie("event");
         event = JSON.parse(event)
+        console.log(event)
         $("#competitionName").html(event.competitionName);
         if (sessionStorage.getItem("username") != null) {
             $("#loginSuccess").show()
@@ -202,18 +203,23 @@
             $("#logout").hide()
         }
         $.ajax({
-            url: "http://localhost:8080/CompetitionManagementSystem/Schedule/getAllLevelCount",
+            url: "http://localhost:8080/CompetitionManagementSystem/Schedule/getAllLevelCountByCid",
             type: "GET",
             headers: {
                 "TOKEN": sessionStorage.getItem("TOKEN")
             },
+            data: {cid: event.competitionId},
             dataType: "json",
             success: function (result) {
                 var A = result.data[0].A;
                 var B = result.data[0].B;
                 var C = result.data[0].C;
                 var D = result.data[0].D;
-                createGraphic(A, B, C, D)
+                if (A === 0 && B === 0 && C === 0 && D===0){
+                    alert("目前竞赛暂无成绩")
+                }else{
+                    createGraphic(A, B, C, D)
+                }
             }
         });
     }

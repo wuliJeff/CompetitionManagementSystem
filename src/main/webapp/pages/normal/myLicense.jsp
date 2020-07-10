@@ -101,33 +101,33 @@
                 <table class="table" id="myTable"
                        style=" margin-bottom: 0; width: 100%; font-size: 16px;">
                     <tr>
-                        <td colspan="3"><b>赛事编号：202006180303</b></td>
+                        <td colspan="3"><b>赛事编号：<span id="competitionId"></span></b></td>
                     </tr>
                     <tr style="font-size: 18px; font-family: 'Microsoft YaHei UI'; text-align: center;">
-                        <td colspan="3"><h2><b>广西大学生程序设计竞赛(GXCPC)<br/>参赛证</b></h2></td>
+                        <td colspan="3"><h2><b><span id="competitionName"></span><br/>参赛证</b></h2></td>
                     </tr>
                     <tr>
                         <td style="width: 33%;">
                             <b style="margin-left: 50px;">
-                                参赛者编号：117583010102
+                                参赛者编号：<span id="competitorId"></span>
                             </b>
                         </td>
                         <td style="width: 33%;">
-                            <b style="margin-left: 50px;">姓名：陈欢成</b>
+                            <b style="margin-left: 50px;">姓名：<span id="competitorName"></span></b>
                         </td>
-                        <td style="width: 33%;"></td>
+                        <td style="width: 33%;"><b style="margin-left: 50px;"><span id="teamName"></span></b></td>
                     </tr>
                     <tr>
                         <td style="width: 33%;">
                             <b style="margin-left: 50px;">
-                                赛事地点：广西民族大学
+                                赛事地点：<span id="school"></span>
                             </b>
                         </td>
                         <td style="width: 33%;">
-                            <b style="margin-left: 50px;">赛场：1</b>
+                            <b style="margin-left: 50px;">赛场：<span id="pname"></span><span id="pnum"></span></b>
                         </td>
                         <td style="width: 33%;">
-                            <b style="margin-left: 50px;">座位号：1</b>
+                            <b style="margin-left: 50px;">座位号：<span id="seat"></span></b>
                         </td>
                     </tr>
                     <tr style="text-align: center;">
@@ -136,26 +136,8 @@
                         </td>
                     </tr>
                     <tr>
-                        <td colspan="3">
-                            竞赛细则<br/>
-                            1、选手在参赛时携带个人证件。<br/>
-                            2、竞赛以上机为比赛方式。<br/>
-                            3、竞赛中至少命题6题，至多命题9题，上机比赛时间为4个小时，中间不休息。<br/>
-                            4、参赛选手可以携带诸如书籍、字典、手册、程序清单等文字性参考资料。<br/>
-                            5、参赛选手不能携带任何可用计算机处理的软件或数据(不允许任何私人携带的磁盘或计算器)。<br/>
-                            6、参赛选手不能携带任何类型的通讯工具，包括无线电接收器、移动电话等。<br/>
-                            7、选手未解决全部题目不得提前离场<br/>
-                            8、竞赛的预定时间为4小时，但当竞赛进行一定时间后，竞赛裁判可以因为出现不可预见的事件而调整比赛时间长度，一旦比赛时间长度发生改变，将会以及时并且统一的方式通告所有参赛选手。<br/>
-                            9、当参赛选手出现妨碍比赛正常进行的行为时，诸如擅自移动赛场中的设备，未经授权修改比赛软硬件，干扰他人比赛等，都将会被竞赛裁判剥夺参赛资格。<br/>
-                            <br/>
-                            竞赛评分<br/>
-                            1、正确解答中等数量以上试题的队伍会根据解题数目进行排名，解题数在中等数量以下的队伍只发布解题数量，不进行排名。<br/>
-                            2、在进行排名时，如果多人解题数量相同，则根据总用时加上惩罚时间进行排名。<br/>
-                            总用时和惩罚时间由每道解答正确的试题的用时之和加上惩罚时间之和而成。每道试题用时将从竞赛开始到试题解答被判定为正确为止，期间每一次错误的运行将被加罚20分钟时间。未正确解答的试题不记时，对应的错误运行也不计入惩罚时间。<br/>
-                            3、选手在比赛期间能看到排名表和他人的成绩、解决的问题。<br/>
-                            4、比赛中每一道题目对应一种颜色的气球(颜色的对应在试题中注明)。在选手正确解答出某道题目后，工作人员将会把对应颜色的气球插到此同学的位置旁。<br/>
-                            5、比赛结束前一个小时内，将不再为正确的解答摆放气球。<br/>
-                            6、请注意竞赛裁判决定解答提交是否正确需要一定的时间。<br/>
+                        <td colspan="3" style="width: 100%; word-break:break-all;">
+                            <div id="order"></div>
                         </td>
                     </tr>
                 </table>
@@ -181,6 +163,67 @@
 <script src="../../assets/js/html2canvas-0.4.1.js"></script>
 <script src="../../assets/js/jspdf.min.js"></script>
 <script>
+    // 根据id获取参赛证部分内容
+    function getLicense() {
+        $.ajax({
+            url: "http://localhost:8080/CompetitionManagementSystem/License/getLicenseById",
+            type: "POST",
+            data: {competitorId : "1"},
+            dataType: "json",
+            success: function (result) {
+                console.log(result)
+                $("#competitionId").html(result.data[0].cid);
+                $("#competitorId").html(result.data[0].competitorId);
+                $("#competitorName").html(result.data[0].name);
+                $("#school").html(result.data[0].school);
+                if (result.data[0].teamName != null && result.data[0].teamName !== ""){
+                    $("#teamName").html("团队名："+result.data[0].teamName);
+                }
+                getSeat(result.data[0].cid, result.data[0].competitorId);
+                getPlace(result.data[0].pid);
+                getOrder(result.data[0].cid);
+            }
+        });
+    }
+    // 查询座位
+    function getSeat(cid, competitorId) {
+        $.ajax({
+            url: "http://localhost:8080/CompetitionManagementSystem/Schedule/findSeat",
+            type: "POST",
+            data: {cid : cid, competitorId : competitorId},
+            dataType: "json",
+            success: function (result) {
+                console.log(result)
+                $("#seat").html(result.data[0].seat);
+            }
+        });
+    }
+    // 通过pid获取当前竞赛的地点
+    function getPlace(pid) {
+        $.ajax({
+            url: "http://localhost:8080/CompetitionManagementSystem/Place/getPlaceByPid",
+            type: "POST",
+            data: {pid : pid},
+            dataType: "json",
+            success: function (result) {
+                console.log(result)
+                $("#pname").html(result.data[0].pname);
+                $("#pnum").html(result.data[0].pnum);
+            }
+        });
+    }
+    function getOrder(cid) {
+        $.ajax({
+            url: "http://localhost:8080/CompetitionManagementSystem/CompetitionOrder/getOrderByCid",
+            type: "POST",
+            data: {cid : cid},
+            dataType: "json",
+            success: function (result) {
+                console.log(result)
+                $("#order").html(result.data[0].detail);
+            }
+        });
+    }
     function loan() {
         $.ajax({
             url: "http://120.25.255.183:8088/Curriculum/User/getUser/" + sessionStorage.getItem('userid'),
@@ -197,7 +240,7 @@
                 }
             }
         });
-
+        getLicense();
         if (sessionStorage.getItem("username") != null) {
             $("#loginSuccess").show()
             $("#noLogin").hide()
