@@ -117,14 +117,17 @@
             </form>
             <!-- 实例化编辑器 -->
             <script type="text/javascript">
+
                 var um = UM.getEditor('editor');
                 function uploadOrder() {
+                    var event = $.cookie("event");
+                    event = JSON.parse(event)
                     var title = document.getElementById("orderTitle")
                     $.ajax({
                         url: "http://localhost:8080/CompetitionManagementSystem/CompetitionOrder/insertNewOrder",
                         type: "POST",
                         data: {
-                            cid: "12",
+                            cid: event.competitionId,
                             title: title.value,
                             detail: um.getContent()
                         },

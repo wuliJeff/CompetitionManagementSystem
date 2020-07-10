@@ -19,32 +19,27 @@ public class PlaceController extends HttpServlet {
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String requestURI = request.getRequestURI();
-        String data = (String) request.getAttribute("data");
-        JSONObject jsb = JSONObject.fromObject(data);
+
         if (requestURI.equals("/CompetitionManagementSystem/Place/getPlaceByPid")) {
-            String pid = null;
-            if (jsb.containsKey("pid")) {
-                pid = jsb.getString("oid");
+            String pid =request.getParameter("pid");;
                 JsonUtil.returnJson(placeService.getPlaceByPid(pid), request, response);
-            }
+
         } else if (requestURI.equals("/CompetitionManagementSystem/Place/getPlaceByCid")) {
-            String cid = null;
-            if (jsb.containsKey("cid")) {
-                cid = jsb.getString("cid");
+            String cid = request.getParameter("cid");
                 JsonUtil.returnJson(placeService.getPlaceByCid(cid), request, response);
-            }
+
         } else if (requestURI.equals("/CompetitionManagementSystem/Place/insertPlace")) {
-            String pid = jsb.getString("pid");
-            String school = jsb.getString("school");
-            String pname = jsb.getString("pname");
+            String pid = request.getParameter("cid");
+            String school = request.getParameter("school");
+            String pname =request.getParameter("pname");
             ;
-            String pnum = jsb.getString("pnum");
+            String pnum = request.getParameter("pnum");
             ;
-            String cid = jsb.getString("cid");
+            String cid = request.getParameter("cid");
             ;
-            String csize = jsb.getString("csize");
+            String csize =request.getParameter("csize");
             ;
-            String manager = jsb.getString("manager");
+            String manager = request.getParameter("manager");
             ;
             Place place = new Place(pid, school, pname, pnum, cid, csize, manager);
             JsonUtil.returnJson(placeService.insertPlace(place), request, response);

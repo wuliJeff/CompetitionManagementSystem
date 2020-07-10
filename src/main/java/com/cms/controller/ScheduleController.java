@@ -18,26 +18,18 @@ public class ScheduleController extends HttpServlet {
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String requestURI = request.getRequestURI();
-        String data = (String) request.getAttribute("data");
-        JSONObject jsb = JSONObject.fromObject(data);
         if (requestURI.equals("/CompetitionManagementSystem/Schedule/selectGradeByCompetitorId")) {
-            String competitorId = null;
-            if (jsb.containsKey("competitorId")) {
-                competitorId = jsb.getString("competitorId");
+            String competitorId = request.getParameter("competitorId");
+
                 JsonUtil.returnJson(scheduleService.selectGradeByCompetitorId(competitorId), request, response);
-            }
+
         } else if (requestURI.equals("/CompetitionManagementSystem/Schedule/selectGradeByCid")) {
-            String cid = null;
-            if (jsb.containsKey("cid")) {
-                cid = jsb.getString("cid");
+            String cid = request.getParameter("cid");
                 JsonUtil.returnJson(scheduleService.selectGradeByCid(cid), request, response);
-            }
         } else if (requestURI.equals("/CompetitionManagementSystem/Schedule/getAllLevelCount")) {
-            String cid = null;
-            if (jsb.containsKey("cid")) {
-                cid = jsb.getString("cid");
+            String cid = request.getParameter("cid");
                 JsonUtil.returnJson(scheduleService.getAllLevelCountByCid(cid), request, response);
-            }
+
         }
     }
 

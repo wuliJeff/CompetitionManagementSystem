@@ -212,6 +212,7 @@
                 var B = result.data[0].B;
                 var C = result.data[0].C;
                 var D = result.data[0].D;
+                alert(aaa)
                 createGraphic(A, B, C, D)
             }
         });

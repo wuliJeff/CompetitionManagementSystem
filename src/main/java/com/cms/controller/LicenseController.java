@@ -19,23 +19,21 @@ public class LicenseController extends HttpServlet {
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String requestURI = request.getRequestURI();
-        String data = (String) request.getAttribute("data");
-        JSONObject jsb = JSONObject.fromObject(data);
         if (requestURI.equals("/CompetitionManagementSystem/License/getLicenseById")) {
-            String competitorId = null;
-            if (jsb.containsKey("competitorId")) {
-                competitorId = jsb.getString("oid");
+            String competitorId = request.getParameter("competitorId");
+
                 JsonUtil.returnJson(licenseService.getLicenseById(competitorId), request, response);
-            }
+
         } else if (requestURI.equals("/CompetitionManagementSystem/License/insertLicense")) {
-            String competitorId = jsb.getString("competitorId");
-            String name = jsb.getString("name");
-            String teamName = jsb.getString("teamName");
-            String school = jsb.getString("school");
-            String cid = jsb.getString("cid");
-            String cname = jsb.getString("cname");
-            String pid = jsb.getString("pid");
-            String oid = jsb.getString("oid");
+
+            String competitorId = request.getParameter("competitorId");
+            String name = request.getParameter("competitorId");
+            String teamName =request.getParameter("teamName");
+            String school = request.getParameter("school");
+            String cid = request.getParameter("cid");
+            String cname = request.getParameter("cname");
+            String pid = request.getParameter("pid");
+            String oid = request.getParameter("oid");
             License license = new License(competitorId, name, teamName, school, cid, cname, pid, oid);
             JsonUtil.returnJson(licenseService.insertLicense(license), request, response);
         }
