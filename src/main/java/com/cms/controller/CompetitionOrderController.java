@@ -36,7 +36,6 @@ public class CompetitionOrderController extends HttpServlet {
             CompetitionOrder competitionOrder = new CompetitionOrder(oid, cid, title, detail);
             JsonUtil.returnJson(competitionOrderService.insertNewOrder(competitionOrder), request, response);
         }
-
     }
 
     @Override

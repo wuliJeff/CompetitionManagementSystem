@@ -54,7 +54,7 @@
 <script>
     $("#submit").click(function () {
         $.ajax({
-            url: "http://120.25.255.183:8088/Curriculum/User/findUserPwd/" + $("#account").val(),
+            url: "http://120.25.255.183:8088/Curriculum/User/modifyUserPwdByUsername/" + $("#account").val(),
             type: "GET",
             data: {
                 password: $("#password").val(),

@@ -7,7 +7,7 @@
          xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd"
          version="3.1">
 
-<!--     CompetitionOrderController-->
+    <!-- CompetitionOrderController -->
     <servlet>
         <servlet-name>getOrderById</servlet-name>
         <servlet-class>com.cms.controller.CompetitionOrderController</servlet-class>
@@ -24,9 +24,9 @@
         <servlet-name>insertNewOrder</servlet-name>
         <url-pattern>/CompetitionOrder/insertNewOrder</url-pattern>
     </servlet-mapping>
-<!--      CompetitionOrderController  end-->
+    <!-- CompetitionOrderController end -->
 
-<!--      LicenseController-->
+    <!-- LicenseController -->
     <servlet>
         <servlet-name>getLicenseById</servlet-name>
         <servlet-class>com.cms.controller.LicenseController</servlet-class>
@@ -43,9 +43,9 @@
         <servlet-name>insertLicense</servlet-name>
         <url-pattern>/License/insertLicense</url-pattern>
     </servlet-mapping>
-     <!-- LicenseController end   -->
+    <!-- LicenseController end -->
 
-    <!--  PlaceController  -->
+    <!-- PlaceController -->
     <servlet>
         <servlet-name>getPlaceByPid</servlet-name>
         <servlet-class>com.cms.controller.PlaceController</servlet-class>
@@ -70,7 +70,7 @@
         <servlet-name>insertPlace</servlet-name>
         <url-pattern>/Place/insertPlace</url-pattern>
     </servlet-mapping>
-    <!-- PlaceController end   -->
+    <!-- PlaceController end -->
 
     <!--  ScheduleController  -->
     <servlet>
@@ -79,7 +79,7 @@
     </servlet>
     <servlet-mapping>
         <servlet-name>selectGradeByCompetitorId</servlet-name>
-        <url-pattern>Schedule/selectGradeByCompetitorId</url-pattern>
+        <url-pattern>/Schedule/selectGradeByCompetitorId</url-pattern>
     </servlet-mapping>
     <servlet>
         <servlet-name>selectGradeByCid</servlet-name>
@@ -97,5 +97,5 @@
         <servlet-name>getAllLevelCount</servlet-name>
         <url-pattern>/Schedule/getAllLevelCount</url-pattern>
     </servlet-mapping>
-    <!-- ScheduleController end   -->
+    <!-- ScheduleController end -->
 </web-app>
