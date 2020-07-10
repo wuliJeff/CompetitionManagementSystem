@@ -15,22 +15,22 @@
     </select>
 
     <!-- 获取一等奖人数 -->
-    <select id="selectGradeA" resultType="int">
+    <select id="selectGradeAByCid" resultType="int">
         select count(*) from Schedule where grade>=90;
     </select>
 
     <!-- 获取二等奖人数 -->
-    <select id="selectGradeB" resultType="int">
+    <select id="selectGradeBByCid" resultType="int">
         select count(*) from Schedule where grade &lt; 90 and grade>=75;
     </select>
 
     <!-- 获取三等奖人数 -->
-    <select id="selectGradeC" resultType="int">
+    <select id="selectGradeCByCid" resultType="int">
         select count(*) from Schedule where grade &lt; 75 and grade>=60;
     </select>
 
     <!-- 获取未获奖人数 -->
-    <select id="selectGradeD" resultType="int">
+    <select id="selectGradeDByCid" resultType="int">
         select count(*) from Schedule where grade &lt; 60;
     </select>
 </mapper>

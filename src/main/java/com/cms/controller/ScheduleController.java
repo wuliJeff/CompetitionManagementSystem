@@ -33,7 +33,11 @@ public class ScheduleController extends HttpServlet {
                 JsonUtil.returnJson(scheduleService.selectGradeByCid(cid), request, response);
             }
         } else if (requestURI.equals("/CompetitionManagementSystem/Schedule/getAllLevelCount")) {
-            JsonUtil.returnJson(scheduleService.getAllLevelCount(), request, response);
+            String cid = null;
+            if (jsb.containsKey("cid")) {
+                cid = jsb.getString("cid");
+                JsonUtil.returnJson(scheduleService.getAllLevelCountByCid(cid), request, response);
+            }
         }
     }
 

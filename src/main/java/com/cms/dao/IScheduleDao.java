@@ -28,26 +28,26 @@ public interface IScheduleDao {
      *
      * @return 人数
      */
-    public int selectGradeA();
+    public int selectGradeAByCid(@Param("cid") String cid);
 
     /**
      * 获取二等奖人数
      *
      * @return 人数
      */
-    public int selectGradeB();
+    public int selectGradeBByCid(@Param("cid") String cid);
 
     /**
      * 获取三等奖人数
      *
      * @return 人数
      */
-    public int selectGradeC();
+    public int selectGradeCByCid(@Param("cid") String cid);
 
     /**
      * 获取未获奖人数
      *
      * @return 人数
      */
-    public int selectGradeD();
+    public int selectGradeDByCid(@Param("cid") String cid);
 }

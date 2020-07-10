@@ -1,6 +1,7 @@
 package com.cms.service;
 
 import net.sf.json.JSONArray;
+import org.apache.ibatis.annotations.Param;
 
 
 public interface ScheduleService {
@@ -26,33 +27,33 @@ public interface ScheduleService {
      *
      * @return 人数
      */
-    public int selectGradeA();
+    public int selectGradeAByCid(String cid);
 
     /**
      * 获取二等奖人数
      *
      * @return 人数
      */
-    public int selectGradeB();
+    public int selectGradeBByCid(String cid);
 
     /**
      * 获取三等奖人数
      *
      * @return 人数
      */
-    public int selectGradeC();
+    public int selectGradeCByCid(String cid);
 
     /**
      * 获取未获奖人数
      *
      * @return 人数
      */
-    public int selectGradeD();
+    public int selectGradeDByCid(String cid);
 
     /**
      * 获取各个等级的人数
      *
      * @return
      */
-    public JSONArray getAllLevelCount();
+    public JSONArray getAllLevelCountByCid(String cid);
 }

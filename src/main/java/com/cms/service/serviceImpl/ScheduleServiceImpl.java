@@ -31,32 +31,32 @@ public class ScheduleServiceImpl implements ScheduleService {
     }
 
     @Override
-    public int selectGradeA() {
-        return session.getMapper(IScheduleDao.class).selectGradeA();
+    public int selectGradeAByCid(String cid) {
+        return session.getMapper(IScheduleDao.class).selectGradeAByCid(cid);
     }
 
     @Override
-    public int selectGradeB() {
-        return session.getMapper(IScheduleDao.class).selectGradeB();
+    public int selectGradeBByCid(String cid) {
+        return session.getMapper(IScheduleDao.class).selectGradeBByCid(cid);
     }
 
     @Override
-    public int selectGradeC() {
-        return session.getMapper(IScheduleDao.class).selectGradeC();
+    public int selectGradeCByCid(String cid) {
+        return session.getMapper(IScheduleDao.class).selectGradeCByCid(cid);
     }
 
     @Override
-    public int selectGradeD() {
-        return session.getMapper(IScheduleDao.class).selectGradeD();
+    public int selectGradeDByCid(String cid) {
+        return session.getMapper(IScheduleDao.class).selectGradeDByCid(cid);
     }
 
     @Override
-    public JSONArray getAllLevelCount() {
+    public JSONArray getAllLevelCountByCid(String cid) {
         Map<String, Integer> map = new HashMap<>();
-        map.put("A", selectGradeA());
-        map.put("B", selectGradeB());
-        map.put("C", selectGradeC());
-        map.put("D", selectGradeD());
+        map.put("A", selectGradeAByCid(cid));
+        map.put("B", selectGradeBByCid(cid));
+        map.put("C", selectGradeCByCid(cid));
+        map.put("D", selectGradeDByCid(cid));
         return JSONArray.fromObject(map);
     }
 
@@ -72,10 +72,11 @@ public class ScheduleServiceImpl implements ScheduleService {
 
     @Test
     public void testGetGradeForAllLevel() {
-        System.out.println(selectGradeA());
-        System.out.println(selectGradeB());
-        System.out.println(selectGradeC());
-        System.out.println(selectGradeD());
-        System.out.println(getAllLevelCount());
+        String cid = "1";
+        System.out.println(selectGradeAByCid(cid));
+        System.out.println(selectGradeBByCid(cid));
+        System.out.println(selectGradeCByCid(cid));
+        System.out.println(selectGradeDByCid(cid));
+        System.out.println(getAllLevelCountByCid(cid));
     }
 }
