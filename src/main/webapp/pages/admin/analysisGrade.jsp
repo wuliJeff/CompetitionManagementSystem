@@ -112,6 +112,7 @@
 <!-- 环形图 -->
 <script type="text/javascript" src="../../assets/js/echarts.min.js"></script>
 <script type="text/javascript">
+
     var dom = document.getElementById("ringGraphic");
     var myChart = echarts.init(dom);
     var app = {};
@@ -123,12 +124,12 @@
             trigger: 'item',
             formatter: "{a} <br/>{b}: {c} ({d}%)"
         },
-        color: ['#93D8A9', '#FFB99D', '#AF7DCC', '#FFD83D', '#bbe2e8'],
+        color: ['#93D8A9', '#FFB99D', '#AF7DCC', '#FFD83D'],
         legend: {
             orient: 'vertical',
             x: '1000px',
             y: '200px',
-            data: ['一等奖', '二等奖', '三等奖', '特等奖', '参与奖']
+            data: ['一等奖', '二等奖', '三等奖', '未获奖']
         },
         series: [{
             name: '访问来源',
@@ -154,24 +155,20 @@
                 }
             },
             data: [{
-                value: 335,
+                value: 10,
                 name: '一等奖'
             },
                 {
-                    value: 310,
+                    value: 20,
                     name: '二等奖'
                 },
                 {
-                    value: 234,
+                    value: 30,
                     name: '三等奖'
                 },
                 {
-                    value: 135,
-                    name: '特等奖'
-                },
-                {
-                    value: 1548,
-                    name: '参与等奖'
+                    value: 40,
+                    name: '未获奖'
                 }
             ]
         }]
