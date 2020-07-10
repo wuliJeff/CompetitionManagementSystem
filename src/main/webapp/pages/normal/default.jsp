@@ -98,7 +98,6 @@
                         </button>
                     </div>
 
-
                     <table class="table" id="myTable"
                            style="margin-top: 2%; margin-bottom: 0; width: 90%; font-size: 16px; text-align: center;">
                         <tr style="font-size: 18px; font-family: 'Microsoft YaHei UI';">

@@ -18,22 +18,16 @@ public class CompetitionOrderController extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+
         String requestURI = request.getRequestURI();
-        String data = (String) request.getAttribute("data");
-        JSONObject jsb = JSONObject.fromObject(data);
-        if (requestURI.equals("/CompetitionManagementSystem/CompetitionOrder/getOrderById")) {
-            String oid = null;
-            String cid = null;
-            if (jsb.containsKey("oid")) {
-                oid = jsb.getString("oid");
-                JsonUtil.returnJson(competitionOrderService.getOrderById(oid), request, response);
-            }
+        if (requestURI.equals("/CompetitionManagementSystem/CompetitionOrder/getOrderByCid")) {
+            String cid = "1";
+            JsonUtil.returnJson(competitionOrderService.getOrderByCid(cid), request, response);
         } else if (requestURI.equals("/CompetitionManagementSystem/CompetitionOrder/insertNewOrder")) {
-            String oid = jsb.getString("oid");
-            String cid = jsb.getString("cid");
-            String title = jsb.getString("title");
-            String detail = jsb.getString("detail");
-            CompetitionOrder competitionOrder = new CompetitionOrder(oid, cid, title, detail);
+            String cid = request.getParameter("cid");
+            String title = request.getParameter("title");
+            String detail = request.getParameter("detail");
+            CompetitionOrder competitionOrder = new CompetitionOrder(null, cid, title, detail);
             JsonUtil.returnJson(competitionOrderService.insertNewOrder(competitionOrder), request, response);
         }
     }

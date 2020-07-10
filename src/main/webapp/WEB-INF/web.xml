@@ -9,12 +9,12 @@
 
     <!-- CompetitionOrderController -->
     <servlet>
-        <servlet-name>getOrderById</servlet-name>
+        <servlet-name>getOrderByCid</servlet-name>
         <servlet-class>com.cms.controller.CompetitionOrderController</servlet-class>
     </servlet>
     <servlet-mapping>
-        <servlet-name>getOrderById</servlet-name>
-        <url-pattern>/CompetitionOrder/getOrderById</url-pattern>
+        <servlet-name>getOrderByCid</servlet-name>
+        <url-pattern>/CompetitionOrder/getOrderByCid</url-pattern>
     </servlet-mapping>
     <servlet>
         <servlet-name>insertNewOrder</servlet-name>

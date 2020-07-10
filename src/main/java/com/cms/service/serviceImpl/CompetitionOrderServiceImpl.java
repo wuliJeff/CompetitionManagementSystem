@@ -5,6 +5,7 @@ import com.cms.entity.CompetitionOrder;
 import com.cms.service.CompetitorOrderService;
 import com.cms.util.JsonUtil;
 import com.cms.util.MapperConfig;
+import com.cms.util.RandomIdFactory;
 import net.sf.json.JSONArray;
 import org.apache.ibatis.session.SqlSession;
 import org.junit.Test;
@@ -20,13 +21,13 @@ public class CompetitionOrderServiceImpl implements CompetitorOrderService {
 
     @Override
     public JSONArray insertNewOrder(CompetitionOrder newOrder) {
-        if (isExistOrder(newOrder.getOid())) {
+        newOrder.setOid(RandomIdFactory.getRandomId());
+        if (isExistOrder(newOrder.getCid())) {
             msg = "赛场秩序册已存在";
             return JsonUtil.returnStatus(false, msg);
         } else {
-            int oid = session.getMapper(ICompetitionOrderDao.class).insertNewOrder(newOrder);
-            System.out.println(oid);
-            if (oid >= 0) {
+            int count = session.getMapper(ICompetitionOrderDao.class).insertNewOrder(newOrder);
+            if (count >= 0) {
                 msg = "添加赛场秩序册成功";
                 return JsonUtil.returnStatus(true, msg);
             } else {
@@ -37,8 +38,8 @@ public class CompetitionOrderServiceImpl implements CompetitorOrderService {
     }
 
     @Override
-    public boolean isExistOrder(String oid) {
-        CompetitionOrder order = session.getMapper(ICompetitionOrderDao.class).getOrderById(oid);
+    public boolean isExistOrder(String cid) {
+        CompetitionOrder order = session.getMapper(ICompetitionOrderDao.class).getOrderByCid(cid);
         if (order != null) {
             return true;
         } else {
@@ -47,15 +48,15 @@ public class CompetitionOrderServiceImpl implements CompetitorOrderService {
     }
 
     @Override
-    public JSONArray getOrderById(String oid) {
-        CompetitionOrder order = session.getMapper(ICompetitionOrderDao.class).getOrderById(oid);
+    public JSONArray getOrderByCid(String cid) {
+        CompetitionOrder order = session.getMapper(ICompetitionOrderDao.class).getOrderByCid(cid);
         return JSONArray.fromObject(order);
     }
 
     @Test
     public void testInsertOrder() {
         CompetitionOrder order = new CompetitionOrder();
-        order.setOid("10");
+        order.setOid(RandomIdFactory.getRandomId());
         order.setCid("1");
         order.setTitle("第十二届蓝桥杯大赛");
         order.setDetail("软件与信息安全学院");
@@ -63,7 +64,7 @@ public class CompetitionOrderServiceImpl implements CompetitorOrderService {
     }
 
     @Test
-    public void testGetOrderByid() {
-        System.out.println(getOrderById("1"));
+    public void testGetOrderByCid() {
+        System.out.println(getOrderByCid("1"));
     }
 }

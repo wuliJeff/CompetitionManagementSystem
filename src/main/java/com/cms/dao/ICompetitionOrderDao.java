@@ -13,10 +13,10 @@ public interface ICompetitionOrderDao {
     public int insertNewOrder(@Param("newOrder") CompetitionOrder newOrder);
 
     /**
-     * 根据对应的oid查询得到赛场秩序册
+     * 根据对应的cid查询得到赛场秩序册
      *
-     * @param oid，赛场秩序册id
+     * @param cid，赛事id
      * @return CompetitionOrder对象
      */
-    public CompetitionOrder getOrderById(@Param("oid") String oid);
+    public CompetitionOrder getOrderByCid(@Param("cid") String cid);
 }

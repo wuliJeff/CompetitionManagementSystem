@@ -93,8 +93,12 @@
 
     <div class="row">
         <div class="col-lg-12">
-            <div id="d" style="text-align: center; margin-top: 2%; margin-bottom: 0;"><h3>
-                <b><span id="competitionName"></span></b></h3></div></h3></div>
+            <div id="d" style="text-align: center; margin-top: 2%; margin-bottom: 0;">
+                <h3>
+                    <b><span id="competitionName"></span>成绩分布情况</b>
+                </h3>
+            </div>
+        </div>
             <div id="ringGraphic" style="width: 100%; height: 600px; margin: 0;"></div>
         </div>
     </div><!--/.row-->

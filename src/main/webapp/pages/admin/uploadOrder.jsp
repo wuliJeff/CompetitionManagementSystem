@@ -5,7 +5,7 @@
   Time: 22:48
   To change this template use File | Settings | File Templates.
 --%>
-<%@ page language="java" import="java.util.*, com.cms.entity.*,  javax.servlet.http.*"
+<%@ page language="java" import="java.util.*, com.cms.entity.*, javax.servlet.http.*"
          contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <!DOCTYPE html>
 <html>
@@ -90,7 +90,7 @@
             <li><a href="#"><span class="glyphicon glyphicon-log-in"></span> 登录</a></li>
         </ul>
     </div>
-    <div class="attribution">write by Jeff</div>
+    <div class="attribution">Copyright &copy; 2020 陈欢成小组</div>
 </div><!--/.sidebar-->
 
 <div class="col-sm-9 col-sm-offset-3 col-lg-10 col-lg-offset-2 main">
@@ -103,30 +103,46 @@
 
     <div class="row">
         <div class="col-lg-12" style="margin-top: 2%;">
-            <form id="searchInfo" action="" method="post">
+            <form id="orderInfo" method="post">
                 <div>
-                    <input type="text" name="userId" class="form-control input-group-sm" placeholder="标题"/>
+                    <input type="text" id="orderTitle" name="orderTitle" class="form-control input-group-sm" placeholder="标题"/>
                     <div class="clear" style="margin-top: 2%; margin-bottom: 2%;"></div>
                     <!--style给定宽度可以影响编辑器的最终宽度-->
                     <script type="text/plain" id="editor" style="width: 100%; height: 400px;">
-                        <p>这里我可以写一些输入提示</p>
-
-                    </script>
-                    <!-- 实例化编辑器 -->
-                    <script type="text/javascript">
-                        var um = UM.getEditor('editor');
+                        <p>在此输入赛场秩序册内容</p>
                     </script>
                     <div class="clear"></div>
-                    <button type="submit" name="submit" class="btn btn-primary btn-outline-primary">提交</button>
+                    <button type="button" name="submit" onclick="uploadOrder()" class="btn btn-primary btn-outline-primary">提交</button>
                 </div>
             </form>
+            <!-- 实例化编辑器 -->
+            <script type="text/javascript">
+                var um = UM.getEditor('editor');
+                function uploadOrder() {
+                    var title = document.getElementById("orderTitle")
+                    $.ajax({
+                        url: "http://localhost:8080/CompetitionManagementSystem/CompetitionOrder/insertNewOrder",
+                        type: "POST",
+                        data: {
+                            cid: "12",
+                            title: title.value,
+                            detail: um.getContent()
+                        },
+                        dataType: "json",
+                        success: function (result) {
+                            alert(result.data[1].msg)
+                        },
+                        error: function () {
+                            alert("fail to insert")
+                        }
+                    });
+                }
+            </script>
         </div>
     </div><!--/.row-->
-
-    <div class="copyrights">write by ...小组</div>
 </div><!--/.main-->
 
-<script src="../../assets/js/jquery-1.11.1.min.js"></script>
+<script src="../../assets/js/jquery-2.1.4.min.js"></script>
 <script src="../../assets/js/bootstrap.min.js"></script>
 <script src="../../assets/js/chart.min.js"></script>
 <script src="../../assets/js/chart-data.js"></script>
@@ -165,7 +181,6 @@
             $(".login").show()
             $("#logout").hide()
         }
-
     }
 
     window.onload = loan;

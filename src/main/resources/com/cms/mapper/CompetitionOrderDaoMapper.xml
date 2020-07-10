@@ -10,8 +10,9 @@
             select last_insert_id()
         </selectKey>
     </insert>
+
     <!-- 查询赛场秩序册 -->
-    <select id="getOrderById" parameterType="String" resultType="com.cms.entity.CompetitionOrder">
-        select * from CompetitionOrder where oid=#{oid}
+    <select id="getOrderByCid" parameterType="String" resultType="com.cms.entity.CompetitionOrder">
+        select * from CompetitionOrder where cid=#{cid}
     </select>
 </mapper>

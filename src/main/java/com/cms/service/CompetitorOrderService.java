@@ -15,16 +15,16 @@ public interface CompetitorOrderService {
     /**
      * 判断当前赛事是否存在赛场秩序册
      *
-     * @param oid
+     * @param cid
      * @return
      */
-    public boolean isExistOrder(String oid);
+    public boolean isExistOrder(String cid);
 
     /**
      * 根据对应的oid查询得到赛场秩序册
      *
-     * @param oid ，赛场秩序册id
+     * @param cid ，赛事id
      * @return CompetitionOrder对象
      */
-    public JSONArray getOrderById(String oid);
+    public JSONArray getOrderByCid(String cid);
 }

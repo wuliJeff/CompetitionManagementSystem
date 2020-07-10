@@ -31,7 +31,7 @@ public class RandomIdFactory {
      * @Time: 2020年6月29日 00:22:27
      * @throws:
      */
-    public static String getAccountId() {
+    public static String getRandomId() {
         long min = 1, max = 9;
         for (int i = 1; i < GenerallyLength; i++) {
             min *= 10;
