@@ -309,7 +309,7 @@
         event = JSON.parse(event)
         var competitorId = document.getElementById("competitorIdSearch");
         var cid = event.competitionId;
-        console.log(competitorId)
+        console.log(competitorId.value)
         console.log(cid)
         $(this).button('loading').delay(3000).queue(function() {
             $(this).button('reset');

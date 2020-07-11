@@ -193,7 +193,7 @@
                                     "<td>" + "无" + "</td>" +
                                     "<td>" + '<input type="text" name="userId" style="display: none" value="' + result.data[i].userid + '">' +
                                     // '<input type="text" name="competitionName" style="display: none" value="'+ result.data[i].competitionName+'">' +
-                                    '<input type="button" name="seachButton" value="详情" class="btn-primary">' + "</td>" +
+                                    '<input type="button" name="seachButton" value="详情" class="btn btn-info">' + "</td>" +
 
                                     "</tr>"
                                 )
@@ -208,7 +208,7 @@
                                     "<td>" + "无" + "</td>" +
                                     "<td>" + "无" + "</td>" +
                                     "<td>" + '<input type="text" name="userId" style="display: none" value="' + result.data[i].userid + '">' +
-                                    '<input type="button" name="seachButton" value="详情" class="btn btn-primary">' + "</td>" +
+                                    '<input type="button" name="seachButton" value="详情" class="btn btn-info>' + "</td>" +
 
                                     "</tr>"
                                 )
@@ -259,15 +259,15 @@
         }
 
     }
-
+    //动态现实表格
     function showTable(event) {
         if (event.type == "1") {
-            $(".table").hide();
+            $(".table").show();
             $("#trOne").hide();
             $("#trTow").show();
             $("#noEvent").hide();
         } else {
-            $(".table").hide();
+            $(".table").show();
             $("#trTow").hide();
             $("#trOne").show();
             $("#noEvent").hide();
