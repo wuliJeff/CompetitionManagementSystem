@@ -53,6 +53,7 @@ public interface IScheduleDao {
 
     /**
      * 查询参赛者的座位
+     *
      * @param cid
      * @param competitorId
      * @return

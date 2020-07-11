@@ -69,8 +69,8 @@ public class ScheduleServiceImpl implements ScheduleService {
     }
 
     @Test
-    public void testFindSeat(){
-        System.out.println(findSeat("1","1"));
+    public void testFindSeat() {
+        System.out.println(findSeat("1", "1"));
     }
 
     @Test

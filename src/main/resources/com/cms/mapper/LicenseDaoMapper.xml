@@ -19,7 +19,7 @@
     </select>
 
     <!-- 获取参赛证 -->
-    <select id="getLicenseById" parameterType="String" resultType="com.cms.entity.License">
-        select * from License where competitorId = #{competitorId};
+    <select id="getLicense" parameterType="String" resultType="com.cms.entity.License">
+        select * from License where competitorId = #{competitorId} and cid=#{cid};
     </select>
 </mapper>

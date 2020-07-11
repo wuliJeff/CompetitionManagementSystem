@@ -163,67 +163,6 @@
 <script src="../../assets/js/html2canvas-0.4.1.js"></script>
 <script src="../../assets/js/jspdf.min.js"></script>
 <script>
-    // 根据id获取参赛证部分内容
-    function getLicense() {
-        $.ajax({
-            url: "http://localhost:8080/CompetitionManagementSystem/License/getLicenseById",
-            type: "POST",
-            data: {competitorId : "1"},
-            dataType: "json",
-            success: function (result) {
-                console.log(result)
-                $("#competitionId").html(result.data[0].cid);
-                $("#competitorId").html(result.data[0].competitorId);
-                $("#competitorName").html(result.data[0].name);
-                $("#school").html(result.data[0].school);
-                if (result.data[0].teamName != null && result.data[0].teamName !== ""){
-                    $("#teamName").html("团队名："+result.data[0].teamName);
-                }
-                getSeat(result.data[0].cid, result.data[0].competitorId);
-                getPlace(result.data[0].pid);
-                getOrder(result.data[0].cid);
-            }
-        });
-    }
-    // 查询座位
-    function getSeat(cid, competitorId) {
-        $.ajax({
-            url: "http://localhost:8080/CompetitionManagementSystem/Schedule/findSeat",
-            type: "POST",
-            data: {cid : cid, competitorId : competitorId},
-            dataType: "json",
-            success: function (result) {
-                console.log(result)
-                $("#seat").html(result.data[0].seat);
-            }
-        });
-    }
-    // 通过pid获取当前竞赛的地点
-    function getPlace(pid) {
-        $.ajax({
-            url: "http://localhost:8080/CompetitionManagementSystem/Place/getPlaceByPid",
-            type: "POST",
-            data: {pid : pid},
-            dataType: "json",
-            success: function (result) {
-                console.log(result)
-                $("#pname").html(result.data[0].pname);
-                $("#pnum").html(result.data[0].pnum);
-            }
-        });
-    }
-    function getOrder(cid) {
-        $.ajax({
-            url: "http://localhost:8080/CompetitionManagementSystem/CompetitionOrder/getOrderByCid",
-            type: "POST",
-            data: {cid : cid},
-            dataType: "json",
-            success: function (result) {
-                console.log(result)
-                $("#order").html(result.data[0].detail);
-            }
-        });
-    }
     function loan() {
         $.ajax({
             url: "http://120.25.255.183:8088/Curriculum/User/getUser/" + sessionStorage.getItem('userid'),
@@ -283,6 +222,72 @@
         deleteCookie();
         window.location.href = "../../index.jsp";
     })
+
+
+    // 根据id获取参赛证部分内容
+    function getLicense() {
+        $.ajax({
+            url: "http://localhost:8080/CompetitionManagementSystem/License/getLicense",
+            type: "POST",
+            data: {competitorId : "1", cid: "1"},
+            dataType: "json",
+            success: function (result) {
+                console.log(result)
+                $("#competitionId").html(result.data[0].cid);
+                $("#competitionName").html(result.data[0].cname);
+                $("#competitorId").html(result.data[0].competitorId);
+                $("#competitorName").html(result.data[0].name);
+                $("#school").html(result.data[0].school);
+                if (result.data[0].teamName != null && result.data[0].teamName !== ""){
+                    $("#teamName").html("团队名："+result.data[0].teamName);
+                }
+                getSeat(result.data[0].cid, result.data[0].competitorId);
+                getPlace(result.data[0].pid);
+                getOrder(result.data[0].cid);
+            }
+        });
+    }
+
+    // 查询座位
+    function getSeat(cid, competitorId) {
+        $.ajax({
+            url: "http://localhost:8080/CompetitionManagementSystem/Schedule/findSeat",
+            type: "POST",
+            data: {cid : cid, competitorId : competitorId},
+            dataType: "json",
+            success: function (result) {
+                console.log(result)
+                $("#seat").html(result.data[0].seat);
+            }
+        });
+    }
+
+    // 通过pid获取当前竞赛的地点
+    function getPlace(pid) {
+        $.ajax({
+            url: "http://localhost:8080/CompetitionManagementSystem/Place/getPlaceByPid",
+            type: "POST",
+            data: {pid : pid},
+            dataType: "json",
+            success: function (result) {
+                console.log(result)
+                $("#pname").html(result.data[0].pname);
+                $("#pnum").html(result.data[0].pnum);
+            }
+        });
+    }
+    function getOrder(cid) {
+        $.ajax({
+            url: "http://localhost:8080/CompetitionManagementSystem/CompetitionOrder/getOrderByCid",
+            type: "POST",
+            data: {cid : cid},
+            dataType: "json",
+            success: function (result) {
+                console.log(result)
+                $("#order").html(result.data[0].detail);
+            }
+        });
+    }
 
     $(function () {
         $("#printLicense").click(function () {

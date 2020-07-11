@@ -26,5 +26,5 @@ public interface LicenseService {
      *
      * @return License对象
      */
-    public JSONArray getLicenseById(String competitorId);
+    public JSONArray getLicense(String competitorId, String cid);
 }

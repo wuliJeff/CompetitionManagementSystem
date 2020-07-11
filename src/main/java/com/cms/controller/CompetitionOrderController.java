@@ -3,7 +3,6 @@ package com.cms.controller;
 import com.cms.entity.CompetitionOrder;
 import com.cms.service.serviceImpl.CompetitionOrderServiceImpl;
 import com.cms.util.JsonUtil;
-import net.sf.json.JSONObject;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -22,7 +21,6 @@ public class CompetitionOrderController extends HttpServlet {
         String requestURI = request.getRequestURI();
         if (requestURI.equals("/CompetitionManagementSystem/CompetitionOrder/getOrderByCid")) {
             String cid = request.getParameter("cid");
-            System.out.println(cid);
             JsonUtil.returnJson(competitionOrderService.getOrderByCid(cid), request, response);
         } else if (requestURI.equals("/CompetitionManagementSystem/CompetitionOrder/insertNewOrder")) {
             String cid = request.getParameter("cid");

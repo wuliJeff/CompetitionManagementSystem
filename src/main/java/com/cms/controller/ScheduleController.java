@@ -27,7 +27,7 @@ public class ScheduleController extends HttpServlet {
         } else if (requestURI.equals("/CompetitionManagementSystem/Schedule/getAllLevelCountByCid")) {
             String cid = request.getParameter("cid");
             JsonUtil.returnJson(scheduleService.getAllLevelCountByCid(cid), request, response);
-        } else if (requestURI.equals("/CompetitionManagementSystem/Schedule/findSeat")){
+        } else if (requestURI.equals("/CompetitionManagementSystem/Schedule/findSeat")) {
             String cid = request.getParameter("cid");
             String competitorId = request.getParameter("competitorId");
             JsonUtil.returnJson(scheduleService.findSeat(cid, competitorId), request, response);

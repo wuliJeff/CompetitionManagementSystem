@@ -3,7 +3,6 @@ package com.cms.controller;
 import com.cms.entity.License;
 import com.cms.service.serviceImpl.LicenseServiceImpl;
 import com.cms.util.JsonUtil;
-import net.sf.json.JSONObject;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -19,13 +18,14 @@ public class LicenseController extends HttpServlet {
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String requestURI = request.getRequestURI();
-        if (requestURI.equals("/CompetitionManagementSystem/License/getLicenseById")) {
+        if (requestURI.equals("/CompetitionManagementSystem/License/getLicense")) {
             String competitorId = request.getParameter("competitorId");
-            JsonUtil.returnJson(licenseService.getLicenseById(competitorId), request, response);
+            String cid = request.getParameter("cid");
+            JsonUtil.returnJson(licenseService.getLicense(competitorId, cid), request, response);
         } else if (requestURI.equals("/CompetitionManagementSystem/License/insertLicense")) {
             String competitorId = request.getParameter("competitorId");
             String name = request.getParameter("competitorId");
-            String teamName =request.getParameter("teamName");
+            String teamName = request.getParameter("teamName");
             String school = request.getParameter("school");
             String cid = request.getParameter("cid");
             String cname = request.getParameter("cname");

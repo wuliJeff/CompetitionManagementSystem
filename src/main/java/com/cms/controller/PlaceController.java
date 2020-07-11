@@ -3,7 +3,6 @@ package com.cms.controller;
 import com.cms.entity.Place;
 import com.cms.service.serviceImpl.PlaceServiceImpl;
 import com.cms.util.JsonUtil;
-import net.sf.json.JSONObject;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -21,26 +20,19 @@ public class PlaceController extends HttpServlet {
         String requestURI = request.getRequestURI();
 
         if (requestURI.equals("/CompetitionManagementSystem/Place/getPlaceByPid")) {
-            String pid =request.getParameter("pid");;
-                JsonUtil.returnJson(placeService.getPlaceByPid(pid), request, response);
-
+            String pid = request.getParameter("pid");
+            JsonUtil.returnJson(placeService.getPlaceByPid(pid), request, response);
         } else if (requestURI.equals("/CompetitionManagementSystem/Place/getPlaceByCid")) {
             String cid = request.getParameter("cid");
-                JsonUtil.returnJson(placeService.getPlaceByCid(cid), request, response);
-
+            JsonUtil.returnJson(placeService.getPlaceByCid(cid), request, response);
         } else if (requestURI.equals("/CompetitionManagementSystem/Place/insertPlace")) {
             String pid = request.getParameter("cid");
             String school = request.getParameter("school");
-            String pname =request.getParameter("pname");
-            ;
+            String pname = request.getParameter("pname");
             String pnum = request.getParameter("pnum");
-            ;
             String cid = request.getParameter("cid");
-            ;
-            String csize =request.getParameter("csize");
-            ;
+            String csize = request.getParameter("csize");
             String manager = request.getParameter("manager");
-            ;
             Place place = new Place(pid, school, pname, pnum, cid, csize, manager);
             JsonUtil.returnJson(placeService.insertPlace(place), request, response);
         }

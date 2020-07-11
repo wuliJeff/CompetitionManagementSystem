@@ -28,12 +28,12 @@
 
     <!-- LicenseController -->
     <servlet>
-        <servlet-name>getLicenseById</servlet-name>
+        <servlet-name>getLicense</servlet-name>
         <servlet-class>com.cms.controller.LicenseController</servlet-class>
     </servlet>
     <servlet-mapping>
-        <servlet-name>getLicenseById</servlet-name>
-        <url-pattern>/License/getLicenseById</url-pattern>
+        <servlet-name>getLicense</servlet-name>
+        <url-pattern>/License/getLicense</url-pattern>
     </servlet-mapping>
     <servlet>
         <servlet-name>insertLicense</servlet-name>
