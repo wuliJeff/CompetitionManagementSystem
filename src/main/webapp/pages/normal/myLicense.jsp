@@ -231,21 +231,29 @@
         $.ajax({
             url: "http://localhost:8080/CompetitionManagementSystem/License/getLicense",
             type: "POST",
+            headers: {
+                "TOKEN": sessionStorage.getItem("TOKEN")
+            },
             data: {competitorId : sessionStorage.getItem("userid"), cid: event.competitionId},
             dataType: "json",
             success: function (result) {
-                console.log(result)
-                $("#competitionId").html(result.data[0].cid);
-                $("#competitionName").html(result.data[0].cname);
-                $("#competitorId").html(result.data[0].competitorId);
-                $("#competitorName").html(result.data[0].name);
-                $("#school").html(result.data[0].school);
-                if (result.data[0].teamName != null && result.data[0].teamName !== ""){
-                    $("#teamName").html("团队名："+result.data[0].teamName);
+                if(result.flag === true) {
+                    if (result.data[0].flag === "false") {
+                        alert(result.data[1].msg)
+                    } else {
+                        $("#competitionId").html(result.data[0].cid);
+                        $("#competitionName").html(result.data[0].cname);
+                        $("#competitorId").html(result.data[0].competitorId);
+                        $("#competitorName").html(result.data[0].name);
+                        $("#school").html(result.data[0].school);
+                        if (result.data[0].teamName != null && result.data[0].teamName !== "") {
+                            $("#teamName").html("团队名：" + result.data[0].teamName);
+                        }
+                        getSeat(result.data[0].cid, result.data[0].competitorId);
+                        getPlace(result.data[0].pid);
+                        getOrder(result.data[0].cid);
+                    }
                 }
-                getSeat(result.data[0].cid, result.data[0].competitorId);
-                getPlace(result.data[0].pid);
-                getOrder(result.data[0].cid);
             }
         });
     }
