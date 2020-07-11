@@ -243,21 +243,28 @@
             data: {competitorId : competitorId, cid: cid},
             dataType: "json",
             success: function (result) {
-                console.log(result)
-                $("#competitionId").html(result.data[0].cid);
-                $("#competitionName").html(result.data[0].cname);
-                $("#competitorId").html(result.data[0].competitorId);
-                $("#competitorName").html(result.data[0].name);
-                $("#school").html(result.data[0].school);
-                if (result.data[0].teamName != null && result.data[0].teamName !== ""){
-                    $("#teamName").html("团队名："+result.data[0].teamName);
+                console.log(result.data[0].flag)
+                if(result.flag === true){
+                    if (result.data[0].flag === "false"){
+                        alert(result.data[1].msg)
+                    } else {
+                        $("#competitionId").html(result.data[0].cid);
+                        $("#competitionName").html(result.data[0].cname);
+                        $("#competitorId").html(result.data[0].competitorId);
+                        $("#competitorName").html(result.data[0].name);
+                        $("#school").html(result.data[0].school);
+                        if (result.data[0].teamName != null && result.data[0].teamName !== "") {
+                            $("#teamName").html("团队名：" + result.data[0].teamName);
+                        }
+                        getSeat(result.data[0].cid, result.data[0].competitorId);
+                        getPlace(result.data[0].pid);
+                        getOrder(result.data[0].cid);
+                    }
                 }
-                getSeat(result.data[0].cid, result.data[0].competitorId);
-                getPlace(result.data[0].pid);
-                getOrder(result.data[0].cid);
             }
         });
     }
+
     // 查询座位
     function getSeat(cid, competitorId) {
         $.ajax({
@@ -266,7 +273,6 @@
             data: {cid : cid, competitorId : competitorId},
             dataType: "json",
             success: function (result) {
-                console.log(result)
                 $("#seat").html(result.data[0].seat);
             }
         });
@@ -280,7 +286,6 @@
             data: {pid : pid},
             dataType: "json",
             success: function (result) {
-                console.log(result)
                 $("#pname").html(result.data[0].pname);
                 $("#pnum").html(result.data[0].pnum);
             }
@@ -294,7 +299,6 @@
             data: {cid : cid},
             dataType: "json",
             success: function (result) {
-                console.log(result)
                 $("#order").html(result.data[0].detail);
             }
         });

@@ -50,6 +50,10 @@ public class LicenseServiceImpl implements LicenseService {
     @Override
     public JSONArray getLicense(String competitorId, String cid) {
         License license = session.getMapper(ILicenseDao.class).getLicense(competitorId, cid);
+        if(license == null){
+            msg = "无此参赛者信息";
+            return JsonUtil.returnStatus(false, msg);
+        }
         return JSONArray.fromObject(license);
     }
 
@@ -69,6 +73,6 @@ public class LicenseServiceImpl implements LicenseService {
 
     @Test
     public void testGetLicenseById() {
-        System.out.println(getLicense("1", "1"));
+        System.out.println(getLicense("1", "2"));
     }
 }
