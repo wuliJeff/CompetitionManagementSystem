@@ -109,7 +109,7 @@
                             </button>
                         </div>
                     </form>
-
+                    <h1 align="center" id="noEvent"><span class="glyphicon">暂无参赛记录</span></h1>
                     <table class="table" id="myTable"
                            style="margin-top: 2%; margin-bottom: 0; width: 90%; font-size: 16px; text-align: center;">
                         <tr id="trOne" style="font-size: 18px; font-family: 'Microsoft YaHei UI';">
@@ -161,17 +161,9 @@
 <script src="../../assets/js/jquery.cookie.js"></script>
 <script>
     function loan() {
-        var UserList=[];
+        var UserList = [];
         var event = $.cookie("event");
         event = JSON.parse(event)
-        //console.log(event)
-        if (event.type == "1") {
-            $("#trOne").hide();
-            $("#trTow").show();
-        } else {
-            $("#trTow").hide();
-            $("#trOne").show();
-        }
 
         $.ajax({
             url: 'http://120.25.255.183:8088/Curriculum/Enlist/getCidEnlist/' + event.competitionId,
@@ -182,41 +174,47 @@
             dataType: "json",
             success: function (result) {
                 if (result.code == 0) {
-                    for (var i = 0; i < result.data.length; i++) {
-                        var id = result.data[i].competitionId;
-                        if (event.type == "1") {
-                            addUser(result.data[i].userid);
-                            var eventtype = "团队赛";
-                            $("#myTable").append("<tr> " +
-                                "<td>" + event.competitionName + "</td>" +
-                                "<td>" + "无" + "</td>" +
-                                "<td>" + "无" + "</td>" +
-                                "<td>" + result.data[i].teamname + "</td>" +
-                                "<td>" + "无" + "</td>" +
-                                "<td>" + "无" + "</td>" +
-                                "<td>" +'<input type="text" name="userId" style="display: none" value="'+ result.data[i].userid+'">' +
-                                // '<input type="text" name="competitionName" style="display: none" value="'+ result.data[i].competitionName+'">' +
-                                '<input type="button" name="seachButton" value="详情" class="btn-primary">' + "</td>" +
+                    if (result.count == 0) {
+                        $(".table").hide();
+                        $("#noEvent").show();
+                    } else {
+                        showTable(event)
+                        for (var i = 0; i < result.data.length; i++) {
+                            var id = result.data[i].competitionId;
+                            if (event.type == "1") {
+                                addUser(result.data[i].userid);
+                                var eventtype = "团队赛";
+                                $("#myTable").append("<tr> " +
+                                    "<td>" + event.competitionName + "</td>" +
+                                    "<td>" + "无" + "</td>" +
+                                    "<td>" + "无" + "</td>" +
+                                    "<td>" + result.data[i].teamname + "</td>" +
+                                    "<td>" + "无" + "</td>" +
+                                    "<td>" + "无" + "</td>" +
+                                    "<td>" + '<input type="text" name="userId" style="display: none" value="' + result.data[i].userid + '">' +
+                                    // '<input type="text" name="competitionName" style="display: none" value="'+ result.data[i].competitionName+'">' +
+                                    '<input type="button" name="seachButton" value="详情" class="btn-primary">' + "</td>" +
 
-                                "</tr>"
-                            )
-                        } else if (event.type == "0") {
-                            addUser(result.data[i].userid);
-                            var eventtype = "个人赛";
-                            $("#myTable").append("<tr> " +
-                                "<td>" + event.competitionName + "</td>" +
-                                "<td>" + "无" + "</td>" +
-                                "<td>" + "无" + "</td>" +
-                                "<td>" + result.data[i].userid + "</td>" +
-                                "<td>" + "无" + "</td>" +
-                                "<td>" + "无" + "</td>" +
-                                "<td>" + '<input type="text" name="userId" style="display: none" value="'+ result.data[i].userid+'">' +
-                                '<input type="button" name="seachButton" value="详情" class="btn btn-primary">' + "</td>" +
+                                    "</tr>"
+                                )
+                            } else if (event.type == "0") {
+                                addUser(result.data[i].userid);
+                                var eventtype = "个人赛";
+                                $("#myTable").append("<tr> " +
+                                    "<td>" + event.competitionName + "</td>" +
+                                    "<td>" + "无" + "</td>" +
+                                    "<td>" + "无" + "</td>" +
+                                    "<td>" + result.data[i].userid + "</td>" +
+                                    "<td>" + "无" + "</td>" +
+                                    "<td>" + "无" + "</td>" +
+                                    "<td>" + '<input type="text" name="userId" style="display: none" value="' + result.data[i].userid + '">' +
+                                    '<input type="button" name="seachButton" value="详情" class="btn btn-primary">' + "</td>" +
 
-                                "</tr>"
-                            )
+                                    "</tr>"
+                                )
+                            }
+
                         }
-
                     }
                     $.cookie("userList", JSON.stringify(UserList));
                     console.log(JSON.stringify(UserList))
@@ -226,7 +224,7 @@
         });
 
         //获取竞赛人员信息
-         function addUser(id) {
+        function addUser(id) {
             $.ajax({
                 url: 'http://120.25.255.183:8088/Curriculum/User/getUser/' + id,
                 type: "get",
@@ -236,9 +234,9 @@
                 dataType: "json",
                 success: function (result) {
                     if (result.code == 0) {
-                        var user=result.data;
+                        var user = result.data;
                         UserList.push(user);
-                       // window.location.href = "detail.jsp";
+                        // window.location.href = "detail.jsp";
                     }
                 },
                 error: function () {
@@ -260,6 +258,20 @@
             $("#logout").hide()
         }
 
+    }
+
+    function showTable(event) {
+        if (event.type == "1") {
+            $(".table").hide();
+            $("#trOne").hide();
+            $("#trTow").show();
+            $("#noEvent").hide();
+        } else {
+            $(".table").hide();
+            $("#trTow").hide();
+            $("#trOne").show();
+            $("#noEvent").hide();
+        }
     }
 
     window.onload = loan;

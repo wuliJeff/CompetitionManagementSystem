@@ -301,8 +301,12 @@
     }
 
     $("#search").click(function () {
+        var event = $.cookie("event");
+        event = JSON.parse(event)
         var competitorId = document.getElementById("competitorIdSearch");
-        var cid = "1";
+        var cid = event.competitionId;
+        console.log(competitorId)
+        console.log(cid)
         $(this).button('loading').delay(3000).queue(function() {
             $(this).button('reset');
             $(this).dequeue();

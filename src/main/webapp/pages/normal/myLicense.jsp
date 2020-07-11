@@ -226,10 +226,12 @@
 
     // 根据id获取参赛证部分内容
     function getLicense() {
+        var event = $.cookie("event");
+        event = JSON.parse(event)
         $.ajax({
             url: "http://localhost:8080/CompetitionManagementSystem/License/getLicense",
             type: "POST",
-            data: {competitorId : "1", cid: "1"},
+            data: {competitorId : sessionStorage.getItem("userid"), cid: event.competitionId},
             dataType: "json",
             success: function (result) {
                 console.log(result)
