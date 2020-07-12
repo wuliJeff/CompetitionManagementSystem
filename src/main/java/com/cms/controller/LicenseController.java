@@ -16,6 +16,7 @@ public class LicenseController extends HttpServlet {
 
     private LicenseServiceImpl licenseService = new LicenseServiceImpl();
 
+    @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String requestURI = request.getRequestURI();
         if (requestURI.equals("/CompetitionManagementSystem/License/getLicense")) {
@@ -24,18 +25,17 @@ public class LicenseController extends HttpServlet {
             JsonUtil.returnJson(licenseService.getLicense(competitorId, cid), request, response);
         } else if (requestURI.equals("/CompetitionManagementSystem/License/insertLicense")) {
             String competitorId = request.getParameter("competitorId");
-            String name = request.getParameter("competitorId");
+            String name = request.getParameter("name");
             String teamName = request.getParameter("teamName");
-            String school = request.getParameter("school");
             String cid = request.getParameter("cid");
             String cname = request.getParameter("cname");
             String pid = request.getParameter("pid");
-            String oid = request.getParameter("oid");
-            License license = new License(competitorId, name, teamName, school, cid, cname, pid, oid);
+            License license = new License(competitorId, name, teamName, cid, cname, pid);
             JsonUtil.returnJson(licenseService.insertLicense(license), request, response);
         }
     }
 
+    @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         doPost(request, response);
     }

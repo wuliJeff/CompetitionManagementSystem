@@ -117,16 +117,14 @@
                             <td><b>赛场号</b></td>
                             <td><b>参赛证号</b></td>
                             <td><b>姓名</b></td>
-                            <td><b>成绩</b></td>
-                            <td><b>排名</b></td>
+
                         </tr>
                         <tr id="trTow" style="font-size: 18px; font-family: 'Microsoft YaHei UI';">
                             <td><b>赛事名称</b></td>
                             <td><b>赛场号</b></td>
                             <td><b>参赛证号</b></td>
                             <td><b>团队名</b></td>
-                            <td><b>成绩</b></td>
-                            <td><b>排名</b></td>
+
                         </tr>
                     </table>
                     <table class="table" id="page"
@@ -182,49 +180,43 @@
                         for (var i = 0; i < result.data.length; i++) {
                             var id = result.data[i].competitionId;
                             if (event.type == "1") {
-                                addUser(result.data[i].userid);
-                                var eventtype = "团队赛";
-                                $("#myTable").append("<tr> " +
-                                    "<td>" + event.competitionName + "</td>" +
-                                    "<td>" + "无" + "</td>" +
-                                    "<td>" + "无" + "</td>" +
-                                    "<td>" + result.data[i].teamname + "</td>" +
-                                    "<td>" + "无" + "</td>" +
-                                    "<td>" + "无" + "</td>" +
-                                    "<td>" + '<input type="text" name="userId" style="display: none" value="' + result.data[i].userid + '">' +
-                                    // '<input type="text" name="competitionName" style="display: none" value="'+ result.data[i].competitionName+'">' +
-                                    '<input type="button" name="seachButton" value="详情" class="btn btn-info">' + "</td>" +
-
-                                    "</tr>"
-                                )
+                                addUser(event, result.data[i].userid, result.data[i].teamname);
                             } else if (event.type == "0") {
-                                addUser(result.data[i].userid);
-                                var eventtype = "个人赛";
-                                $("#myTable").append("<tr> " +
-                                    "<td>" + event.competitionName + "</td>" +
-                                    "<td>" + "无" + "</td>" +
-                                    "<td>" + "无" + "</td>" +
-                                    "<td>" + result.data[i].userid + "</td>" +
-                                    "<td>" + "无" + "</td>" +
-                                    "<td>" + "无" + "</td>" +
-                                    "<td>" + '<input type="text" name="userId" style="display: none" value="' + result.data[i].userid + '">' +
-                                    '<input type="button" name="seachButton" value="详情" class="btn btn-info>' + "</td>" +
-
-                                    "</tr>"
-                                )
+                                addUser(event, result.data[i].userid, result.data[i].teamname);
                             }
 
                         }
                     }
-                    $.cookie("userList", JSON.stringify(UserList));
-                    console.log(JSON.stringify(UserList))
                 } else if (result.code == 404) {
                 }
             }
         });
 
+        function insertLicense(event, user, teamname) {
+            $.ajax({
+                url: 'http://localhost:8080/CompetitionManagementSystem/License/insertLicense',
+                type: "GET",
+                headers: {
+                    "TOKEN": sessionStorage.getItem("TOKEN")
+                },
+                data: {
+                    competitorId: user.userid,
+                    name: user.username,
+                    cname: event.competitionName,
+                    teamName: teamname,
+                    cid: event.competitionId
+                },
+                dataType: "json",
+                success: function (result) {
+                    if (result.flag == "true") {
+                        console.log(result)
+                    }
+                }
+            });
+        }
+
         //获取竞赛人员信息
-        function addUser(id) {
+        function addUser(event, id, teamname) {
             $.ajax({
                 url: 'http://120.25.255.183:8088/Curriculum/User/getUser/' + id,
                 type: "get",
@@ -236,13 +228,16 @@
                     if (result.code == 0) {
                         var user = result.data;
                         UserList.push(user);
-                        // window.location.href = "detail.jsp";
+                        console.log(UserList);
+                        $.cookie("UserList",JSON.stringify(UserList))
+                        insertLicense(event, user, teamname)
                     }
                 },
                 error: function () {
                     alert("查询失败");
                 }
             });
+
             return;
         };
         if (sessionStorage.getItem("username") != null) {
@@ -257,8 +252,9 @@
             $(".login").show()
             $("#logout").hide()
         }
-
+        getLicense(event.competitionId)
     }
+
     //动态现实表格
     function showTable(event) {
         if (event.type == "1") {
@@ -275,6 +271,85 @@
     }
 
     window.onload = loan;
+
+    function getLicense(cid) {
+        $.ajax({
+            url: "http://localhost:8080/CompetitionManagementSystem/License/getLicense",
+            type: "POST",
+            data: {cid: cid},
+            dataType: "json",
+            success: function (result) {
+                console.log(result.data[0].flag)
+                if (result.flag === true) {
+                    if (result.data[0].flag === "false") {
+                        alert(result.data[1].msg)
+                    } else {
+                        console.log(result)
+                        for (var i = 0; i < result.data.length; i++) {
+
+                            if (result.data[i].pid == "") {
+                                var Place = "暂未分配"
+
+                            } else {
+                                var Place = getPlace(result.data[i].pid);
+
+
+                            }
+
+                            if (result.data[i].teamname != null) {
+
+                                $("#myTable").append("<tr> " +
+                                    "<td>" + result.data[i].cname + "</td>" +
+                                    "<td>" + Place + "</td>" +
+                                    "<td>" + result.data[i].licenseId + "</td>" +
+                                    "<td>" + result.data[i].teamName + "</td>" +
+                                    "<td>" + '<input type="text" name="userId" style="display: none" value="' + result.data[i].userid + '">' +
+                                    // '<input type="text" name="competitionName" style="display: none" value="'+ result.data[i].competitionName+'">' +
+                                    '<input type="button" name="seachButton" value="详情" class="btn btn-info">' + "</td>" +
+
+                                    "</tr>"
+                                )
+                            } else {
+                                $("#myTable").append("<tr> " +
+                                    "<td>" + result.data[i].cname + "</td>" +
+                                    "<td>" + Place + "</td>" +
+                                    "<td>" + result.data[i].licenseId + "</td>" +
+                                    "<td>" + result.data[i].name + "</td>" +
+                                    "<td>" + '<input type="text" name="userId" style="display: none" value="' + result.data[i].userid + '">' +
+                                    '<input type="button" name="seachButton" value="详情" class="btn btn-info>' + "</td>" +
+
+                                    "</tr>"
+                                )
+                            }
+
+
+                        }
+                    }
+                }
+            }
+        });
+    }
+
+    // 通过pid获取当前竞赛的地点
+    function getPlace(pid) {
+        var Place;
+        var PlaceName;
+        var PlaceNum;
+        $.ajax({
+            url: "http://localhost:8080/CompetitionManagementSystem/Place/getPlaceByPid",
+            type: "POST",
+            data: {pid: pid},
+            dataType: "json",
+            success: function (result) {
+                PlaceName = result.data[0].pname;
+                PlaceNum = result.data[0].pnum;
+            }
+        });
+        Place = PlaceNum + PlaceName;
+       //console.log(Place)
+        return Place;
+    }
+
 
     // 清除所有的cookie
     function deleteCookie() {

@@ -16,10 +16,10 @@ public interface LicenseService {
     /**
      * 查找是否已存在参赛证，避免重复插入
      *
-     * @param license
+     *
      * @return
      */
-    public boolean isExistLicense(License license);
+    public boolean isExistLicense(String competitorId, String cid);
 
     /**
      * 获取参赛证
@@ -27,4 +27,6 @@ public interface LicenseService {
      * @return License对象
      */
     public JSONArray getLicense(String competitorId, String cid);
+
+    public JSONArray updateLicense(License l);
 }

@@ -21,6 +21,7 @@ public class PlaceController extends HttpServlet {
 
     private PlaceServiceImpl placeService = new PlaceServiceImpl();
 
+    @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String requestURI = request.getRequestURI();
 
@@ -50,6 +51,7 @@ public class PlaceController extends HttpServlet {
         }
     }
 
+    @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         doPost(request, response);
     }

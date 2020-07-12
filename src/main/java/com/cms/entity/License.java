@@ -4,24 +4,42 @@ public class License {
     private String competitorId;  //参赛者id
     private String name;  //姓名
     private String teamName;  //团队名
-    private String school;  //学校
+
     private String cid;  //赛事id
     private String cname;  //赛事名称
     private String pid; //赛场id
-    private String oid; //赛场秩序册id
+    private String LicenseId;
 
     public License() {
     }
 
-    public License(String competitorId, String name, String teamName, String school, String cid, String cname, String pid, String oid) {
+    public String getLicenseId() {
+        return LicenseId;
+    }
+
+    public void setLicenseId(String licenseId) {
+        LicenseId = licenseId;
+    }
+
+    public License(String competitorId, String name, String teamName, String cid, String cname, String pid, String licenseId) {
         this.competitorId = competitorId;
         this.name = name;
         this.teamName = teamName;
-        this.school = school;
         this.cid = cid;
         this.cname = cname;
         this.pid = pid;
-        this.oid = oid;
+        LicenseId = licenseId;
+    }
+
+    public License(String competitorId, String name, String teamName, String cid, String cname, String pid) {
+        this.competitorId = competitorId;
+        this.name = name;
+        this.teamName = teamName;
+
+        this.cid = cid;
+        this.cname = cname;
+        this.pid = pid;
+
     }
 
     public String getCompetitorId() {
@@ -48,13 +66,7 @@ public class License {
         this.teamName = teamName;
     }
 
-    public String getSchool() {
-        return school;
-    }
 
-    public void setSchool(String school) {
-        this.school = school;
-    }
 
     public String getCid() {
         return cid;
@@ -80,13 +92,7 @@ public class License {
         this.pid = pid;
     }
 
-    public String getOid() {
-        return oid;
-    }
 
-    public void setOid(String oid) {
-        this.oid = oid;
-    }
 
     @Override
     public String toString() {
@@ -94,11 +100,10 @@ public class License {
                 "competitorId='" + competitorId + '\'' +
                 ", name='" + name + '\'' +
                 ", teamName='" + teamName + '\'' +
-                ", school='" + school + '\'' +
+
                 ", cid='" + cid + '\'' +
                 ", cname='" + cname + '\'' +
                 ", pid='" + pid + '\'' +
-                ", oid='" + oid + '\'' +
                 '}';
     }
 }

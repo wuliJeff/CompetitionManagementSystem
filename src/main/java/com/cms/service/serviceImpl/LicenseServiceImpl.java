@@ -5,9 +5,12 @@ import com.cms.entity.License;
 import com.cms.service.LicenseService;
 import com.cms.util.JsonUtil;
 import com.cms.util.MapperConfig;
+import com.cms.util.RandomIdFactory;
 import net.sf.json.JSONArray;
 import org.apache.ibatis.session.SqlSession;
 import org.junit.Test;
+
+import java.util.List;
 
 public class LicenseServiceImpl implements LicenseService {
 
@@ -23,10 +26,11 @@ public class LicenseServiceImpl implements LicenseService {
         /**
          * 存在参赛证则不重复插入
          */
-        if (isExistLicense(license)) {
+        if (isExistLicense(license.getCompetitorId(),license.getCid())) {
             msg = "参赛证已存在";
             return JsonUtil.returnStatus(false, msg);
         } else {
+           license.setLicenseId(RandomIdFactory.getRandomId());
             int competitorId = session.getMapper(ILicenseDao.class).insertLicense(license);
             if (competitorId >= 0) {
                 msg = "参赛证添加成功";
@@ -39,8 +43,8 @@ public class LicenseServiceImpl implements LicenseService {
     }
 
     @Override
-    public boolean isExistLicense(License license) {
-        License license1 = session.getMapper(ILicenseDao.class).isExistLicense(license);
+    public boolean isExistLicense(String competitorId, String cid) {
+        License license1 = session.getMapper(ILicenseDao.class).isExistLicense(competitorId,cid);
         if (license1 != null) {
             return true;
         }
@@ -49,7 +53,7 @@ public class LicenseServiceImpl implements LicenseService {
 
     @Override
     public JSONArray getLicense(String competitorId, String cid) {
-        License license = session.getMapper(ILicenseDao.class).getLicense(competitorId, cid);
+        List<License> license = session.getMapper(ILicenseDao.class).getLicense(competitorId, cid);
         if(license == null){
             msg = "无此参赛者信息";
             return JsonUtil.returnStatus(false, msg);
@@ -57,18 +61,25 @@ public class LicenseServiceImpl implements LicenseService {
         return JSONArray.fromObject(license);
     }
 
+    @Override
+    public JSONArray updateLicense(License l) {
+        if (session.getMapper(ILicenseDao.class).UpdateLicense(l)>0){
+            msg = "更新成功";
+        };
+        return JsonUtil.returnStatus(false, msg);
+    }
+
     @Test
     public void testInsertLicense() {
         License license = new License();
-        license.setCompetitorId("7");
-        license.setName("lulu");
-        license.setTeamName("null");
-        license.setSchool("广西民族大学");
-        license.setCid("1");
-        license.setCname("程序设计竞赛");
-        license.setPid("1");
-        license.setOid("1");
-        System.out.println(insertLicense(license));
+//        license.setCompetitorId("7");
+//        license.setName("lulu");
+//        license.setTeamName("null");
+        license.setCid("202007101135");
+       // license.setCname("程序设计竞赛");
+      //  license.setPid("1");
+
+        System.out.println(getLicense("","202007101135"));
     }
 
     @Test

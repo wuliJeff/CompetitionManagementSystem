@@ -6,20 +6,48 @@
 
     <!-- 添加参赛证 -->
     <insert id="insertLicense" parameterType="com.cms.entity.License">
-        insert into License values (#{license.competitorId}, #{license.name}, #{license.teamName}, #{license.school},
-        #{license.cid}, #{license.cname}, #{license.pid}, #{license.oid});
+        insert into License(competitorId,name,teamname,cid,cname,licenseId)
+        values (#{license.competitorId}, #{license.name}, #{license.teamName},
+        #{license.cid}, #{license.cname},#{license.licenseId});
         <selectKey keyColumn="1" resultType="int" keyProperty="competitorId" order="AFTER">
             select last_insert_id()
         </selectKey>
     </insert>
+    <update id="UpdateLicense">
+        update  license
+        <set>
+            <if test="name!=null">
+                name=#{name},
+            </if>
+            <if test="pid!=null">
+                pid=#{pid},
+            </if>
+        </set>
+        where cid=#{cid} and  competitorId=#{competitorId}
+    </update>
 
     <!-- 查询是否存在参赛证 -->
-    <select id="isExistLicense" parameterType="com.cms.entity.License" resultType="com.cms.entity.License">
-        select * from License where competitorId=#{license.competitorId} and cid=#{license.cid} and pid=#{license.pid}
+    <select id="isExistLicense"  parameterType="String" resultType="com.cms.entity.License">
+        select * from License
+        where 1=1
+        <if test="competitorId !=null and competitorId != ''">
+            and  competitorId = #{competitorId}
+        </if>
+        <if test="cid !=null and competitorId !='' ">
+            and   cid = #{cid}
+        </if>
     </select>
+
 
     <!-- 获取参赛证 -->
     <select id="getLicense" parameterType="String" resultType="com.cms.entity.License">
-        select * from License where competitorId = #{competitorId} and cid=#{cid};
+        select * from License
+        where 1=1
+        <if test="competitorId !=null and competitorId != ''">
+          and  competitorId = #{competitorId}
+        </if>
+        <if test="cid !=null and competitorId !='' ">
+          and   cid = #{cid}
+        </if>
     </select>
 </mapper>
