@@ -112,20 +112,18 @@
                     <table class="table" id="myTable"
                            style="margin-top: 2%; margin-bottom: 0; width: 90%; font-size: 16px; text-align: center;">
                         <tr id="trOne" style="font-size: 18px; font-family: 'Microsoft YaHei UI';">
-                            <td><b>赛事名称</b></td>
-                            <td><b>赛场号</b></td>
                             <td><b>参赛证号</b></td>
-                            <td><b>姓名</b></td>
-                            <td><b>成绩</b></td>
-                            <td><b>排名</b></td>
+                            <td><b>赛场号</b></td>
+                            <td><b>团队名</b></td>
+                            <td><b>赛事名称</b></td>
                         </tr>
                         <tr id="trTow" style="font-size: 18px; font-family: 'Microsoft YaHei UI';">
-                            <td><b>赛事名称</b></td>
-                            <td><b>赛场号</b></td>
                             <td><b>参赛证号</b></td>
+                            <td><b>赛场号</b></td>
                             <td><b>团队名</b></td>
-                            <td><b>成绩</b></td>
-                            <td><b>排名</b></td>
+                            <td><b>赛事名称</b></td>
+
+
                         </tr>
                     </table>
                     <table class="table" id="page"
@@ -268,10 +266,10 @@
                             if (result.data[i].teamname != null) {
 
                                 $("#myTable").append("<tr> " +
-                                    "<td>" + result.data[i].cname + "</td>" +
+                                    "<td>" + result.data[i].licenseId  + "</td>" +
                                     "<td>" + Place + "</td>" +
-                                    "<td>" + result.data[i].licenseId + "</td>" +
-                                    "<td>" + result.data[i].teamName + "</td>" +
+                                    "<td>" + result.data[i].teamName+ "</td>" +
+                                    "<td>" + result.data[i].cname + "</td>" +
                                     "<td>" + '<input type="text" name="userId" style="display: none" value="' + result.data[i].userid + '">' +
                                     // '<input type="text" name="competitionName" style="display: none" value="'+ result.data[i].competitionName+'">' +
                                     '<input type="button" name="seachButton" value="详情" class="btn btn-info">' + "</td>" +
@@ -280,10 +278,10 @@
                                 )
                             } else {
                                 $("#myTable").append("<tr> " +
-                                    "<td>" + result.data[i].cname + "</td>" +
+                                    "<td>" + result.data[i].licenseId  + "</td>" +
                                     "<td>" + Place + "</td>" +
-                                    "<td>" + result.data[i].licenseId + "</td>" +
-                                    "<td>" + result.data[i].name + "</td>" +
+                                    "<td>" + result.data[i].teamName+ "</td>" +
+                                    "<td>" + result.data[i].cname + "</td>" +
                                     "<td>" + '<input type="text" name="userId" style="display: none" value="' + result.data[i].userid + '">' +
                                     '<input type="button" name="seachButton" value="详情" class="btn btn-info>' + "</td>" +
 
