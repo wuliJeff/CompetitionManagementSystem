@@ -44,7 +44,7 @@ public class LicenseServiceImpl implements LicenseService {
 
     @Override
     public boolean isExistLicense(String competitorId, String cid) {
-        License license1 = session.getMapper(ILicenseDao.class).isExistLicense(competitorId,cid);
+       License  license1 = session.getMapper(ILicenseDao.class).isExistLicense(competitorId,cid);
         if (license1 != null) {
             return true;
         }
@@ -53,12 +53,14 @@ public class LicenseServiceImpl implements LicenseService {
 
     @Override
     public JSONArray getLicense(String competitorId, String cid) {
-        List<License> license = session.getMapper(ILicenseDao.class).getLicense(competitorId, cid);
-        if(license == null){
+        List<License> l = session.getMapper(ILicenseDao.class).getLicense(competitorId, cid);
+        if(l == null){
             msg = "无此参赛者信息";
             return JsonUtil.returnStatus(false, msg);
+        }else{
+            msg="查询成功";
         }
-        return JSONArray.fromObject(license);
+        return JSONArray.fromObject(l);
     }
 
     @Override
@@ -79,7 +81,9 @@ public class LicenseServiceImpl implements LicenseService {
        // license.setCname("程序设计竞赛");
       //  license.setPid("1");
 
-        System.out.println(getLicense("","202007101135"));
+        System.out.println(getLicense("","202007101262"));
+        System.out.println(getLicense("202007102028","202007101135"));
+        System.out.println(getLicense("202007102028",""));
     }
 
     @Test

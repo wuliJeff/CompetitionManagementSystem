@@ -115,7 +115,7 @@
                         <tr id="trOne" style="font-size: 18px; font-family: 'Microsoft YaHei UI';">
                             <td><b>参赛证号</b></td>
                             <td><b>赛场号</b></td>
-                            <td><b>团队名</b></td>
+                            <td><b>姓名</b></td>
                             <td><b>赛事名称</b></td>
                         </tr>
                         <tr id="trTow" style="font-size: 18px; font-family: 'Microsoft YaHei UI';">
@@ -284,7 +284,7 @@
                         console.log(result)
                         for (var i = 0; i < result.data.length; i++) {
 
-                            if (result.data[i].pid == "") {
+                            if (result.data[i].pid == "" || result.data[i].pid == null) {
                                 var Place = "暂未分配"
 
                             } else {
@@ -293,7 +293,7 @@
 
                             }
 
-                            if (result.data[i].teamname != null) {
+                            if (result.data[i].teamname != null ) {
 
                                 $("#myTable").append("<tr> " +
                                     "<td>" + result.data[i].licenseId  + "</td>" +
@@ -307,10 +307,12 @@
                                     "</tr>"
                                 )
                             } else {
+                                console.log(result.data[i].name)
+                                console.log( result.data[i].cname)
                                 $("#myTable").append("<tr> " +
                                     "<td>" + result.data[i].licenseId  + "</td>" +
                                     "<td>" + Place + "</td>" +
-                                    "<td>" + result.data[i].teamName+ "</td>" +
+                                    "<td>" + result.data[i].name+ "</td>" +
                                     "<td>" + result.data[i].cname + "</td>" +
                                     "<td>" + '<input type="text" name="userId" style="display: none" value="' + result.data[i].userid + '">' +
                                     '<input type="button" name="seachButton" value="详情" class="btn btn-info>' + "</td>" +

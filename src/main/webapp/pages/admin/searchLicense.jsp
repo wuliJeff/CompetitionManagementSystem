@@ -243,7 +243,6 @@
             data: {competitorId : competitorId, cid: cid},
             dataType: "json",
             success: function (result) {
-                console.log(result.data[0].flag)
                 if(result.flag === true){
                     if (result.data[0].flag === "false"){
                         alert(result.data[1].msg)
@@ -256,6 +255,7 @@
                         if (result.data[0].teamName != null && result.data[0].teamName !== "") {
                             $("#teamName").html("团队名：" + result.data[0].teamName);
                         }
+
                         getSeat(result.data[0].cid, result.data[0].competitorId);
                         getPlace(result.data[0].pid);
                         getOrder(result.data[0].cid);

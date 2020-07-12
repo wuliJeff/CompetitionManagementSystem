@@ -249,6 +249,8 @@
                         if (result.data[0].teamName != null && result.data[0].teamName !== "") {
                             $("#teamName").html("团队名：" + result.data[0].teamName);
                         }
+                        console.log(result)
+
                         getSeat(result.data[0].cid, result.data[0].competitorId);
                         getPlace(result.data[0].pid);
                         getOrder(result.data[0].cid);
@@ -293,7 +295,6 @@
             data: {cid : cid},
             dataType: "json",
             success: function (result) {
-                console.log(result)
                 $("#order").html(result.data[0].detail);
             }
         });

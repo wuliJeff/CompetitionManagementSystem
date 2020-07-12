@@ -56,4 +56,10 @@ public class PlaceServiceImpl implements PlaceService {
             return false;
         }
     }
+    @Test
+    public void testGetGradeForAllLevel() {
+        System.out.println(getPlaceByCid("202007101135"));
+        System.out.println(getPlaceByPid("202007127665918"));
+    }
 }
+

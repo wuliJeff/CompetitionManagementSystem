@@ -9,7 +9,7 @@ public class License {
     private String cname;  //赛事名称
     private String pid; //赛场id
     private String LicenseId;
-
+    private String oid;
     public License() {
     }
 
@@ -40,6 +40,25 @@ public class License {
         this.cname = cname;
         this.pid = pid;
 
+    }
+
+    public License(String competitorId, String name, String teamName, String cid, String cname, String pid, String licenseId, String oid) {
+        this.competitorId = competitorId;
+        this.name = name;
+        this.teamName = teamName;
+        this.cid = cid;
+        this.cname = cname;
+        this.pid = pid;
+        LicenseId = licenseId;
+        this.oid = oid;
+    }
+
+    public String getOid() {
+        return oid;
+    }
+
+    public void setOid(String oid) {
+        this.oid = oid;
     }
 
     public String getCompetitorId() {

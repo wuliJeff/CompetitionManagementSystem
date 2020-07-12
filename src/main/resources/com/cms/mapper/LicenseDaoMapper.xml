@@ -33,7 +33,7 @@
         <if test="competitorId !=null and competitorId != ''">
             and  competitorId = #{competitorId}
         </if>
-        <if test="cid !=null and competitorId !='' ">
+        <if test="cid !=null and cid !='' ">
             and   cid = #{cid}
         </if>
     </select>
@@ -43,11 +43,12 @@
     <select id="getLicense" parameterType="String" resultType="com.cms.entity.License">
         select * from License
         where 1=1
+        <if test="cid !=null and cid != '' ">
+            and   cid = #{cid}
+        </if>
         <if test="competitorId !=null and competitorId != ''">
-          and  competitorId = #{competitorId}
+            and  competitorId = #{competitorId}
         </if>
-        <if test="cid !=null and competitorId !='' ">
-          and   cid = #{cid}
-        </if>
+
     </select>
 </mapper>

@@ -18,10 +18,9 @@ public interface ILicenseDao {
     /**
      * 查找是否已存在参赛证，避免重复插入
      *
-     * @param license
      * @return
      */
-    public License isExistLicense(@Param("competitorId") String competitorId, @Param("cid") String cid);
+   public License isExistLicense(@Param("competitorId") String competitorId, @Param("cid") String cid);
 
     /**
      * 获取参赛证
