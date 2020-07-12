@@ -23,6 +23,34 @@
     <script src="../../assets/js/respond.min.js"></script>
     <![endif]-->
 
+    <style>
+        .file {
+            position: relative;
+            display: inline-block;
+            background: #D0EEFF;
+            border: 1px solid #99D3F5;
+            border-radius: 4px;
+            padding: 4px 12px;
+            overflow: hidden;
+            color: #1E88C7;
+            text-decoration: none;
+            text-indent: 0;
+            line-height: 20px;
+        }
+        .file input {
+            position: absolute;
+            font-size: 100px;
+            right: 0;
+            top: 0;
+            opacity: 0;
+        }
+        .file:hover {
+            background: #AADFFD;
+            border-color: #78C3F3;
+            color: #004974;
+            text-decoration: none;
+        }
+    </style>
 </head>
 
 <body>
@@ -98,9 +126,11 @@
 
     <div class="row">
         <div class="col-lg-12">
-            <div id="myLicense" class="row">
-                <p>该页可要可不要</p>
-                <p>赛场分布位置</p>
+            <div id="place" class="row">
+                <a href="javascript:;" class="file">上传赛场名单
+                    <span class="glyphicon glyphicon-folder-open"></span>
+                    <input type="file" onchange="importFile(this)" />
+                </a>
             </div><!--/.row-->
         </div>
     </div><!--/.row-->
@@ -114,9 +144,9 @@
 <script src="../../assets/js/easypiechart-data.js"></script>
 <script src="../../assets/js/bootstrap-datepicker.js"></script>
 <script src="../../assets/js/jquery.cookie.js"></script>
+<script src="../../assets/js/xlsx.full.min.js"></script>
 <script>
     function loan() {
-
         $.ajax({
             url: "http://120.25.255.183:8088/Curriculum/User/getUser/" + sessionStorage.getItem('userid'),
             type: "GET",
@@ -175,6 +205,39 @@
         deleteCookie();
         window.location.href = "../../index.jsp";
     })
+
+    function importFile(obj) {//导入
+        var event = $.cookie("event");
+        event = JSON.parse(event);
+        if(!obj.files) {
+            return;
+        }
+        var f = obj.files[0];
+        var reader = new FileReader();
+        reader.onload = function(e) {
+            var data = e.target.result;
+            var wb = XLSX.read(data, {
+                type: 'binary' //以二进制的方式读取
+            });
+            var sheet0=wb.Sheets[wb.SheetNames[0]];//sheet0代表excel表格中的第一页
+            var excelData = XLSX.utils.sheet_to_json(sheet0);//利用接口实现转换
+            console.log(excelData);
+            console.log(JSON.stringify(excelData));
+            $.ajax({
+                url: "http://localhost:8080/CompetitionManagementSystem/Place/insertPlace",
+                type: "POST",
+                data: {excelData: JSON.stringify(excelData), cid: event.competitionId},
+                dataType: "json",
+                success: function (result) {
+                    if(result.flag === true){
+                        alert(result.data[1].msg)
+                    }
+                }
+            });
+        }
+        reader.readAsBinaryString(f);
+    }
+
 </script>
 
 </body>

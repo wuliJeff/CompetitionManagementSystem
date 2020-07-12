@@ -32,11 +32,12 @@ public interface IPlaceDao {
     public int insertPlace(@Param("place") Place place);
 
     /**
-     * 判断该赛场是否被安排
-     *
-     * @param pid，赛场号
-     * @param cid，赛事编号
-     * @return 返回Place对象
+     * 判断赛场是否已存在
+     * @param school
+     * @param pname
+     * @param pnum
+     * @param cid
+     * @return
      */
-    public Place isUsedPlace(@Param("pid") String pid, @Param("cid") String cid);
+    public Place isExistPlace(@Param("school") String school, @Param("pname") String pname, @Param("pnum") String pnum,@Param("cid") String cid);
 }

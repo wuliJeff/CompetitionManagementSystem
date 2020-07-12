@@ -22,8 +22,8 @@
             select last_insert_id()
         </selectKey>
     </insert>
-    <!-- 判断赛场是否被使用 -->
-    <select id="isUsedPlace" parameterType="String" resultType="com.cms.entity.Place">
-        select * from Place where pid=#{pid} and cid=#{cid};
+    <!-- 判断赛场是否被安排 -->
+    <select id="isExistPlace" parameterType="String" resultType="com.cms.entity.Place">
+        select * from Place where school=#{school} and pname=#{pname} and pnum=#{pnum} and cid=#{cid};
     </select>
 </mapper>

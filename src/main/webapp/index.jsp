@@ -10,7 +10,6 @@
     <link href="assets/css/bootstrap.min.css" rel="stylesheet">
     <link href="assets/css/datepicker3.css" rel="stylesheet">
     <link href="assets/css/styles.css" rel="stylesheet">
-
 </head>
 
 <body>
@@ -79,7 +78,6 @@
                         alert("登录成功");
                         window.location.href = "pages/normal/default.jsp";
                     }
-
                 } else if (result.code == 404) {
                     alert("用户名或密码不正确")
                 }

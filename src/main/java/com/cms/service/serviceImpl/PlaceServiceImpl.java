@@ -5,6 +5,7 @@ import com.cms.entity.Place;
 import com.cms.service.PlaceService;
 import com.cms.util.JsonUtil;
 import com.cms.util.MapperConfig;
+import com.cms.util.RandomIdFactory;
 import net.sf.json.JSONArray;
 import org.apache.ibatis.session.SqlSession;
 import org.junit.Test;
@@ -33,43 +34,26 @@ public class PlaceServiceImpl implements PlaceService {
     }
 
     @Override
-    public JSONArray insertPlace(Place place) {
-        if (isUsedPlace(place.getPid(), place.getCid())) {
-            msg = "赛场已被安排";
-            return JsonUtil.returnStatus(false, msg);
-        } else {
-            int pid = session.getMapper(IPlaceDao.class).insertPlace(place);
-            if (pid >= 0) {
-                msg = "赛场安排成功";
-                return JsonUtil.returnStatus(true, msg);
+    public JSONArray insertPlace(List<Place> places) {
+        for (Place place : places) {
+            place.setPid(RandomIdFactory.getRandomId());
+            if (isExistPlace(place.getSchool(), place.getPname(), place.getPnum(), place.getCid())) {
+                continue;
             } else {
-                msg = "赛场安排失败";
-                return JsonUtil.returnStatus(false, msg);
+                session.getMapper(IPlaceDao.class).insertPlace(place);
             }
         }
+        msg = "赛场导入完成";
+        return JsonUtil.returnStatus(true, msg);
     }
 
     @Override
-    public boolean isUsedPlace(String pid, String cid) {
-        Place place = session.getMapper(IPlaceDao.class).isUsedPlace(pid, cid);
+    public boolean isExistPlace(String school, String pname, String pnum, String cid) {
+        Place place = session.getMapper(IPlaceDao.class).isExistPlace(school, pname, pnum, cid);
         if (place != null) {
             return true;
         } else {
             return false;
         }
-    }
-
-    @Test
-    public void testGetPalce() {
-        System.out.println(getPlaceByPid("1"));
-        System.out.println(getPlaceByCid("1"));
-    }
-
-    @Test
-    public void testInsertPlace() {
-        Place place = new Place();
-        place.setPid("1");
-        place.setCid("2");
-        System.out.println(insertPlace(place));
     }
 }

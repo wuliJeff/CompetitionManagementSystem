@@ -29,14 +29,15 @@ public interface PlaceService {
      * @param place ，赛场对象
      * @return
      */
-    public JSONArray insertPlace(Place place);
+    public JSONArray insertPlace(List<Place> place);
 
     /**
-     * 判断该赛场是否被安排
-     *
-     * @param pid，赛场号
-     * @param cid，赛事编号
+     * 判断赛场是否存在
+     * @param school
+     * @param pname
+     * @param pnum
+     * @param cid
      * @return
      */
-    public boolean isUsedPlace(String pid, String cid);
+    public boolean isExistPlace(String school, String pname, String pnum, String cid);
 }
