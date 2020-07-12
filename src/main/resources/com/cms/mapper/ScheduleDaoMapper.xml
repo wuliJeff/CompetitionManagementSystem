@@ -38,4 +38,8 @@
     <select id="selectGradeDByCid" parameterType="String" resultType="int">
         select count(*) from Schedule where cid=#{cid} and grade &lt; 60;
     </select>
+
+    <update id="publishGrade">
+        update Schedule set grade=#{grade} where cid=#{cid} and competitorId=#{competitorId}
+    </update>
 </mapper>

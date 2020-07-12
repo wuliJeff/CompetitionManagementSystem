@@ -59,4 +59,13 @@ public interface IScheduleDao {
      * @return
      */
     public String findSeat(@Param("cid") String cid, @Param("competitorId") String competitorId);
+
+    /**
+     * 发布成绩
+     * @param cid
+     * @param competitorId
+     * @param grade
+     * @return
+     */
+    public int publishGrade(@Param("cid") String cid, @Param("competitorId") String competitorId, @Param("grade") float grade);
 }

@@ -105,5 +105,14 @@
         <servlet-name>findSeat</servlet-name>
         <url-pattern>/Schedule/findSeat</url-pattern>
     </servlet-mapping>
+    <servlet>
+        <servlet-name>publishGrade</servlet-name>
+        <servlet-class>com.cms.controller.ScheduleController</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>publishGrade</servlet-name>
+        <url-pattern>/Schedule/publishGrade</url-pattern>
+    </servlet-mapping>
+
     <!-- ScheduleController end -->
 </web-app>

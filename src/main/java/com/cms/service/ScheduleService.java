@@ -1,8 +1,6 @@
 package com.cms.service;
 
 import net.sf.json.JSONArray;
-import org.apache.ibatis.annotations.Param;
-
 
 public interface ScheduleService {
 
@@ -65,4 +63,13 @@ public interface ScheduleService {
      * @return
      */
     public JSONArray findSeat(String cid, String competitorId);
+
+    /**
+     * 发布成绩
+     * @param cid
+     * @param competitorId
+     * @param grade
+     * @return
+     */
+    public int publishGrade(String cid, String competitorId, float grade);
 }

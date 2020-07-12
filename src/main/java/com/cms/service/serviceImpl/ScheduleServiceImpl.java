@@ -68,6 +68,12 @@ public class ScheduleServiceImpl implements ScheduleService {
         return JSONArray.fromObject(map);
     }
 
+    @Override
+    public int publishGrade(String cid, String competitorId, float grade) {
+        int count = session.getMapper(IScheduleDao.class).publishGrade(cid, competitorId, grade);
+        return count;
+    }
+
     @Test
     public void testFindSeat() {
         System.out.println(findSeat("1", "1"));
