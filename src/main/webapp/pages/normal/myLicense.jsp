@@ -167,8 +167,8 @@
 <script src="../../assets/js/jspdf.min.js"></script>
 <script>
     function loan() {
-        document.getElementById("myLicense").style.display="none";
-        document.getElementById("tip").style.display="";
+        document.getElementById("myLicense").style.display = "none";
+        document.getElementById("tip").style.display = "";
         $.ajax({
             url: "http://120.25.255.183:8088/Curriculum/User/getUser/" + sessionStorage.getItem('userid'),
             type: "GET",
@@ -239,17 +239,17 @@
             headers: {
                 "TOKEN": sessionStorage.getItem("TOKEN")
             },
-            data: {competitorId : sessionStorage.getItem("userid"), cid: event.competitionId},
+            data: {competitorId: sessionStorage.getItem("userid"), cid: event.competitionId},
             dataType: "json",
             success: function (result) {
-                if(result.flag === true) {
+                if (result.flag === true) {
                     if (result.data[0].flag === "false") {
-                        document.getElementById("tip").style.display="";
-                        document.getElementById("myLicense").style.display="none";
+                        document.getElementById("tip").style.display = "";
+                        document.getElementById("myLicense").style.display = "none";
                         alert(result.data[1].msg)
                     } else {
-                        document.getElementById("myLicense").style.display="";
-                        document.getElementById("tip").style.display="none";
+                        document.getElementById("myLicense").style.display = "";
+                        document.getElementById("tip").style.display = "none";
                         $("#competitionId").html(result.data[0].cid);
                         $("#competitionName").html(result.data[0].cname);
                         $("#competitorId").html(result.data[0].competitorId);
@@ -261,12 +261,12 @@
                         console.log(result)
 
                         getSeat(result.data[0].cid, result.data[0].competitorId);
-                        if (result.data[0].pid != null && result.data[0].pid != ""){
+                        if (result.data[0].pid != null && result.data[0].pid != "") {
                             getPlace(result.data[0].pid);
                             getOrder(result.data[0].cid);
-                        }else{
-                            document.getElementById("tip").style.display="";
-                            document.getElementById("myLicense").style.display="none";
+                        } else {
+                            document.getElementById("tip").style.display = "";
+                            document.getElementById("myLicense").style.display = "none";
                             alert("暂未分配赛场")
                         }
                     }
@@ -280,7 +280,7 @@
         $.ajax({
             url: "http://localhost:8080/CompetitionManagementSystem/Schedule/findSeat",
             type: "POST",
-            data: {cid : cid, competitorId : competitorId},
+            data: {cid: cid, competitorId: competitorId},
             dataType: "json",
             success: function (result) {
                 console.log(result)
@@ -294,7 +294,7 @@
         $.ajax({
             url: "http://localhost:8080/CompetitionManagementSystem/Place/getPlaceByPid",
             type: "POST",
-            data: {pid : pid},
+            data: {pid: pid},
             dataType: "json",
             success: function (result) {
                 console.log(result)
@@ -303,11 +303,12 @@
             }
         });
     }
+
     function getOrder(cid) {
         $.ajax({
             url: "http://localhost:8080/CompetitionManagementSystem/CompetitionOrder/getOrderByCid",
             type: "POST",
-            data: {cid : cid},
+            data: {cid: cid},
             dataType: "json",
             success: function (result) {
                 $("#order").html(result.data[0].detail);

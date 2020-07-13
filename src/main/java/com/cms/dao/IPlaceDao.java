@@ -24,7 +24,7 @@ public interface IPlaceDao {
     public List<Place> getPlaceByCid(@Param("cid") String cid);
 
 
-    public Place getPlaceByCAndP(@Param("cid") String cid,@Param("pid") String pid);
+    public Place getPlaceByCAndP(@Param("cid") String cid, @Param("pid") String pid);
 
     /**
      * 根据赛事id查询所有赛场
@@ -32,7 +32,8 @@ public interface IPlaceDao {
      * @param cid
      * @return
      */
-    public List<Place> getPlaceByCidAndPid(@Param("cid") String cid,@Param("pid") String pid);
+    public List<Place> getPlaceByCidAndPid(@Param("cid") String cid, @Param("pid") String pid);
+
     /**
      * 添加赛场安排
      *
@@ -43,11 +44,12 @@ public interface IPlaceDao {
 
     /**
      * 判断赛场是否已存在
+     *
      * @param school
      * @param pname
      * @param pnum
      * @param cid
      * @return
      */
-    public Place isExistPlace(@Param("school") String school, @Param("pname") String pname, @Param("pnum") String pnum,@Param("cid") String cid);
+    public Place isExistPlace(@Param("school") String school, @Param("pname") String pname, @Param("pnum") String pnum, @Param("cid") String cid);
 }

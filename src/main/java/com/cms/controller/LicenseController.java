@@ -51,22 +51,22 @@ public class LicenseController extends HttpServlet {
             List<License> licenseList = new ArrayList<>();
             Place place = null;
             Schedule schedules = null;
-            licenseList = licenseService.getLicenseByCC("", cid);
+            licenseList = licenseService.getLicenseByCid(cid);
             System.out.println(licenseList);
             if (licenseList.size() != 0) {
                 for (License license : licenseList) {
-                    if (license.getPid()==null) {
-                        JsonUtil.returnJson(JsonUtil.returnStatus(false, "暂未分配座位"), request,response);
+                    if (license.getPid() == null) {
+                        JsonUtil.returnJson(JsonUtil.returnStatus(false, "暂未分配座位"), request, response);
                     }
-                        place = placeService.getPlaceByCAndP(cid, license.getPid());
-                        schedules = scheduleService.getSchedule(cid, license.getCompetitorId());
-                        Information information = new Information(license.getLicenseId(), license.getCompetitorId(),
-                                cid, place.getPid(), license.getName(), license.getTeamName(), license.getCname(),
-                                place.getPname(), place.getPnum(), place.getManager(), schedules.getSeat(),
-                                schedules.getGrade());
-                        informationList.add(information);
-                    }
+                    place = placeService.getPlaceByCAndP(cid, license.getPid());
+                    schedules = scheduleService.getSchedule(cid, license.getCompetitorId());
+                    Information information = new Information(license.getLicenseId(), license.getCompetitorId(),
+                            cid, place.getPid(), license.getName(), license.getTeamName(), license.getCname(),
+                            place.getPname(), place.getPnum(), place.getManager(), schedules.getSeat(),
+                            schedules.getGrade());
+                    informationList.add(information);
                 }
+            }
             JsonUtil.returnJson(JSONArray.fromObject(informationList), request, response);
         }
     }

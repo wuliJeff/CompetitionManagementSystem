@@ -69,8 +69,8 @@ public class ScheduleServiceImpl implements ScheduleService {
     }
 
     @Override
-    public  Schedule getSchedule(String cid, String competitorId) {
-        Schedule schedule= session.getMapper(IScheduleDao.class).getSchedule(cid, competitorId);
+    public Schedule getSchedule(String cid, String competitorId) {
+        Schedule schedule = session.getMapper(IScheduleDao.class).getSchedule(cid, competitorId);
         return schedule;
     }
 
@@ -93,7 +93,7 @@ public class ScheduleServiceImpl implements ScheduleService {
     @Override
     public boolean isExsitSchedule(Schedule s) {
         Schedule schedule = session.getMapper(IScheduleDao.class).isExsitSchedule(s);
-        if (schedule != null){
+        if (schedule != null) {
             return true;
         }
         return false;

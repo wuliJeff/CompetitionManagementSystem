@@ -105,19 +105,24 @@
         <div class="col-lg-12" style="margin-top: 2%;">
             <form id="orderInfo" method="post">
                 <div>
-                    <input type="text" id="orderTitle" name="orderTitle" class="form-control input-group-sm" placeholder="标题"/>
+                    <input type="text" id="orderTitle" name="orderTitle" class="form-control input-group-sm"
+                           placeholder="标题"/>
                     <div class="clear" style="margin-top: 2%; margin-bottom: 2%;"></div>
                     <!--style给定宽度可以影响编辑器的最终宽度-->
                     <script type="text/plain" id="editor" style="width: 100%; height: 400px;">
                         <p>在此输入赛场秩序册内容</p>
+
                     </script>
                     <div class="clear"></div>
-                    <button type="button" name="submit" onclick="uploadOrder()" class="btn btn-primary btn-outline-primary">提交</button>
+                    <button type="button" name="submit" onclick="uploadOrder()"
+                            class="btn btn-primary btn-outline-primary">提交
+                    </button>
                 </div>
             </form>
             <!-- 实例化编辑器 -->
             <script type="text/javascript">
                 var um = UM.getEditor('editor');
+
                 function uploadOrder() {
                     var event = $.cookie("event");
                     event = JSON.parse(event)

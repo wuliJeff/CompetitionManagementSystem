@@ -21,7 +21,7 @@ public interface ILicenseDao {
      *
      * @return
      */
-   public License isExistLicense(@Param("competitorId") String competitorId, @Param("cid") String cid);
+    public License isExistLicense(@Param("competitorId") String competitorId, @Param("cid") String cid);
 
     /**
      * 获取参赛证
@@ -29,7 +29,6 @@ public interface ILicenseDao {
      * @return License对象
      */
     public List<License> getLicense(@Param("competitorId") String competitorId, @Param("cid") String cid);
-
 
 
     public int updateLicense(@Param("license") License license);

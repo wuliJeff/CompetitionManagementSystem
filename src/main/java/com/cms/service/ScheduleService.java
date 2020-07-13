@@ -71,6 +71,7 @@ public interface ScheduleService {
 
     /**
      * 发布成绩
+     *
      * @param cid
      * @param competitorId
      * @param grade

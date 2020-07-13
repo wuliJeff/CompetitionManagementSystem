@@ -32,12 +32,12 @@ public class ScheduleController extends HttpServlet {
             String cid = request.getParameter("cid");
             String competitorId = request.getParameter("competitorId");
             JsonUtil.returnJson(scheduleService.findSeat(cid, competitorId), request, response);
-        } else if (requestURI.equals("/CompetitionManagementSystem/Schedule/publishGrade")){
+        } else if (requestURI.equals("/CompetitionManagementSystem/Schedule/publishGrade")) {
             String excelData = request.getParameter("excelData");
             String cid = request.getParameter("cid");
             JSONArray jsonArray = JSONArray.fromObject(excelData);
-            for (int i=0; i<jsonArray.size(); i++) {
-                JSONObject jsonObject = (JSONObject)jsonArray.get(i);
+            for (int i = 0; i < jsonArray.size(); i++) {
+                JSONObject jsonObject = (JSONObject) jsonArray.get(i);
                 String competitorId = jsonObject.getString("competitorId");
                 float grade = Float.parseFloat(jsonObject.getString("grade"));
                 scheduleService.publishGrade(cid, competitorId, grade);

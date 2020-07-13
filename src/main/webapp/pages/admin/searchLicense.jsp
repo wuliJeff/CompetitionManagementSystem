@@ -102,7 +102,8 @@
                 <input type="text" name="competitorIdSearch" id="competitorIdSearch"
                        class="form-control input-group-sm" style="width: auto;"
                        placeholder="参赛者id"/>
-                <button id="search" type="button" name="search" class="btn btn-primary btn-outline-primary" data-loading-text="查询中...">
+                <button id="search" type="button" name="search" class="btn btn-primary btn-outline-primary"
+                        data-loading-text="查询中...">
                     <span class="glyphicon glyphicon-search"></span> 查询
                 </button>
             </div>
@@ -177,8 +178,8 @@
 <script src="../../assets/js/jspdf.min.js"></script>
 <script>
     function loan() {
-        document.getElementById("tip").style.display="none";
-        document.getElementById("myLicense").style.display="none";
+        document.getElementById("tip").style.display = "none";
+        document.getElementById("myLicense").style.display = "none";
         $.ajax({
             url: "http://120.25.255.183:8088/Curriculum/User/getUser/" + sessionStorage.getItem('userid'),
             type: "GET",
@@ -243,17 +244,17 @@
         $.ajax({
             url: "http://localhost:8080/CompetitionManagementSystem/License/getLicense",
             type: "POST",
-            data: {competitorId : competitorId, cid: cid},
+            data: {competitorId: competitorId, cid: cid},
             dataType: "json",
             success: function (result) {
-                if(result.flag === true){
-                    if (result.data[0].flag === "false"){
-                        document.getElementById("myLicense").style.display="none";
-                        document.getElementById("tip").style.display="";
+                if (result.flag === true) {
+                    if (result.data[0].flag === "false") {
+                        document.getElementById("myLicense").style.display = "none";
+                        document.getElementById("tip").style.display = "";
                         alert(result.data[1].msg)
                     } else {
-                        document.getElementById("myLicense").style.display="";
-                        document.getElementById("tip").style.display="none";
+                        document.getElementById("myLicense").style.display = "";
+                        document.getElementById("tip").style.display = "none";
                         $("#competitionId").html(result.data[0].cid);
                         $("#competitionName").html(result.data[0].cname);
                         $("#competitorId").html(result.data[0].competitorId);
@@ -276,7 +277,7 @@
         $.ajax({
             url: "http://localhost:8080/CompetitionManagementSystem/Schedule/findSeat",
             type: "POST",
-            data: {cid : cid, competitorId : competitorId},
+            data: {cid: cid, competitorId: competitorId},
             dataType: "json",
             success: function (result) {
                 $("#seat").html(result.data[0].seat);
@@ -289,7 +290,7 @@
         $.ajax({
             url: "http://localhost:8080/CompetitionManagementSystem/Place/getPlaceByPid",
             type: "POST",
-            data: {pid : pid},
+            data: {pid: pid},
             dataType: "json",
             success: function (result) {
                 $("#pname").html(result.data[0].pname);
@@ -302,13 +303,13 @@
         $.ajax({
             url: "http://localhost:8080/CompetitionManagementSystem/CompetitionOrder/getOrderByCid",
             type: "POST",
-            data: {cid : cid},
+            data: {cid: cid},
             dataType: "json",
             success: function (result) {
-                if (result.flag === true){
-                    if (result.data[0].flag === "false"){
+                if (result.flag === true) {
+                    if (result.data[0].flag === "false") {
                         alert(result.data[1].msg)
-                    }else{
+                    } else {
                         $("#order").html(result.data[0].detail);
                     }
                 }
@@ -323,7 +324,7 @@
         var cid = event.competitionId;
         console.log(competitorId.value)
         console.log(cid)
-        $(this).button('loading').delay(3000).queue(function() {
+        $(this).button('loading').delay(3000).queue(function () {
             $(this).button('reset');
             $(this).dequeue();
         });

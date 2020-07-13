@@ -99,9 +99,9 @@
                 </h3>
             </div>
         </div>
-            <div id="ringGraphic" style="width: 100%; height: 600px; margin: 0;"></div>
-        </div>
-    </div><!--/.row-->
+        <div id="ringGraphic" style="width: 100%; height: 600px; margin: 0;"></div>
+    </div>
+</div><!--/.row-->
 </div><!--/.main-->
 
 <script src="../../assets/js/jquery-1.11.1.min.js"></script>
@@ -215,9 +215,9 @@
                 var B = result.data[0].B;
                 var C = result.data[0].C;
                 var D = result.data[0].D;
-                if (A === 0 && B === 0 && C === 0 && D===0){
+                if (A === 0 && B === 0 && C === 0 && D === 0) {
                     alert("目前竞赛暂无成绩")
-                }else{
+                } else {
                     createGraphic(A, B, C, D)
                 }
             }

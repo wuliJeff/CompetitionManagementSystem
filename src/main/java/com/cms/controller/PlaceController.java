@@ -36,8 +36,8 @@ public class PlaceController extends HttpServlet {
             String cid = request.getParameter("cid");
             JSONArray placeJsonArray = JSONArray.fromObject(excelData);
             List<Place> places = new ArrayList<>();
-            for (int i=0; i<placeJsonArray.size(); i++) {
-                JSONObject placeJsonObject = (JSONObject)placeJsonArray.get(i);
+            for (int i = 0; i < placeJsonArray.size(); i++) {
+                JSONObject placeJsonObject = (JSONObject) placeJsonArray.get(i);
                 String pid = placeJsonObject.getString("pid");
                 String school = placeJsonObject.getString("school");
                 String pname = placeJsonObject.getString("pname");

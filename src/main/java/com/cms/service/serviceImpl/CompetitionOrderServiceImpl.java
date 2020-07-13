@@ -52,7 +52,7 @@ public class CompetitionOrderServiceImpl implements CompetitorOrderService {
         CompetitionOrder order = session.getMapper(ICompetitionOrderDao.class).getOrderByCid(cid);
         if (order != null) {
             return JSONArray.fromObject(order);
-        }else {
+        } else {
             msg = "该赛事暂无赛场秩序册";
             return JsonUtil.returnStatus(false, msg);
         }

@@ -227,6 +227,7 @@
             }
         }
     }
+
     //查看单个竞赛
     $("#myTable").on("click", "input[name='seachButton']", function () {
         var name = $(this).parent().parent().find("input[name='competitionName']").val();

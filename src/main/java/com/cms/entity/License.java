@@ -10,6 +10,7 @@ public class License {
     private String pid; //赛场id
     private String LicenseId;
     private String oid;
+
     public License() {
     }
 
@@ -86,7 +87,6 @@ public class License {
     }
 
 
-
     public String getCid() {
         return cid;
     }
@@ -110,7 +110,6 @@ public class License {
     public void setPid(String pid) {
         this.pid = pid;
     }
-
 
 
     @Override

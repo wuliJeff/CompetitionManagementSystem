@@ -266,9 +266,9 @@
                             if (result.data[i].teamname != null) {
 
                                 $("#myTable").append("<tr> " +
-                                    "<td>" + result.data[i].licenseId  + "</td>" +
+                                    "<td>" + result.data[i].licenseId + "</td>" +
                                     "<td>" + Place + "</td>" +
-                                    "<td>" + result.data[i].teamName+ "</td>" +
+                                    "<td>" + result.data[i].teamName + "</td>" +
                                     "<td>" + result.data[i].cname + "</td>" +
                                     "<td>" + '<input type="text" name="userId" style="display: none" value="' + result.data[i].userid + '">' +
                                     // '<input type="text" name="competitionName" style="display: none" value="'+ result.data[i].competitionName+'">' +
@@ -278,9 +278,9 @@
                                 )
                             } else {
                                 $("#myTable").append("<tr> " +
-                                    "<td>" + result.data[i].licenseId  + "</td>" +
+                                    "<td>" + result.data[i].licenseId + "</td>" +
                                     "<td>" + Place + "</td>" +
-                                    "<td>" + result.data[i].name+ "</td>" +
+                                    "<td>" + result.data[i].name + "</td>" +
                                     "<td>" + result.data[i].cname + "</td>" +
                                     "<td>" + '<input type="text" name="userId" style="display: none" value="' + result.data[i].userid + '">' +
                                     '<input type="button" name="seachButton" value="详情" class="btn btn-info>' + "</td>" +

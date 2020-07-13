@@ -62,6 +62,7 @@ public interface IScheduleDao {
 
     /**
      * 发布成绩
+     *
      * @param cid
      * @param competitorId
      * @param grade
@@ -71,6 +72,7 @@ public interface IScheduleDao {
 
     /**
      * 发布成绩
+     *
      * @param cid
      * @param competitorId
      * @param grade

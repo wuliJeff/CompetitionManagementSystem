@@ -44,6 +44,6 @@
 
     </select>
     <select id="getLicenseByCid" resultType="com.cms.entity.License">
-       select * from License where cid = {#cid}
+       select * from License where cid = #{cid}
     </select>
 </mapper>

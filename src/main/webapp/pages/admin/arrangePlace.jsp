@@ -37,6 +37,7 @@
             text-indent: 0;
             line-height: 20px;
         }
+
         .file input {
             position: absolute;
             font-size: 100px;
@@ -44,6 +45,7 @@
             top: 0;
             opacity: 0;
         }
+
         .file:hover {
             background: #AADFFD;
             border-color: #78C3F3;
@@ -123,15 +125,15 @@
             <li class="active"><a href="#"><span class="glyphicon glyphicon-tags"></span> 赛场管理 </a></li>
         </ol>
     </div><!--/.row-->
-    <br />
-    <br />
+    <br/>
+    <br/>
     <div class="row">
         <div class="col-lg-12">
             <div id="place" class="row" style="margin-left: 2%;">
                 <a href="javascript:;" class="file">
                     <span class="glyphicon glyphicon-folder-open"></span>
                     上传赛场名单并分配赛场
-                    <input type="file" onchange="importFile(this)" />
+                    <input type="file" onchange="importFile(this)"/>
                 </a>
                 &nbsp;&nbsp;&nbsp;&nbsp;
                 <a href="javascript:;" class="file" id="refresh">
@@ -141,7 +143,8 @@
                 </a>
             </div><!--/.row-->
         </div>
-        <div id="myArrange" style="font-family: 'Microsoft YaHei UI'; margin-top: 2%; font-size: 18px; text-align: center;">
+        <div id="myArrange"
+             style="font-family: 'Microsoft YaHei UI'; margin-top: 2%; font-size: 18px; text-align: center;">
             <table>
                 <tr></tr>
             </table>
@@ -163,8 +166,8 @@
 <script src="../../assets/js/xlsx.full.min.js"></script>
 <script>
     function loan() {
-        document.getElementById("tip").style.display="";
-        document.getElementById("myArrange").style.display="";
+        document.getElementById("tip").style.display = "";
+        document.getElementById("myArrange").style.display = "";
         $.ajax({
             url: "http://120.25.255.183:8088/Curriculum/User/getUser/" + sessionStorage.getItem('userid'),
             type: "GET",
@@ -224,13 +227,13 @@
         window.location.href = "../../index.jsp";
     })
 
-    function refresh(){
+    function refresh() {
         var event = $.cookie("event");
         event = JSON.parse(event);
         $.ajax({
             url: "http://localhost:8080/CompetitionManagementSystem/Place/getPlaceByCid",
             type: "POST",
-            data: {cid:event.competitionId},
+            data: {cid: event.competitionId},
             datatype: "JSON",
             success: function (result) {
                 console.log(result.data[0]);
@@ -246,17 +249,17 @@
     function importFile(obj) {//导入
         var event = $.cookie("event");
         event = JSON.parse(event);
-        if(!obj.files) {
+        if (!obj.files) {
             return;
         }
         var f = obj.files[0];
         var reader = new FileReader();
-        reader.onload = function(e) {
+        reader.onload = function (e) {
             var data = e.target.result;
             var wb = XLSX.read(data, {
                 type: 'binary' //以二进制的方式读取
             });
-            var sheet0=wb.Sheets[wb.SheetNames[0]];//sheet0代表excel表格中的第一页
+            var sheet0 = wb.Sheets[wb.SheetNames[0]];//sheet0代表excel表格中的第一页
             var excelData = XLSX.utils.sheet_to_json(sheet0);//利用接口实现转换
             console.log(excelData);
             console.log(JSON.stringify(excelData));
@@ -266,7 +269,7 @@
                 data: {excelData: JSON.stringify(excelData), cid: event.competitionId},
                 dataType: "json",
                 success: function (result) {
-                    if(result.flag === true){
+                    if (result.flag === true) {
                         alert(result.data[1].msg)
                     }
                 }

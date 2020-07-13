@@ -206,16 +206,16 @@
             headers: {
                 "TOKEN": sessionStorage.getItem("TOKEN")
             },
-            data: {cid : event.cid},
+            data: {cid: event.cid},
             dataType: "json",
             success: function (result) {
                 var A = result.data[0].A;
                 var B = result.data[0].B;
                 var C = result.data[0].C;
                 var D = result.data[0].D;
-                if (A === 0 && B === 0 && C === 0 && D===0){
+                if (A === 0 && B === 0 && C === 0 && D === 0) {
                     alert("目前竞赛暂未公布成绩")
-                }else{
+                } else {
                     createGraphic(A, B, C, D)
                 }
             }

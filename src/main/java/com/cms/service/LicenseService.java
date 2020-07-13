@@ -18,7 +18,6 @@ public interface LicenseService {
     /**
      * 查找是否已存在参赛证，避免重复插入
      *
-     *
      * @return
      */
     public boolean isExistLicense(String competitorId, String cid);

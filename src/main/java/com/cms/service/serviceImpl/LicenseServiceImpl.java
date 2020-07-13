@@ -26,11 +26,11 @@ public class LicenseServiceImpl implements LicenseService {
         /**
          * 存在参赛证则不重复插入
          */
-        if (isExistLicense(license.getCompetitorId(),license.getCid())) {
+        if (isExistLicense(license.getCompetitorId(), license.getCid())) {
             msg = "参赛证已存在";
             return JsonUtil.returnStatus(false, msg);
         } else {
-           license.setLicenseId(RandomIdFactory.getRandomId());
+            license.setLicenseId(RandomIdFactory.getRandomId());
             int competitorId = session.getMapper(ILicenseDao.class).insertLicense(license);
             if (competitorId >= 0) {
                 msg = "参赛证添加成功";
@@ -44,7 +44,7 @@ public class LicenseServiceImpl implements LicenseService {
 
     @Override
     public boolean isExistLicense(String competitorId, String cid) {
-       License  license = session.getMapper(ILicenseDao.class).isExistLicense(competitorId,cid);
+        License license = session.getMapper(ILicenseDao.class).isExistLicense(competitorId, cid);
         if (license != null) {
             return true;
         }
@@ -54,11 +54,11 @@ public class LicenseServiceImpl implements LicenseService {
     @Override
     public JSONArray getLicense(String competitorId, String cid) {
         List<License> license = session.getMapper(ILicenseDao.class).getLicense(competitorId, cid);
-        if(license.size() == 0){
+        if (license.size() == 0) {
             msg = "无此参赛证信息";
             return JsonUtil.returnStatus(false, msg);
-        }else{
-            msg="查询成功";
+        } else {
+            msg = "查询成功";
             return JSONArray.fromObject(license);
         }
     }
@@ -71,7 +71,7 @@ public class LicenseServiceImpl implements LicenseService {
 
     @Override
     public JSONArray updateLicense(License license) {
-        if (session.getMapper(ILicenseDao.class).updateLicense(license)>0){
+        if (session.getMapper(ILicenseDao.class).updateLicense(license) > 0) {
             msg = "更新成功";
         }
         return JsonUtil.returnStatus(false, msg);
@@ -94,7 +94,7 @@ public class LicenseServiceImpl implements LicenseService {
 //        license.setPid("1");
 
 //        System.out.println(getLicense("","202007101262"));
-        System.out.println(getLicense("202007102028","202007101135"));
+        System.out.println(getLicense("202007102028", "202007101135"));
 //        System.out.println(getLicense("202007102028",""));
     }
 
