@@ -48,7 +48,7 @@ public class LicenseController extends HttpServlet {
         } else if (requestURI.equals("/CompetitionManagementSystem/License/getInformation")) {
             String cid = request.getParameter("cid");
             List<Information> informationList = new ArrayList<>();
-            List<License> licenseList = new ArrayList<>();
+            List<License> licenseList;
             Place place = null;
             Schedule schedules = null;
             licenseList = licenseService.getLicenseByCid(cid);

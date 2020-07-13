@@ -11,40 +11,40 @@
     </insert>
 
     <!-- 根据参赛者id查询所有成绩 -->
-    <select id="selectGradeByCompetitorId" parameterType="String" resultType="com.cms.entity.Schedule">
+    <select id="selectGradeByCompetitorId" parameterType="String" resultType="com.cms.entity.Schedule" useCache="false" flushCache="true">
         select * from Schedule where competitorId=#{competitorId} order by grade DESC;
     </select>
 
     <!-- 根据赛事id和参赛者id查询座位安排 -->
-    <select id="findSeat" parameterType="String" resultType="String">
+    <select id="findSeat" parameterType="String" resultType="String" useCache="false" flushCache="true">
         select seat from Schedule where cid=#{cid} and competitorId=#{competitorId}
     </select>
 
     <!-- 根据赛事id查询所有成绩 -->
-    <select id="selectGradeByCid" parameterType="String" resultType="com.cms.entity.Schedule">
+    <select id="selectGradeByCid" parameterType="String" resultType="com.cms.entity.Schedule" useCache="false" flushCache="true">
         select * from Schedule where cid=#{cid} order by grade DESC;
     </select>
 
     <!-- 获取一等奖人数 -->
-    <select id="selectGradeAByCid" parameterType="String" resultType="int">
+    <select id="selectGradeAByCid" parameterType="String" resultType="int" useCache="false" flushCache="true">
         select count(*) from Schedule where cid=#{cid} and grade>=90;
     </select>
 
     <!-- 获取二等奖人数 -->
-    <select id="selectGradeBByCid" parameterType="String" resultType="int">
+    <select id="selectGradeBByCid" parameterType="String" resultType="int" useCache="false" flushCache="true">
         select count(*) from Schedule where cid=#{cid} and (grade &lt; 90 and grade>=75);
     </select>
 
     <!-- 获取三等奖人数 -->
-    <select id="selectGradeCByCid" parameterType="String" resultType="int">
+    <select id="selectGradeCByCid" parameterType="String" resultType="int" useCache="false" flushCache="true">
         select count(*) from Schedule where cid=#{cid} and (grade &lt; 75 and grade>=60);
     </select>
 
     <!-- 获取未获奖人数 -->
-    <select id="selectGradeDByCid" parameterType="String" resultType="int">
+    <select id="selectGradeDByCid" parameterType="String" resultType="int" useCache="false" flushCache="true">
         select count(*) from Schedule where cid=#{cid} and grade &lt; 60;
     </select>
-    <select id="getSchedule" resultType="com.cms.entity.Schedule">
+    <select id="getSchedule" resultType="com.cms.entity.Schedule" useCache="false" flushCache="true">
          select * from Schedule where cid=#{cid} and competitorId=#{competitorId}
     </select>
 
@@ -52,7 +52,7 @@
         update Schedule set grade=#{grade} where cid=#{cid} and competitorId=#{competitorId}
     </update>
 
-    <select id="isExsitSchedule" parameterType="com.cms.entity.Schedule" resultType="com.cms.entity.Schedule">
+    <select id="isExsitSchedule" parameterType="com.cms.entity.Schedule" resultType="com.cms.entity.Schedule" useCache="false" flushCache="true">
         select * from Schedule where cid=#{s.cid} and competitorId=#{s.competitorId};
     </select>
 </mapper>

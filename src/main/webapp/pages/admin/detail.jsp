@@ -213,14 +213,18 @@
                 data: {excelData: JSON.stringify(excelData), cid: event.competitionId},
                 dataType: "json",
                 success: function (result) {
-                    if (result.flag === true) {
-                        window.location.reload();
-                    }
+                    alert("成绩发布成功")
+                    window.location.reload()
+                },
+                error:function (result) {
+                    alert("成绩发布成功")
+                    window.location.reload()
                 }
             });
         }
         reader.readAsBinaryString(f);
     }
+
     function loan() {
         var UserList = [];
         var event = $.cookie("event");
@@ -314,7 +318,7 @@
             $(".login").show()
             $("#logout").hide()
         }
-        getLicense(event.competitionId)
+        getInfomation(event.competitionId)
     }
 
     //动态现实表格
@@ -334,24 +338,25 @@
 
     window.onload = loan;
 
-    function getLicense(cid) {
+    function getInfomation(cid) {
         $.ajax({
             url: "http://localhost:8080/CompetitionManagementSystem/License/getInformation",
             type: "POST",
             data: {cid: cid},
             dataType: "json",
+            aysn: false,
             success: function (result) {
+                console.log(result)
                 if (result.flag === true) {
                     if (result.data[0].flag === "false") {
                         alert(result.data[1].msg)
                     } else {
-                        var grade;
                         for (var i = 0; i < result.data.length; i++) {
                             if (result.data[i].grade < 0) {
-                                grade = "未发布";
+                                var grade = "未发布";
                                 document.getElementById("publishButton").style.display = "";
                             } else {
-                                grade = result.data[i].grade;
+                                var grade = result.data[i].grade;
                                 document.getElementById("publishButton").style.display = "none";
                             }
                             if (result.data[i].teamname != null) {

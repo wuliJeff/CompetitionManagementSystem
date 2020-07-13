@@ -5,12 +5,12 @@
 <mapper namespace="com.cms.dao.IPlaceDao">
 
     <!-- 根据赛场id查询所有赛事的赛场安排 -->
-    <select id="getPlaceByPid" parameterType="String" resultType="com.cms.entity.Place">
+    <select id="getPlaceByPid" parameterType="String" resultType="com.cms.entity.Place" useCache="false" flushCache="true">
         select * from Place where pid=#{pid}
     </select>
 
     <!-- 根据赛事id查询所有赛场 -->
-    <select id="getPlaceByCid" parameterType="String" resultType="com.cms.entity.Place">
+    <select id="getPlaceByCid" parameterType="String" resultType="com.cms.entity.Place" useCache="false" flushCache="true">
         select * from Place where cid=#{cid}
     </select>
 
@@ -23,13 +23,13 @@
         </selectKey>
     </insert>
     <!-- 判断赛场是否被安排 -->
-    <select id="isExistPlace" parameterType="String" resultType="com.cms.entity.Place">
+    <select id="isExistPlace" parameterType="String" resultType="com.cms.entity.Place" useCache="false" flushCache="true">
         select * from Place where school=#{school} and pname=#{pname} and pnum=#{pnum} and cid=#{cid};
     </select>
-    <select id="getPlaceByCidAndPid" resultType="com.cms.entity.Place">
+    <select id="getPlaceByCidAndPid" resultType="com.cms.entity.Place" useCache="false" flushCache="true">
           select * from Place where pid=#{pid} and cid=#{cid}
     </select>
-    <select id="getPlaceByCAndP" resultType="com.cms.entity.Place">
+    <select id="getPlaceByCAndP" resultType="com.cms.entity.Place" useCache="false" flushCache="true">
              select * from Place where pid=#{pid} and cid=#{cid}
     </select>
 </mapper>
