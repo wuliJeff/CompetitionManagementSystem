@@ -42,7 +42,6 @@ public class ScheduleController extends HttpServlet {
                 float grade = Float.parseFloat(jsonObject.getString("grade"));
                 scheduleService.publishGrade(cid, competitorId, grade);
             }
-            // 返回？
         }
     }
 

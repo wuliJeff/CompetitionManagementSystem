@@ -4,8 +4,8 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.cms.dao.IScheduleDao">
     <insert id="insertSchedule">
-       insert into  Schedule values (#{cid},#{competitorId},#{pid},#{seat},#{grade} )
-       <selectKey keyColumn="0" keyProperty="cid" resultType="int" order="AFTER">
+       insert into Schedule values(#{s.cid},#{s.competitorId},#{s.pid},#{s.seat},#{s.grade})
+       <selectKey keyColumn="1" keyProperty="cid" resultType="int" order="AFTER">
            select last_insert_id();
        </selectKey>
     </insert>

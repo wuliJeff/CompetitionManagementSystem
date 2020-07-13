@@ -64,8 +64,8 @@ public class LicenseServiceImpl implements LicenseService {
     }
 
     @Override
-    public JSONArray updateLicense(License l) {
-        if (session.getMapper(ILicenseDao.class).UpdateLicense(l)>0){
+    public JSONArray updateLicense(License license) {
+        if (session.getMapper(ILicenseDao.class).updateLicense(license)>0){
             msg = "更新成功";
         }
         return JsonUtil.returnStatus(false, msg);

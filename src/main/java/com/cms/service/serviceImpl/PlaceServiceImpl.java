@@ -40,19 +40,20 @@ public class PlaceServiceImpl implements PlaceService {
         LicenseServiceImpl licenseService = new LicenseServiceImpl();
         ScheduleServiceImpl scheduleService = new ScheduleServiceImpl();
         List<License> licenses = licenseService.getLicenseByCid(places.get(0).getCid());
+        int licenseSize = licenses.size();
         int i = 0;
         for (Place place : places) {
             place.setPid(RandomIdFactory.getRandomId());
-            for (int j = Integer.parseInt(place.getCsize()); j >= 0; j = j - 2) {
-                if (i < licenses.size()) {
+            int j = Integer.parseInt(place.getCsize());
+            for (int k = 1; k < j; ) {
+                k = k + 2;
+                if (i != licenseSize) {
                     License license = licenses.get(i);
+                    i++;
                     license.setPid(place.getPid());
                     licenseService.updateLicense(license);
-                    i++;
-                    Schedule schedule = new Schedule(license.getCid(),license.getCompetitorId(),place.getPid(),String.valueOf(j),-1);
+                    Schedule schedule = new Schedule(license.getCid(), license.getCompetitorId(), place.getPid(), String.valueOf(j), -1);
                     scheduleService.insertSchedule(schedule);
-                } else {
-                    break;
                 }
             }
             if (!isExistPlace(place.getSchool(), place.getPname(), place.getPnum(), place.getCid())) {
@@ -60,7 +61,6 @@ public class PlaceServiceImpl implements PlaceService {
             }
         }
         msg = "赛场导入完成";
-        System.out.println(JsonUtil.returnStatus(true, msg));
         return JsonUtil.returnStatus(true, msg);
     }
 

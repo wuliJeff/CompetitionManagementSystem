@@ -13,17 +13,8 @@
             select last_insert_id()
         </selectKey>
     </insert>
-    <update id="UpdateLicense">
-        update  license
-        <set>
-            <if test="name!=null">
-                name=#{name},
-            </if>
-            <if test="pid!=null">
-                pid=#{pid},
-            </if>
-        </set>
-        where cid=#{cid} and competitorId=#{competitorId}
+    <update id="updateLicense" parameterType="com.cms.entity.License">
+        update License set name=#{license.name}, pid=#{license.pid} where cid=#{license.cid} and competitorId=#{license.competitorId}
     </update>
 
     <!-- 查询是否存在参赛证 -->
