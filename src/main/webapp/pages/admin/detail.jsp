@@ -100,15 +100,16 @@
         <div class="col-lg-12">
             <div class="row">
                 <div class="col-lg-12" style="margin-top: 2%;">
-                    <form id="searchInfo" action="" method="post">
-                        <div class="input-group">
-                            <input type="text" name="userId" class="form-control input-group-sm" style="width: auto;"
-                                   placeholder="参赛证号/参赛者姓名"/>
-                            <button type="submit" name="search" class="btn btn-primary btn-outline-primary">
-                                <span class="glyphicon glyphicon-search"></span> 查询
-                            </button>
-                        </div>
-                    </form>
+<%--                    <form id="searchInfo" action="" method="post">--%>
+<%--                        <div class="input-group">--%>
+<%--                            <input type="text" name="userId" class="form-control input-group-sm" style="width: auto;"--%>
+<%--                                   placeholder="参赛证号/参赛者姓名"/>--%>
+<%--                            <button type="submit" name="search" class="btn btn-primary btn-outline-primary">--%>
+<%--                                <span class="glyphicon glyphicon-search"></span> 查询--%>
+<%--                            </button>--%>
+<%--                        </div>--%>
+<%--                    </form>--%>
+
                     <h1 align="center" id="noEvent"><span class="glyphicon">暂无参赛记录</span></h1>
                     <table class="table" id="myTable"
                            style="margin-top: 2%; margin-bottom: 0; width: 90%; font-size: 16px; text-align: center;">
@@ -127,6 +128,7 @@
                             <td><b>座位号</b></td>
                             <td><b>团队名</b></td>
                             <td><b>成绩</b></td>
+                        </tr>
                     </table>
                     <table class="table" id="page"
                            style="margin-top: 0; width: 90%; font-size: 16px; text-align: center;">
@@ -185,7 +187,6 @@
                             } else if (event.type == "0") {
                                 addUser(event, result.data[i].userid, result.data[i].teamname);
                             }
-
                         }
                     }
                 } else if (result.code == 404) {
@@ -236,7 +237,6 @@
                     alert("查询失败");
                 }
             });
-
             return;
         };
         if (sessionStorage.getItem("username") != null) {
@@ -282,16 +282,12 @@
                     if (result.data[0].flag === "false") {
                         alert(result.data[1].msg)
                     } else {
-
-
                         for (var i = 0; i < result.data.length; i++) {
-
                             if (result.data[i].grade < 0) {
                                 var grade = "未发布"
                             } else {
                                 var grade = result.data[i].grade
                             }
-
                             if (result.data[i].teamname != null) {
 
                                 $("#myTable").append("<tr> " +
@@ -301,21 +297,10 @@
                                     "<td>" + result.data[i].seat + "</td>" +
                                     "<td>" + result.data[i].name + "</td>" +
                                     "<td>" + grade + "</td>" +
-                                    "<td>" + '<input type="text" name="userId" style="display: none" value="' + result.data[i].userid + '">' +
-                                    // '<input type="text" name="competitionName" style="display: none" value="'+ result.data[i].competitionName+'">' +
-                                    '<input type="button" name="seachButton" value="详情" class="btn btn-info">' + "</td>" +
-
                                     "</tr>"
                                 )
-                                // <td><b>参赛证号</b></td>
-                                // <td><b>赛场</b></td>
-                                // <td><b>监考人员</b></td>
-                                // <td><b>座位号</b></td>
-                                // <td><b>团队名</b></td>
-                                // <td><b>成绩</b></td>
                             } else {
-                                console.log(result.data[i].name)
-                                console.log(result.data[i].cname)
+
                                 $("#myTable").append("<tr> " +
                                     "<td>" + result.data[i].licenseId + "</td>" +
                                     "<td>" + result.data[i].pname + result.data[i].pnum + "</td>" +
@@ -323,42 +308,15 @@
                                     "<td>" + result.data[i].seat + "</td>" +
                                     "<td>" + result.data[i].cname + "</td>" +
                                     "<td>" + grade + "</td>" +
-                                    "<td>" + '<input type="text" name="userId" style="display: none" value="' + result.data[i].userid + '">' +
-                                    '<input type="button" name="seachButton" value="详情" class="btn btn-info>' + "</td>" +
-
                                     "</tr>"
                                 )
                             }
-
-
                         }
                     }
                 }
             }
         });
     }
-
-    //
-    // // 通过pid获取当前竞赛的地点
-    // function getPlace(pid) {
-    //     var Place;
-    //     var PlaceName;
-    //     var PlaceNum;
-    //     $.ajax({
-    //         url: "http://localhost:8080/CompetitionManagementSystem/Place/getPlaceByPid",
-    //         type: "POST",
-    //         data: {pid: pid},
-    //         dataType: "json",
-    //         success: function (result) {
-    //             PlaceName = result.data[0].pname;
-    //             PlaceNum = result.data[0].pnum;
-    //         }
-    //     });
-    //     Place = PlaceNum + PlaceName;
-    //    //console.log(Place)
-    //     return Place;
-    // }
-    //
 
     // 清除所有的cookie
     function deleteCookie() {

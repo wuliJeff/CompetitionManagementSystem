@@ -254,7 +254,6 @@
                         $("#competitionName").html(result.data[0].cname);
                         $("#competitorId").html(result.data[0].competitorId);
                         $("#competitorName").html(result.data[0].name);
-                        $("#school").html(result.data[0].school);
                         if (result.data[0].teamName != null && result.data[0].teamName !== "") {
                             $("#teamName").html("团队名：" + result.data[0].teamName);
                         }
@@ -297,7 +296,7 @@
             data: {pid: pid},
             dataType: "json",
             success: function (result) {
-                console.log(result)
+                $("#school").html(result.data[0].school);
                 $("#pname").html(result.data[0].pname);
                 $("#pnum").html(result.data[0].pnum);
             }
