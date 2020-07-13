@@ -141,7 +141,14 @@
                 </a>
             </div><!--/.row-->
         </div>
-
+        <div id="myArrange" style="font-family: 'Microsoft YaHei UI'; margin-top: 2%; font-size: 18px; text-align: center;">
+            <table>
+                <tr></tr>
+            </table>
+        </div>
+        <div id="tip" style="text-align: center; margin: 10%; font-size: 18px; font-family: 'Microsoft YaHei UI';">
+            <b>您还没有安排赛场喔，赶紧上传赛场教室的文件即可体验一键安排赛场</b>
+        </div>
     </div><!--/.row-->
 </div><!--/.main-->
 
@@ -156,6 +163,8 @@
 <script src="../../assets/js/xlsx.full.min.js"></script>
 <script>
     function loan() {
+        document.getElementById("tip").style.display="";
+        document.getElementById("myArrange").style.display="";
         $.ajax({
             url: "http://120.25.255.183:8088/Curriculum/User/getUser/" + sessionStorage.getItem('userid'),
             type: "GET",

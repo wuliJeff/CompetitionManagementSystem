@@ -106,6 +106,9 @@
                     <span class="glyphicon glyphicon-search"></span> 查询
                 </button>
             </div>
+            <div id="tip" style="text-align: center; margin: 10%; font-size: 18px; font-family: 'Microsoft YaHei UI';">
+                <b>无此参赛证信息，请输入已经分配赛场的参赛者id</b>
+            </div>
             <div id="myLicense" class="row"
                  style="margin-top: 2%;width: 90%; margin-left: 2%; background-color: #ffffff;">
                 <table class="table" id="myTable"
@@ -151,11 +154,11 @@
                         </td>
                     </tr>
                 </table>
+                <br/>
+                <button id="printLicense" class="btn btn-default active" style="margin-left: 2%;"><span
+                        class="glyphicon glyphicon-print"></span> 点击打印
+                </button>
             </div><!--/.row-->
-            <br/>
-            <button id="printLicense" class="btn btn-default active" style="margin-left: 2%;"><span
-                    class="glyphicon glyphicon-print"></span> 点击打印
-            </button>
         </div>
     </div><!--/.row-->
 </div><!--/.main-->
@@ -173,9 +176,9 @@
 <script src="../../assets/js/html2canvas-0.4.1.js"></script>
 <script src="../../assets/js/jspdf.min.js"></script>
 <script>
-
     function loan() {
-
+        document.getElementById("tip").style.display="none";
+        document.getElementById("myLicense").style.display="none";
         $.ajax({
             url: "http://120.25.255.183:8088/Curriculum/User/getUser/" + sessionStorage.getItem('userid'),
             type: "GET",
@@ -245,8 +248,12 @@
             success: function (result) {
                 if(result.flag === true){
                     if (result.data[0].flag === "false"){
+                        document.getElementById("myLicense").style.display="none";
+                        document.getElementById("tip").style.display="";
                         alert(result.data[1].msg)
                     } else {
+                        document.getElementById("myLicense").style.display="";
+                        document.getElementById("tip").style.display="none";
                         $("#competitionId").html(result.data[0].cid);
                         $("#competitionName").html(result.data[0].cname);
                         $("#competitorId").html(result.data[0].competitorId);
@@ -255,7 +262,6 @@
                         if (result.data[0].teamName != null && result.data[0].teamName !== "") {
                             $("#teamName").html("团队名：" + result.data[0].teamName);
                         }
-
                         getSeat(result.data[0].cid, result.data[0].competitorId);
                         getPlace(result.data[0].pid);
                         getOrder(result.data[0].cid);
@@ -326,7 +332,7 @@
 
     $(function () {
         $("#printLicense").click(function () {
-            var targetDom = $("#myLicense");
+            var targetDom = $("#myTable");
             //把需要导出的pdf内容clone一份，这样对它进行转换、微调等操作时才不会影响原来界面
             var copyDom = targetDom.clone();
             //新的div宽高跟原来一样，高度设置成自适应，这样才能完整显示节点中的所有内容（比如说表格滚动条中的内容）

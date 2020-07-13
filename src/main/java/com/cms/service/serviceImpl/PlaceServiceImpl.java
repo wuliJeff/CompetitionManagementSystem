@@ -37,6 +37,7 @@ public class PlaceServiceImpl implements PlaceService {
     public JSONArray insertPlace(List<Place> places) {
         for (Place place : places) {
             place.setPid(RandomIdFactory.getRandomId());
+
             if (isExistPlace(place.getSchool(), place.getPname(), place.getPnum(), place.getCid())) {
                 continue;
             } else {
