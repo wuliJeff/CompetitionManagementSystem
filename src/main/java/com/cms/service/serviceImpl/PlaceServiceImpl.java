@@ -54,9 +54,23 @@ public class PlaceServiceImpl implements PlaceService {
         List<License> licenses = licenseService.getLicenseByCid(places.get(0).getCid());
         int licenseSize = licenses.size();
         int i = 0;
+        boolean isExistPlaces = false;
         for (Place place : places) {
-            place.setPid(RandomIdFactory.getRandomId());
+
+            isExistPlaces = isExistPlace(place.getSchool(), place.getPname(), place.getPnum(), place.getCid());
+
+            if (isExistPlaces) {
+                Place p = session.getMapper(IPlaceDao.class).isExistPlace(place.getSchool(), place.getPname(), place.getPnum(), place.getCid());
+                place.setPid(p.getPid());
+            }else {
+                place.setPid(RandomIdFactory.getRandomId());
+            }
             int j = Integer.parseInt(place.getCsize());
+
+            if (!isExistPlaces) {
+                session.getMapper(IPlaceDao.class).insertPlace(place);
+            }
+
             for (int k = 1; k < j; ) {
                 k = k + 2;
                 if (i != licenseSize) {
@@ -69,9 +83,6 @@ public class PlaceServiceImpl implements PlaceService {
                 } else {
                     break;
                 }
-            }
-            if (!isExistPlace(place.getSchool(), place.getPname(), place.getPnum(), place.getCid())) {
-                session.getMapper(IPlaceDao.class).insertPlace(place);
             }
         }
         msg = "赛场导入完成";

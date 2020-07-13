@@ -1,9 +1,7 @@
 package com.cms.dao;
 
-import com.cms.entity.Information;
 import com.cms.entity.License;
 import org.apache.ibatis.annotations.Param;
-import org.apache.ibatis.annotations.Update;
 
 import java.util.List;
 
@@ -29,7 +27,6 @@ public interface ILicenseDao {
      * @return License对象
      */
     public List<License> getLicense(@Param("competitorId") String competitorId, @Param("cid") String cid);
-
 
     public int updateLicense(@Param("license") License license);
 

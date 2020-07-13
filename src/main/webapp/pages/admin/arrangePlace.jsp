@@ -135,18 +135,18 @@
                     上传赛场名单并分配赛场
                     <input type="file" onchange="importFile(this)"/>
                 </a>
-                &nbsp;&nbsp;&nbsp;&nbsp;
-                <a href="javascript:;" class="file" id="refresh">
-                    <span class="glyphicon glyphicon-refresh"></span>
-                    点我刷新
-                    <input type="button"/>
-                </a>
             </div><!--/.row-->
         </div>
         <div id="myArrange"
              style="font-family: 'Microsoft YaHei UI'; margin-top: 2%; font-size: 18px; text-align: center;">
-            <table>
-                <tr></tr>
+            <table id="table" class="table"
+                   style="margin-top: 2%; margin-bottom: 0; width: 90%; font-size: 16px; text-align: center;">
+                <tr style="font-size: 18px; font-family: 'Microsoft YaHei UI';">
+                    <td><b>学校</b></td>
+                    <td><b>教室</b></td>
+                    <td><b>教室容量</b></td>
+                    <td><b>监考人员</b></td>
+                </tr>
             </table>
         </div>
         <div id="tip" style="text-align: center; margin: 10%; font-size: 18px; font-family: 'Microsoft YaHei UI';">
@@ -167,7 +167,8 @@
 <script>
     function loan() {
         document.getElementById("tip").style.display = "";
-        document.getElementById("myArrange").style.display = "";
+        document.getElementById("place").style.display = "";
+        document.getElementById("myArrange").style.display = "none";
         $.ajax({
             url: "http://120.25.255.183:8088/Curriculum/User/getUser/" + sessionStorage.getItem('userid'),
             type: "GET",
@@ -196,7 +197,6 @@
             $(".login").show()
             $("#logout").hide()
         }
-
     }
 
     window.onload = loan;
@@ -233,18 +233,14 @@
         $.ajax({
             url: "http://localhost:8080/CompetitionManagementSystem/Place/getPlaceByCid",
             type: "POST",
+            async: false,
             data: {cid: event.competitionId},
             datatype: "JSON",
             success: function (result) {
-                console.log(result.data[0]);
+                console.log(result);
             }
         });
     }
-
-    $("#refresh").click(function () {
-        refresh();
-    })
-
 
     function importFile(obj) {//导入
         var event = $.cookie("event");
@@ -266,11 +262,24 @@
             $.ajax({
                 url: "http://localhost:8080/CompetitionManagementSystem/Place/insertPlace",
                 type: "POST",
+                async: false,
                 data: {excelData: JSON.stringify(excelData), cid: event.competitionId},
                 dataType: "json",
                 success: function (result) {
                     if (result.flag === true) {
                         alert(result.data[1].msg)
+                        for (i=0; i<excelData.length; i++){
+                            $("#table").append("<tr> " +
+                                "<td>" + excelData[i].school + "</td>" +
+                                "<td>" + excelData[i].pname + excelData[i].pnum + "</td>" +
+                                "<td>" + excelData[i].csize + "</td>" +
+                                "<td>" + excelData[i].manager + "</td>" +
+                                "</tr>"
+                            );
+                        }
+                        document.getElementById("tip").style.display = "none";
+                        document.getElementById("place").style.display = "none";
+                        document.getElementById("myArrange").style.display = "";
                     }
                 }
             });

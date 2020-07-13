@@ -52,7 +52,6 @@ public class LicenseController extends HttpServlet {
             Place place = null;
             Schedule schedules = null;
             licenseList = licenseService.getLicenseByCid(cid);
-            System.out.println(licenseList);
             if (licenseList.size() != 0) {
                 for (License license : licenseList) {
                     if (license.getPid() == null) {

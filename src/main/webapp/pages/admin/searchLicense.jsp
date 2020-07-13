@@ -187,6 +187,7 @@
                 "TOKEN": sessionStorage.getItem("TOKEN")
             },
             dataType: "json",
+            async: false,
             success: function (result) {
                 if (result.code == 0) {
                     sessionStorage.setItem("user", result.data);
@@ -246,6 +247,7 @@
             type: "POST",
             data: {competitorId: competitorId, cid: cid},
             dataType: "json",
+            async: false,
             success: function (result) {
                 if (result.flag === true) {
                     if (result.data[0].flag === "false") {
@@ -259,7 +261,6 @@
                         $("#competitionName").html(result.data[0].cname);
                         $("#competitorId").html(result.data[0].competitorId);
                         $("#competitorName").html(result.data[0].name);
-                        $("#school").html(result.data[0].school);
                         if (result.data[0].teamName != null && result.data[0].teamName !== "") {
                             $("#teamName").html("团队名：" + result.data[0].teamName);
                         }
@@ -279,6 +280,7 @@
             type: "POST",
             data: {cid: cid, competitorId: competitorId},
             dataType: "json",
+            async: false,
             success: function (result) {
                 $("#seat").html(result.data[0].seat);
             }
@@ -292,7 +294,9 @@
             type: "POST",
             data: {pid: pid},
             dataType: "json",
+            async: false,
             success: function (result) {
+                $("#school").html(result.data[0].school);
                 $("#pname").html(result.data[0].pname);
                 $("#pnum").html(result.data[0].pnum);
             }
@@ -305,6 +309,7 @@
             type: "POST",
             data: {cid: cid},
             dataType: "json",
+            async: false,
             success: function (result) {
                 if (result.flag === true) {
                     if (result.data[0].flag === "false") {

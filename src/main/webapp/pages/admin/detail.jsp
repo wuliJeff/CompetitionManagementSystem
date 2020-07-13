@@ -22,7 +22,36 @@
     <script src="../../assets/js/html5shiv.min.js"></script>
     <script src="../../assets/js/respond.min.js"></script>
     <![endif]-->
+    <style>
+        .file {
+            position: relative;
+            display: inline-block;
+            background: #D0EEFF;
+            border: 1px solid #99D3F5;
+            border-radius: 4px;
+            padding: 4px 12px;
+            overflow: hidden;
+            color: #1E88C7;
+            text-decoration: none;
+            text-indent: 0;
+            line-height: 20px;
+        }
 
+        .file input {
+            position: absolute;
+            font-size: 100px;
+            right: 0;
+            top: 0;
+            opacity: 0;
+        }
+
+        .file:hover {
+            background: #AADFFD;
+            border-color: #78C3F3;
+            color: #004974;
+            text-decoration: none;
+        }
+    </style>
 </head>
 
 <body>
@@ -100,15 +129,13 @@
         <div class="col-lg-12">
             <div class="row">
                 <div class="col-lg-12" style="margin-top: 2%;">
-<%--                    <form id="searchInfo" action="" method="post">--%>
-<%--                        <div class="input-group">--%>
-<%--                            <input type="text" name="userId" class="form-control input-group-sm" style="width: auto;"--%>
-<%--                                   placeholder="参赛证号/参赛者姓名"/>--%>
-<%--                            <button type="submit" name="search" class="btn btn-primary btn-outline-primary">--%>
-<%--                                <span class="glyphicon glyphicon-search"></span> 查询--%>
-<%--                            </button>--%>
-<%--                        </div>--%>
-<%--                    </form>--%>
+                    <div id="publishButton" class="row" style="margin-left: 2%;">
+                        <a href="javascript:;" class="file">
+                            <span class="glyphicon glyphicon-folder-open"></span>
+                            点我发布成绩
+                            <input type="file" onchange="importFile(this)"/>
+                        </a>
+                    </div><!--/.row-->
 
                     <h1 align="center" id="noEvent"><span class="glyphicon">暂无参赛记录</span></h1>
                     <table class="table" id="myTable"
@@ -160,18 +187,52 @@
 <script src="../../assets/js/easypiechart-data.js"></script>
 <script src="../../assets/js/bootstrap-datepicker.js"></script>
 <script src="../../assets/js/jquery.cookie.js"></script>
+<script src="../../assets/js/xlsx.full.min.js"></script>
 <script>
+
+    function importFile(obj) {//导入
+        var event = $.cookie("event");
+        event = JSON.parse(event);
+        if (!obj.files) {
+            return;
+        }
+        var f = obj.files[0];
+        var reader = new FileReader();
+        reader.onload = function (e) {
+            var data = e.target.result;
+            var wb = XLSX.read(data, {
+                type: 'binary' //以二进制的方式读取
+            });
+            var sheet0 = wb.Sheets[wb.SheetNames[0]];//sheet0代表excel表格中的第一页
+            var excelData = XLSX.utils.sheet_to_json(sheet0);//利用接口实现转换
+            console.log(excelData);
+            console.log(JSON.stringify(excelData));
+            $.ajax({
+                url: "http://localhost:8080/CompetitionManagementSystem/Schedule/publishGrade",
+                type: "POST",
+                data: {excelData: JSON.stringify(excelData), cid: event.competitionId},
+                dataType: "json",
+                success: function (result) {
+                    if (result.flag === true) {
+                        window.location.reload();
+                    }
+                }
+            });
+        }
+        reader.readAsBinaryString(f);
+    }
     function loan() {
         var UserList = [];
         var event = $.cookie("event");
         event = JSON.parse(event)
-
+        document.getElementById("publishButton").style.display = "none";
         $.ajax({
             url: 'http://120.25.255.183:8088/Curriculum/Enlist/getCidEnlist/' + event.competitionId,
             type: "GET",
             headers: {
                 "TOKEN": sessionStorage.getItem("TOKEN")
             },
+            async: false,
             dataType: "json",
             success: function (result) {
                 if (result.code == 0) {
@@ -201,6 +262,7 @@
                 headers: {
                     "TOKEN": sessionStorage.getItem("TOKEN")
                 },
+                async: false,
                 data: {
                     competitorId: user.userid,
                     name: user.username,
@@ -224,6 +286,7 @@
                 headers: {
                     "TOKEN": $.cookie("TOKEN")
                 },
+                async: false,
                 dataType: "json",
                 success: function (result) {
                     if (result.code == 0) {
@@ -282,11 +345,14 @@
                     if (result.data[0].flag === "false") {
                         alert(result.data[1].msg)
                     } else {
+                        var grade;
                         for (var i = 0; i < result.data.length; i++) {
                             if (result.data[i].grade < 0) {
-                                var grade = "未发布"
+                                grade = "未发布";
+                                document.getElementById("publishButton").style.display = "";
                             } else {
-                                var grade = result.data[i].grade
+                                grade = result.data[i].grade;
+                                document.getElementById("publishButton").style.display = "none";
                             }
                             if (result.data[i].teamname != null) {
 
