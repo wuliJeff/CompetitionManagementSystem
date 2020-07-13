@@ -231,7 +231,7 @@
         var event = $.cookie("event");
         event = JSON.parse(event);
         $.ajax({
-            url: "http://localhost:8080/CompetitionManagementSystem/Place/getPlaceByCid",
+            url: "http://39.96.59.27:8080/CompetitionManagementSystem/Place/getPlaceByCid",
             type: "POST",
             async: false,
             data: {cid: event.competitionId},
@@ -260,7 +260,7 @@
             console.log(excelData);
             console.log(JSON.stringify(excelData));
             $.ajax({
-                url: "http://localhost:8080/CompetitionManagementSystem/Place/insertPlace",
+                url: "http://39.96.59.27:8080/CompetitionManagementSystem/Place/insertPlace",
                 type: "POST",
                 async: false,
                 data: {excelData: JSON.stringify(excelData), cid: event.competitionId},

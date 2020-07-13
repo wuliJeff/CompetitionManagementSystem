@@ -159,18 +159,6 @@
 <script src="../../assets/js/jquery.cookie.js"></script>
 <script>
     function loan() {
-        var event = $.cookie("event");
-        event = JSON.parse(event)
-        console.log(event)
-
-        if (event.type == "1") {
-            $("#trOne").hide();
-            $("#trTow").show();
-        } else {
-            $("#trTow").hide();
-            $("#trOne").show();
-        }
-        getLicense(event.competitionId)
         if (sessionStorage.getItem("username") != null) {
             $("#loginSuccess").show()
             $("#noLogin").hide()
@@ -184,11 +172,24 @@
             $("#logout").hide()
         }
     }
+        var event = $.cookie("event");
+        event = JSON.parse(event)
+        console.log(event)
+
+        if (event.type == "1") {
+            $("#trOne").hide();
+            $("#trTow").show();
+        } else {
+            $("#trTow").hide();
+            $("#trOne").show();
+        }
+        getLicense(event.competitionId)
+
     window.onload = loan;
 
     function getLicense(cid) {
         $.ajax({
-            url: "http://localhost:8080/CompetitionManagementSystem/License/getInformation",
+            url: "http://39.96.59.27:8080/CompetitionManagementSystem/License/getInformation",
             type: "POST",
             data: {cid: cid},
             dataType: "json",
@@ -238,7 +239,7 @@
         var PlaceName;
         var PlaceNum;
         $.ajax({
-            url: "http://localhost:8080/CompetitionManagementSystem/Place/getPlaceByPid",
+            url: "http://39.96.59.27:8080/CompetitionManagementSystem/Place/getPlaceByPid",
             type: "POST",
             data: {pid: pid},
             dataType: "json",

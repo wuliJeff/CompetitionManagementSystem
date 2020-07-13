@@ -234,7 +234,7 @@
         var event = $.cookie("event");
         event = JSON.parse(event)
         $.ajax({
-            url: "http://localhost:8080/CompetitionManagementSystem/License/getLicense",
+            url: "http://39.96.59.27:8080/CompetitionManagementSystem/License/getLicense",
             type: "POST",
             headers: {
                 "TOKEN": sessionStorage.getItem("TOKEN")
@@ -277,7 +277,7 @@
     // 查询座位
     function getSeat(cid, competitorId) {
         $.ajax({
-            url: "http://localhost:8080/CompetitionManagementSystem/Schedule/findSeat",
+            url: "http://39.96.59.27:8080/CompetitionManagementSystem/Schedule/findSeat",
             type: "POST",
             data: {cid: cid, competitorId: competitorId},
             dataType: "json",
@@ -291,7 +291,7 @@
     // 通过pid获取当前竞赛的地点
     function getPlace(pid) {
         $.ajax({
-            url: "http://localhost:8080/CompetitionManagementSystem/Place/getPlaceByPid",
+            url: "http://39.96.59.27:8080/CompetitionManagementSystem/Place/getPlaceByPid",
             type: "POST",
             data: {pid: pid},
             dataType: "json",
@@ -305,7 +305,7 @@
 
     function getOrder(cid) {
         $.ajax({
-            url: "http://localhost:8080/CompetitionManagementSystem/CompetitionOrder/getOrderByCid",
+            url: "http://39.96.59.27:8080/CompetitionManagementSystem/CompetitionOrder/getOrderByCid",
             type: "POST",
             data: {cid: cid},
             dataType: "json",

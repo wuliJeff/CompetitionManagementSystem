@@ -128,7 +128,7 @@
                     event = JSON.parse(event)
                     var title = document.getElementById("orderTitle")
                     $.ajax({
-                        url: "http://localhost:8080/CompetitionManagementSystem/CompetitionOrder/insertNewOrder",
+                        url: "http://39.96.59.27:8080/CompetitionManagementSystem/CompetitionOrder/insertNewOrder",
                         type: "POST",
                         data: {
                             cid: event.competitionId,

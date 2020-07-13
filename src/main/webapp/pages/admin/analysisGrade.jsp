@@ -203,7 +203,7 @@
             $("#logout").hide()
         }
         $.ajax({
-            url: "http://localhost:8080/CompetitionManagementSystem/Schedule/getAllLevelCountByCid",
+            url: "http://39.96.59.27:8080/CompetitionManagementSystem/Schedule/getAllLevelCountByCid",
             type: "GET",
             headers: {
                 "TOKEN": sessionStorage.getItem("TOKEN")

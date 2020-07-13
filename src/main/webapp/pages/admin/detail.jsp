@@ -208,7 +208,7 @@
             console.log(excelData);
             console.log(JSON.stringify(excelData));
             $.ajax({
-                url: "http://localhost:8080/CompetitionManagementSystem/Schedule/publishGrade",
+                url: "http://39.96.59.27:8080/CompetitionManagementSystem/Schedule/publishGrade",
                 type: "POST",
                 data: {excelData: JSON.stringify(excelData), cid: event.competitionId},
                 dataType: "json",
@@ -226,6 +226,18 @@
     }
 
     function loan() {
+        if (sessionStorage.getItem("username") != null) {
+            $("#loginSuccess").show()
+            $("#noLogin").hide()
+            $("#login").hide()
+            $(".logout").show()
+            $("#userName").html(sessionStorage.getItem("username"));
+        } else {
+            $("#loginSuccess").hide()
+            $("#noLogin").show()
+            $(".login").show()
+            $("#logout").hide()
+        }
         var UserList = [];
         var event = $.cookie("event");
         event = JSON.parse(event)
@@ -261,7 +273,7 @@
 
         function insertLicense(event, user, teamname) {
             $.ajax({
-                url: 'http://localhost:8080/CompetitionManagementSystem/License/insertLicense',
+                url: 'http://39.96.59.27:8080/CompetitionManagementSystem/License/insertLicense',
                 type: "GET",
                 headers: {
                     "TOKEN": sessionStorage.getItem("TOKEN")
@@ -306,18 +318,7 @@
             });
             return;
         };
-        if (sessionStorage.getItem("username") != null) {
-            $("#loginSuccess").show()
-            $("#noLogin").hide()
-            $("#login").hide()
-            $(".logout").show()
-            $("#userName").html(sessionStorage.getItem("username"));
-        } else {
-            $("#loginSuccess").hide()
-            $("#noLogin").show()
-            $(".login").show()
-            $("#logout").hide()
-        }
+
         getInfomation(event.competitionId)
     }
 
@@ -340,7 +341,7 @@
 
     function getInfomation(cid) {
         $.ajax({
-            url: "http://localhost:8080/CompetitionManagementSystem/License/getInformation",
+            url: "http://39.96.59.27:8080/CompetitionManagementSystem/License/getInformation",
             type: "POST",
             data: {cid: cid},
             dataType: "json",

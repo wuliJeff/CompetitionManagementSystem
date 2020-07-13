@@ -199,14 +199,13 @@
                 }
             }
         });
-
         $.ajax({
-            url: "http://localhost:8080/CompetitionManagementSystem/Schedule/getAllLevelCountByCid",
+            url: "http://39.96.59.27:8080/CompetitionManagementSystem/Schedule/getAllLevelCountByCid",
             type: "GET",
             headers: {
                 "TOKEN": sessionStorage.getItem("TOKEN")
             },
-            data: {cid: event.cid},
+            data: {cid: event.competitionId},
             dataType: "json",
             success: function (result) {
                 var A = result.data[0].A;
@@ -214,7 +213,7 @@
                 var C = result.data[0].C;
                 var D = result.data[0].D;
                 if (A === 0 && B === 0 && C === 0 && D === 0) {
-                    alert("目前竞赛暂未公布成绩")
+                    alert("目前竞赛暂无成绩")
                 } else {
                     createGraphic(A, B, C, D)
                 }
