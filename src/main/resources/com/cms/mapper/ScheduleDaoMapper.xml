@@ -48,4 +48,8 @@
     <update id="publishGrade">
         update Schedule set grade=#{grade} where cid=#{cid} and competitorId=#{competitorId}
     </update>
+
+    <select id="isExsitSchedule" parameterType="com.cms.entity.Schedule" resultType="com.cms.entity.Schedule">
+        select * from Schedule where cid=#{s.cid} and competitorId=#{s.competitorId};
+    </select>
 </mapper>

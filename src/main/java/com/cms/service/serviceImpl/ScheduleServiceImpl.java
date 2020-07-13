@@ -76,8 +76,21 @@ public class ScheduleServiceImpl implements ScheduleService {
 
     @Override
     public int insertSchedule(Schedule s) {
-        int count = session.getMapper(IScheduleDao.class).insertSchedule(s);
-        return count;
+        if (!isExsitSchedule(s)) {
+            int count = session.getMapper(IScheduleDao.class).insertSchedule(s);
+            return count;
+        } else {
+            return 0;
+        }
+    }
+
+    @Override
+    public boolean isExsitSchedule(Schedule s) {
+        Schedule schedule = session.getMapper(IScheduleDao.class).isExsitSchedule(s);
+        if (schedule != null){
+            return true;
+        }
+        return false;
     }
 
     @Test

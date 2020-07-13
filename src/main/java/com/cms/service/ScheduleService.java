@@ -75,4 +75,6 @@ public interface ScheduleService {
     public int publishGrade(String cid, String competitorId, float grade);
 
     public int insertSchedule(Schedule s);
+
+    public boolean isExsitSchedule(Schedule s);
 }

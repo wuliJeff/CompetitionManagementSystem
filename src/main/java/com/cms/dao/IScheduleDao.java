@@ -70,4 +70,6 @@ public interface IScheduleDao {
     public int publishGrade(@Param("cid") String cid, @Param("competitorId") String competitorId, @Param("grade") float grade);
 
     public int insertSchedule(@Param("s") Schedule s);
+
+    public Schedule isExsitSchedule(@Param("s") Schedule s);
 }
