@@ -44,8 +44,8 @@ public class LicenseServiceImpl implements LicenseService {
 
     @Override
     public boolean isExistLicense(String competitorId, String cid) {
-       License  license1 = session.getMapper(ILicenseDao.class).isExistLicense(competitorId,cid);
-        if (license1 != null) {
+       License  license = session.getMapper(ILicenseDao.class).isExistLicense(competitorId,cid);
+        if (license != null) {
             return true;
         }
         return false;
@@ -53,37 +53,37 @@ public class LicenseServiceImpl implements LicenseService {
 
     @Override
     public JSONArray getLicense(String competitorId, String cid) {
-        List<License> l = session.getMapper(ILicenseDao.class).getLicense(competitorId, cid);
-        if(l == null){
-            msg = "无此参赛者信息";
+        List<License> license = session.getMapper(ILicenseDao.class).getLicense(competitorId, cid);
+        if(license.size() == 0){
+            msg = "无此参赛证信息";
             return JsonUtil.returnStatus(false, msg);
         }else{
             msg="查询成功";
+            return JSONArray.fromObject(license);
         }
-        return JSONArray.fromObject(l);
     }
 
     @Override
     public JSONArray updateLicense(License l) {
         if (session.getMapper(ILicenseDao.class).UpdateLicense(l)>0){
             msg = "更新成功";
-        };
+        }
         return JsonUtil.returnStatus(false, msg);
     }
 
     @Test
     public void testInsertLicense() {
-        License license = new License();
+//        License license = new License();
 //        license.setCompetitorId("7");
 //        license.setName("lulu");
 //        license.setTeamName("null");
-        license.setCid("202007101135");
-       // license.setCname("程序设计竞赛");
-      //  license.setPid("1");
+//        license.setCid("202007101135");
+//        license.setCname("程序设计竞赛");
+//        license.setPid("1");
 
-        System.out.println(getLicense("","202007101262"));
+//        System.out.println(getLicense("","202007101262"));
         System.out.println(getLicense("202007102028","202007101135"));
-        System.out.println(getLicense("202007102028",""));
+//        System.out.println(getLicense("202007102028",""));
     }
 
     @Test

@@ -23,7 +23,7 @@
                 pid=#{pid},
             </if>
         </set>
-        where cid=#{cid} and  competitorId=#{competitorId}
+        where cid=#{cid} and competitorId=#{competitorId}
     </update>
 
     <!-- 查询是否存在参赛证 -->
@@ -44,10 +44,10 @@
         select * from License
         where 1=1
         <if test="cid !=null and cid != '' ">
-            and   cid = #{cid}
+            and cid = #{cid}
         </if>
         <if test="competitorId !=null and competitorId != ''">
-            and  competitorId = #{competitorId}
+            and competitorId = #{competitorId}
         </if>
 
     </select>

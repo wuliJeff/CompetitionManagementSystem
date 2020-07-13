@@ -252,8 +252,12 @@
                         console.log(result)
 
                         getSeat(result.data[0].cid, result.data[0].competitorId);
-                        getPlace(result.data[0].pid);
-                        getOrder(result.data[0].cid);
+                        if (result.data[0].pid != null && result.data[0].pid != ""){
+                            getPlace(result.data[0].pid);
+                            getOrder(result.data[0].cid);
+                        }else{
+                            alert("暂未分配赛场")
+                        }
                     }
                 }
             }

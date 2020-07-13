@@ -123,16 +123,25 @@
             <li class="active"><a href="#"><span class="glyphicon glyphicon-tags"></span> 赛场管理 </a></li>
         </ol>
     </div><!--/.row-->
-
+    <br />
+    <br />
     <div class="row">
         <div class="col-lg-12">
-            <div id="place" class="row">
-                <a href="javascript:;" class="file">上传赛场名单
+            <div id="place" class="row" style="margin-left: 2%;">
+                <a href="javascript:;" class="file">
                     <span class="glyphicon glyphicon-folder-open"></span>
+                    上传赛场名单并分配赛场
                     <input type="file" onchange="importFile(this)" />
+                </a>
+                &nbsp;&nbsp;&nbsp;&nbsp;
+                <a href="javascript:;" class="file" id="refresh">
+                    <span class="glyphicon glyphicon-refresh"></span>
+                    点我刷新
+                    <input type="button"/>
                 </a>
             </div><!--/.row-->
         </div>
+
     </div><!--/.row-->
 </div><!--/.main-->
 
@@ -205,6 +214,25 @@
         deleteCookie();
         window.location.href = "../../index.jsp";
     })
+
+    function refresh(){
+        var event = $.cookie("event");
+        event = JSON.parse(event);
+        $.ajax({
+            url: "http://localhost:8080/CompetitionManagementSystem/Place/getPlaceByCid",
+            type: "POST",
+            data: {cid:event.competitionId},
+            datatype: "JSON",
+            success: function (result) {
+                console.log(result.data[0]);
+            }
+        });
+    }
+
+    $("#refresh").click(function () {
+        refresh();
+    })
+
 
     function importFile(obj) {//导入
         var event = $.cookie("event");

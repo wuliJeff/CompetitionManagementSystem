@@ -299,7 +299,13 @@
             data: {cid : cid},
             dataType: "json",
             success: function (result) {
-                $("#order").html(result.data[0].detail);
+                if (result.flag === true){
+                    if (result.data[0].flag === "false"){
+                        alert(result.data[1].msg)
+                    }else{
+                        $("#order").html(result.data[0].detail);
+                    }
+                }
             }
         });
     }
