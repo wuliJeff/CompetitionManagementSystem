@@ -30,4 +30,6 @@ public interface ILicenseDao {
     public List<License> getLicense(@Param("competitorId") String competitorId, @Param("cid") String cid);
 
     public  int  UpdateLicense(@Param("license") License license);
+
+    public List<License> getLicenseByCid(@Param("cid") String cid);
 }

@@ -51,4 +51,8 @@
         </if>
 
     </select>
+
+    <select id="getLicenseByCid" parameterType="String" resultType="com.cms.entity.License">
+        select * from License where cid=#{cid}
+    </select>
 </mapper>

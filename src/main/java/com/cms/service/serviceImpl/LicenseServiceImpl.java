@@ -71,6 +71,12 @@ public class LicenseServiceImpl implements LicenseService {
         return JsonUtil.returnStatus(false, msg);
     }
 
+    @Override
+    public List<License> getLicenseByCid(String cid) {
+        List<License> license = session.getMapper(ILicenseDao.class).getLicenseByCid(cid);
+        return license;
+    }
+
     @Test
     public void testInsertLicense() {
 //        License license = new License();

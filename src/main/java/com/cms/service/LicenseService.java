@@ -3,6 +3,8 @@ package com.cms.service;
 import com.cms.entity.License;
 import net.sf.json.JSONArray;
 
+import java.util.List;
+
 public interface LicenseService {
 
     /**
@@ -29,4 +31,6 @@ public interface LicenseService {
     public JSONArray getLicense(String competitorId, String cid);
 
     public JSONArray updateLicense(License l);
+
+    public List<License> getLicenseByCid(String cid);
 }

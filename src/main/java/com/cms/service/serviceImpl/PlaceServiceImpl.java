@@ -39,11 +39,10 @@ public class PlaceServiceImpl implements PlaceService {
     public JSONArray insertPlace(List<Place> places) {
         LicenseServiceImpl licenseService = new LicenseServiceImpl();
         ScheduleServiceImpl scheduleService = new ScheduleServiceImpl();
-        List<License> licenses = licenseService.getLicense("", places.get(0).getCid());
+        List<License> licenses = licenseService.getLicenseByCid(places.get(0).getCid());
         int i = 0;
         for (Place place : places) {
             place.setPid(RandomIdFactory.getRandomId());
-
             for (int j = Integer.parseInt(place.getCsize()); j >= 0; j = j - 2) {
                 if (i < licenses.size()) {
                     License license = licenses.get(i);
@@ -52,24 +51,16 @@ public class PlaceServiceImpl implements PlaceService {
                     i++;
                     Schedule schedule = new Schedule(license.getCid(),license.getCompetitorId(),place.getPid(),String.valueOf(j),-1);
                     scheduleService.insertSchedule(schedule);
-//
-//                j += 2;
-//                if (j >= Integer.parseInt(place.getCsize())) {
-//                    break;
-//                }
                 } else {
                     break;
                 }
             }
-
-            if (isExistPlace(place.getSchool(), place.getPname(), place.getPnum(), place.getCid())) {
-                continue;
-            } else {
+            if (!isExistPlace(place.getSchool(), place.getPname(), place.getPnum(), place.getCid())) {
                 session.getMapper(IPlaceDao.class).insertPlace(place);
             }
         }
-
         msg = "赛场导入完成";
+        System.out.println(JsonUtil.returnStatus(true, msg));
         return JsonUtil.returnStatus(true, msg);
     }
 
