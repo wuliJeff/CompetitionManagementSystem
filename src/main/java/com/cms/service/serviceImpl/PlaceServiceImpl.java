@@ -1,7 +1,9 @@
 package com.cms.service.serviceImpl;
 
 import com.cms.dao.IPlaceDao;
+import com.cms.entity.License;
 import com.cms.entity.Place;
+import com.cms.entity.Schedule;
 import com.cms.service.PlaceService;
 import com.cms.util.JsonUtil;
 import com.cms.util.MapperConfig;
@@ -35,8 +37,30 @@ public class PlaceServiceImpl implements PlaceService {
 
     @Override
     public JSONArray insertPlace(List<Place> places) {
+        LicenseServiceImpl licenseService = new LicenseServiceImpl();
+        ScheduleServiceImpl scheduleService = new ScheduleServiceImpl();
+        List<License> licenses = licenseService.getLicense("", places.get(0).getCid());
+        int i = 0;
         for (Place place : places) {
             place.setPid(RandomIdFactory.getRandomId());
+
+            for (int j = Integer.parseInt(place.getCsize()); j >= 0; j = j - 2) {
+                if (i < licenses.size()) {
+                    License license = licenses.get(i);
+                    license.setPid(place.getPid());
+                    licenseService.updateLicense(license);
+                    i++;
+                    Schedule schedule = new Schedule(license.getCid(),license.getCompetitorId(),place.getPid(),String.valueOf(j),-1);
+                    scheduleService.insertSchedule(schedule);
+//
+//                j += 2;
+//                if (j >= Integer.parseInt(place.getCsize())) {
+//                    break;
+//                }
+                } else {
+                    break;
+                }
+            }
 
             if (isExistPlace(place.getSchool(), place.getPname(), place.getPnum(), place.getCid())) {
                 continue;
@@ -44,6 +68,7 @@ public class PlaceServiceImpl implements PlaceService {
                 session.getMapper(IPlaceDao.class).insertPlace(place);
             }
         }
+
         msg = "赛场导入完成";
         return JsonUtil.returnStatus(true, msg);
     }
@@ -57,6 +82,7 @@ public class PlaceServiceImpl implements PlaceService {
             return false;
         }
     }
+
     @Test
     public void testGetGradeForAllLevel() {
         System.out.println(getPlaceByCid("202007101135"));

@@ -74,6 +74,12 @@ public class ScheduleServiceImpl implements ScheduleService {
         return count;
     }
 
+    @Override
+    public int insertSchedule(Schedule s) {
+        int count = session.getMapper(IScheduleDao.class).insertSchedule(s);
+        return count;
+    }
+
     @Test
     public void testFindSeat() {
         System.out.println(findSeat("1", "1"));

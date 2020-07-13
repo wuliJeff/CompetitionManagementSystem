@@ -1,5 +1,6 @@
 package com.cms.service;
 
+import com.cms.entity.Schedule;
 import net.sf.json.JSONArray;
 
 public interface ScheduleService {
@@ -72,4 +73,6 @@ public interface ScheduleService {
      * @return
      */
     public int publishGrade(String cid, String competitorId, float grade);
+
+    public int insertSchedule(Schedule s);
 }
