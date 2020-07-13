@@ -23,6 +23,16 @@ public interface IPlaceDao {
      */
     public List<Place> getPlaceByCid(@Param("cid") String cid);
 
+
+    public Place getPlaceByCAndP(@Param("cid") String cid,@Param("pid") String pid);
+
+    /**
+     * 根据赛事id查询所有赛场
+     *
+     * @param cid
+     * @return
+     */
+    public List<Place> getPlaceByCidAndPid(@Param("cid") String cid,@Param("pid") String pid);
     /**
      * 添加赛场安排
      *

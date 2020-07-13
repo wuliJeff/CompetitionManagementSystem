@@ -7,6 +7,9 @@ import java.util.List;
 
 public interface PlaceService {
 
+    public JSONArray getPlaceByCidAndPid(String cid,String pid);
+
+    public Place getPlaceByCAndP(String cid,String pid);
     /**
      * 根据赛场id查询所有赛事的赛场安排
      *

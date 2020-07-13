@@ -67,6 +67,15 @@ public interface IScheduleDao {
      * @param grade
      * @return
      */
+    public Schedule getSchedule(@Param("cid") String cid, @Param("competitorId") String competitorId);
+
+    /**
+     * 发布成绩
+     * @param cid
+     * @param competitorId
+     * @param grade
+     * @return
+     */
     public int publishGrade(@Param("cid") String cid, @Param("competitorId") String competitorId, @Param("grade") float grade);
 
     public int insertSchedule(@Param("s") Schedule s);

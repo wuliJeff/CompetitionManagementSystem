@@ -3,6 +3,8 @@ package com.cms.service;
 import com.cms.entity.Schedule;
 import net.sf.json.JSONArray;
 
+import java.util.List;
+
 public interface ScheduleService {
 
     /**
@@ -64,6 +66,8 @@ public interface ScheduleService {
      * @return
      */
     public JSONArray findSeat(String cid, String competitorId);
+
+    public Schedule getSchedule(String cid, String competitorId);
 
     /**
      * 发布成绩

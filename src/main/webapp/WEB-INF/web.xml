@@ -36,6 +36,14 @@
         <url-pattern>/License/getLicense</url-pattern>
     </servlet-mapping>
     <servlet>
+        <servlet-name>getInformation</servlet-name>
+        <servlet-class>com.cms.controller.LicenseController</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>getInformation</servlet-name>
+        <url-pattern>/License/getInformation</url-pattern>
+    </servlet-mapping>
+    <servlet>
         <servlet-name>insertLicense</servlet-name>
         <servlet-class>com.cms.controller.LicenseController</servlet-class>
     </servlet>

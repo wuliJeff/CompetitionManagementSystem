@@ -30,6 +30,8 @@ public interface LicenseService {
      */
     public JSONArray getLicense(String competitorId, String cid);
 
+    public List<License> getLicenseByCC(String competitorId, String cid);
+
     public JSONArray updateLicense(License l);
 
     public List<License> getLicenseByCid(String cid);

@@ -69,6 +69,12 @@ public class ScheduleServiceImpl implements ScheduleService {
     }
 
     @Override
+    public  Schedule getSchedule(String cid, String competitorId) {
+        Schedule schedule= session.getMapper(IScheduleDao.class).getSchedule(cid, competitorId);
+        return schedule;
+    }
+
+    @Override
     public int publishGrade(String cid, String competitorId, float grade) {
         int count = session.getMapper(IScheduleDao.class).publishGrade(cid, competitorId, grade);
         return count;

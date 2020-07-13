@@ -64,6 +64,12 @@ public class LicenseServiceImpl implements LicenseService {
     }
 
     @Override
+    public List<License> getLicenseByCC(String competitorId, String cid) {
+        List<License> license = session.getMapper(ILicenseDao.class).getLicense(competitorId, cid);
+        return license;
+    }
+
+    @Override
     public JSONArray updateLicense(License license) {
         if (session.getMapper(ILicenseDao.class).updateLicense(license)>0){
             msg = "更新成功";

@@ -206,7 +206,6 @@
                 dataType: "json",
                 success: function (result) {
                     if (result.flag == "true") {
-                        console.log(result)
                     }
                 }
             });
@@ -225,7 +224,6 @@
                     if (result.code == 0) {
                         var user = result.data;
                         UserList.push(user);
-                        console.log(UserList);
                         $.cookie("UserList",JSON.stringify(UserList))
                         insertLicense(event, user, teamname)
                     }
@@ -271,7 +269,7 @@
 
     function getLicense(cid) {
         $.ajax({
-            url: "http://localhost:8080/CompetitionManagementSystem/License/getLicense",
+            url: "http://localhost:8080/CompetitionManagementSystem/License/getInformation",
             type: "POST",
             data: {cid: cid},
             dataType: "json",
@@ -280,8 +278,10 @@
                 if (result.flag === true) {
                     if (result.data[0].flag === "false") {
                         alert(result.data[1].msg)
+                        console.log(111)
                     } else {
-                        console.log(result)
+
+
                         for (var i = 0; i < result.data.length; i++) {
 
                             if (result.data[i].pid == "" || result.data[i].pid == null) {
